@@ -1,0 +1,26 @@
+[
+  {
+    "id": 4,
+    "slug": "/products/product-1",
+    "title": "Product",
+    "abstract": "Lorem Ipsum"
+  },
+  {
+    "id": 5,
+    "slug": "/products/product-2",
+    "title": "Product",
+    "abstract": "Lorem Ipsum"
+  },
+  {
+    "id": 6,
+    "slug": "/products/product-3",
+    "title": "Product",
+    "abstract": "Lorem Ipsum"
+  },
+  {
+    "id": 7,
+    "slug": "/products/product-4",
+    "title": "Product",
+    "abstract": "Lorem Ipsum"
+  }
+]

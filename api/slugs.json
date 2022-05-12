@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "/",
+    "resolve": "/",
+    "id": 1
+  },
+  {
+    "slug": "/about",
+    "resolve": "/about",
+    "id": 2
+  },
+  {
+    "slug": "/products",
+    "resolve": "/products",
+    "id": 3
+  },
+  {
+    "slug": "/products/product-1",
+    "resolve": "/product/4",
+    "id": 4
+  }
+]
