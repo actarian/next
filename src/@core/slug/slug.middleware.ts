@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 
 export async function slugMiddleware(request: NextRequest, event: NextFetchEvent) {
   let url = request.nextUrl;
-  const slugs = await getCachedSlugs(request.nextUrl.origin);
+  const slugs = await getCachedSlugs();
   const slug = slugs.find(s => s.slug === url.pathname);
   if (!slug) {
     // console.log('slug.notfound', url.pathname);
