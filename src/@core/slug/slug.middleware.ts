@@ -1,11 +1,12 @@
+import { apiGet } from '@core/api/api.service';
 import { resolveSchema } from '@core/schema/schema.service';
-import { getCachedSlugs } from '@core/slug/slug.service';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 export async function slugMiddleware(request: NextRequest, event: NextFetchEvent) {
   let url = request.nextUrl;
-  const slugs = await getCachedSlugs();
+  const slugs = await apiGet('/slugs');
+  // const slugs = await getCachedSlugs();
   const slug = slugs.find(s => s.slug === url.pathname);
   if (!slug) {
     // console.log('slug.notfound', url.pathname);
