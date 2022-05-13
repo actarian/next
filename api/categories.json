@@ -1,0 +1,31 @@
+[{
+  "id": 1,
+  "name": "homepage",
+  "title": "Homepage",
+  "slug": "",
+  "categoryId": null
+}, {
+  "id": 2,
+  "name": "about",
+  "title": "About",
+  "slug": "about",
+  "categoryId": null
+}, {
+  "id": 3,
+  "name": "products",
+  "title": "Products",
+  "slug": "products",
+  "categoryId": null
+}, {
+  "id": 4,
+  "name": "apparel",
+  "title": "Apparel",
+  "slug": "apparel",
+  "categoryId": 3
+}, {
+  "id": 5,
+  "name": "menswear",
+  "title": "Menswear",
+  "slug": "menswear",
+  "categoryId": 4
+}]

@@ -1,26 +1,30 @@
 [
   {
     "id": 4,
-    "slug": "/products/product-1",
-    "title": "Product",
-    "abstract": "Lorem Ipsum"
+    "slug": "t-shirt",
+    "title": "T-Shirt",
+    "abstract": "Lorem Ipsum",
+    "categoryId": 5
   },
   {
     "id": 5,
-    "slug": "/products/product-2",
-    "title": "Product",
-    "abstract": "Lorem Ipsum"
+    "slug": "trouser",
+    "title": "Trouser",
+    "abstract": "Lorem Ipsum",
+    "categoryId": 5
   },
   {
     "id": 6,
-    "slug": "/products/product-3",
-    "title": "Product",
-    "abstract": "Lorem Ipsum"
+    "slug": "jacket",
+    "title": "Jacket",
+    "abstract": "Lorem Ipsum",
+    "categoryId": 5
   },
   {
     "id": 7,
-    "slug": "/products/product-4",
-    "title": "Product",
-    "abstract": "Lorem Ipsum"
+    "slug": "pullover",
+    "title": "Pullover",
+    "abstract": "Lorem Ipsum",
+    "categoryId": 5
   }
 ]

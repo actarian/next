@@ -1,11 +1,14 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Container from '../../components/container';
 import Layout from '../../components/layout';
 import { getProducts } from '../../edge/product/product.service';
 import { getMenu } from '../../lib/menu/menu.service';
 
 export default function Product({ menu, params }) {
-  console.log('Product', menu, params);
+  const router = useRouter()
+  const { id } = router.query;
+  console.log('Product', id, menu, params);
   return (
     <>
       <Layout menu={menu}>

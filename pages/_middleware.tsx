@@ -3,19 +3,33 @@ import { NextResponse } from 'next/server';
 import api from '../api';
 import { fetchApi } from '../edge/fetchApi';
 
+let cache;
+async function getSlugs() {
+  if (cache) {
+    return cache;
+  }
+  const slugs = await fetchApi('/api/slugs');
+  cache = slugs;
+  return slugs;
+}
+
 export async function middleware(request: NextRequest, event: NextFetchEvent) {
-  const url = request.nextUrl.clone();
-  if (url.pathname.indexOf('.') !== -1 ||
+  let url = request.nextUrl;
+  if (url.pathname.indexOf('.') !== -1) {
+    return;
+  }
+  if (
     url.pathname.indexOf('/api') === 0) {
     return;
   }
-  const slugs = await fetchApi('/api/slugs');
+  const slugs = await getSlugs();
   const slug = slugs.find(s => s.slug === url.pathname);
   if (!slug) {
     console.log('slug.notfound', url.pathname);
     return;
   }
   console.log('slug.found', slug);
+  url = url.clone();
   // match slug -> rewrite | not found
   // console.log('middleware', url.pathname);
   url.pathname = slug.resolve;

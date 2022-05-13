@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
     return;
   }
   const url = request.nextUrl.clone();
+  console.log(url.pathname);
   url.pathname = `/api/_mock/${encodeURIComponent(url.pathname)}`;
   const response = NextResponse.rewrite(url);
   return response;

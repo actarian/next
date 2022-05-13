@@ -1,6 +1,7 @@
 // import App from 'next/app'
 import Router, { useRouter } from 'next/router';
 import { useEffect } from "react";
+import './styles.scss';
 
 let count = 0;
 
