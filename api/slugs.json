@@ -1,22 +1,37 @@
 [
   {
     "slug": "/",
-    "resolve": "/",
+    "schema": "homepage",
     "id": 1
   },
   {
     "slug": "/about",
-    "resolve": "/about",
+    "schema": "about",
     "id": 2
   },
   {
     "slug": "/products",
-    "resolve": "/products",
+    "schema": "products",
     "id": 3
   },
   {
-    "slug": "/products/product-1",
-    "resolve": "/product/4",
+    "slug": "/products/apparel/menswear/t-shirts/t-shirt",
+    "schema": "product",
     "id": 4
+  },
+  {
+    "slug": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
+    "schema": "product",
+    "id": 5
+  },
+  {
+    "slug": "/products/apparel/menswear/jackets/lightweight-jacket",
+    "schema": "product",
+    "id": 6
+  },
+  {
+    "slug": "/products/apparel/menswear/hats/black-beanie",
+    "schema": "product",
+    "id": 7
   }
 ]

@@ -28,4 +28,28 @@
   "title": "Menswear",
   "slug": "menswear",
   "categoryId": 4
+}, {
+  "id": 6,
+  "name": "t-shirts",
+  "title": "T-Shirts",
+  "slug": "t-shirts",
+  "categoryId": 5
+}, {
+  "id": 7,
+  "name": "trousers",
+  "title": "Trousers",
+  "slug": "trousers",
+  "categoryId": 5
+}, {
+  "id": 8,
+  "name": "jackets",
+  "title": "Jackets",
+  "slug": "jackets",
+  "categoryId": 5
+}, {
+  "id": 9,
+  "name": "hats",
+  "title": "Hats",
+  "slug": "hats",
+  "categoryId": 5
 }]
