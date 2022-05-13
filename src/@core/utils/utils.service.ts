@@ -25,3 +25,7 @@ export function merge(target, source) {
   }
   return target;
 }
+
+export function asStaticProps(props: any): any {
+  return JSON.parse(JSON.stringify(props));
+}

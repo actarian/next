@@ -1,14 +1,18 @@
 import Container from '@components/container';
 import Headline from '@components/headline';
-import Layout from '@components/layout';
 import ProductItem from '@components/product-item/product-item';
+import Layout from '@components/_layout';
+import { Menu } from '@core/menu/menu';
 import { getCachedMenu } from '@core/menu/menu.service';
+import { Product } from '@core/product/product';
 import { getProducts } from '@core/product/product.service';
+import { asStaticProps } from '@core/utils/utils.service';
 import { Box } from '@strapi/design-system/Box';
 import { GridLayout } from '@strapi/design-system/Layout';
 import Head from 'next/head';
+import { IEquatable, PageType } from 'types';
 
-export default function Products({ menu, products }) {
+export default function Products({ menu, products, params }: ProductsPageProps) {
   const title = 'Products';
   const abstract = 'Lorem ipsum dolor sit amet';
   return (
@@ -32,14 +36,18 @@ export default function Products({ menu, products }) {
   )
 }
 
+export interface ProductsPageProps extends PageType {
+  params: { id: IEquatable };
+  menu: Menu[];
+  products: Product[];
+}
+
 export async function getStaticProps(params) {
-  console.log('Products getStaticProps', params);
   const menu = await getCachedMenu('header');
   const products = await getProducts();
+  const props = asStaticProps({ ...params, menu, products });
+  // console.log('Products getStaticProps', props);
   return {
-    props: {
-      menu,
-      products,
-    },
+    props,
   };
 }
