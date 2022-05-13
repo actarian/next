@@ -1,7 +1,7 @@
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK;
+const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || true;
 
 export async function middleware(request: NextRequest, event: NextFetchEvent) {
   if (!API_MOCK) {
