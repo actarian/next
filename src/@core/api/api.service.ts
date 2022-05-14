@@ -12,7 +12,7 @@ const defaultOptions: FetchRequestOptions = {
   },
 };
 
-typeof eval === 'function' ? defaultOptions.mode = 'cors' : null;
+// typeof eval === 'function' ? defaultOptions.mode = 'cors' : null;
 
 export async function apiFetch(pathname, options: any = {}) {
   const url = `${URL}${API}${pathname}`;
