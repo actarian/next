@@ -1,10 +1,10 @@
 {
-    "id": 4,
-    "slug": "/products/apparel/menswear/t-shirts/t-shirt",
-    "title": "T-Shirt",
-    "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-    "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
-    "image": "/assets/products/t-shirt.webp",
-    "price": 160.12,
-    "categoryId": 6
-  }
+  "id": 4,
+  "slug": "/products/apparel/menswear/t-shirts/t-shirt",
+  "title": "T-Shirt",
+  "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
+  "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
+  "image": "/assets/products/t-shirt.webp",
+  "price": 160.12,
+  "categoryId": 6
+}

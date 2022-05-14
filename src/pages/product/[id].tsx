@@ -17,6 +17,10 @@ export default function ProductPage({ menu, product, params }: ProductPageProps)
   // const router = useRouter()
   // const { id } = router.query;
   // console.log('Product', id, menu, product, params);
+  if (!product) {
+    return;
+  }
+  console.log(product);
   return (
     <>
       <Layout menu={menu}>
