@@ -1,4 +1,4 @@
-import { FetchRequestOptions, httpGet } from '../http/http.service';
+import { FetchRequestOptions, httpFetch } from '../http/http.service';
 import { merge } from '../utils/utils.service';
 
 const URL = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
@@ -17,7 +17,7 @@ const defaultOptions: FetchRequestOptions = {
 export async function apiFetch(pathname, options: any = {}) {
   const url = `${URL}${API}${pathname}`;
   const apiOptions = merge({ ...defaultOptions }, options);
-  const apiResponse = await httpGet(url, apiOptions);
+  const apiResponse = await httpFetch(url, apiOptions);
   return apiResponse;
 }
 

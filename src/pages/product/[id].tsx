@@ -1,6 +1,7 @@
 import Container from '@components/container';
 import Headline from '@components/headline';
 import Layout from '@components/_layout';
+import { IEquatable } from '@core/entity/entity';
 import { getCachedMenu } from '@core/menu/menu.service';
 import { Product } from '@core/product/product';
 import { getProduct, getProducts } from '@core/product/product.service';
@@ -9,7 +10,8 @@ import { Box } from '@strapi/design-system/Box';
 import { Typography } from '@strapi/design-system/Typography';
 import Head from 'next/head';
 import Image from 'next/image';
-import { IEquatable, PageType } from 'types';
+import { P } from 'src/@pipe/pipe';
+import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
@@ -20,7 +22,7 @@ export default function ProductPage({ menu, product, params }: ProductPageProps)
   if (!product) {
     return;
   }
-  console.log(product);
+  // console.log(product);
   return (
     <>
       <Layout menu={menu}>
@@ -36,6 +38,7 @@ export default function ProductPage({ menu, product, params }: ProductPageProps)
             </Box>
           }
           <Image alt={product.title} src={product.image} layout="intrinsic" width={200} height={200} />
+          { P(product.price, P.price()) }
         </Container>
       </Layout>
     </>
@@ -49,9 +52,12 @@ export interface ProductPageProps extends PageType {
 }
 
 export async function getStaticProps(params) {
+  const id = parseInt(params.params.id);
+  // console.log('Product getStaticProps', id);
+  const product = await getProduct(id);
+  // console.log('Product getStaticProps', product);
   const menu = await getCachedMenu('header');
-  const product = await getProduct(params.params.id);
-  const props = asStaticProps({ ...params, menu, product });
+  const props = asStaticProps({ product, menu, ...params });
   // console.log('Product getStaticProps', props);
   return {
     props,
@@ -60,8 +66,9 @@ export async function getStaticProps(params) {
 
 export async function getStaticPaths() {
   const products = await getProducts();
+  const ids = products ? products.map(x => x.id) : [];
   return {
-    paths: products?.map((x) => `/product/${x.id}`) || [],
+    paths: ids.map((id) => `/product/${id}`),
     fallback: true,
   }
 }

@@ -18,11 +18,16 @@ export default function CustomApp({ Component, pageProps }) {
       console.log('App is changing to: ', url);
       // Component = dynamic(() => import('./index'));
     };
+    const onRouteChangeError = async(url)=> {
+      console.log('App route error: ', url);
+    };
 
     Router.events.on('routeChangeStart', onRouteChangeStart);
+    Router.events.on('routeChangeError', onRouteChangeError);
 
     return () => {
       Router.events.off('routeChangeStart', onRouteChangeStart);
+      Router.events.off('routeChangeError', onRouteChangeError);
     };
 
   }, []);

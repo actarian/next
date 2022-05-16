@@ -10,9 +10,9 @@ import { asStaticProps } from '@core/utils/utils.service';
 import { Box } from '@strapi/design-system/Box';
 import { GridLayout } from '@strapi/design-system/Layout';
 import Head from 'next/head';
-import { IEquatable, PageType } from 'types';
+import { PageType } from 'types';
 
-export default function Products({ menu, products, params }: ProductsPageProps) {
+export default function Products({ menu, products }: ProductsPageProps) {
   const title = 'Products';
   const abstract = 'Lorem ipsum dolor sit amet';
   return (
@@ -37,7 +37,6 @@ export default function Products({ menu, products, params }: ProductsPageProps) 
 }
 
 export interface ProductsPageProps extends PageType {
-  params: { id: IEquatable };
   menu: Menu[];
   products: Product[];
 }

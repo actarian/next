@@ -7,8 +7,11 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
     return;
   }
   if (isApiRequest(request)) {
+    // check if route exists
+    // or load mock api ??
     return;
   }
+  // console.log(request.url, request.nextUrl, event);
   return await slugMiddleware(request, event);
 }
 
