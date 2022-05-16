@@ -1,13 +1,11 @@
 import JsonService from '@core/entity/json.service';
 import { fsReadJson, pathJoin } from '@core/fs/fs.service';
 
-const CACHE = {
-  data: null,
-};
+let STORE = null;
 
 export async function getData(): Promise<any> {
-  if (CACHE.data) {
-    return CACHE.data;
+  if (STORE) {
+    return STORE;
   }
   const pathname = pathJoin('data', 'data.json');
   const json = await fsReadJson(pathname);
@@ -15,7 +13,7 @@ export async function getData(): Promise<any> {
   Object.keys(json).forEach(key => {
     data[key] = new JsonService(json[key]);
   });
-  CACHE.data = data;
+  STORE = data;
   return data;
 }
 

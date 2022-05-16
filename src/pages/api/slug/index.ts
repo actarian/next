@@ -5,12 +5,20 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
     const data = await getSlugs();
-    response.status(200).json(data);
+    if (data) {
+      response.status(200).json(data);
+    } else {
+      response.status(500).send('impossible to read data');
+    }
   },
   post: async (request: NextApiRequest, response: NextApiResponse) => {
     const { slug } = request.body;
     const data = await getSlug(slug);
-    response.status(200).json(data);
+    if (data) {
+      response.status(200).json(data);
+    } else {
+      response.status(404).send('Slug not found');
+    }
   }
 });
 
