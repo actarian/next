@@ -1,5 +1,8 @@
+const path = require("path");
+
 import JsonService from '@core/entity/json.service';
-import { fsReadJson, pathJoin } from '@core/fs/fs.service';
+import { fsReadJson } from '@core/fs/fs.service';
+// import { fsReadJson, pathJoin } from '@core/fs/fs.service';
 
 let STORE = null;
 
@@ -7,7 +10,9 @@ export async function getData(): Promise<any> {
   if (STORE) {
     return STORE;
   }
-  const pathname = pathJoin('data', 'data.json');
+  const pathname = path.join(process.cwd(), 'data', 'data.json');
+  // const pathname = pathJoin('data', 'data.json');
+  console.log('getData', pathname);
   const json = await fsReadJson(pathname);
   let data = {};
   Object.keys(json).forEach(key => {
