@@ -20,7 +20,7 @@ export default apiHandler({
         // console.log('slug.notfound', slug);
         return response.status(404).send('Slug not found');
       }
-      console.log('slug.found', route);
+      // console.log('slug.found', route);
       const resolvedRoute = resolveSchema(route);
       await response.unstable_revalidate(resolvedRoute);
       return response.json({ revalidated: true })

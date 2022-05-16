@@ -11,8 +11,7 @@ export async function getData(): Promise<any> {
     return STORE;
   }
   const pathname = path.join(process.cwd(), 'data', 'data.json');
-  // const pathname = pathJoin('data', 'data.json');
-  console.log('getData', pathname);
+  // const pathname = pathJoin('data', 'data.json'); // !!! not working
   const json = await fsReadJson(pathname);
   let data = {};
   Object.keys(json).forEach(key => {
