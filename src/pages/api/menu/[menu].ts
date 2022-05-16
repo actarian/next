@@ -1,5 +1,5 @@
 import { apiHandler } from '@core/api/api.helper';
-import { getMenu } from '@core/menu/menu.service';
+import { getMenu } from '@models/menu/menu.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

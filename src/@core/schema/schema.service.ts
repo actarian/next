@@ -1,4 +1,4 @@
-import { Slug } from '@core/slug/slug';
+import { Slug } from '@models/slug/slug';
 import { SCHEMA } from '../../../schema';
 
 export function resolveSchema(slug: Slug) {

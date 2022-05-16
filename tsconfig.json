@@ -22,7 +22,9 @@
     "paths": {
       "@components/*": ["src/@components/*"],
       "@core/*": ["src/@core/*"],
+      "@hooks/*": ["src/@hooks/*"],
       "@models/*": ["src/@models/*"],
+      "@pipes/*": ["src/@pipes/*"],
     }
   },
   "include": [

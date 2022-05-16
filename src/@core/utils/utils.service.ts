@@ -1,3 +1,4 @@
+import { IEquatable } from "@core/entity/entity";
 
 export function merge(target, source) {
   // override null values
@@ -28,4 +29,16 @@ export function merge(target, source) {
 
 export function asStaticProps(props: any): any {
   return JSON.parse(JSON.stringify(props));
+}
+
+export function asLocalizedPaths(ids: IEquatable[], locales): any {
+  let paths;
+  if (Array.isArray(locales) && locales.length > 0) {
+    paths = [];
+    locales.map((locale) => ids.forEach((id) => paths.push({ params: { id: id.toString() }, locale })));
+  } else {
+    // paths = ids.map((id) => `/product/${id}`);
+    paths = ids.map((id) => ({ params: { id: id.toString() } }));
+  }
+  return paths;
 }

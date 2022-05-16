@@ -1,5 +1,6 @@
 import { isApiRequest, isStaticRequest } from '@core/middleware/middleware.service';
-import { slugMiddleware } from '@core/slug/slug.middleware';
+import { mockInterceptor } from '@core/mock/mock.interceptor';
+import { slugInterceptor } from '@models/slug/slug.interceptor';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest, event: NextFetchEvent) {
@@ -7,42 +8,8 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
     return;
   }
   if (isApiRequest(request)) {
-    // check if route exists
-    // or load mock api ??
-    return;
+    return await mockInterceptor(request, event);
   }
   // console.log(request.url, request.nextUrl, event);
-  return await slugMiddleware(request, event);
+  return await slugInterceptor(request, event);
 }
-
-/*
-import api from '../../api';
-export async function middleware___(request: NextRequest, event: NextFetchEvent) {
-  // Get the product id from the URL
-  const url = request.nextUrl.clone();
-  const [, , id] = url.pathname.split('/');
-
-  // Check on upstash if we have stock
-  const hasStock = await api.cache.get(id)
-
-  // Rewrite to the correct url
-  url.pathname = hasStock ? `/product/${id}/` : `/product/${id}/no-stock`
-  return NextResponse.rewrite(url)
-}
-
-export function middleware__(request: NextRequest, event: NextFetchEvent) {
-
-  // console.log(request);
-
-  // if the request is coming from New York, redirect to the home page
-  if (request.geo.city === 'New York') {
-    return NextResponse.redirect('/home')
-    // if the request is coming from London, rewrite to a special page
-  } else if (request.geo.city === 'London') {
-    return NextResponse.rewrite('/not-home')
-  }
-
-  return NextResponse.json({ message: 'Hello World!' })
-
-}
-*/

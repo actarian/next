@@ -1,31 +1,32 @@
-import Container from '@components/container';
-import Headline from '@components/headline';
+import Container from '@components/container/container';
+import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
-import { getCachedMenu } from '@core/menu/menu.service';
-import { Product } from '@core/product/product';
-import { getProduct, getProducts } from '@core/product/product.service';
-import { asStaticProps } from '@core/utils/utils.service';
+import { asLocalizedPaths, asStaticProps } from '@core/utils/utils.service';
+import { getCachedGlobal } from '@models/global/global.service';
+import { Menu } from '@models/menu/menu';
+import { Product } from '@models/product/product';
+import { getProduct, getProducts } from '@models/product/product.service';
+import { P } from '@pipes/pipes';
 import { Box } from '@strapi/design-system/Box';
 import { Typography } from '@strapi/design-system/Typography';
 import Head from 'next/head';
 import Image from 'next/image';
-import { P } from 'src/@pipe/pipe';
 import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
-export default function ProductPage({ menu, product, params }: ProductPageProps) {
+export default function ProductPage({ header, product, params }: ProductPageProps) {
   // const router = useRouter()
   // const { id } = router.query;
-  // console.log('Product', id, menu, product, params);
+  // console.log('Product', id, header, product, params);
   if (!product) {
     return;
   }
   // console.log(product);
   return (
     <>
-      <Layout menu={menu}>
+      <Layout header={header}>
         <Head>
           <title>{product.title}</title>
         </Head>
@@ -38,7 +39,7 @@ export default function ProductPage({ menu, product, params }: ProductPageProps)
             </Box>
           }
           <Image alt={product.title} src={product.image} layout="intrinsic" width={200} height={200} />
-          { P(product.price, P.price()) }
+          {P(product.price, P.price())}
         </Container>
       </Layout>
     </>
@@ -47,28 +48,33 @@ export default function ProductPage({ menu, product, params }: ProductPageProps)
 
 export interface ProductPageProps extends PageType {
   params: { id: IEquatable };
-  menu: any;
+  header: Menu;
   product: Product;
 }
 
-export async function getStaticProps(params) {
-  const id = parseInt(params.params.id);
+export async function getStaticProps(context) {
+  const id = parseInt(context.params.id);
   // console.log('Product getStaticProps', id);
   const product = await getProduct(id);
   // console.log('Product getStaticProps', product);
-  const menu = await getCachedMenu('header');
-  const props = asStaticProps({ product, menu, ...params });
+  const global = await getCachedGlobal();
+  const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
+  const props = asStaticProps({ product, header, ...context });
   // console.log('Product getStaticProps', props);
   return {
     props,
+    // revalidate: 3600, // revalidate every hour
   }
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const products = await getProducts();
   const ids = products ? products.map(x => x.id) : [];
+  // console.log('Product getStaticPaths', locales, ids);
+  const paths = asLocalizedPaths(ids, locales);
+  // console.log('Product getStaticPaths', paths);
   return {
-    paths: ids.map((id) => `/product/${id}`),
+    paths,
     fallback: true,
   }
 }

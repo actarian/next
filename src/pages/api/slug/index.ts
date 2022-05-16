@@ -1,5 +1,5 @@
 import { apiHandler } from '@core/api/api.helper';
-import { getSlug } from '@core/slug/slug.service';
+import { getSlug } from '@models/slug/slug.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

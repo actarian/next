@@ -1,5 +1,5 @@
 import { apiHandler } from '@core/api/api.helper';
-import { getProducts } from '@core/product/product.service';
+import { getProducts } from '@models/product/product.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
