@@ -1,8 +1,12 @@
 import { apiHandler } from '@core/api/api.helper';
-import { getSlug } from '@models/slug/slug.service';
+import { getSlug, getSlugs } from '@models/slug/slug.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
+  get: async (request: NextApiRequest, response: NextApiResponse) => {
+    const data = await getSlugs();
+    response.status(200).json(data);
+  },
   post: async (request: NextApiRequest, response: NextApiResponse) => {
     const { slug } = request.body;
     const data = await getSlug(slug);

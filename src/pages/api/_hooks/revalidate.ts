@@ -17,17 +17,17 @@ export default apiHandler({
       const { slug } = request.body;
       const route = await getSlug(slug);
       if (!route) {
-        // console.log('slug.notfound', url.pathname);
-        return;
+        // console.log('slug.notfound', slug);
+        return response.status(404).send('Slug not found');
       }
-      // console.log('slug.found', slug);
+      console.log('slug.found', route);
       const resolvedRoute = resolveSchema(route);
       await response.unstable_revalidate(resolvedRoute);
       return response.json({ revalidated: true })
     } catch (error) {
       // If there was an error, Next.js will continue
       // to show the last successfully generated page
-      return response.status(500).send('Error revalidating')
+      return response.status(500).send('Error revalidating');
     }
   },
 });

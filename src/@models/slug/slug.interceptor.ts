@@ -11,7 +11,7 @@ export async function slugInterceptor(request: NextRequest, event: NextFetchEven
     // console.log('slug.notfound', url.pathname);
     return;
   }
-  // console.log('slug.found', slug);
+  console.log('slug.found', slug);
   url = request.nextUrl.clone();
   // match slug -> rewrite | not found
   url.pathname = resolveSchema(slug);
