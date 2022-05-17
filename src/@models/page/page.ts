@@ -13,8 +13,8 @@ export interface Page extends Slug {
   updatedAt?: Date;
   meta?: Meta;
   images: Image[];
-  locale?: string;
-  markets?: string[];
+  // locale?: string;
+  // markets?: string[];
   breadcrumb?: Breadcrumb[];
 }
 

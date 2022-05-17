@@ -1,4 +1,6 @@
-import { IEquatable } from "@core/entity/entity";
+import { IEquatable } from '@core/entity/entity';
+import { Slug } from '@models/slug/slug';
+import { PAGES } from '../../pages';
 
 export function merge(target, source) {
   // override null values
@@ -41,6 +43,10 @@ export function asLocalizedPaths(ids: IEquatable[], locales): any {
     paths = ids.map((id) => ({ params: { id: id.toString() } }));
   }
   return paths;
+}
+
+export function resolveRoute(slug: Slug) {
+  return PAGES[slug.schema](slug);
 }
 
 export async function awaitAll(array, callback) {

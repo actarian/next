@@ -1,5 +1,5 @@
 import { apiPost } from '@core/api/api.service';
-import { resolveSchema } from '@core/schema/schema.service';
+import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -21,7 +21,7 @@ export async function slugInterceptor(request: NextRequest, event: NextFetchEven
   // console.log('slug.found', slug);
   url = request.nextUrl.clone();
   // match slug -> rewrite | not found
-  url.pathname = resolveSchema(slug);
+  url.pathname = resolveRoute(slug);
   // console.log('slug.found', url.pathname);
   const response = NextResponse.rewrite(url);
   return response;

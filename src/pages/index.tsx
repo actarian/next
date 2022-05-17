@@ -1,10 +1,12 @@
+import Banner from '@components/banner/banner';
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils/utils.service';
-import { Button, Display, Grid, Image, Text, useTheme } from '@geist-ui/core';
+import { asStaticProps } from '@core/utils';
+import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
 import { useApiGet } from '@hooks/useApi/useApi';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
+import { getProduct } from '@models/product/product.service';
 import Head from 'next/head';
 import React from 'react';
 import { PageType } from 'types';
@@ -12,11 +14,9 @@ import { PageType } from 'types';
 const githubRepoUrl = 'https://github.com/actarian/next';
 const documentationUrl = 'https://geist-ui.dev/en-us/guide/colors';
 
-export default function Index({ header, params }: IndexProps) {
-  const { palette } = useTheme();
+export default function Index({ page, header, locales, locale }: IndexProps) {
 
-  const title = 'Index';
-  const abstract = 'Lorem ipsum dolor sit amet';
+  // console.log('Index', header, locales, locale);
 
   const { response } = useApiGet('/hello');
   if (response) {
@@ -27,17 +27,15 @@ export default function Index({ header, params }: IndexProps) {
 
   return (
     <>
-      <Display padding="20px" margin="0" style={{ backgroundColor: palette.cyan }}>
-        <Text h3 margin="0">Banner</Text>
-      </Display>
+      <Banner />
       <Layout header={header}>
         <Head>
-          <title>{title}</title>
+          <title>{page.title}</title>
         </Head>
-        <Breadcrumb></Breadcrumb>
-        <Text h1>Start our Geist journey.</Text>
-        <Display title={title} caption={abstract}>
-          <Image src="/assets/homepage/banner.png" alt={title} draggable={false} />
+        <Breadcrumb />
+        <Text h1>{page.title}</Text>
+        <Display title={page.title} caption={page.abstract}>
+          <Image src="/assets/homepage/banner.png" alt={page.title} draggable={false} />
         </Display>
         <Grid.Container justify="center" gap={3} mt="100px">
           <Grid xs={20} sm={7} justify="center">
@@ -55,13 +53,15 @@ export default function Index({ header, params }: IndexProps) {
 
 export interface IndexProps extends PageType {
   header: Menu;
+  page: any;
 }
 
 export async function getStaticProps(context) {
   const global = await getCachedGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
-  const props = asStaticProps({ ...context, header });
-  // console.log('Index getStaticProps', props);
+  const page = await getProduct(5);
+  const props = asStaticProps({ ...context, header, page });
+  // console.log('Index getStaticProps', props, context);
   return {
     props,
   };

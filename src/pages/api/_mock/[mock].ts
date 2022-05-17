@@ -6,6 +6,11 @@ export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
     const { query: { mock } } = request;
     const data = await resolveMockApi(mock as string);
-    response.status(200).json(data);
+    if (data) {
+      response.status(200).json(data);
+    } else {
+      throw 'not found';
+      // response.status(404).send('not found');
+    }
   },
 });

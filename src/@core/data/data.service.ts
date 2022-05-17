@@ -3,7 +3,7 @@ const pluralize = require('pluralize');
 
 import JsonService from '@core/entity/json.service';
 import { fsReadJson, fsWrite } from '@core/fs/fs.service';
-import { awaitAll, isDevelopment } from '@core/utils/utils.service';
+import { awaitAll, isDevelopment } from '@core/utils';
 // import { fsReadJson, pathJoin } from '@core/fs/fs.service';
 
 const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;

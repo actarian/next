@@ -1,12 +1,12 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils/utils.service';
+import { asStaticProps } from '@core/utils';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import Head from 'next/head';
 import { PageType } from 'types';
 
-export default function Custom404({ header, params }: Custom404Props) {
+export default function Custom404({ header, locales, locale }: Custom404Props) {
   const title = 'Error 404';
   const abstract = 'Page not found';
   return (

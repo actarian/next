@@ -1,7 +1,7 @@
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils/utils.service';
+import { asStaticProps } from '@core/utils';
 import { Grid } from '@geist-ui/core';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
@@ -10,7 +10,7 @@ import { getProducts } from '@models/product/product.service';
 import Head from 'next/head';
 import { PageType } from 'types';
 
-export default function Products({ header, products }: ProductsPageProps) {
+export default function Products({ header, products, locales, locale }: ProductsPageProps) {
   const title = 'Products';
   const abstract = 'Lorem ipsum dolor sit amet';
   return (

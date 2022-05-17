@@ -1,12 +1,12 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils/utils.service';
+import { asStaticProps } from '@core/utils';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import Head from 'next/head';
 import { PageType } from 'types';
 
-export default function About({ header, params }: AboutProps) {
+export default function About({ header, locales, locale }: AboutProps) {
   const title = 'About';
   const abstract = 'Lorem ipsum dolor sit amet';
   return (

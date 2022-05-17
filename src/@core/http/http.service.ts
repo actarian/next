@@ -1,4 +1,4 @@
-import { merge } from '../utils/utils.service';
+import { merge } from '@core/utils';
 
 const defaultOptions: FetchRequestOptions = {
   // method: 'POST', // *GET, POST, PUT, DELETE, etc.

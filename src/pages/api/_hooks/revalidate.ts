@@ -1,5 +1,5 @@
 import { apiHandler } from '@core/api/api.helper';
-import { resolveSchema } from '@core/schema/schema.service';
+import { resolveRoute } from '@core/utils';
 import { getSlug } from '@models/slug/slug.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -21,7 +21,7 @@ export default apiHandler({
         return response.status(404).send('Slug not found');
       }
       // console.log('slug.found', route);
-      const resolvedRoute = resolveSchema(route);
+      const resolvedRoute = resolveRoute(route);
       await response.unstable_revalidate(resolvedRoute);
       return response.json({ revalidated: true })
     } catch (error) {

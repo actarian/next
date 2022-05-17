@@ -1,5 +1,5 @@
 
-export const SCHEMA = {
+export const PAGES = {
   homepage: (slug) => '/',
   about: (slug) => '/about',
   products: (slug) => '/products',

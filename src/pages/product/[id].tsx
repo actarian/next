@@ -1,7 +1,7 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
-import { asLocalizedPaths, asStaticProps } from '@core/utils/utils.service';
+import { asLocalizedPaths, asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
 import { getCachedGlobal } from '@models/global/global.service';
@@ -14,10 +14,10 @@ import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
-export default function ProductPage({ header, product, params }: ProductPageProps) {
+export default function ProductPage({ header, product, params, locales, locale }: ProductPageProps) {
   // const router = useRouter()
   // const { id } = router.query;
-  // console.log('Product', id, header, product, params);
+  // console.log('Product', id, header, product, locales, locale);
   if (!product) {
     return;
   }

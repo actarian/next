@@ -1,5 +1,5 @@
-import { FetchRequestOptions, httpFetch } from '../http/http.service';
-import { merge } from '../utils/utils.service';
+import { FetchRequestOptions, httpFetch } from '@core/http/http.service';
+import { merge } from '@core/utils';
 
 const URL = process.env.NEXT_PUBLIC_URL === 'https://' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_URL;
 const API = process.env.NEXT_PUBLIC_API || '/api';
