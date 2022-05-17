@@ -1,7 +1,15 @@
 // import App from 'next/app'
+import { CssBaseline, GeistProvider, Themes } from '@geist-ui/core';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from "react";
 import '../styles/styles.scss';
+
+const customTheme = Themes.createFromDark({
+  type: 'custom',
+  palette: {
+    // success: '#FF0',
+  },
+});
 
 let count = 0;
 
@@ -18,7 +26,7 @@ export default function CustomApp({ Component, pageProps }) {
       console.log('App is changing to: ', url);
       // Component = dynamic(() => import('./index'));
     };
-    const onRouteChangeError = async(url)=> {
+    const onRouteChangeError = async (url) => {
       console.log('App route error: ', url);
     };
 
@@ -32,7 +40,12 @@ export default function CustomApp({ Component, pageProps }) {
 
   }, []);
 
-  return <Component {...pageProps} />
+  return (
+    <GeistProvider themes={[customTheme]} themeType="custom">
+      <CssBaseline />
+      <Component {...pageProps} />
+    </GeistProvider>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for

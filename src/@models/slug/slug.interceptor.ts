@@ -6,9 +6,16 @@ import { NextResponse } from 'next/server';
 export async function slugInterceptor(request: NextRequest, event: NextFetchEvent) {
   let url = request.nextUrl;
   // !!! use global data ???
-  const slug = await apiPost(`/slug`, { slug: url.pathname });
-  if (!slug) {
-    // console.log('slug.notfound', url.pathname);
+  let slug = null;
+  try {
+    slug = await apiPost(`/slug`, { slug: url.pathname });
+    // console.log('slugInterceptor', url.pathname, '->', slug);
+    if (!slug) {
+      // console.log('slug.notfound', url.pathname);
+      return;
+    }
+  } catch (error) {
+    console.log('slugInterceptor.error', error.status, error.statusText);
     return;
   }
   // console.log('slug.found', slug);

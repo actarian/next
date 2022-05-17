@@ -42,3 +42,14 @@ export function asLocalizedPaths(ids: IEquatable[], locales): any {
   }
   return paths;
 }
+
+export async function awaitAll(array, callback) {
+  const promises = array.map(callback);
+  await Promise.all(promises);
+}
+
+export function getIsDevelopment(): boolean {
+  return process && process.env.NODE_ENV === 'development';
+}
+
+export const isDevelopment = getIsDevelopment();

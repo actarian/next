@@ -14,9 +14,11 @@ export default apiHandler({
   post: async (request: NextApiRequest, response: NextApiResponse) => {
     const { slug } = request.body;
     const data = await getSlug(slug);
-    if (data) {
+    console.log('slug.apiHandler', slug, '->', data);
+    if (data !== null) {
       response.status(200).json(data);
     } else {
+      throw 'not found';
       response.status(404).send('Slug not found');
     }
   }

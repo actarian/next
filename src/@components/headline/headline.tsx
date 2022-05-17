@@ -1,16 +1,24 @@
-import { Button } from '@strapi/design-system/Button';
-import { BaseHeaderLayout } from '@strapi/design-system/Layout';
-import { ArrowLeft, Pencil, Plus } from '@strapi/icons';
+import { Button, Card, Grid, Spacer, Text } from '@geist-ui/core';
+import { ArrowLeft } from '@geist-ui/icons';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function Headline({ title, abstract }) {
   const router = useRouter()
   return (
-    <BaseHeaderLayout title={title} subtitle={abstract} as="h2"
-      navigationAction={<Button startIcon={<ArrowLeft />} onClick={() => router.back()}>Go back</Button>}
-      primaryAction={false ? <Button startIcon={<Plus />}>Add an entry</Button> : null}
-      secondaryAction={false ? <Button variant="tertiary" startIcon={<Pencil />}>Edit</Button> : null}
-    />
+    <>
+      <Grid.Container gap={1.5}>
+        <Grid xs={24} justify="center">
+          <Card width="100%">
+            <Text h4 my={0}>{title}</Text>
+            <Text>{abstract}</Text>
+            <Card.Footer>
+              <Button icon={<ArrowLeft />} auto onClick={() => router.back()}>Go back</Button>
+            </Card.Footer>
+          </Card>
+        </Grid>
+      </Grid.Container>
+      <Spacer h={.5} />
+    </>
   );
 }

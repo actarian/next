@@ -1,13 +1,9 @@
-import { getData } from '@core/data/data.service';
-import JsonService from '@core/entity/json.service';
 import { fsExists, fsReadJson, fsWriteJson, pathJoin } from '@core/fs/fs.service';
-import { Menu } from '@models/menu/menu';
+import { getMenus } from '@models/menu/menu.service';
 import { Global } from './global';
 
 export async function getGlobal(): Promise<Global> {
-  const data = await getData();
-  const menuService = await data.menu as JsonService<Menu>;
-  const menu = await menuService.findMany();
+  const menu = await getMenus();
   const timestamp = new Date().getTime();
   return {
     menu,

@@ -1,14 +1,12 @@
-import Container from '@components/container/container';
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils/utils.service';
+import { Grid } from '@geist-ui/core';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import { Product } from '@models/product/product';
 import { getProducts } from '@models/product/product.service';
-import { Box } from '@strapi/design-system/Box';
-import { GridLayout } from '@strapi/design-system/Layout';
 import Head from 'next/head';
 import { PageType } from 'types';
 
@@ -21,16 +19,16 @@ export default function Products({ header, products }: ProductsPageProps) {
         <Head>
           <title>{title}</title>
         </Head>
-        <Container>
-          <Headline title={title} abstract={abstract}></Headline>
-          {products &&
-            <Box padding={8} background="neutral100">
-              <GridLayout>
-                {products.map((item) => <ProductItem key={item.id} item={item} />)}
-              </GridLayout>
-            </Box>
-          }
-        </Container>
+        <Headline title={title} abstract={abstract}></Headline>
+        {products &&
+          <Grid.Container gap={2} justify="flex-start">
+            {products.map((item) =>
+              <Grid xs={8} key={item.id}>
+                <ProductItem item={item} />
+              </Grid>
+            )}
+          </Grid.Container>
+        }
       </Layout>
     </>
   )

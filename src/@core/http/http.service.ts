@@ -1,6 +1,6 @@
 import { merge } from '../utils/utils.service';
 
-const defaultOptions:FetchRequestOptions = {
+const defaultOptions: FetchRequestOptions = {
   // method: 'POST', // *GET, POST, PUT, DELETE, etc.
   // mode: 'cors', // no-cors, *cors, same-origin
   // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -14,10 +14,13 @@ const defaultOptions:FetchRequestOptions = {
   // body: JSON.stringify(data) // body data type must match "Content-Type" header
 };
 
-export async function httpFetch(url, options:FetchRequestOptions = {}) {
+export async function httpFetch(url, options: FetchRequestOptions = {}) {
   // console.log('httpFetch', url, options);
   const httpOptions = merge({ ...defaultOptions }, options);
   const httpResponse = await fetch(url, httpOptions);
+  if (!httpResponse.ok) {
+    throw httpResponse;
+  }
   const response = await httpResponse.json();
   return response;
   /*

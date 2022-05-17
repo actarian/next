@@ -1,17 +1,15 @@
-import Container from '@components/container/container';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
 import { asLocalizedPaths, asStaticProps } from '@core/utils/utils.service';
+import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
+import { ArrowRight } from '@geist-ui/icons';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import { Product } from '@models/product/product';
 import { getProduct, getProducts } from '@models/product/product.service';
 import { P } from '@pipes/pipes';
-import { Box } from '@strapi/design-system/Box';
-import { Typography } from '@strapi/design-system/Typography';
 import Head from 'next/head';
-import Image from 'next/image';
 import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
@@ -30,17 +28,24 @@ export default function ProductPage({ header, product, params }: ProductPageProp
         <Head>
           <title>{product.title}</title>
         </Head>
-        <Container>
-          <Headline title={product.title} abstract={product.abstract}></Headline>
-          {
-            product.description &&
-            <Box paddingLeft={10} paddingRight={10} background="neutral100">
-              <Typography>{<div className="wysiwyg" dangerouslySetInnerHTML={{ __html: product.description }} />}</Typography>
-            </Box>
-          }
-          <Image alt={product.title} src={product.image} layout="intrinsic" width={200} height={200} />
-          {P(product.price, P.price())}
-        </Container>
+        <Headline title={product.title} abstract={product.abstract}></Headline>
+        <Grid.Container gap={1.5}>
+          <Grid xs={12} justify="center" alignItems="flex-start">
+            <Card width="100%" type="dark">
+              <Image alt={product.title} src={product.image} />
+            </Card>
+          </Grid>
+          <Grid xs={12} justify="center" alignItems="flex-start">
+            <Card width="100%">
+              {product.description && <Text>{<div className="wysiwyg" dangerouslySetInnerHTML={{ __html: product.description }} />}</Text>}
+              <Card.Footer>
+                <Button type="success" icon={<ArrowRight />} auto>Buy {P(product.price, P.price())}</Button>
+              </Card.Footer>
+            </Card>
+          </Grid>
+        </Grid.Container>
+        <Spacer h={.5} />
+        <Note type="warning">This note details something important.</Note>
       </Layout>
     </>
   )

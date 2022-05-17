@@ -5,12 +5,14 @@
     "build:next": "next build",
     "build": "run-s build:*",
     "start": "next start",
+    "serve": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@strapi/design-system": "0.0.1-alpha.79",
-    "@strapi/icons": "0.0.1-alpha.79",
+    "@geist-ui/core": "^2.3.8",
+    "@geist-ui/icons": "^1.0.2",
     "next": "^12.1.6",
+    "pluralize": "^8.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "styled-components": "^5.3.5"

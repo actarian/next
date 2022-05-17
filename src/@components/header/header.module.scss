@@ -9,11 +9,11 @@
 
 .menu {
   display: flex;
-  padding :0;
-  margin: 0 -5px;
-  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-  &>li {
-    padding: 5px;
-  }
+.logo {
+  font-size: 0;
 }

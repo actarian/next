@@ -1,4 +1,3 @@
-import Container from '@components/container/container';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils/utils.service';
@@ -16,9 +15,7 @@ export default function Custom404({ header, params }: Custom404Props) {
         <Head>
           <title>{title}</title>
         </Head>
-        <Container>
-          <Headline title={title} abstract={abstract}></Headline>
-        </Container>
+        <Headline title={title} abstract={abstract}></Headline>
       </Layout>
     </>
   )
