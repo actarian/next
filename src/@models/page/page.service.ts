@@ -7,6 +7,23 @@ export async function getPageByCollectionAndId(collectionName: string, id: IEqua
   if (!data) {
     return null;
   }
+  const page = data.page;
+  if (!page) {
+    return null;
+  }
+  const pages = await page.findMany(id);
+  if (!pages) {
+    return null;
+  }
+  const item = pages.find(x => x.schema === collectionName && x.id === id);
+  return item || null;
+}
+
+export async function getPageByCollectionAndId_2(collectionName: string, id: IEquatable): Promise<Page | null> {
+  const data = await getData();
+  if (!data) {
+    return null;
+  }
   const collection = data[collectionName];
   if (!collection) {
     return null;

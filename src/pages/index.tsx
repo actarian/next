@@ -6,7 +6,7 @@ import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
 import { useApiGet } from '@hooks/useApi/useApi';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
-import { getProduct } from '@models/product/product.service';
+import { getPageByCollectionAndId } from '@models/page/page.service';
 import Head from 'next/head';
 import React from 'react';
 import { PageType } from 'types';
@@ -32,7 +32,7 @@ export default function Index({ page, header, locales, locale }: IndexProps) {
         <Head>
           <title>{page.title}</title>
         </Head>
-        <Breadcrumb />
+        <Breadcrumb items={page.breadcrumb} />
         <Text h1>{page.title}</Text>
         <Display title={page.title} caption={page.abstract}>
           <Image src="/assets/homepage/banner.png" alt={page.title} draggable={false} />
@@ -59,7 +59,7 @@ export interface IndexProps extends PageType {
 export async function getStaticProps(context) {
   const global = await getCachedGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
-  const page = await getProduct(5);
+  const page = await getPageByCollectionAndId('homepage', 1);
   const props = asStaticProps({ ...context, header, page });
   // console.log('Index getStaticProps', props, context);
   return {

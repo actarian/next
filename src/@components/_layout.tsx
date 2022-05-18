@@ -9,7 +9,7 @@ export default function Layout({ header, children }) {
   return (
     <>
       <Meta />
-      <Page width="1024px" padding={0}>
+      <Page width="1024px" style={ {maxWidth: 'calc(100vw - 40px)', margin: '0 auto' } } padding={0}>
         <Page.Header>
           <Header menu={header}></Header>
         </Page.Header>

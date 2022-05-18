@@ -18,19 +18,19 @@ export interface Page extends Slug {
   breadcrumb?: Breadcrumb[];
 }
 
+export interface Meta {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  robots?: string;
+}
+
 // !!! MenuItem ?
 export interface Breadcrumb extends Slug {
   id: IEquatable; // * slug
   slug: string; // * slug
   schema: SchemaType; // * slug
   title?: string;
-}
-
-export interface Meta {
-  title?: string;
-  description?: string;
-  keywords?: string;
-  robots?: string;
 }
 
 export interface Image {

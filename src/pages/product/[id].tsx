@@ -1,3 +1,4 @@
+import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
@@ -6,6 +7,7 @@ import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
+import { getPageByCollectionAndId } from '@models/page/page.service';
 import { Product } from '@models/product/product';
 import { getProduct, getProducts } from '@models/product/product.service';
 import { P } from '@pipes/pipes';
@@ -14,32 +16,33 @@ import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
-export default function ProductPage({ header, product, params, locales, locale }: ProductPageProps) {
+export default function ProductPage({ page, header, product, params, locales, locale }: ProductPageProps) {
   // const router = useRouter()
   // const { id } = router.query;
-  // console.log('Product', id, header, product, locales, locale);
-  if (!product) {
+  // console.log('Product', page, product);
+  if (!page || !product) {
     return;
   }
-  // console.log(product);
+  // console.log(page);
   return (
     <>
       <Layout header={header}>
         <Head>
-          <title>{product.title}</title>
+          <title>{page.title}</title>
         </Head>
-        <Headline title={product.title} abstract={product.abstract}></Headline>
+        <Breadcrumb items={page.breadcrumb} />
+        <Headline title={page.title} abstract={page.abstract}></Headline>
         <Grid.Container gap={1.5}>
           <Grid xs={12} justify="center" alignItems="flex-start">
             <Card width="100%" type="dark">
-              <Image alt={product.title} src={product.image} />
+              <Image alt={page.title} src={product.image} />
             </Card>
           </Grid>
           <Grid xs={12} justify="center" alignItems="flex-start">
             <Card width="100%">
-              {product.description && <Text>{<div className="wysiwyg" dangerouslySetInnerHTML={{ __html: product.description }} />}</Text>}
+              {page.description && <Text>{<div className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
-                <Button type="success" icon={<ArrowRight />} auto>Buy {P(product.price, P.price())}</Button>
+                <Button type="success" icon={<ArrowRight />} auto>Buy {P(page.price, P.price())}</Button>
               </Card.Footer>
             </Card>
           </Grid>
@@ -55,6 +58,7 @@ export interface ProductPageProps extends PageType {
   params: { id: IEquatable };
   header: Menu;
   product: Product;
+  page: any;
 }
 
 export async function getStaticProps(context) {
@@ -64,7 +68,8 @@ export async function getStaticProps(context) {
   // console.log('Product getStaticProps', product);
   const global = await getCachedGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
-  const props = asStaticProps({ product, header, ...context });
+  const page = await getPageByCollectionAndId('product', id);
+  const props = asStaticProps({ page, product, header, ...context });
   // console.log('Product getStaticProps', props);
   return {
     props,

@@ -1,11 +1,18 @@
 import { Breadcrumbs, Spacer } from '@geist-ui/core';
-import { Github } from '@geist-ui/icons';
 import NextLink from 'next/link';
 
-export default function Breadcrumb(props) {
+export default function Breadcrumb({ items }) {
   return (
     <>
       <Breadcrumbs>
+        { items.map((x, i) => (
+          i < items.length - 1 ?
+          <NextLink key={i} href={x.slug}>
+            <Breadcrumbs.Item nextLink>{x.name}</Breadcrumbs.Item>
+          </NextLink> :
+          <Breadcrumbs.Item key={i}>{x.name}</Breadcrumbs.Item>
+        )) }
+        { /*
         <NextLink href="/">
           <Breadcrumbs.Item nextLink> <Github /> Home</Breadcrumbs.Item>
         </NextLink>
@@ -13,6 +20,7 @@ export default function Breadcrumb(props) {
           <Breadcrumbs.Item nextLink>Components</Breadcrumbs.Item>
         </NextLink>
         <Breadcrumbs.Item>Breadcrumbs</Breadcrumbs.Item>
+        */ }
       </Breadcrumbs>
       <Spacer h={.5} />
     </>
