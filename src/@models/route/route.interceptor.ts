@@ -3,7 +3,7 @@ import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-export async function routeInterceptor(request: NextRequest, event: NextFetchEvent) {
+export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;
   // !!! use global data ???
   let route = null;

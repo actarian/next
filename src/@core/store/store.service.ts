@@ -14,6 +14,10 @@ import { CollectionDescription, Store } from './store';
 const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
 
 export async function getStore(): Promise<Store> {
+  return await getStore_();
+}
+
+export async function getStore_(): Promise<Store> {
   if (!isDevelopment && !API_MOCK) {
     return null;
   }
@@ -25,7 +29,7 @@ export async function getStore(): Promise<Store> {
   return data;
 }
 
-export async function getCachedStore(): Promise<Store> {
+export async function getCachedStore_(): Promise<Store> {
   if (!isDevelopment && !API_MOCK) {
     return null;
   }
@@ -45,7 +49,7 @@ export async function getCachedStore(): Promise<Store> {
       return store;
     }
   }
-  const store = await getStore();
+  const store = await getStore_();
   const storeData = {};
   Object.keys(store).map(key => {
     storeData[key] = (store[key] as JsonService<IEntity>).collection;

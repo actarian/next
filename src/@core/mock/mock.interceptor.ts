@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
 
-export async function mockInterceptor(request: NextRequest, event: NextFetchEvent) {
+export async function mockInterceptor(request: NextRequest, next: NextFetchEvent) {
   if (!API_MOCK) {
     return;
   }

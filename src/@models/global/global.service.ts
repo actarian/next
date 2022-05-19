@@ -3,6 +3,10 @@ import { getMenus } from '@models/menu/menu.service';
 import { Global } from './global';
 
 export async function getGlobal(): Promise<Global> {
+  return await getGlobal_();
+}
+
+export async function getGlobal_(): Promise<Global> {
   const menu = await getMenus();
   const timestamp = new Date().getTime();
   return {
@@ -11,7 +15,7 @@ export async function getGlobal(): Promise<Global> {
   };
 }
 
-export async function getCachedGlobal(): Promise<Global> {
+export async function getCachedGlobal_(): Promise<Global> {
   const cacheDirectory = pathJoin('.cache');
   await fsExistOrCreateFolder(cacheDirectory);
   const pathname = pathJoin('.cache', 'global.json');
@@ -22,7 +26,7 @@ export async function getCachedGlobal(): Promise<Global> {
       return cache;
     }
   }
-  const global = await getGlobal();
+  const global = await getGlobal_();
   await fsWriteJson(pathname, global);
   return global;
 }

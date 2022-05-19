@@ -1,11 +1,11 @@
 import { Store } from '@core/store/store';
-import { getCachedStore } from '@core/store/store.service';
+import { getStore } from '@core/store/store.service';
 import { Breadcrumb, IBreadcrumb } from '@models/breadcrumb/breadcrumb';
 import { ICategorized } from '@models/category/category';
 import { Category } from 'data/types/category';
 
 export async function getBreadcrumb(item: ICategorized, injectedStore?: Store): Promise<Breadcrumb[]> { // !!! any
-  const store = injectedStore || (await getCachedStore());
+  const store = injectedStore || (await getStore());
   if (!store) {
     return [];
   }

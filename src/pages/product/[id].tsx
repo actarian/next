@@ -5,7 +5,7 @@ import { IEquatable } from '@core/entity/entity';
 import { asLocalizedPaths, asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { getCachedGlobal } from '@models/global/global.service';
+import { getGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import { getPageByCollectionAndId } from '@models/page/page.service';
 import { getProducts } from '@models/product/product.service';
@@ -61,7 +61,7 @@ export interface ProductPageProps extends PageType {
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   // console.log('Product getStaticProps', id);
-  const global = await getCachedGlobal();
+  const global = await getGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
   const page = await getPageByCollectionAndId('product', id);
   const props = asStaticProps({ page, header, ...context });

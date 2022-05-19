@@ -4,7 +4,7 @@ import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
 // import { useApiGet } from '@hooks/useApi/useApi';
-import { getCachedGlobal } from '@models/global/global.service';
+import { getGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import { getPageByCollectionAndId } from '@models/page/page.service';
 import Head from 'next/head';
@@ -59,7 +59,7 @@ export interface IndexProps extends PageType {
 }
 
 export async function getStaticProps(context) {
-  const global = await getCachedGlobal();
+  const global = await getGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
   const page = await getPageByCollectionAndId('homepage', 1);
   const props = asStaticProps({ ...context, header, page });

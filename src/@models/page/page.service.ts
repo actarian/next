@@ -1,10 +1,10 @@
 import { IEquatable } from '@core/entity/entity';
-import { getCachedStore } from '@core/store/store.service';
+import { getStore } from '@core/store/store.service';
 import { getBreadcrumb } from '@models/breadcrumb/breadcrumb.service';
 import { Page } from './page';
 
 export async function getPageByCollectionAndId(collectionName: string, id: IEquatable): Promise<Page | null> {
-  const store = await getCachedStore();
+  const store = await getStore();
   if (!store) {
     return null;
   }
@@ -31,7 +31,7 @@ export async function getPageByCollectionAndId(collectionName: string, id: IEqua
 }
 
 export async function getPageByUrl(href): Promise<Page | null> {
-  const store = await getCachedStore();
+  const store = await getStore();
   if (!store) {
     return null;
   }

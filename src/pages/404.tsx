@@ -1,7 +1,7 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
-import { getCachedGlobal } from '@models/global/global.service';
+import { getGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import Head from 'next/head';
 import { PageType } from 'types';
@@ -26,7 +26,7 @@ export interface Custom404Props extends PageType {
 }
 
 export async function getStaticProps(context) {
-  const global = await getCachedGlobal();
+  const global = await getGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
   const props = asStaticProps({ ...context, header });
   // console.log('Custom404 getStaticProps', props);
