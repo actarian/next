@@ -2,10 +2,10 @@ const path = require('path');
 const pluralize = require('pluralize');
 import { IEntity } from '@core/entity/entity';
 import JsonService from '@core/entity/json.service';
-import { fsExists, fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
+import { fsExistOrCreateFolder, fsExists, fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import { awaitAll, isDevelopment } from '@core/utils';
+import { resolveHref } from '@models/breadcrumb/breadcrumb.service';
 import { ICategorized } from '@models/category/category';
-import { resolveHref } from '@models/page/page.service';
 import { PAGES } from 'src/pages';
 import { CollectionDescription, Store } from './store';
 
@@ -29,7 +29,10 @@ export async function getCachedStore(): Promise<Store> {
   if (!isDevelopment && !API_MOCK) {
     return null;
   }
-  const pathname = path.join(process.cwd(), '.cache', 'store.json');
+  const cwd = process.cwd();
+  const cacheDirectory = path.join(cwd, '.cache');
+  await fsExistOrCreateFolder(cacheDirectory);
+  const pathname = path.join(cwd, '.cache', 'store.json');
   // const pathname = pathJoin('.cache', 'store.json'); // !!! not working
   const exists = await fsExists(pathname);
   if (exists) {

@@ -1,5 +1,5 @@
-const path = require("path");
-const fs = require("fs");
+const path = require('path');
+const fs = require('fs');
 
 export async function fsExists(pathname) {
   try {
@@ -47,6 +47,17 @@ export async function fsWriteJson(pathname, data) {
     await fsWrite(pathname, JSON.stringify(data));
   } catch (error) {
     console.log('fsWriteJson', error);
+  }
+}
+
+export async function fsExistOrCreateFolder(pathname) {
+  try {
+    const exists = fs.existsSync(pathname);
+    if (!exists) {
+      await fs.promises.mkdir(pathname);
+    }
+  } catch (error) {
+    console.log('fsExistOrCreateFolder', error);
   }
 }
 

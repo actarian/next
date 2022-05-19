@@ -11,7 +11,7 @@ const defaultOptions: FetchRequestOptions = {
   },
   // redirect: 'follow', // manual, *follow, error
   // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-  // body: JSON.stringify(data) // body data type must match "Content-Type" header
+  // body: JSON.stringify(data) // body data type must match 'Content-Type' header
 };
 
 export async function httpFetch(url, options: FetchRequestOptions = {}) {
@@ -74,7 +74,7 @@ export type FetchRequestOptions = {
   // Tells browsers to include credentials with requests to same-origin URLs, and use any credentials sent back in responses from same-origin URLs.
   // include
   // Tells browsers to include credentials in both same- and cross-origin requests, and always use any credentials sent back in responses.
-  // Note: Credentials may be included in simple and "final" cross-origin requests, but should not be included in CORS preflight requests.
+  // Note: Credentials may be included in simple and 'final' cross-origin requests, but should not be included in CORS preflight requests.
   cache?: 'default' | 'no-store' | 'reload' | 'no-cache' | 'force-cache' | 'only-if-cached';
   // A string indicating how the request will interact with the browser's HTTP cache. The possible values, default, no-store, reload, no-cache, force-cache, and only-if-cached, are documented in the article for the cache property of the Request object.
   redirect?: 'follow' | 'error' | 'manual';

@@ -1,8 +1,8 @@
 
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable } from '@core/entity/entity';
 
-  export interface Route {
-    href: string;
-    schema: string;
-    schemaId: number;
-  }
+export interface Route {
+  href: string;
+  schema: string;
+  schemaId: IEquatable;
+}

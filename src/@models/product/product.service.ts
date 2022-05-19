@@ -1,7 +1,7 @@
 import { IEquatable } from '@core/entity/entity';
 import { getCachedStore } from '@core/store/store.service';
 import { awaitAll } from '@core/utils';
-import { decorateHref } from '@models/page/page.service';
+import { decorateHref } from '@models/breadcrumb/breadcrumb.service';
 import { Product } from './product';
 
 export async function getProducts(): Promise<Product[]> {

@@ -1,4 +1,4 @@
-import { fsExists, fsReadJson, fsWriteJson, pathJoin } from '@core/fs/fs.service';
+import { fsExistOrCreateFolder, fsExists, fsReadJson, fsWriteJson, pathJoin } from '@core/fs/fs.service';
 import { getMenus } from '@models/menu/menu.service';
 import { Global } from './global';
 
@@ -12,6 +12,8 @@ export async function getGlobal(): Promise<Global> {
 }
 
 export async function getCachedGlobal(): Promise<Global> {
+  const cacheDirectory = pathJoin('.cache');
+  await fsExistOrCreateFolder(cacheDirectory);
   const pathname = pathJoin('.cache', 'global.json');
   const exists = await fsExists(pathname);
   if (exists) {
