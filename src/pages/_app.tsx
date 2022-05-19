@@ -41,6 +41,13 @@ export default function CustomApp({ Component, pageProps }) {
   }, []);
 
   return (
+    <GeistProvider themeType="dark">
+      <CssBaseline />
+      <Component {...pageProps} />
+    </GeistProvider>
+  );
+
+  return (
     <GeistProvider themes={[customTheme]} themeType="custom">
       <CssBaseline />
       <Component {...pageProps} />

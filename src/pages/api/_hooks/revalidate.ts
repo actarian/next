@@ -1,6 +1,6 @@
 import { apiHandler } from '@core/api/api.helper';
 import { resolveRoute } from '@core/utils';
-import { getSlug } from '@models/slug/slug.service';
+import { getRoute } from '@models/route/route.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
@@ -12,15 +12,15 @@ export default apiHandler({
     }
     try {
       /*
-      { "id": 1, "schema": "product", "slug": "/products/xxxx" }
+      { "id": 1, "schema": "product", "href": "/product/xxxx" }
       */
-      const { slug } = request.body;
-      const route = await getSlug(slug);
+      const { href } = request.body;
+      const route = await getRoute(href);
       if (!route) {
-        // console.log('slug.notfound', slug);
-        return response.status(404).send('Slug not found');
+        // console.log('route.notfound', href);
+        return response.status(404).send('Route not found');
       }
-      // console.log('slug.found', route);
+      // console.log('route.found', route);
       const resolvedRoute = resolveRoute(route);
       await response.unstable_revalidate(resolvedRoute);
       return response.json({ revalidated: true })

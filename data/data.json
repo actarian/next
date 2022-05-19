@@ -1,8 +1,43 @@
 {
+  "homepage": [
+    {
+      "id": 1,
+      "schema": "homepage",
+      "slug": "",
+      "title": "Homepage",
+      "abstract": "Homepage abstract.",
+      "description": "<p>Homepage description</p>",
+      "image": "/assets/homepage/banner.png",
+      "categoryId": 1
+    }
+  ],
+  "about": [
+    {
+      "id": 1,
+      "schema": "about",
+      "slug": "about",
+      "title": "About",
+      "abstract": "About abstract.",
+      "description": "<p>About description</p>",
+      "categoryId": 2
+    }
+  ],
+  "product_index": [
+    {
+      "id": 1,
+      "schema": "product_index",
+      "slug": "products",
+      "title": "Products",
+      "abstract": "Products abstract.",
+      "description": "<p>Products description</p>",
+      "categoryId": 3
+    }
+  ],
   "product": [
     {
       "id": 4,
-      "slug": "/products/apparel/menswear/t-shirts/t-shirt",
+      "schema": "product",
+      "slug": "t-shirt",
       "title": "T-Shirt",
       "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
       "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
@@ -12,7 +47,8 @@
     },
     {
       "id": 5,
-      "slug": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
+      "schema": "product",
+      "slug": "unisex-skinny-joggers",
       "title": "Unisex Skinny Joggers",
       "abstract": "Your perfect joggers for everyday use and walks in the forest.",
       "description": "<p>It looks like you found your next favorite workout sweatpants—the slim fit joggers are light and breathable, making them perfect for sports. Or if you feel like lounging on the couch, these soft joggers are just what you need. • 65% polyester, 35% cotton • Fabric weight: 250 g/m² (10.5 oz/y²) • Elastic waistband with a self-colored flat cord • Brushed metal eyelets for the cord • Double layer ribbed ankle cuffs • Side pockets with double layered ribbed hem • Back patch pocket • Slim fit (women may want to order a size down)</p>",
@@ -22,7 +58,8 @@
     },
     {
       "id": 6,
-      "slug": "/products/apparel/menswear/jackets/lightweight-jacket",
+      "schema": "product",
+      "slug": "lightweight-jacket",
       "title": "Lightweight Jacket",
       "abstract": "Your perfect jacket for everyday use and walks in the forest.",
       "description": "<p>Add a little zing to your winter wardrobe with this vibrant Winter-breaker Jacket. With a brushed fleece inside, and a relaxed unisex fit, this jacket is just the stuff of the dreams, so be quick to grab yourself one!     Long sleeve ripstop jacket colorblocked in black. Rough pattern in obsidian black and brown printed throughout. Printed graphic in white throughout. Logo-woven webbing trim in white and black throughout. Bungee-style drawstring at hood featuring rubberized logo hardware. Zip closure at front. Rubberized logo appliqué at chest. Welt pockets and textile logo patch in orange at waist. Elasticized cuffs. Partially lined. Black hardware.</p>",
@@ -32,7 +69,8 @@
     },
     {
       "id": 7,
-      "slug": "/products/apparel/menswear/hats/black-beanie",
+      "schema": "product",
+      "slug": "black-beanie",
       "title": "Black Beanie",
       "abstract": "Your perfect beanie for everyday use and walks in the forest.",
       "description": "<p>The Next.js beanie has arrived! This embroidered beauty has a snug fit that ensures you're going to feel cozy and warm whatever you're doing.</p><ol><li>60% cotton, 40% acrylic</li><li>Breathable cotton blend</li><li>Form-fitting shape</li><li>One size fits most</li></ol>",
@@ -41,64 +79,33 @@
       "categoryId": 9
     }
   ],
-  "slug": [
-    {
-      "slug": "/",
-      "schema": "homepage",
-      "id": 1
-    },
-    {
-      "slug": "/who-we-are",
-      "schema": "about",
-      "id": 2
-    },
-    {
-      "slug": "/products",
-      "schema": "products",
-      "id": 3
-    },
-    {
-      "slug": "/products/apparel/menswear/t-shirts/t-shirt",
-      "schema": "product",
-      "id": 4
-    },
-    {
-      "slug": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
-      "schema": "product",
-      "id": 5
-    },
-    {
-      "slug": "/products/apparel/menswear/jackets/lightweight-jacket",
-      "schema": "product",
-      "id": 6
-    },
-    {
-      "slug": "/products/apparel/menswear/hats/black-beanie",
-      "schema": "product",
-      "id": 7
-    }
-  ],
   "category": [
     {
       "id": 1,
       "name": "homepage",
       "title": "Homepage",
       "slug": "",
-      "categoryId": null
+      "categoryId": null,
+      "schema": "homepage",
+      "schemaId": 1
     },
     {
       "id": 2,
       "name": "about",
       "title": "About",
       "slug": "about",
-      "categoryId": null
+      "categoryId": 1,
+      "schema": "about",
+      "schemaId": 1
     },
     {
       "id": 3,
-      "name": "products",
+      "name": "product_index",
       "title": "Products",
       "slug": "products",
-      "categoryId": null
+      "categoryId": 1,
+      "schema": "product_index",
+      "schemaId": 1
     },
     {
       "id": 4,
@@ -143,41 +150,6 @@
       "categoryId": 5
     }
   ],
-  "menu": [
-    {
-      "id": "header",
-      "items": [
-        {
-          "name": "Homepage",
-          "slug": "/"
-        },
-        {
-          "name": "About",
-          "slug": "/who-we-are"
-        },
-        {
-          "name": "Products",
-          "slug": "/products"
-        },
-        {
-          "name": "T-Shirt",
-          "slug": "/products/apparel/menswear/t-shirts/t-shirt"
-        },
-        {
-          "name": "Unisex Skinny Joggers",
-          "slug": "/products/apparel/menswear/trousers/unisex-skinny-joggers"
-        },
-        {
-          "name": "Lightweight Jacket",
-          "slug": "/products/apparel/menswear/jackets/lightweight-jacket"
-        },
-        {
-          "name": "Black Beanie",
-          "slug": "/products/apparel/menswear/hats/black-beanie"
-        }
-      ]
-    }
-  ],
   "page": [
     {
       "id": 1,
@@ -193,20 +165,12 @@
         "description": "Homepage description",
         "keywords": "homepage keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "slug": "",
-          "schema": "homepage",
-          "title": "Homepage"
-        }
-      ]
+      }
     },
     {
-      "id": 2,
+      "id": 1,
       "schema": "about",
-      "slug": "who-we-are",
+      "slug": "about",
       "title": "About",
       "abstract": "About abstract",
       "description": "<p>About description</p>",
@@ -217,25 +181,11 @@
         "description": "About description",
         "keywords": "about keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "slug": "",
-          "schema": "homepage",
-          "title": "Homepage"
-        },
-        {
-          "id": 2,
-          "slug": "about",
-          "schema": "about",
-          "title": "About"
-        }
-      ]
+      }
     },
     {
-      "id": 3,
-      "schema": "products",
+      "id": 1,
+      "schema": "product_index",
       "slug": "products",
       "title": "Products",
       "abstract": "Products abstract",
@@ -247,24 +197,10 @@
         "description": "Products description",
         "keywords": "products keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "slug": "",
-          "schema": "homepage",
-          "title": "Homepage"
-        },
-        {
-          "id": 3,
-          "slug": "products",
-          "schema": "products",
-          "title": "Products"
-        }
-      ]
+      }
     },
     {
-      "id": 4,
+      "id": 1,
       "schema": "product",
       "slug": "t-shirt",
       "title": "T-Shirt",
@@ -278,47 +214,10 @@
         "description": "T-Shirt description",
         "keywords": "t-shirt keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "name": "homepage",
-          "title": "Homepage",
-          "slug": "",
-          "categoryId": null
-        },
-        {
-          "id": 3,
-          "name": "products",
-          "title": "Products",
-          "slug": "products",
-          "categoryId": null
-        },
-        {
-          "id": 4,
-          "name": "apparel",
-          "title": "Apparel",
-          "slug": "apparel",
-          "categoryId": 3
-        },
-        {
-          "id": 5,
-          "name": "menswear",
-          "title": "Menswear",
-          "slug": "menswear",
-          "categoryId": 4
-        },
-        {
-          "id": 6,
-          "name": "t-shirts",
-          "title": "T-Shirts",
-          "slug": "t-shirts",
-          "categoryId": 5
-        }
-      ]
+      }
     },
     {
-      "id": 5,
+      "id": 2,
       "schema": "product",
       "slug": "unisex-skinny-joggers",
       "title": "Unisex Skinny Joggers",
@@ -332,47 +231,10 @@
         "description": "Unisex Skinny Joggers description",
         "keywords": "unisex skinny joggers keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "name": "homepage",
-          "title": "Homepage",
-          "slug": "",
-          "categoryId": null
-        },
-        {
-          "id": 3,
-          "name": "products",
-          "title": "Products",
-          "slug": "products",
-          "categoryId": null
-        },
-        {
-          "id": 4,
-          "name": "apparel",
-          "title": "Apparel",
-          "slug": "apparel",
-          "categoryId": 3
-        },
-        {
-          "id": 5,
-          "name": "menswear",
-          "title": "Menswear",
-          "slug": "menswear",
-          "categoryId": 4
-        },
-        {
-          "id": 7,
-          "name": "trousers",
-          "title": "Trousers",
-          "slug": "trousers",
-          "categoryId": 5
-        }
-      ]
+      }
     },
     {
-      "id": 6,
+      "id": 3,
       "schema": "product",
       "slug": "lightweight-jacket",
       "title": "Lightweight Jacket",
@@ -386,47 +248,10 @@
         "description": "Lightweight Jacket description",
         "keywords": "lightweight jacket keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
-        {
-          "id": 1,
-          "name": "homepage",
-          "title": "Homepage",
-          "slug": "",
-          "categoryId": null
-        },
-        {
-          "id": 3,
-          "name": "products",
-          "title": "Products",
-          "slug": "products",
-          "categoryId": null
-        },
-        {
-          "id": 4,
-          "name": "apparel",
-          "title": "Apparel",
-          "slug": "apparel",
-          "categoryId": 3
-        },
-        {
-          "id": 5,
-          "name": "menswear",
-          "title": "Menswear",
-          "slug": "menswear",
-          "categoryId": 4
-        },
-        {
-          "id": 8,
-          "name": "jackets",
-          "title": "Jackets",
-          "slug": "jackets",
-          "categoryId": 5
-        }
-      ]
+      }
     },
     {
-      "id": 7,
+      "id": 4,
       "schema": "product",
       "slug": "black-beanie",
       "title": "Black Beanie",
@@ -440,44 +265,79 @@
         "description": "Black Beanie description",
         "keywords": "black beanie keywords",
         "robots": "all"
-      },
-      "breadcrumb": [
+      }
+    }
+  ],
+  "menu": [
+    {
+      "id": "header",
+      "items": [
         {
-          "id": 1,
-          "name": "homepage",
-          "title": "Homepage",
-          "slug": "",
-          "categoryId": null
+          "name": "Homepage",
+          "href": "/"
         },
         {
-          "id": 3,
-          "name": "products",
-          "title": "Products",
-          "slug": "products",
-          "categoryId": null
+          "name": "About",
+          "href": "/about"
         },
         {
-          "id": 4,
-          "name": "apparel",
-          "title": "Apparel",
-          "slug": "apparel",
-          "categoryId": 3
+          "name": "Products",
+          "href": "/products"
         },
         {
-          "id": 5,
-          "name": "menswear",
-          "title": "Menswear",
-          "slug": "menswear",
-          "categoryId": 4
+          "name": "T-Shirt",
+          "href": "/products/apparel/menswear/t-shirts/t-shirt"
         },
         {
-          "id": 9,
-          "name": "hats",
-          "title": "Hats",
-          "slug": "hats",
-          "categoryId": 5
+          "name": "Unisex Skinny Joggers",
+          "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers"
+        },
+        {
+          "name": "Lightweight Jacket",
+          "href": "/products/apparel/menswear/jackets/lightweight-jacket"
+        },
+        {
+          "name": "Black Beanie",
+          "href": "/products/apparel/menswear/hats/black-beanie"
         }
       ]
+    }
+  ],
+  "route": [
+    {
+      "href": "/",
+      "schema": "homepage",
+      "schemaId": 1
+    },
+    {
+      "href": "/about",
+      "schema": "about",
+      "schemaId": 1
+    },
+    {
+      "href": "/products",
+      "schema": "product_index",
+      "schemaId": 1
+    },
+    {
+      "href": "/products/apparel/menswear/t-shirts/t-shirt",
+      "schema": "product",
+      "schemaId": 1
+    },
+    {
+      "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
+      "schema": "product",
+      "schemaId": 2
+    },
+    {
+      "href": "/products/apparel/menswear/jackets/lightweight-jacket",
+      "schema": "product",
+      "schemaId": 3
+    },
+    {
+      "href": "/products/apparel/menswear/hats/black-beanie",
+      "schema": "product",
+      "schemaId": 4
     }
   ]
 }

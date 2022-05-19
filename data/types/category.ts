@@ -7,4 +7,6 @@
     title: string;
     slug: string;
     categoryId: null | IEquatable;
+    schema: string;
+    schemaId: number;
   }

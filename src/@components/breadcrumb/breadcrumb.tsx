@@ -5,13 +5,13 @@ export default function Breadcrumb({ items }) {
   return (
     <>
       <Breadcrumbs>
-        { items.map((x, i) => (
-          i < items.length - 1 ?
-          <NextLink key={i} href={x.slug}>
-            <Breadcrumbs.Item nextLink>{x.name}</Breadcrumbs.Item>
-          </NextLink> :
-          <Breadcrumbs.Item key={i}>{x.name}</Breadcrumbs.Item>
-        )) }
+        {items.map((x, i) => (
+          i < items.length - 1 && x.schemaId ?
+            <NextLink key={i} href={x.href}>
+              <Breadcrumbs.Item nextLink>{x.title}</Breadcrumbs.Item>
+            </NextLink> :
+            <Breadcrumbs.Item key={i}>{x.title}</Breadcrumbs.Item>
+        ))}
         { /*
         <NextLink href="/">
           <Breadcrumbs.Item nextLink> <Github /> Home</Breadcrumbs.Item>

@@ -1,5 +1,5 @@
 import { IEquatable } from '@core/entity/entity';
-import { Slug } from '@models/slug/slug';
+import { Route } from '@models/route/route';
 import { PAGES } from '../../pages';
 
 export function merge(target, source) {
@@ -45,13 +45,13 @@ export function asLocalizedPaths(ids: IEquatable[], locales): any {
   return paths;
 }
 
-export function resolveRoute(slug: Slug) {
-  return PAGES[slug.schema](slug);
+export function resolveRoute(route: Route) {
+  return PAGES[route.schema](route);
 }
 
-export async function awaitAll(array, callback) {
+export async function awaitAll(array: any, callback: (item: any, index: number) => Promise<any>): Promise<any[]> {
   const promises = array.map(callback);
-  await Promise.all(promises);
+  return await Promise.all(promises);
 }
 
 export function getIsDevelopment(): boolean {

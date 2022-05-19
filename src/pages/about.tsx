@@ -1,21 +1,26 @@
+import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
+import { Page } from '@models/page/page';
+import { getPageByCollectionAndId } from '@models/page/page.service';
 import Head from 'next/head';
 import { PageType } from 'types';
 
-export default function About({ header, locales, locale }: AboutProps) {
-  const title = 'About';
-  const abstract = 'Lorem ipsum dolor sit amet';
+export default function About({ header, page, locales, locale }: AboutProps) {
+  if (!page) {
+    return;
+  }
   return (
     <>
       <Layout header={header}>
         <Head>
-          <title>{title}</title>
+          <title>{page.title}</title>
         </Head>
-        <Headline title={title} abstract={abstract}></Headline>
+        <Breadcrumb items={page.breadcrumb} />
+        <Headline title={page.title} abstract={page.abstract}></Headline>
       </Layout>
     </>
   )
@@ -23,12 +28,14 @@ export default function About({ header, locales, locale }: AboutProps) {
 
 export interface AboutProps extends PageType {
   header: Menu;
+  page: Page;
 }
 
 export async function getStaticProps(context) {
   const global = await getCachedGlobal();
   const header = global.menu.find(x => x.id === 'header'); // global.menu.header; ??
-  const props = asStaticProps({ ...context, header });
+  const page = await getPageByCollectionAndId('about', 1);
+  const props = asStaticProps({ ...context, header, page });
   // console.log('About getStaticProps', props);
   return {
     props,

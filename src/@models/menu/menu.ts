@@ -7,5 +7,5 @@ export interface Menu {
 
 export interface MenuItem {
   name: string;
-  slug: string;
+  href: string;
 }

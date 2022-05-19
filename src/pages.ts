@@ -1,7 +1,7 @@
 
 export const PAGES = {
-  homepage: (slug) => '/',
-  about: (slug) => '/about',
-  products: (slug) => '/products',
-  product: (slug) => `/product/${slug.id}`,
+  homepage: (route) => '/',
+  about: (route) => '/about',
+  product_index: (route) => '/product_index',
+  product: (route) => `/product/${route.schemaId}`,
 };

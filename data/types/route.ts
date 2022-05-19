@@ -1,8 +1,8 @@
 
   import { IEquatable} from '@core/entity/entity';
 
-  export interface Slug {
-    slug: string;
+  export interface Route {
+    href: string;
     schema: string;
-    id: IEquatable;
+    schemaId: number;
   }

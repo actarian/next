@@ -3,7 +3,7 @@ import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { useApiGet } from '@hooks/useApi/useApi';
+// import { useApiGet } from '@hooks/useApi/useApi';
 import { getCachedGlobal } from '@models/global/global.service';
 import { Menu } from '@models/menu/menu';
 import { getPageByCollectionAndId } from '@models/page/page.service';
@@ -15,14 +15,16 @@ const githubRepoUrl = 'https://github.com/actarian/next';
 const documentationUrl = 'https://geist-ui.dev/en-us/guide/colors';
 
 export default function Index({ page, header, locales, locale }: IndexProps) {
-
+  if (!page) {
+    return;
+  }
   // console.log('Index', header, locales, locale);
-
+  /*
   const { response } = useApiGet('/hello');
   if (response) {
     console.log('response', response);
   }
-
+  */
   const redirectToUrl = (url: string) => window.open(url);
 
   return (

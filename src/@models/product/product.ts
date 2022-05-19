@@ -9,4 +9,5 @@ export interface Product {
   image: string;
   price: number;
   categoryId: IEquatable;
+  href?: string;
 }

@@ -29,7 +29,7 @@ export default function Header({ menu }) {
       { /*
         <Stack horizontal spacing={4}>
           {menu && menu.items.map((item, i) => (
-            <NextLink key={i} href={item.slug}>{item.name}</NextLink>
+            <NextLink key={i} href={item.href}>{item.name}</NextLink>
           ))}
         </Stack>
         */ }
@@ -37,7 +37,7 @@ export default function Header({ menu }) {
         <ul className={styles.menu}>
           {menu && menu.map((item, i) => (
             <li key={i}>
-              <NextLink href={item.slug}>{item.name}</NextLink>
+              <NextLink href={item.href}>{item.name}</NextLink>
             </li>
           ))}
         </ul>
@@ -55,7 +55,7 @@ export default function Header({ menu }) {
         {menu &&
           <Tabs leftSpace={0} activeClassName="current" align="center" hideDivider hideBorder value={currentTab} onChange={onTabChange}>
             {menu.items.map((item, i) => (
-              <Tabs.Item font="14px" label={item.name} value={item.slug} key={`${item.name}-${i}`} />
+              <Tabs.Item font="14px" label={item.name} value={item.href} key={`${item.name}-${i}`} />
             ))}
           </Tabs>
         }

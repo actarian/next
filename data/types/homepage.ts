@@ -1,7 +1,7 @@
 
   import { IEquatable} from '@core/entity/entity';
 
-  export interface Product {
+  export interface Homepage {
     id: IEquatable;
     schema: string;
     slug: string;
@@ -9,6 +9,5 @@
     abstract: string;
     description: string;
     image: string;
-    price: number;
     categoryId: IEquatable;
   }

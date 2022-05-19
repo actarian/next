@@ -11,6 +11,5 @@
     image: string;
     categoryId: IEquatable;
     meta: any;
-    breadcrumb: any;
     price?: number;
   }

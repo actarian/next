@@ -68,7 +68,7 @@ export function isApiRequest(request: NextRequest) {
 }
 
 export function isExistingApiRoute(request: NextRequest) {
-  const rx = /^\/api\/(slug|product|(product\/(.+))|(menu\/(.+)))\/?$/gm;
+  const rx = /^\/api\/(route|product|(product\/(.+))|(menu\/(.+)))\/?$/gm;
   const url = request.nextUrl;
   const isApi = url.pathname.indexOf('/api') === 0;
   const isExisting = isApi && rx.test(url.pathname);
