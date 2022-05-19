@@ -5,24 +5,23 @@ import { NextResponse } from 'next/server';
 
 export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;
-  // !!! use global data ???
   let route = null;
   try {
     route = await apiPost(`/route`, { href: url.pathname });
-    // console.log('routeInterceptor', url.pathname, '->', route);
+    console.log('routeInterceptor', url.pathname, '->', route);
     if (!route) {
-      // console.log('route.notfound', url.pathname);
+      console.log('routeInterceptor.route.notfound', url.pathname);
       return;
     }
   } catch (error) {
     console.log('routeInterceptor.error', url.pathname, error.status, error.statusText);
     return;
   }
-  // console.log('route.found', route);
+  console.log('routeInterceptor.route.found', route);
   url = request.nextUrl.clone();
   // match route -> rewrite | not found
   url.pathname = resolveRoute(route);
-  // console.log('route.found', url.pathname);
+  console.log('routeInterceptor.route.found', url.pathname);
   const response = NextResponse.rewrite(url);
   return response;
 }

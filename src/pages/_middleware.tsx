@@ -10,6 +10,6 @@ export async function middleware(request: NextRequest, next: NextFetchEvent) {
   if (isApiRequest(request)) {
     return await mockInterceptor(request, next);
   }
-  // console.log(request.url, request.nextUrl, next);
+  console.log('pages.middleware', request.nextUrl.pathname);
   return await routeInterceptor(request, next);
 }
