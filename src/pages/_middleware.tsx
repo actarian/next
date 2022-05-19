@@ -4,6 +4,7 @@ import { routeInterceptor } from '@models/route/route.interceptor';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest, next: NextFetchEvent) {
+  console.log('pages.middleware', request.nextUrl.locale);
   if (isStaticRequest(request)) {
     return;
   }

@@ -1,8 +1,8 @@
 
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable } from '@core/entity/entity';
 
-  export interface Product {
-    id: IEquatable;
+export interface Product {
+  id: IEquatable;
     schema: string;
     slug: string;
     title: string;
@@ -12,4 +12,4 @@
     price: number;
     categoryId: IEquatable;
     meta: any;
-  }
+}

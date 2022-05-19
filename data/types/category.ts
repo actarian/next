@@ -1,12 +1,12 @@
 
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable } from '@core/entity/entity';
 
-  export interface Category {
-    id: IEquatable;
+export interface Category {
+  id: IEquatable;
     name: string;
     title: string;
     slug: string;
     categoryId: null | IEquatable;
     schema: string;
     schemaId: number;
-  }
+}

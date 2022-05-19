@@ -20,7 +20,8 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
   console.log('routeInterceptor.route.found', route);
   url = request.nextUrl.clone();
   // match route -> rewrite | not found
-  url.pathname = resolveRoute(route);
+  const resolvedPathname = resolveRoute(route);
+  url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
   console.log('routeInterceptor.route.found', url.pathname);
   const response = NextResponse.rewrite(url);
   return response;

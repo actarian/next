@@ -1,8 +1,8 @@
 
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable } from '@core/entity/entity';
 
-  export interface Homepage {
-    id: IEquatable;
+export interface Homepage {
+  id: IEquatable;
     schema: string;
     slug: string;
     title: string;
@@ -11,4 +11,4 @@
     image: string;
     categoryId: IEquatable;
     meta: any;
-  }
+}
