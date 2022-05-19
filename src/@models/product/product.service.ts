@@ -1,26 +1,19 @@
-import { getData } from '@core/data/data.service';
 import { IEquatable } from '@core/entity/entity';
+import { getCachedStore } from '@core/store/store.service';
 import { awaitAll } from '@core/utils';
-import { resolveHref } from '@models/page/page.service';
-// import { parseMockApi } from '@core/mock/mock.server';
+import { decorateHref } from '@models/page/page.service';
 import { Product } from './product';
 
 export async function getProducts(): Promise<Product[]> {
-  const data = await getData();
-  const products = await data.product.findMany();
+  const store = await getCachedStore();
+  const products: any[] = await store.product.findMany(); // !!! any
   // console.log('products ->', products.length);
   return await awaitAll(products, async (p) => await decorateHref(p));
 }
 
 export async function getProduct(id: IEquatable): Promise<Product> {
-  const data = await getData();
-  const product = await data.product.findOne(id);
-  // const product = await parseMockApi(`/api/product/${id}`);
+  const store = await getCachedStore();
+  const product: any = await store.product.findOne(id); // !!! any
   // console.log('product ->', product);
   return await decorateHref(product);
-}
-
-export async function decorateHref(item: any): Promise<any> {
-  const href = await resolveHref(item);
-  return { ...item, href };
 }

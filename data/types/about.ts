@@ -9,4 +9,5 @@
     abstract: string;
     description: string;
     categoryId: IEquatable;
+    meta: any;
   }

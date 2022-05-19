@@ -1,8 +1,8 @@
-import { getData } from '@core/data/data.service';
+import { getCachedStore } from '@core/store/store.service';
 import { Category } from './category';
 
 export async function getCategories(): Promise<Category[]> {
-  const data = await getData();
-  const categories = await data.category.findMany();
+  const store = await getCachedStore();
+  const categories: any = await store.category.findMany(); // !!! any
   return categories;
 }

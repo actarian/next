@@ -10,4 +10,5 @@
     description: string;
     image: string;
     categoryId: IEquatable;
+    meta: any;
   }

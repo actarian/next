@@ -11,4 +11,5 @@
     image: string;
     price: number;
     categoryId: IEquatable;
+    meta: any;
   }

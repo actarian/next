@@ -1,19 +1,17 @@
 import { IEquatable } from '@core/entity/entity';
 
-export interface Category {
-  id: IEquatable;
-  name: string;
-  title: string;
-  slug: string;
-  categoryId?: IEquatable;
-  schema?: string;
-  schemaId?: IEquatable;
-}
-
-export interface ICategorized {
-  id: IEquatable;
-  schema: string;
+export interface IBreadcrumb {
+  id?: IEquatable;
   title: string;
   slug: string;
   categoryId: IEquatable;
+  schema?: string;
+  schemaId?: IEquatable;
+  href?: string;
+}
+
+export interface Breadcrumb {
+  title: string;
+  categoryId: IEquatable;
+  href?: string;
 }

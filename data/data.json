@@ -8,7 +8,13 @@
       "abstract": "Homepage abstract.",
       "description": "<p>Homepage description</p>",
       "image": "/assets/homepage/banner.png",
-      "categoryId": 1
+      "categoryId": 1,
+      "meta": {
+        "title": "Homepage",
+        "description": "Homepage description",
+        "keywords": "homepage keywords",
+        "robots": "all"
+      }
     }
   ],
   "about": [
@@ -19,7 +25,13 @@
       "title": "About",
       "abstract": "About abstract.",
       "description": "<p>About description</p>",
-      "categoryId": 2
+      "categoryId": 2,
+      "meta": {
+        "title": "About",
+        "description": "About description",
+        "keywords": "about keywords",
+        "robots": "all"
+      }
     }
   ],
   "product_index": [
@@ -30,12 +42,18 @@
       "title": "Products",
       "abstract": "Products abstract.",
       "description": "<p>Products description</p>",
-      "categoryId": 3
+      "categoryId": 3,
+      "meta": {
+        "title": "Products",
+        "description": "Products description",
+        "keywords": "products keywords",
+        "robots": "all"
+      }
     }
   ],
   "product": [
     {
-      "id": 4,
+      "id": 1,
       "schema": "product",
       "slug": "t-shirt",
       "title": "T-Shirt",
@@ -43,10 +61,16 @@
       "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
       "image": "/assets/products/t-shirt.webp",
       "price": 160.12,
-      "categoryId": 6
+      "categoryId": 6,
+      "meta": {
+        "title": "T-Shirt",
+        "description": "T-Shirt description",
+        "keywords": "t-shirt keywords",
+        "robots": "all"
+      }
     },
     {
-      "id": 5,
+      "id": 2,
       "schema": "product",
       "slug": "unisex-skinny-joggers",
       "title": "Unisex Skinny Joggers",
@@ -54,10 +78,16 @@
       "description": "<p>It looks like you found your next favorite workout sweatpants—the slim fit joggers are light and breathable, making them perfect for sports. Or if you feel like lounging on the couch, these soft joggers are just what you need. • 65% polyester, 35% cotton • Fabric weight: 250 g/m² (10.5 oz/y²) • Elastic waistband with a self-colored flat cord • Brushed metal eyelets for the cord • Double layer ribbed ankle cuffs • Side pockets with double layered ribbed hem • Back patch pocket • Slim fit (women may want to order a size down)</p>",
       "image": "/assets/products/trouser.webp",
       "price": 160.12,
-      "categoryId": 7
+      "categoryId": 7,
+      "meta": {
+        "title": "Unisex Skinny Joggers",
+        "description": "Unisex Skinny Joggers description",
+        "keywords": "unisex skinny joggers keywords",
+        "robots": "all"
+      }
     },
     {
-      "id": 6,
+      "id": 3,
       "schema": "product",
       "slug": "lightweight-jacket",
       "title": "Lightweight Jacket",
@@ -65,10 +95,16 @@
       "description": "<p>Add a little zing to your winter wardrobe with this vibrant Winter-breaker Jacket. With a brushed fleece inside, and a relaxed unisex fit, this jacket is just the stuff of the dreams, so be quick to grab yourself one!     Long sleeve ripstop jacket colorblocked in black. Rough pattern in obsidian black and brown printed throughout. Printed graphic in white throughout. Logo-woven webbing trim in white and black throughout. Bungee-style drawstring at hood featuring rubberized logo hardware. Zip closure at front. Rubberized logo appliqué at chest. Welt pockets and textile logo patch in orange at waist. Elasticized cuffs. Partially lined. Black hardware.</p>",
       "image": "/assets/products/jacket.webp",
       "price": 249.99,
-      "categoryId": 8
+      "categoryId": 8,
+      "meta": {
+        "title": "Lightweight Jacket",
+        "description": "Lightweight Jacket description",
+        "keywords": "lightweight jacket keywords",
+        "robots": "all"
+      }
     },
     {
-      "id": 7,
+      "id": 4,
       "schema": "product",
       "slug": "black-beanie",
       "title": "Black Beanie",
@@ -76,7 +112,13 @@
       "description": "<p>The Next.js beanie has arrived! This embroidered beauty has a snug fit that ensures you're going to feel cozy and warm whatever you're doing.</p><ol><li>60% cotton, 40% acrylic</li><li>Breathable cotton blend</li><li>Form-fitting shape</li><li>One size fits most</li></ol>",
       "image": "/assets/products/hat.webp",
       "price": 160.12,
-      "categoryId": 9
+      "categoryId": 9,
+      "meta": {
+        "title": "Black Beanie",
+        "description": "Black Beanie description",
+        "keywords": "black beanie keywords",
+        "robots": "all"
+      }
     }
   ],
   "category": [
@@ -150,124 +192,6 @@
       "categoryId": 5
     }
   ],
-  "page": [
-    {
-      "id": 1,
-      "schema": "homepage",
-      "slug": "",
-      "title": "Index",
-      "abstract": "Index abstract",
-      "description": "<p>Index description</p>",
-      "image": "/assets/homepage/hero.png",
-      "categoryId": 1,
-      "meta": {
-        "title": "Homepage",
-        "description": "Homepage description",
-        "keywords": "homepage keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 1,
-      "schema": "about",
-      "slug": "about",
-      "title": "About",
-      "abstract": "About abstract",
-      "description": "<p>About description</p>",
-      "image": "/assets/about/hero.png",
-      "categoryId": 2,
-      "meta": {
-        "title": "About",
-        "description": "About description",
-        "keywords": "about keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 1,
-      "schema": "product_index",
-      "slug": "products",
-      "title": "Products",
-      "abstract": "Products abstract",
-      "description": "<p>Products description</p>",
-      "image": "/assets/products/hero.png",
-      "categoryId": 3,
-      "meta": {
-        "title": "Products",
-        "description": "Products description",
-        "keywords": "products keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 1,
-      "schema": "product",
-      "slug": "t-shirt",
-      "title": "T-Shirt",
-      "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-      "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
-      "image": "/assets/products/t-shirt.webp",
-      "price": 160.12,
-      "categoryId": 6,
-      "meta": {
-        "title": "T-Shirt",
-        "description": "T-Shirt description",
-        "keywords": "t-shirt keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 2,
-      "schema": "product",
-      "slug": "unisex-skinny-joggers",
-      "title": "Unisex Skinny Joggers",
-      "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-      "description": "<p>It looks like you found your next favorite workout sweatpants—the slim fit joggers are light and breathable, making them perfect for sports. Or if you feel like lounging on the couch, these soft joggers are just what you need. • 65% polyester, 35% cotton • Fabric weight: 250 g/m² (10.5 oz/y²) • Elastic waistband with a self-colored flat cord • Brushed metal eyelets for the cord • Double layer ribbed ankle cuffs • Side pockets with double layered ribbed hem • Back patch pocket • Slim fit (women may want to order a size down)</p>",
-      "image": "/assets/products/trouser.webp",
-      "price": 160.12,
-      "categoryId": 7,
-      "meta": {
-        "title": "Unisex Skinny Joggers",
-        "description": "Unisex Skinny Joggers description",
-        "keywords": "unisex skinny joggers keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 3,
-      "schema": "product",
-      "slug": "lightweight-jacket",
-      "title": "Lightweight Jacket",
-      "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-      "description": "<p>Add a little zing to your winter wardrobe with this vibrant Winter-breaker Jacket. With a brushed fleece inside, and a relaxed unisex fit, this jacket is just the stuff of the dreams, so be quick to grab yourself one!     Long sleeve ripstop jacket colorblocked in black. Rough pattern in obsidian black and brown printed throughout. Printed graphic in white throughout. Logo-woven webbing trim in white and black throughout. Bungee-style drawstring at hood featuring rubberized logo hardware. Zip closure at front. Rubberized logo appliqué at chest. Welt pockets and textile logo patch in orange at waist. Elasticized cuffs. Partially lined. Black hardware.</p>",
-      "image": "/assets/products/jacket.webp",
-      "price": 249.99,
-      "categoryId": 8,
-      "meta": {
-        "title": "Lightweight Jacket",
-        "description": "Lightweight Jacket description",
-        "keywords": "lightweight jacket keywords",
-        "robots": "all"
-      }
-    },
-    {
-      "id": 4,
-      "schema": "product",
-      "slug": "black-beanie",
-      "title": "Black Beanie",
-      "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-      "description": "<p>The Next.js beanie has arrived! This embroidered beauty has a snug fit that ensures you're going to feel cozy and warm whatever you're doing.</p><ol><li>60% cotton, 40% acrylic</li><li>Breathable cotton blend</li><li>Form-fitting shape</li><li>One size fits most</li></ol>",
-      "image": "/assets/products/hat.webp",
-      "price": 160.12,
-      "categoryId": 9,
-      "meta": {
-        "title": "Black Beanie",
-        "description": "Black Beanie description",
-        "keywords": "black beanie keywords",
-        "robots": "all"
-      }
-    }
-  ],
   "menu": [
     {
       "id": "header",
@@ -301,43 +225,6 @@
           "href": "/products/apparel/menswear/hats/black-beanie"
         }
       ]
-    }
-  ],
-  "route": [
-    {
-      "href": "/",
-      "schema": "homepage",
-      "schemaId": 1
-    },
-    {
-      "href": "/about",
-      "schema": "about",
-      "schemaId": 1
-    },
-    {
-      "href": "/products",
-      "schema": "product_index",
-      "schemaId": 1
-    },
-    {
-      "href": "/products/apparel/menswear/t-shirts/t-shirt",
-      "schema": "product",
-      "schemaId": 1
-    },
-    {
-      "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
-      "schema": "product",
-      "schemaId": 2
-    },
-    {
-      "href": "/products/apparel/menswear/jackets/lightweight-jacket",
-      "schema": "product",
-      "schemaId": 3
-    },
-    {
-      "href": "/products/apparel/menswear/hats/black-beanie",
-      "schema": "product",
-      "schemaId": 4
     }
   ]
 }

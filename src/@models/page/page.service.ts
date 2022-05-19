@@ -1,27 +1,27 @@
-import { getData } from '@core/data/data.service';
-import { IEquatable } from '@core/entity/entity';
+import { IEquatable, IQuerable } from '@core/entity/entity';
+import { getCachedStore } from '@core/store/store.service';
+import { Breadcrumb, IBreadcrumb } from '@models/breadcrumb/breadcrumb';
+import { ICategorized } from '@models/category/category';
 import { Page } from './page';
 
 export async function getPageByCollectionAndId(collectionName: string, id: IEquatable): Promise<Page | null> {
-  const data = await getData();
-  if (!data) {
+  const store = await getCachedStore();
+  if (!store) {
     return null;
   }
-  const page = data.page;
+  const page = store.page;
   if (!page) {
     return null;
   }
-
-  const category = data.category;
+  const category = store.category;
   if (!category) {
     return null;
   }
-
-  const pages = await page.findMany(id);
+  const pages = await page.findMany();
   if (!pages) {
     return null;
   }
-  const item = pages.find(x => x.schema === collectionName && x.id === id);
+  const item: any = pages.find(x => x.schema === collectionName && x.id === id); // !!! any
   if (item) {
     item.breadcrumb = await getBreadcrumb(item);
     return item;
@@ -32,11 +32,11 @@ export async function getPageByCollectionAndId(collectionName: string, id: IEqua
 }
 
 export async function getPageByUrl(href): Promise<Page | null> {
-  const data = await getData();
-  if (!data) {
+  const store = await getCachedStore();
+  if (!store) {
     return null;
   }
-  const routes = await data.route.findMany();
+  const routes = await store.route.findMany();
   if (!routes) {
     return null;
   }
@@ -44,30 +44,30 @@ export async function getPageByUrl(href): Promise<Page | null> {
   if (!route) {
     return null;
   }
-  const collection = data[route.schema];
+  const collection = store[route.schema];
   if (!collection) {
     return null;
   }
-  const item = await collection.findOne(route.id);
+  const item: any = await collection.findOne(route.id); // !!! any
   return item || null;
 }
 
-export async function getBreadcrumb(page): Promise<any[]> { // !!! any
-  const data = await getData();
-  if (!data) {
+export async function getBreadcrumb(item: ICategorized, injectedStore?: { [key: string]: IQuerable<any> }): Promise<Breadcrumb[]> { // !!! any
+  const store = injectedStore || (await getCachedStore());
+  if (!store) {
     return [];
   }
 
-  const category = data.category;
+  const category = store.category;
   if (!category) {
     return [];
   }
 
   const categories = await category.findMany();
 
-  const breadcrumb = [];
+  const breadcrumb: IBreadcrumb[] = [];
 
-  let categoryId = page.categoryId || null;
+  let categoryId = item.categoryId || null;
   let skipLast = false;
   while (categoryId !== null) {
     // console.log(categoryId);
@@ -77,8 +77,8 @@ export async function getBreadcrumb(page): Promise<any[]> { // !!! any
       breadcrumb.unshift(b);
       categoryId = b.categoryId || null;
       if (
-        b.schema === page.schema &&
-        b.schemaId === page.id
+        b.schema === item.schema &&
+        b.schemaId === item.id
       ) {
         skipLast = true;
       }
@@ -89,11 +89,11 @@ export async function getBreadcrumb(page): Promise<any[]> { // !!! any
 
   if (!skipLast) {
     breadcrumb.push({
-      id: null,
-      title: page.title,
-      slug: page.slug,
-      schema: page.schema,
-      schemaId: page.id,
+      title: item.title,
+      slug: item.slug,
+      schema: item.schema,
+      schemaId: item.id,
+      categoryId: 0,
     });
   }
 
@@ -108,22 +108,27 @@ export async function getBreadcrumb(page): Promise<any[]> { // !!! any
   return breadcrumb;
 }
 
-export async function resolveHref(page): Promise<string> {
-  const breadcrumb = await getBreadcrumb(page);
+export async function resolveHref(item: ICategorized, injectedStore?: { [key: string]: IQuerable<any> }): Promise<string> {
+  const breadcrumb = await getBreadcrumb(item, injectedStore);
   const href = breadcrumb.length > 0 ? breadcrumb.pop().href : '';
   // console.log('resolveHref', href);
   return href;
 }
 
+export async function decorateHref(item: any): Promise<any> {
+  const href = await resolveHref(item);
+  return { ...item, href };
+}
+
 export async function getPageByCollectionAndId_2(collectionName: string, id: IEquatable): Promise<Page | null> {
-  const data = await getData();
-  if (!data) {
+  const store = await getCachedStore();
+  if (!store) {
     return null;
   }
-  const collection = data[collectionName];
+  const collection = store[collectionName];
   if (!collection) {
     return null;
   }
-  const item = await collection.findOne(id);
+  const item: any = await collection.findOne(id); // !!! any
   return item || null;
 }
