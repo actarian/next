@@ -83,7 +83,9 @@ async function remapData(json: any): Promise<Store> {
   store['page'] = pageService;
   const routeService = await getRouteService(store);
   store['route'] = routeService;
-  await awaitAll(collections, async (c) => await addType(json[c.singularName], c, collections));
+  if (isDevelopment) {
+    await awaitAll(collections, async (c) => await addType(json[c.singularName], c, collections));
+  }
   return store;
 }
 
@@ -155,11 +157,11 @@ async function addType(items, c, collections: CollectionDescription[]): Promise<
   }
   // console.log(keys, optionalKeys);
   const type = `
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable } from '@core/entity/entity';
 
-  export interface ${c.displayName} {
-    ${keys.map(key => `${key}${optionalKeys.indexOf(key) !== -1 ? '?' : ''}: ${types[key].join(' | ')};`).join('\n    ')}
-  }
+export interface ${c.displayName} {
+  ${keys.map(key => `${key}${optionalKeys.indexOf(key) !== -1 ? '?' : ''}: ${types[key].join(' | ')};`).join('\n    ')}
+}
 `;
   const pathname = path.join(process.cwd(), 'data', 'types', `${c.singularName}.ts`);
   await fsWrite(pathname, type);
