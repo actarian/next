@@ -1,8 +1,8 @@
 const path = require('path');
 const pluralize = require('pluralize');
 import { IEntity } from '@core/entity/entity';
-import JsonService from '@core/entity/json.service';
 import { fsExistOrCreateFolder, fsExists, fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
+import JsonService from '@core/json/json.service';
 import { awaitAll, isDevelopment } from '@core/utils';
 import { resolveHref } from '@models/breadcrumb/breadcrumb.service';
 import { ICategorized } from '@models/category/category';

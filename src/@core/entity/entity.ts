@@ -7,9 +7,13 @@ export interface IEntity {
 }
 
 export interface IQuerable<T extends IEntity> {
-  findMany(): Promise<T[]>;
+  findMany(params?:FindManyParams): Promise<T[]>;
   findOne(id: IEquatable): Promise<T | null>;
   create(payload: T): Promise<T>;
   update(payload: T): Promise<T>;
   delete(id: IEquatable): Promise<T | null>;
+}
+
+export interface FindManyParams {
+  where?: { [key: string]: any }
 }
