@@ -10,7 +10,7 @@ export default function ProductItem({ item }) {
         <Card shadow hoverable width="100%" style={{ cursor: 'pointer' }}>
           <Image src={item.image} draggable={false} title={item.title} />
           <Text h4 my={0}>{item.title}</Text>
-          <Text>{item.abstract}</Text>
+          <Text p>{item.abstract}</Text>
         </Card>
 
       </NextLink>

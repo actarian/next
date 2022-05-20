@@ -11,7 +11,7 @@ export default function Headline({ title, abstract }) {
         <Grid xs={24} justify="center">
           <Card width="100%">
             <Text h4 my={0}>{title}</Text>
-            <Text>{abstract}</Text>
+            <Text p>{abstract}</Text>
             <Card.Footer>
               <Button icon={<ArrowLeft />} auto onClick={() => router.back()}>Go back</Button>
             </Card.Footer>

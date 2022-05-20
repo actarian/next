@@ -3,7 +3,7 @@ import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
 import { asLocalizedPaths, asStaticProps } from '@core/utils';
-import { Button, Card, Grid, Image, Note, Spacer } from '@geist-ui/core';
+import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
 import { Menu } from '@models/menu/menu';
 import { getMenu } from '@models/menu/menu.service';
@@ -20,10 +20,10 @@ export default function ProductPage({ page, header, params, locales, locale }: P
   const router = useRouter()
   const { id } = router.query;
   */
-  console.log('Product', page.description);
   if (!page) {
     return;
   }
+  console.log('Product', page.description);
   return (
     <>
       <Layout header={header}>
@@ -47,7 +47,7 @@ export default function ProductPage({ page, header, params, locales, locale }: P
           <Grid xs={12} justify="center" alignItems="flex-start">
 
             <Card width="100%">
-              {page.description && <span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}
+              {page.description && <Text p>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
                 <Button type="success" icon={<ArrowRight />} auto>Buy {P(page.price, P.price())}</Button>
               </Card.Footer>
