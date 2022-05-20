@@ -36,6 +36,7 @@ export interface AboutProps extends PageType {
 }
 
 export async function getStaticProps(context) {
+  console.log('about', context);
   const page = await getPageByCollectionAndId('about', 1);
   const header = await getMenu('header');
   const props = asStaticProps({ ...context, page, header });

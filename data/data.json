@@ -39,7 +39,7 @@
       "id": 1,
       "schema": "product_index",
       "slug": "products",
-      "title": "Products",
+      "title": { "en": "Products", "it": "Prodotti" },
       "abstract": "Products abstract.",
       "description": "<p>Products description</p>",
       "categoryId": 3,
@@ -198,33 +198,91 @@
       "items": [
         {
           "name": "Homepage",
-          "href": "/"
+          "href": "/ww/en"
         },
         {
           "name": "About",
-          "href": "/about"
+          "href": "/ww/en/about"
         },
         {
           "name": "Products",
-          "href": "/products"
+          "href": "/ww/en/products"
         },
         {
           "name": "T-Shirt",
-          "href": "/products/apparel/menswear/t-shirts/t-shirt"
+          "href": "/ww/en/products/apparel/menswear/t-shirts/t-shirt"
         },
         {
           "name": "Unisex Skinny Joggers",
-          "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers"
+          "href": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers"
         },
         {
           "name": "Lightweight Jacket",
-          "href": "/products/apparel/menswear/jackets/lightweight-jacket"
+          "href": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket"
         },
         {
           "name": "Black Beanie",
-          "href": "/products/apparel/menswear/hats/black-beanie"
+          "href": "/ww/en/products/apparel/menswear/hats/black-beanie"
         }
       ]
+    }
+  ],
+  "market": [
+    {
+      "id": 1,
+      "schema": "market",
+      "code": "ww",
+      "title": "International",
+      "isDefault": true
+    },
+    {
+      "id": 2,
+      "schema": "market",
+      "code": "eu",
+      "title": "Europe",
+      "countries": ["it", "fr"],
+      "languages": ["it", "fr"]
+    }
+  ],
+  "locale": [
+    {
+      "id": 1,
+      "schema": "locale",
+      "code": "en",
+      "title": "English",
+      "isDefault": true
+    },
+    {
+      "id": 2,
+      "schema": "locale",
+      "code": "it",
+      "title": "Italiano"
+    },
+    {
+      "id": 3,
+      "schema": "locale",
+      "code": "fr",
+      "title": "Français"
+    }
+  ],
+  "country": [
+    {
+      "id": 1,
+      "schema": "country",
+      "code": "us",
+      "title": "United States"
+    },
+    {
+      "id": 2,
+      "schema": "country",
+      "code": "it",
+      "title": "Italy"
+    },
+    {
+      "id": 3,
+      "schema": "country",
+      "code": "fr",
+      "title": "France"
     }
   ]
 }

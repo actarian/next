@@ -1,13 +1,10 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface About {
+export interface Locale {
   id: IEquatable;
   schema: string;
-  slug: string;
+  code: string;
   title: string;
-  abstract: string;
-  description: string;
-  categoryId: IEquatable;
-  meta: any;
+  isDefault: any;
 }

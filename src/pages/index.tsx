@@ -24,7 +24,7 @@ export default function Index({ page, header, locales, locale }: IndexProps) {
     console.log('response', response);
   }
   */
-  const redirectToUrl = (url: string) => window.open(url);
+  const windowOpen = (url: string) => window.open(url);
 
   return (
     <>
@@ -47,13 +47,13 @@ export default function Index({ page, header, locales, locale }: IndexProps) {
         <Grid.Container justify="center" gap={3} mt="100px">
           <Grid xs={20} sm={7} justify="center">
 
-            <Button shadow type="secondary-light" width="100%" onClick={() => redirectToUrl(githubRepoUrl)}> GitHub Repo </Button>
+            <Button shadow type="secondary-light" width="100%" onClick={() => windowOpen(githubRepoUrl)}> GitHub Repo </Button>
 
           </Grid>
           <Grid xs={0} sm={3} />
           <Grid xs={20} sm={7} justify="center">
 
-            <Button width="100%" onClick={() => redirectToUrl(documentationUrl)}> Theme Documentation </Button>
+            <Button width="100%" onClick={() => windowOpen(documentationUrl)}> Theme Documentation </Button>
 
           </Grid>
         </Grid.Container>

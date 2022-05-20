@@ -1,5 +1,9 @@
 import { IEntity, IEquatable, IQuerable } from '../entity/entity';
 
+export type JsonFindParams = {
+  where?: { [key: string]: any }
+};
+
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
   collection: T[];
 
@@ -11,16 +15,14 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     return new Promise<T>((resolve, reject) => {
       const item = this.collection.find(x => x.id === id);
       if (item) {
-        resolve(item);
+        resolve(this.decorator_(item));
       } else {
         resolve(null);
       }
     });
   }
 
-  findMany(params: {
-    where?: { [key: string]: any }
-  } = {}): Promise<T[]> {
+  findMany(params: JsonFindParams = {}): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
       let collection = this.collection;
       collection = this.where_(collection, params.where);
@@ -30,26 +32,14 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
           return p && (x[c] === params.where[c]);
         }, true));
       }
-      resolve(collection);
+      resolve(collection.map(x => this.decorator_(x)));
     });
-  }
-
-  private where_(items: any[], where: { [key: string]: any }): any[] {
-    if (where) {
-      const keys = Object.keys(where);
-      items = items.filter(x => {
-        return keys.reduce<boolean>((p, c) => {
-          return p && (x[c] === where[c]);
-        }, true);
-      })
-    }
-    return items;
   }
 
   create(payload): Promise<T> {
     return new Promise<T | null>((resolve, reject) => {
       try {
-        const item = { ...payload, id: newUUID() };
+        const item = { ...payload, id: this.newUUID_() };
         this.collection.push(item);
         resolve(item);
       } catch (error) {
@@ -85,8 +75,24 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
       resolve(null);
     });
   }
-}
 
-function newUUID() {
-  return new Date().getTime();
+  protected where_(items: any[], where: { [key: string]: any }): any[] {
+    if (where) {
+      const keys = Object.keys(where);
+      items = items.filter(x => {
+        return keys.reduce<boolean>((p, c) => {
+          return p && (x[c] === where[c]);
+        }, true);
+      })
+    }
+    return items;
+  }
+
+  protected decorator_(item: any): any {
+    return item;
+  }
+
+  protected newUUID_() {
+    return new Date().getTime();
+  }
 }

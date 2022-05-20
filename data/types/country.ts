@@ -1,7 +1,9 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface Menu {
+export interface Country {
   id: IEquatable;
-  items: any[];
+  schema: string;
+  code: string;
+  title: string;
 }

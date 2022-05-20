@@ -1,27 +1,20 @@
 // import App from 'next/app'
-import { CssBaseline, GeistProvider, Themes } from '@geist-ui/core';
-import Router, { useRouter } from 'next/router';
-import { useEffect } from "react";
+import { CssBaseline, GeistProvider } from '@geist-ui/core';
+// import Router from 'next/router';
+// import { useEffect } from "react";
 import '../styles/styles.scss';
 
-const customTheme = Themes.createFromDark({
-  type: 'custom',
-  palette: {
-    // success: '#FF0',
-  },
-});
-
-let count = 0;
+// let count = 0;
 
 export default function CustomApp({ Component, pageProps }) {
-  const router = useRouter();
+  // const router = useRouter();
   // console.log('Component', Component);
   // console.log('pageProps', pageProps);
   // console.log('router', router);
 
+  /*
   useEffect(() => {
     // console.log('useEffect', ++count);
-
     const onRouteChangeStart = async (url) => {
       console.log('App is changing to: ', url);
       // Component = dynamic(() => import('./index'));
@@ -29,26 +22,17 @@ export default function CustomApp({ Component, pageProps }) {
     const onRouteChangeError = async (url) => {
       console.log('App route error: ', url);
     };
-
     Router.events.on('routeChangeStart', onRouteChangeStart);
     Router.events.on('routeChangeError', onRouteChangeError);
-
     return () => {
       Router.events.off('routeChangeStart', onRouteChangeStart);
       Router.events.off('routeChangeError', onRouteChangeError);
     };
-
   }, []);
+  */
 
   return (
     <GeistProvider themeType="dark">
-      <CssBaseline />
-      <Component {...pageProps} />
-    </GeistProvider>
-  );
-
-  return (
-    <GeistProvider themes={[customTheme]} themeType="custom">
       <CssBaseline />
       <Component {...pageProps} />
     </GeistProvider>
@@ -70,5 +54,28 @@ export default function CustomApp({ Component, pageProps }) {
 /*
 export function reportWebVitals(metric) {
   console.log('App.reportWebVitals', metric);
+}
+*/
+
+/*
+import { CssBaseline, GeistProvider, Themes } from '@geist-ui/core';
+import Router, { useRouter } from 'next/router';
+import { useEffect } from "react";
+import '../styles/styles.scss';
+
+const customTheme = Themes.createFromDark({
+  type: 'custom',
+  palette: {
+    // success: '#FF0',
+  },
+});
+
+export default function CustomApp({ Component, pageProps }) {
+  return (
+    <GeistProvider themes={[customTheme]} themeType="custom">
+      <CssBaseline />
+      <Component {...pageProps} />
+    </GeistProvider>
+  );
 }
 */
