@@ -1,6 +1,10 @@
 {
   "scripts": {
-    "dev": "next dev",
+    "mock:build": "tsc ./node/mock.build.ts",
+    "mock:run": "node ./node/mock.build.js",
+    "dev:mock": "run-s mock:*",
+    "dev:next": "next dev",
+    "dev": "run-p dev:*",
     "build:clean": "rimraf .cache/* \"!.cache/.gitkeep\"",
     "build:next": "next build",
     "build": "run-s build:*",

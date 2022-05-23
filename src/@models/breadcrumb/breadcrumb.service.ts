@@ -9,16 +9,29 @@ export async function getBreadcrumb(item: ICategorized, injectedStore?: Store): 
   if (!store) {
     return [];
   }
-
   const category = store.category;
   if (!category) {
     return [];
   }
-
   const categories: Category[] = await category.findMany() as Category[];
+  const breadcrumb: Breadcrumb[] = getBreadcrumbFromCategories(item, categories);
+  return breadcrumb;
+}
 
+export async function resolveHref(item: ICategorized, injectedStore?: Store): Promise<string> {
+  const breadcrumb = await getBreadcrumb(item, injectedStore);
+  const href = breadcrumb.length > 0 ? breadcrumb.pop().href : '';
+  // console.log('resolveHref', href);
+  return href;
+}
+
+export async function decorateHref(item: any): Promise<any> {
+  const href = await resolveHref(item);
+  return { ...item, href };
+}
+
+export function getBreadcrumbFromCategories(item: ICategorized, categories: Category[]): Breadcrumb[] { // !!! any
   const breadcrumb: IBreadcrumb[] = [];
-
   let categoryId = item.categoryId || null;
   let skipLast = false;
   while (categoryId !== null) {
@@ -38,7 +51,6 @@ export async function getBreadcrumb(item: ICategorized, injectedStore?: Store): 
       categoryId = null;
     }
   }
-
   if (!skipLast) {
     breadcrumb.push({
       title: item.title,
@@ -48,26 +60,18 @@ export async function getBreadcrumb(item: ICategorized, injectedStore?: Store): 
       categoryId: 0,
     });
   }
-
   breadcrumb.reduce((p, c, i) => {
     const href = `${p}/${c.slug}`;
     c.href = href;
     return href === '/' ? '' : href;
   }, '');
-
   // console.log('getBreadcrumb.breadcrumb', breadcrumb);
-
   return breadcrumb;
 }
 
-export async function resolveHref(item: ICategorized, injectedStore?: Store): Promise<string> {
-  const breadcrumb = await getBreadcrumb(item, injectedStore);
+export function resolveHrefFromCategories(item: ICategorized, categories: Category[]): string {
+  const breadcrumb = getBreadcrumbFromCategories(item, categories);
   const href = breadcrumb.length > 0 ? breadcrumb.pop().href : '';
   // console.log('resolveHref', href);
   return href;
-}
-
-export async function decorateHref(item: any): Promise<any> {
-  const href = await resolveHref(item);
-  return { ...item, href };
 }
