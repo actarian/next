@@ -97,10 +97,10 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     const collection = store[key];
     const items = collection.items;
     for (let item of items) {
+      const href = resolveHrefFromCategories(item, store.category.items);
       let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
       availableMarkets.forEach(m => {
         m.languages.forEach(l => {
-          const href = resolveHrefFromCategories(item, store.category.items);
           if (href) {
             routes.push({
               href: `/${m.id}/${l}${href === '/' ? '' : href}`,
@@ -112,6 +112,17 @@ function getRouteService(store: SerializedStore): SerializedCollection {
           }
         });
       });
+      if (key === 'homepage') {
+        const defaultMarket = markets[0].id;
+        const defaultLocale = markets[0].languages[0];
+        routes.push({
+          href: `/`,
+          market: defaultMarket,
+          locale: defaultLocale,
+          pageSchema: key,
+          pageId: item.id,
+        });
+      }
     }
   }
   // console.log('routes', routes);
