@@ -1,15 +1,24 @@
 import CartMini from '@components/cart-mini/cart-mini';
-import { Button, Image, Tabs } from '@geist-ui/core';
+import { Button, Image, Link, Popover, Spacer, Tabs, Text } from '@geist-ui/core';
 import { ShoppingCart } from '@geist-ui/icons';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import styles from './header.module.scss';
 
-export default function Header({ menu }) {
+export default function Header({ page }) {
   const router = useRouter();
 
   const [active, setActive] = useState(false);
+
+  const menu = page.header;
+  const locales = page.locales;
+  const markets = page.markets.map(x => ({
+    ...x,
+    locales: x.languages ? locales.filter(l => x.languages.includes(l.id)) : locales,
+  }));
+
+  // console.log(markets);
 
   const brand = 'Brand Name';
   const locale = '';
@@ -61,8 +70,28 @@ export default function Header({ menu }) {
         }
 
         <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => setActive(true)}></Button>
+
+        <Popover content={<MarketSelector markets={markets} locales={locales} />}>{page.locale}</Popover>
       </nav>
       <CartMini children={null} active={active} setActive={setActive}></CartMini>
     </header>
+  )
+}
+function MarketSelector({ markets, locales }) {
+  return (
+    <div style={{ padding: '0 10px' }}>
+      {markets && markets.map(market => (
+        <div key={`${market.id}`}>
+          <Text type="secondary" margin={0}>{market.title}</Text>
+          <Spacer h={.5} />
+          {market.locales && market.locales.map(locale => (
+            <div key={`${locale.id}`}>
+              <Link href={`/${market.id}/${locale.code}`}>{locale.title}</Link>
+            </div>
+          ))}
+          <Spacer h={.5} />
+        </div>
+      ))}
+    </div>
   )
 }

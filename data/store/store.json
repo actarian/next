@@ -276,14 +276,14 @@
     "displayName": "Market",
     "items": [
       {
-        "id": 1,
+        "id": "ww",
         "schema": "market",
         "code": "ww",
         "title": "International",
         "isDefault": true
       },
       {
-        "id": 2,
+        "id": "eu",
         "schema": "market",
         "code": "eu",
         "title": "Europe",
@@ -304,20 +304,20 @@
     "displayName": "Locale",
     "items": [
       {
-        "id": 1,
+        "id": "en",
         "schema": "locale",
         "code": "en",
         "title": "English",
         "isDefault": true
       },
       {
-        "id": 2,
+        "id": "it",
         "schema": "locale",
         "code": "it",
         "title": "Italiano"
       },
       {
-        "id": 3,
+        "id": "fr",
         "schema": "locale",
         "code": "fr",
         "title": "Français"
@@ -330,19 +330,19 @@
     "displayName": "Country",
     "items": [
       {
-        "id": 1,
+        "id": "us",
         "schema": "country",
         "code": "us",
         "title": "United States"
       },
       {
-        "id": 2,
+        "id": "it",
         "schema": "country",
         "code": "it",
         "title": "Italy"
       },
       {
-        "id": 3,
+        "id": "fr",
         "schema": "country",
         "code": "fr",
         "title": "France"
@@ -486,39 +486,249 @@
     "displayName": "Route",
     "items": [
       {
-        "href": "/",
-        "schema": "homepage",
-        "schemaId": 1
+        "href": "/ww/en",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "homepage",
+        "pageId": 1
       },
       {
-        "href": "/about",
-        "schema": "about",
-        "schemaId": 1
+        "href": "/ww/it",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "homepage",
+        "pageId": 1
       },
       {
-        "href": "/products",
-        "schema": "product_index",
-        "schemaId": 1
+        "href": "/ww/fr",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "homepage",
+        "pageId": 1
       },
       {
-        "href": "/products/apparel/menswear/t-shirts/t-shirt",
-        "schema": "product",
-        "schemaId": 1
+        "href": "/eu/it",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "homepage",
+        "pageId": 1
       },
       {
-        "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers",
-        "schema": "product",
-        "schemaId": 2
+        "href": "/eu/fr",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "homepage",
+        "pageId": 1
       },
       {
-        "href": "/products/apparel/menswear/jackets/lightweight-jacket",
-        "schema": "product",
-        "schemaId": 3
+        "href": "/ww/en/about",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "about",
+        "pageId": 1
       },
       {
-        "href": "/products/apparel/menswear/hats/black-beanie",
-        "schema": "product",
-        "schemaId": 4
+        "href": "/ww/it/about",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/fr/about",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/it/about",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/fr/about",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/en/products",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "product_index",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/it/products",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "product_index",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/fr/products",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "product_index",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/it/products",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "product_index",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/fr/products",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "product_index",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/en/products/apparel/menswear/t-shirts/t-shirt",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "product",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/it/products/apparel/menswear/t-shirts/t-shirt",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/fr/products/apparel/menswear/t-shirts/t-shirt",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/it/products/apparel/menswear/t-shirts/t-shirt",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 1
+      },
+      {
+        "href": "/eu/fr/products/apparel/menswear/t-shirts/t-shirt",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 1
+      },
+      {
+        "href": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "product",
+        "pageId": 2
+      },
+      {
+        "href": "/ww/it/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 2
+      },
+      {
+        "href": "/ww/fr/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 2
+      },
+      {
+        "href": "/eu/it/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 2
+      },
+      {
+        "href": "/eu/fr/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 2
+      },
+      {
+        "href": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "product",
+        "pageId": 3
+      },
+      {
+        "href": "/ww/it/products/apparel/menswear/jackets/lightweight-jacket",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 3
+      },
+      {
+        "href": "/ww/fr/products/apparel/menswear/jackets/lightweight-jacket",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 3
+      },
+      {
+        "href": "/eu/it/products/apparel/menswear/jackets/lightweight-jacket",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 3
+      },
+      {
+        "href": "/eu/fr/products/apparel/menswear/jackets/lightweight-jacket",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 3
+      },
+      {
+        "href": "/ww/en/products/apparel/menswear/hats/black-beanie",
+        "market": "ww",
+        "locale": "en",
+        "pageSchema": "product",
+        "pageId": 4
+      },
+      {
+        "href": "/ww/it/products/apparel/menswear/hats/black-beanie",
+        "market": "ww",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 4
+      },
+      {
+        "href": "/ww/fr/products/apparel/menswear/hats/black-beanie",
+        "market": "ww",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 4
+      },
+      {
+        "href": "/eu/it/products/apparel/menswear/hats/black-beanie",
+        "market": "eu",
+        "locale": "it",
+        "pageSchema": "product",
+        "pageId": 4
+      },
+      {
+        "href": "/eu/fr/products/apparel/menswear/hats/black-beanie",
+        "market": "eu",
+        "locale": "fr",
+        "pageSchema": "product",
+        "pageId": 4
       }
     ]
   }

@@ -1,15 +1,16 @@
 
-  import { IEquatable} from '@core/entity/entity';
+import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-  export interface Page {
-    id: IEquatable;
-    schema: string;
-    slug: string;
-    title: string;
-    abstract: string;
-    description: string;
-    image: string;
-    categoryId: IEquatable;
-    meta: any;
-    price?: number;
-  }
+export interface Page {
+  id: IEquatable;
+  schema: string;
+  slug: string;
+  title: string | ILocalizedString;
+  abstract: string;
+  description: string;
+  image: string;
+  categoryId: IEquatable;
+  meta: any;
+  href: string;
+  price?: number;
+}

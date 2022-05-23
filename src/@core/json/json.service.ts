@@ -1,8 +1,4 @@
-import { IEntity, IEquatable, IQuerable } from '../entity/entity';
-
-export type JsonFindParams = {
-  where?: { [key: string]: any }
-};
+import { FindManyParams, FindParams, IEntity, IEquatable, IQuerable } from '../entity/entity';
 
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
   collection: T[];
@@ -11,18 +7,18 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     this.collection = collection;
   }
 
-  findOne(id: IEquatable): Promise<T | null> {
+  findOne(id: IEquatable, params: FindParams = {}): Promise<T | null> {
     return new Promise<T>((resolve, reject) => {
       const item = this.collection.find(x => x.id === id);
       if (item) {
-        resolve(this.decorator_(item));
+        resolve(this.decorator_(item, params));
       } else {
         resolve(null);
       }
     });
   }
 
-  findMany(params: JsonFindParams = {}): Promise<T[]> {
+  findMany(params: FindManyParams = {}): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
       let collection = this.collection;
       collection = this.where_(collection, params.where);
@@ -32,7 +28,7 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
           return p && (x[c] === params.where[c]);
         }, true));
       }
-      resolve(collection.map(x => this.decorator_(x)));
+      resolve(collection.map(x => this.decorator_(x, params.params)));
     });
   }
 
@@ -88,7 +84,7 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     return items;
   }
 
-  protected decorator_(item: any): any {
+  protected decorator_(item: any, params: FindParams = {}): any {
     return item;
   }
 

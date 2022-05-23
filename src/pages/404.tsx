@@ -1,23 +1,20 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
-import { Menu } from '@models/menu/menu';
-import { getMenu } from '@models/menu/menu.service';
 import Head from 'next/head';
 import { PageType } from 'types';
 
-export default function Custom404({ header, locales, locale }: Custom404Props) {
-  const title = 'Error 404';
-  const abstract = 'Page not found';
+export default function Custom404({ page, params }: Custom404Props) {
+  console.log('Custom404.params', page, params);
   return (
     <>
-      <Layout header={header}>
+      <Layout page={page}>
 
         <Head>
-          <title>{title}</title>
+          <title>{page.title}</title>
         </Head>
 
-        <Headline title={title} abstract={abstract}></Headline>
+        <Headline title={page.title} abstract={page.abstract}></Headline>
 
       </Layout>
     </>
@@ -25,13 +22,26 @@ export default function Custom404({ header, locales, locale }: Custom404Props) {
 }
 
 export interface Custom404Props extends PageType {
-  header: Menu;
+  page: any;
 }
 
 export async function getStaticProps(context) {
-  const header = await getMenu('header');
-  const props = asStaticProps({ ...context, header });
+  const title = 'Page Not Found';
+  const abstract = 'The page you are looking for does not exist.';
+  const page = {
+    title,
+    abstract,
+    meta: {
+      title,
+      description: abstract,
+      keywords: '',
+      robots: 'all',
+    },
+    markets: [],
+    locales: [],
+  };
   // console.log('Custom404 getStaticProps', props);
+  const props = asStaticProps({ ...context, page });
   return {
     props,
   };

@@ -1,4 +1,3 @@
-import { IEquatable } from '@core/entity/entity';
 import { Route } from '@models/route/route';
 import { PAGES } from '../../pages';
 
@@ -29,24 +28,12 @@ export function merge(target, source) {
   return target;
 }
 
+export function resolveRoute(route: Route) {
+  return PAGES[route.pageSchema](route);
+}
+
 export function asStaticProps(props: any): any {
   return JSON.parse(JSON.stringify(props));
-}
-
-export function asLocalizedPaths(ids: IEquatable[], locales): any {
-  let paths;
-  if (Array.isArray(locales) && locales.length > 0) {
-    paths = [];
-    locales.map((locale) => ids.forEach((id) => paths.push({ params: { id: id.toString() }, locale })));
-  } else {
-    // paths = ids.map((id) => `/product/${id}`);
-    paths = ids.map((id) => ({ params: { id: id.toString() } }));
-  }
-  return paths;
-}
-
-export function resolveRoute(route: Route) {
-  return PAGES[route.schema](route);
 }
 
 export async function awaitAll(array: any, callback: (item: any, index: number) => Promise<any>): Promise<any[]> {

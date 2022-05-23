@@ -2,29 +2,32 @@ import { apiPost } from '@core/api/api.service';
 import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import { Route } from './route';
 
 export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;
-  let route = null;
+  let route: Route = null;
   // const pathname = url.pathname;
-  const { market, language, pathname } = decompose(url.pathname);
+  // const { market, language, pathname } = decompose(url.pathname);
   try {
-    route = await apiPost(`/route`, { href: pathname });
+    route = await apiPost(`/route`, { href: url.pathname });
     if (!route) {
       console.log('routeInterceptor.route.notfound', url.pathname);
       return;
     }
   } catch (error) {
-    console.log('routeInterceptor.error', url.pathname, error.status, error.statusText, pathname);
+    console.log('routeInterceptor.error', url.pathname, error.status, error.statusText);
     return;
   }
-  console.log('routeInterceptor.route.found', url.pathname, '->', route, market, language, pathname);
+  console.log('routeInterceptor.route.found', url.pathname, '->', route);
   url = request.nextUrl.clone();
   const resolvedPathname = resolveRoute(route);
-  url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
+  url.pathname = resolvedPathname;
+  // url.pathname = `/${market}/${language}${resolvedPathname}`;
   // url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
   // url.searchParams.set('market', market);
   // url.searchParams.set('language', language);
+  console.log('routeInterceptor.route', route.pageSchema, route.pageId, route.market, route.locale);
   const response = NextResponse.rewrite(url);
   return response;
 }
@@ -57,5 +60,8 @@ function decompose(pathname: string) {
     language = defaultLanguage;
   }
   pathname = components.join('/');
+  if (pathname.length === 0) {
+    pathname = '/';
+  }
   return { market, language, pathname };
 }

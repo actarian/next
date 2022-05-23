@@ -25,9 +25,9 @@ const dataSrc = './data/data.json';
 
 export async function BuildAndWatch() {
   console.log('BuildAndWatch');
-  await buildStore(dataSrc);
+  await readStore(dataSrc);
   fs.watchFile(dataSrc, { interval: 2000 }, async (current, previous) => {
-    await buildStore(dataSrc);
+    await readStore(dataSrc);
   });
 }
 
@@ -35,20 +35,21 @@ if (process.env.NODE_ENV !== 'production') {
   BuildAndWatch();
 }
 
-async function buildStore(pathname): Promise<SerializedStore> {
-  console.log('buildStore');
+async function readStore(pathname): Promise<SerializedStore> {
   // const pathname = path.join(process.cwd(), 'data', 'data.json');
   // const pathname = pathJoin('data', 'data.json'); // !!! not working
   const json = await fsReadJson(pathname);
-  const store = await jsonToStore(json);
+  console.log('readStore');
+  const store = await buildStore(json);
+  console.log('buildStore');
   const outname = path.join(process.cwd(), 'data', 'store', `store.json`);
   await fsWriteJson(outname, store);
   return store;
 }
 
-async function jsonToStore(json: JSON): Promise<SerializedStore> {
+async function buildStore(json: JSON): Promise<SerializedStore> {
   let store: SerializedStore = {};
-  const collections: CollectionDescription[] = Object.keys(json).map(key => remapCollection(key));
+  let collections: CollectionDescription[] = Object.keys(json).map(key => remapCollection(key));
   collections.forEach((c) => {
     store[c.singularName] = toServiceSchema(c, json[c.singularName]);
   });
@@ -57,7 +58,8 @@ async function jsonToStore(json: JSON): Promise<SerializedStore> {
   const routeService = getRouteService(store);
   store['route'] = routeService;
   // Object.keys(store).forEach(key => console.log((store[key] as MockService<any>).collection));
-  await awaitAll(collections, async (c) => await addType(json[c.singularName], c, collections));
+  collections = Object.keys(store).map(key => store[key]);
+  await awaitAll(collections, async (c) => await addType(c.items, c, collections));
   return store;
 }
 
@@ -87,17 +89,29 @@ function getRouteService(store: SerializedStore): SerializedCollection {
   const keys = Object.keys(PAGES);
   const routes = [];
   for (const key of keys) {
+    const languages = store.locale.items.map(x => x.id);
+    const markets = store.market.items.map(x => ({
+      id: x.id,
+      languages: x.languages || languages,
+    }));
     const collection = store[key];
     const items = collection.items;
     for (let item of items) {
-      const href = resolveHrefFromCategories(item, store.category.items);
-      if (href) {
-        routes.push({
-          href: href,
-          schema: key,
-          schemaId: item.id,
+      let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
+      availableMarkets.forEach(m => {
+        m.languages.forEach(l => {
+          const href = resolveHrefFromCategories(item, store.category.items);
+          if (href) {
+            routes.push({
+              href: `/${m.id}/${l}${href === '/' ? '' : href}`,
+              market: m.id,
+              locale: l,
+              pageSchema: key,
+              pageId: item.id,
+            });
+          }
         });
-      }
+      });
     }
   }
   // console.log('routes', routes);
@@ -107,6 +121,24 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     items: routes,
   };
   return routeService;
+}
+
+function remapCollection(key: string): CollectionDescription {
+  return {
+    singularName: key,
+    pluralName: pluralize(key),
+    displayName: key.charAt(0).toUpperCase() + key.substring(1, key.length).toLowerCase(),
+  };
+}
+
+function toServiceSchema(c: CollectionDescription, collection: IEntity[]): SerializedCollection {
+  if (c.singularName === c.pluralName) {
+    throw `DataService.getData: invalid plural key: ${c.singularName}`;
+  }
+  return {
+    ...c,
+    items: collection.map(x => ({ ...x, schema: c.singularName })),
+  };
 }
 
 async function addType(items, c, collections: CollectionDescription[]): Promise<string> {
@@ -145,24 +177,6 @@ export interface ${c.displayName} {
   const pathname = path.join(process.cwd(), 'data', 'types', `${c.singularName}.ts`);
   await fsWrite(pathname, type);
   return type;
-}
-
-function remapCollection(key: string): CollectionDescription {
-  return {
-    singularName: key,
-    pluralName: pluralize(key),
-    displayName: key.charAt(0).toUpperCase() + key.substring(1, key.length).toLowerCase(),
-  };
-}
-
-function toServiceSchema(c: CollectionDescription, collection: IEntity[]): SerializedCollection {
-  if (c.singularName === c.pluralName) {
-    throw `DataService.getData: invalid plural key: ${c.singularName}`;
-  }
-  return {
-    ...c,
-    items: collection.map(x => ({ ...x, schema: c.singularName })),
-  };
 }
 
 function getType(key: string, value: any, collections: CollectionDescription[]): string {

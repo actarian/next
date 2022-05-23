@@ -1,7 +1,7 @@
 
 export const PAGES = {
-  homepage: (route) => '/',
-  about: (route) => '/about',
-  product_index: (route) => '/product_index',
-  product: (route) => `/product/${route.schemaId}`,
+  homepage: (route) => `/${route.market}/${route.locale}/homepage/${route.pageId}`,
+  about: (route) => `/${route.market}/${route.locale}/about/${route.pageId}`,
+  product_index: (route) => `/${route.market}/${route.locale}/product_index/${route.pageId}`,
+  product: (route) => `/${route.market}/${route.locale}/product/${route.pageId}`, // '/product/:id' // !!!
 };

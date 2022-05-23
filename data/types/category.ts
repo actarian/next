@@ -8,5 +8,6 @@ export interface Category {
   slug: string;
   categoryId: null | IEquatable;
   pageSchema: string;
-  pageId: number;
+  pageId: IEquatable;
+  schema: string;
 }

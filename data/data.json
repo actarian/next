@@ -229,14 +229,14 @@
   ],
   "market": [
     {
-      "id": 1,
+      "id": "ww",
       "schema": "market",
       "code": "ww",
       "title": "International",
       "isDefault": true
     },
     {
-      "id": 2,
+      "id": "eu",
       "schema": "market",
       "code": "eu",
       "title": "Europe",
@@ -246,20 +246,20 @@
   ],
   "locale": [
     {
-      "id": 1,
+      "id": "en",
       "schema": "locale",
       "code": "en",
       "title": "English",
       "isDefault": true
     },
     {
-      "id": 2,
+      "id": "it",
       "schema": "locale",
       "code": "it",
       "title": "Italiano"
     },
     {
-      "id": 3,
+      "id": "fr",
       "schema": "locale",
       "code": "fr",
       "title": "Français"
@@ -267,19 +267,19 @@
   ],
   "country": [
     {
-      "id": 1,
+      "id": "us",
       "schema": "country",
       "code": "us",
       "title": "United States"
     },
     {
-      "id": 2,
+      "id": "it",
       "schema": "country",
       "code": "it",
       "title": "Italy"
     },
     {
-      "id": 3,
+      "id": "fr",
       "schema": "country",
       "code": "fr",
       "title": "France"

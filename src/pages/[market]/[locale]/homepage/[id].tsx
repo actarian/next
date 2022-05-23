@@ -3,21 +3,22 @@ import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { Menu } from '@models/menu/menu';
-import { getMenu } from '@models/menu/menu.service';
-import { getPageByCollectionAndId } from '@models/page/page.service';
-import Head from 'next/head';
+import { getPage } from '@models/page/page.service';
+import { getStaticPathsForSchema } from '@models/route/route.service';
 import React from 'react';
 import { PageType } from 'types';
 
 const githubRepoUrl = 'https://github.com/actarian/next';
 const documentationUrl = 'https://geist-ui.dev/en-us/guide/colors';
 
-export default function Index({ page, header, locales, locale }: IndexProps) {
+export default function Homepage({ page, params }: HomepageProps) {
   if (!page) {
     return;
   }
-  // console.log('Index', header, locales, locale);
+
+  // console.log('Homepage.params', params);
+  // console.log('Homepage.page', page);
+
   /*
   const { response } = useApiGet('/hello');
   if (response) {
@@ -30,11 +31,7 @@ export default function Index({ page, header, locales, locale }: IndexProps) {
     <>
       <Banner />
 
-      <Layout header={header}>
-
-        <Head>
-          <title>{page.title}</title>
-        </Head>
+      <Layout page={page}>
 
         <Breadcrumb items={page.breadcrumb} />
 
@@ -63,17 +60,26 @@ export default function Index({ page, header, locales, locale }: IndexProps) {
   )
 }
 
-export interface IndexProps extends PageType {
+export interface HomepageProps extends PageType {
   page: any;
-  header: Menu;
 }
 
 export async function getStaticProps(context) {
-  const page = await getPageByCollectionAndId('homepage', 1);
-  const header = await getMenu('header');
-  const props = asStaticProps({ ...context, page, header });
-  // console.log('Index getStaticProps', props, context);
+  const id = parseInt(context.params.id);
+  const market = context.params.market;
+  const locale = context.params.locale;
+  const page = await getPage('homepage', id, market, locale);
+  const props = asStaticProps({ ...context, page });
+  // console.log('Homepage getStaticProps', props, context);
   return {
     props,
+  };
+}
+
+export async function getStaticPaths() {
+  const paths = await getStaticPathsForSchema('homepage');
+  return {
+    paths,
+    fallback: true,
   };
 }
