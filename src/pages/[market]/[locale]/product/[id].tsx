@@ -5,7 +5,6 @@ import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { Menu } from '@models/menu/menu';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { P } from '@pipes/pipes';
@@ -60,9 +59,8 @@ export default function ProductPage({ page, params }: ProductPageProps) {
 }
 
 export interface ProductPageProps extends PageType {
-  params: { id: IEquatable };
   page: any;
-  header: Menu;
+  params: { id: IEquatable, market: string, locale: string };
 }
 
 export async function getStaticProps(context) {

@@ -10,8 +10,8 @@ import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import { isLocalizedString } from '@core/locale/locale.service';
 import { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
-import { resolveHrefFromCategories } from '@models/breadcrumb/breadcrumb.service';
 import { ICategorized } from '@models/category/category';
+import { getCategoryTreeWithCategories } from '@models/category/category.service';
 import { PAGES } from '../../pages';
 
 if (process.env && process.env.NODE_ENV) {
@@ -69,12 +69,7 @@ function getPageService(store: SerializedStore): SerializedCollection {
   for (const key of keys) {
     const collection = store[key];
     const items = collection.items as ICategorized[];
-    for (let item of items) {
-      const href = resolveHrefFromCategories(item, store.category.items);
-      if (href) {
-        pages.push({ ...item, href });
-      }
-    }
+    pages.push(...items);
   }
   // console.log('pages', pages);
   const pageCollection = remapCollection('page');
@@ -97,19 +92,24 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     const collection = store[key];
     const items = collection.items;
     for (let item of items) {
-      const href = resolveHrefFromCategories(item, store.category.items);
+      const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
+      const href = categoryTree.reduce((p, c, i) => {
+        const href = `${p}/${c.slug}`;
+        return href === '/' ? '' : href;
+      }, '');
+      // console.log('href', href);
       let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
       availableMarkets.forEach(m => {
         m.languages.forEach(l => {
-          if (href) {
-            routes.push({
-              href: `/${m.id}/${l}${href === '/' ? '' : href}`,
-              market: m.id,
-              locale: l,
-              pageSchema: key,
-              pageId: item.id,
-            });
-          }
+          const route = {
+            href: `/${m.id}/${l}${href}`,
+            market: m.id,
+            locale: l,
+            pageSchema: key,
+            pageId: item.id,
+          };
+          // console.log(route.href);
+          routes.push(route);
         });
       });
       if (key === 'homepage') {

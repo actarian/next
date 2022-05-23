@@ -1,25 +1,4 @@
 {
-  "notfound": {
-    "singularName": "notfound",
-    "pluralName": "notfounds",
-    "displayName": "Notfound",
-    "items": [
-      {
-        "id": 1,
-        "slug": "404",
-        "title": "Page Not Found",
-        "abstract": "The page you are looking for does not exist.",
-        "description": "<p>Page Not Found description</p>",
-        "meta": {
-          "title": "Page Not Found",
-          "description": "The page you are looking for does not exist.",
-          "keywords": "404 keywords",
-          "robots": "all"
-        },
-        "schema": "notfound"
-      }
-    ]
-  },
   "homepage": {
     "singularName": "homepage",
     "pluralName": "homepages",
@@ -389,8 +368,7 @@
           "description": "Homepage description",
           "keywords": "homepage keywords",
           "robots": "all"
-        },
-        "href": "/"
+        }
       },
       {
         "id": 1,
@@ -405,8 +383,7 @@
           "description": "About description",
           "keywords": "about keywords",
           "robots": "all"
-        },
-        "href": "/about"
+        }
       },
       {
         "id": 1,
@@ -424,8 +401,7 @@
           "description": "Products description",
           "keywords": "products keywords",
           "robots": "all"
-        },
-        "href": "/products"
+        }
       },
       {
         "id": 1,
@@ -442,8 +418,7 @@
           "description": "T-Shirt description",
           "keywords": "t-shirt keywords",
           "robots": "all"
-        },
-        "href": "/products/apparel/menswear/t-shirts/t-shirt"
+        }
       },
       {
         "id": 2,
@@ -460,8 +435,7 @@
           "description": "Unisex Skinny Joggers description",
           "keywords": "unisex skinny joggers keywords",
           "robots": "all"
-        },
-        "href": "/products/apparel/menswear/trousers/unisex-skinny-joggers"
+        }
       },
       {
         "id": 3,
@@ -478,8 +452,7 @@
           "description": "Lightweight Jacket description",
           "keywords": "lightweight jacket keywords",
           "robots": "all"
-        },
-        "href": "/products/apparel/menswear/jackets/lightweight-jacket"
+        }
       },
       {
         "id": 4,
@@ -496,8 +469,7 @@
           "description": "Black Beanie description",
           "keywords": "black beanie keywords",
           "robots": "all"
-        },
-        "href": "/products/apparel/menswear/hats/black-beanie"
+        }
       }
     ]
   },

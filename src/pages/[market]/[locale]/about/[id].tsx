@@ -1,6 +1,7 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
+import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Page } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
@@ -26,6 +27,7 @@ export default function About({ page, params }: AboutProps) {
 
 export interface AboutProps extends PageType {
   page: Page;
+  params: { id: IEquatable, market: string, locale: string };
 }
 
 export async function getStaticProps(context) {

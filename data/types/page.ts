@@ -11,6 +11,5 @@ export interface Page {
   image: string;
   categoryId: IEquatable;
   meta: any;
-  href: string;
   price?: number;
 }

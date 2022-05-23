@@ -13,6 +13,12 @@ export interface Route {
   pageId: IEquatable;
 }
 
+export interface RouteLink {
+  href: string;
+  title: string;
+  categoryId: IEquatable;
+}
+
 interface RouteRequest extends NextApiRequest {
   query: {
     href: string

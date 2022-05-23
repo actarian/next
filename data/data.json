@@ -1,19 +1,4 @@
 {
-  "notfound": [
-    {
-      "id": 1,
-      "slug": "404",
-      "title": "Page Not Found",
-      "abstract": "The page you are looking for does not exist.",
-      "description": "<p>Page Not Found description</p>",
-      "meta": {
-        "title": "Page Not Found",
-        "description": "The page you are looking for does not exist.",
-        "keywords": "404 keywords",
-        "robots": "all"
-      }
-    }
-  ],
   "homepage": [
     {
       "id": 1,

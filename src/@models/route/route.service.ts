@@ -1,8 +1,10 @@
+import { FindManyParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
+import { Category } from '@models/category/category';
 // import { parseMockApi } from '@core/mock/mock.server';
-import { Route } from './route';
+import { Route, RouteLink } from './route';
 
-export async function getRoutes(): Promise<Route[]> {
+export async function getRoutes(params: FindManyParams = {}): Promise<Route[]> {
   const store = await getStore();
   const routes: any[] = await store.route.findMany(); // !!! any
   return routes;
@@ -20,6 +22,30 @@ export async function getStaticPathsForSchema(schema: string): Promise<StaticPat
   const store = await getStore();
   const routes = await store.route.findMany();
   return routes.filter(x => x.pageSchema === schema).map(x => ({ params: { id: x.pageId.toString(), market: x.market, locale: x.locale } }));
+}
+
+export async function decorateHref(item: any, market: string = 'ww', locale: string = 'en'): Promise<any> {
+  const routes = await getRoutes({ where: { pageSchema: item.schema, pageId: item.id, market, locale } });
+  const href = routes.length ? routes[0].href : null;
+  return { ...item, href };
+}
+
+export async function getBreadcrumbFromCategoryTree(categoryTree: Category[], market: string = 'ww', locale: string = 'en'): Promise<RouteLink[]> {
+  const routes: Route[] = await getRoutes();
+  return categoryTree.map(x => {
+    const route = x.pageSchema && x.pageId ? routes.find(r =>
+      r.pageSchema === x.pageSchema &&
+      r.pageId === x.pageId &&
+      r.market === market &&
+      r.locale === locale
+    ) : null;
+    const href = route ? route.href : null;
+    return {
+      href,
+      title: x.title,
+      categoryId: x.id,
+    }
+  });
 }
 
 export type StaticPath = { params: { [key: string]: string } };

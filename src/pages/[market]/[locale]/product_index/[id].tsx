@@ -2,6 +2,7 @@ import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
+import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Grid } from '@geist-ui/core';
 import { Page } from '@models/page/page';
@@ -43,6 +44,7 @@ export default function Products({ page, products, params }: ProductsPageProps) 
 export interface ProductsPageProps extends PageType {
   page: Page;
   products: Product[];
+  params: { id: IEquatable, market: string, locale: string };
 }
 
 export async function getStaticProps(context) {

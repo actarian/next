@@ -1,6 +1,9 @@
 import { IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { getBreadcrumb } from '@models/breadcrumb/breadcrumb.service';
+import { Breadcrumb } from '@models/breadcrumb/breadcrumb';
+import { getBreadcrumbFromCategoryTree } from '@models/breadcrumb/breadcrumb.service';
+import { Category } from '@models/category/category';
+import { getCategoryTree } from '@models/category/category.service';
 import { Page } from './page';
 
 export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<Page | null> {
@@ -27,42 +30,19 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
     item.markets = markets;
     const locales = await store.locale.findMany({ params: { locale } });
     item.locales = locales;
-    const header = await store.menu.findOne('header');
+    const header = await store.menu.findOne('header', { params: { locale } });
     item.header = header;
     const routes = await store.route.findMany({ where: { pageSchema: schema, pageId: id } });
-    const alternate = routes.filter(x => x.locale !== locale);
+    const href = routes.find(x => x.market === market && x.locale === locale);
+    item.href = href;
+    const alternate = routes.filter(x => x.market === market && x.locale !== locale);
     item.alternate = alternate;
-    item.breadcrumb = await getBreadcrumb(item);
+    const categoryTree: Category[] = await getCategoryTree(item, { params: { locale } });
+    const breadcrumb: Breadcrumb[] = await getBreadcrumbFromCategoryTree(categoryTree);
+    item.breadcrumb = breadcrumb;
     return item;
   } else {
-    console.log('PageService.getPageByCollectionAndId.notfound', schema, id, locale);
-    return null;
-  }
-}
-
-export async function getPageByCollectionAndId(collectionName: string, id: IEquatable): Promise<Page | null> {
-  const store = await getStore();
-  if (!store) {
-    return null;
-  }
-  const page = store.page;
-  if (!page) {
-    return null;
-  }
-  const category = store.category;
-  if (!category) {
-    return null;
-  }
-  const pages = await page.findMany();
-  if (!pages) {
-    return null;
-  }
-  const item: any = pages.find(x => x.schema === collectionName && x.id === id); // !!! any
-  if (item) {
-    item.breadcrumb = await getBreadcrumb(item);
-    return item;
-  } else {
-    console.log('PageService.getPageByCollectionAndId.notfound', collectionName, id);
+    console.log('PageService.getPage.notfound', schema, id, locale);
     return null;
   }
 }
