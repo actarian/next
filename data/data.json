@@ -128,8 +128,8 @@
       "title": "Homepage",
       "slug": "",
       "categoryId": null,
-      "schema": "homepage",
-      "schemaId": 1
+      "pageSchema": "homepage",
+      "pageId": 1
     },
     {
       "id": 2,
@@ -137,8 +137,8 @@
       "title": "About",
       "slug": "about",
       "categoryId": 1,
-      "schema": "about",
-      "schemaId": 1
+      "pageSchema": "about",
+      "pageId": 1
     },
     {
       "id": 3,
@@ -146,8 +146,8 @@
       "title": "Products",
       "slug": "products",
       "categoryId": 1,
-      "schema": "product_index",
-      "schemaId": 1
+      "pageSchema": "product_index",
+      "pageId": 1
     },
     {
       "id": 4,

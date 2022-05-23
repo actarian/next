@@ -18,10 +18,11 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
     console.log('routeInterceptor.error', url.pathname, error.status, error.statusText, pathname);
     return;
   }
-  console.log('routeInterceptor.route.found', url.pathname, '->', route);
+  console.log('routeInterceptor.route.found', url.pathname, '->', route, market, language, pathname);
   url = request.nextUrl.clone();
   const resolvedPathname = resolveRoute(route);
   url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
+  // url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
   // url.searchParams.set('market', market);
   // url.searchParams.set('language', language);
   const response = NextResponse.rewrite(url);

@@ -1,4 +1,6 @@
+require('module-alias/register');
 
+const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
@@ -7,34 +9,44 @@ import { IEntity } from '@core/entity/entity';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import { isLocalizedString } from '@core/locale/locale.service';
 import { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
-import { awaitAll, isDevelopment } from '@core/utils';
+import { awaitAll } from '@core/utils';
 import { resolveHrefFromCategories } from '@models/breadcrumb/breadcrumb.service';
 import { ICategorized } from '@models/category/category';
 import { PAGES } from '../../pages';
 
-const dataSrc = './data/data.json';
-
-export async function MockBuild() {
-  if (isDevelopment) {
-    await mockData(dataSrc);
-    fs.watchFile(dataSrc, { interval: 2000 }, async (current, previous) => {
-      await mockData(dataSrc);
-    });
-  }
+if (process.env && process.env.NODE_ENV) {
+  dotenv.config({ path: '.env.' + process.env.NODE_ENV });
+} else {
+  dotenv.config({ path: '.env.development' });
 }
 
-async function mockData(pathname): Promise<SerializedStore>  {
-  console.log('rebuilding store');
+const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
+const dataSrc = './data/data.json';
+
+export async function BuildAndWatch() {
+  console.log('BuildAndWatch');
+  await buildStore(dataSrc);
+  fs.watchFile(dataSrc, { interval: 2000 }, async (current, previous) => {
+    await buildStore(dataSrc);
+  });
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  BuildAndWatch();
+}
+
+async function buildStore(pathname): Promise<SerializedStore> {
+  console.log('buildStore');
   // const pathname = path.join(process.cwd(), 'data', 'data.json');
   // const pathname = pathJoin('data', 'data.json'); // !!! not working
   const json = await fsReadJson(pathname);
-  const data = await remapData(json);
-  const outname = path.join(process.cwd(), 'data', 'mock', `mock.json`);
-  await fsWriteJson(outname, data);
-  return data;
+  const store = await jsonToStore(json);
+  const outname = path.join(process.cwd(), 'data', 'store', `store.json`);
+  await fsWriteJson(outname, store);
+  return store;
 }
 
-async function remapData(json: JSON): Promise<SerializedStore> {
+async function jsonToStore(json: JSON): Promise<SerializedStore> {
   let store: SerializedStore = {};
   const collections: CollectionDescription[] = Object.keys(json).map(key => remapCollection(key));
   collections.forEach((c) => {
@@ -47,6 +59,54 @@ async function remapData(json: JSON): Promise<SerializedStore> {
   // Object.keys(store).forEach(key => console.log((store[key] as MockService<any>).collection));
   await awaitAll(collections, async (c) => await addType(json[c.singularName], c, collections));
   return store;
+}
+
+function getPageService(store: SerializedStore): SerializedCollection {
+  const keys = Object.keys(PAGES);
+  const pages = [];
+  for (const key of keys) {
+    const collection = store[key];
+    const items = collection.items as ICategorized[];
+    for (let item of items) {
+      const href = resolveHrefFromCategories(item, store.category.items);
+      if (href) {
+        pages.push({ ...item, href });
+      }
+    }
+  }
+  // console.log('pages', pages);
+  const pageCollection = remapCollection('page');
+  const pageService = {
+    ...pageCollection,
+    items: pages,
+  };
+  return pageService;
+}
+
+function getRouteService(store: SerializedStore): SerializedCollection {
+  const keys = Object.keys(PAGES);
+  const routes = [];
+  for (const key of keys) {
+    const collection = store[key];
+    const items = collection.items;
+    for (let item of items) {
+      const href = resolveHrefFromCategories(item, store.category.items);
+      if (href) {
+        routes.push({
+          href: href,
+          schema: key,
+          schemaId: item.id,
+        });
+      }
+    }
+  }
+  // console.log('routes', routes);
+  const routeCollection = remapCollection('route');
+  const routeService = {
+    ...routeCollection,
+    items: routes,
+  };
+  return routeService;
 }
 
 async function addType(items, c, collections: CollectionDescription[]): Promise<string> {
@@ -87,48 +147,6 @@ export interface ${c.displayName} {
   return type;
 }
 
-function getPageService(store: SerializedStore): SerializedCollection {
-  const keys = Object.keys(PAGES);
-  const pages = [];
-  for (const key of keys) {
-    const collection = store[key];
-    const items = collection.items as ICategorized[];
-    for (let item of items) {
-      const href = resolveHrefFromCategories(item, store.category.items);
-      if (href) {
-        pages.push({ ...item, href });
-      }
-    }
-  }
-  // console.log('pages', pages);
-  const pageCollection = remapCollection('page');
-  const pageService = toServiceSchema(pageCollection, pages);
-  return pageService;
-}
-
-function getRouteService(store: SerializedStore):SerializedCollection {
-  const keys = Object.keys(PAGES);
-  const routes = [];
-  for (const key of keys) {
-    const collection = store[key];
-    const items = collection.items;
-    for (let item of items) {
-      const href = resolveHrefFromCategories(item, store.category.items);
-      if (href) {
-        routes.push({
-          href: href,
-          schema: key,
-          schemaId: item.id,
-        });
-      }
-    }
-  }
-  // console.log('routes', routes);
-  const routeCollection = remapCollection('route');
-  const routeService = toServiceSchema(routeCollection, routes);
-  return routeService;
-}
-
 function remapCollection(key: string): CollectionDescription {
   return {
     singularName: key,
@@ -143,7 +161,7 @@ function toServiceSchema(c: CollectionDescription, collection: IEntity[]): Seria
   }
   return {
     ...c,
-    items: collection,
+    items: collection.map(x => ({ ...x, schema: c.singularName })),
   };
 }
 

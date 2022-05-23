@@ -44,7 +44,7 @@ export async function fsWrite(pathname, data, encoding = 'utf8') {
 
 export async function fsWriteJson(pathname, data) {
   try {
-    await fsWrite(pathname, JSON.stringify(data));
+    await fsWrite(pathname, JSON.stringify(data, null, 2));
   } catch (error) {
     console.log('fsWriteJson', error);
   }

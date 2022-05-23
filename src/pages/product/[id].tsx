@@ -23,7 +23,7 @@ export default function ProductPage({ page, header, params, locales, locale }: P
   if (!page) {
     return;
   }
-  console.log('Product', page.description);
+  // console.log('Product', page.description);
   return (
     <>
       <Layout header={header}>

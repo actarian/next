@@ -1,8 +1,7 @@
 import { Store } from '@core/store/store';
 import { getStore } from '@core/store/store.service';
 import { Breadcrumb, IBreadcrumb } from '@models/breadcrumb/breadcrumb';
-import { ICategorized } from '@models/category/category';
-import { Category } from 'data/types/category';
+import { Category, ICategorized } from '@models/category/category';
 
 export async function getBreadcrumb(item: ICategorized, injectedStore?: Store): Promise<Breadcrumb[]> { // !!! any
   const store = injectedStore || (await getStore());
@@ -42,8 +41,8 @@ export function getBreadcrumbFromCategories(item: ICategorized, categories: Cate
       breadcrumb.unshift(b);
       categoryId = b.categoryId || null;
       if (
-        b.schema === item.schema &&
-        b.schemaId === item.id
+        b.pageSchema === item.schema &&
+        b.pageId === item.id
       ) {
         skipLast = true;
       }
@@ -55,9 +54,8 @@ export function getBreadcrumbFromCategories(item: ICategorized, categories: Cate
     breadcrumb.push({
       title: item.title,
       slug: item.slug,
-      schema: item.schema,
-      schemaId: item.id,
-      categoryId: 0,
+      pageSchema: item.schema,
+      pageId: item.id,
     });
   }
   breadcrumb.reduce((p, c, i) => {
@@ -66,7 +64,11 @@ export function getBreadcrumbFromCategories(item: ICategorized, categories: Cate
     return href === '/' ? '' : href;
   }, '');
   // console.log('getBreadcrumb.breadcrumb', breadcrumb);
-  return breadcrumb;
+  return breadcrumb.map(x => ({
+    categoryId: x.id,
+    title: x.title,
+    href: x.pageSchema ? x.href : null,
+  }));
 }
 
 export function resolveHrefFromCategories(item: ICategorized, categories: Category[]): string {

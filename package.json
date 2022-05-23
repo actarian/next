@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "mock:build": "tsc ./node/mock.build.ts",
-    "mock:run": "node ./node/mock.build.js",
+    "mock:build": "tsc --project ./tsconfig.server.json",
+    "mock:run": "node .build/@core/mock/mock.build.js",
     "dev:mock": "run-s mock:*",
     "dev:next": "next dev",
     "dev": "run-p dev:*",
@@ -11,6 +11,12 @@
     "start": "next start",
     "serve": "next start",
     "lint": "next lint"
+  },
+  "_moduleAliases": {
+    "@root": ".build",
+    "@core": ".build/@core",
+    "@models": ".build/@models",
+    "src": ".build"
   },
   "dependencies": {
     "@geist-ui/core": "^2.3.8",
@@ -24,9 +30,11 @@
   "devDependencies": {
     "@types/node": "^17.0.32",
     "@types/react": "^18.0.9",
+    "dotenv": "^16.0.1",
     "eslint": "^8.15.0",
     "eslint-config-next": "^12.1.6",
     "npm-run-all": "^4.1.5",
+    "module-alias": "^2.2.2",
     "rimraf": "^3.0.2",
     "sass": "^1.51.0",
     "typescript": "^4.6.4"

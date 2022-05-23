@@ -6,8 +6,8 @@ export interface Category {
   title: string;
   slug: string;
   categoryId?: IEquatable;
-  schema?: string;
-  schemaId?: IEquatable;
+  pageSchema?: string;
+  pageId?: IEquatable;
 }
 
 export interface ICategorized {

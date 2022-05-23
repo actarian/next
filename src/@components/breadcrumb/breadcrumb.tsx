@@ -6,7 +6,7 @@ export default function Breadcrumb({ items }) {
     <>
       <Breadcrumbs>
         {items.map((x, i) => (
-          i < items.length - 1 && x.schemaId ?
+          i < items.length - 1 && x.href ?
             <NextLink key={i} href={x.href}>
               <Breadcrumbs.Item nextLink>{x.title}</Breadcrumbs.Item>
             </NextLink> :

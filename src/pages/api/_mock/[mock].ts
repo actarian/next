@@ -1,5 +1,5 @@
 import { apiHandler } from '@core/api/api.helper';
-import { resolveMockApi } from '@core/mock/mock.server';
+import { resolveMockApi } from '@core/mock/mock.api';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
