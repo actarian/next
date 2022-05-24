@@ -14,7 +14,7 @@ export default function Layout({ page, children }) {
         <meta name="description" content={page.meta.description} />
         <meta name="keywords" content={page.meta.keywords} />
         <meta name="robots" content={page.meta.robots} />
-        {page.alternate && page.alternate.map(alternate => (
+        {page.alternates && page.alternates.map(alternate => (
           <link key={`${alternate.market}-${alternate.locale}`} rel="alternate" href={alternate.href} />
         ))}
       </Head>

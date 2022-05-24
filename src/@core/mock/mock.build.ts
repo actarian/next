@@ -7,7 +7,7 @@ const pluralize = require('pluralize');
 
 import { IEntity } from '@core/entity/entity';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
-import { isLocalizedString } from '@core/locale/locale.service';
+import { isLocalizedString, localizedToString } from '@core/locale/locale.service';
 import { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
 import { ICategorized } from '@models/category/category';
@@ -93,14 +93,20 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     const items = collection.items;
     for (let item of items) {
       const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
-      const href = categoryTree.reduce((p, c, i) => {
-        const href = `${p}/${c.slug}`;
-        return href === '/' ? '' : href;
-      }, '');
-      // console.log('href', href);
       let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
       availableMarkets.forEach(m => {
         m.languages.forEach(l => {
+
+          const href = categoryTree.reduce((p, c, i) => {
+            let slug = c.slug;
+            if (isLocalizedString(slug)) {
+              slug = localizedToString(slug, l);
+            }
+            slug = `${p}/${slug}`;
+            return slug === '/' ? '' : slug;
+          }, '');
+          // console.log('href', href);
+
           const route = {
             href: `/${m.id}/${l}${href}`,
             market: m.id,

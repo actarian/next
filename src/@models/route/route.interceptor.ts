@@ -19,7 +19,7 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
     console.log('routeInterceptor.error', url.pathname, error.status, error.statusText);
     return;
   }
-  console.log('routeInterceptor.route.found', url.pathname, '->', route);
+  // console.log('routeInterceptor.route.found', url.pathname, '->', route);
   url = request.nextUrl.clone();
   const resolvedPathname = resolveRoute(route);
   url.pathname = resolvedPathname;
@@ -27,7 +27,7 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
   // url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
   // url.searchParams.set('market', market);
   // url.searchParams.set('language', language);
-  console.log('routeInterceptor.route', route.pageSchema, route.pageId, route.market, route.locale);
+  // console.log('routeInterceptor.route', route.pageSchema, route.pageId, route.market, route.locale);
   const response = NextResponse.rewrite(url);
   return response;
 }

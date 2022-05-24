@@ -6,7 +6,7 @@ import MockService from '@core/mock/mock.service';
 import { Store } from '@core/store/store';
 
 export async function getMockStore(): Promise<Store> {
-  console.log('getMockStore');
+  // console.log('getMockStore');
   const pathname = path.join(process.cwd(), 'data', 'store', 'store.json');
   // const pathname = pathJoin('data', 'store', 'store.json'); // !!! not working
   const json = await fsReadJson(pathname);

@@ -1,19 +1,19 @@
 
 import { Card, Image, Text } from '@geist-ui/core';
 import NextLink from 'next/link';
+import React from 'react';
 
 export default function ProductItem({ item }) {
+
+  // const MyLink = React.forwardRef((props, ref) => <NextLink innerRef={ref} {...props} />);
+
   return (
     <>
-      <NextLink href={item.href}>
-
-        <Card shadow hoverable width="100%" style={{ cursor: 'pointer' }}>
-          <Image src={item.image} draggable={false} title={item.title} />
-          <Text h4 my={0}>{item.title}</Text>
-          <Text p>{item.abstract}</Text>
-        </Card>
-
-      </NextLink>
+      <Card shadow hoverable width="100%" style={{ cursor: 'pointer' }}>
+        <Image src={item.image} draggable={false} title={item.title} />
+        <Text h4 my={0}>{<NextLink href={item.href}>{item.title}</NextLink>}</Text>
+        <Text p>{item.abstract}</Text>
+      </Card>
     </>
   );
 }

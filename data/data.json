@@ -4,14 +4,14 @@
       "id": 1,
       "schema": "homepage",
       "slug": "",
-      "title": "Homepage",
-      "abstract": "Homepage abstract.",
-      "description": "<p>Homepage description</p>",
+      "title": { "en": "New Wave", "it": "Bossa nova", "fr": "Nouvelle vague" },
+      "abstract": { "en": "The charm of yesterday, the elegance of today", "it": "Il fascino di ieri, l'eleganza di oggi", "fr": "Le charme d'hier, l'élégance d'aujourd'hui" },
+      "description": { "en": "All-Italian tradition and passion: over 30 years of history in the ancient art of producing eyewear", "it": "Tradizione e passione tutta italiana: oltre 30 anni di storia nell’arte antica di produrre occhiali", "fr": "Tradition et passion entièrement italiennes : plus de 30 ans d'histoire dans l'art ancien de la fabrication de lunettes" },
       "image": "/assets/homepage/banner.png",
       "categoryId": 1,
       "meta": {
-        "title": "Homepage",
-        "description": "Homepage description",
+        "title": { "en": "New Wave", "it": "Bossa nova", "fr": "Nouvelle vague" },
+        "description": { "en": "The charm of yesterday, the elegance of today", "it": "Il fascino di ieri, l'eleganza di oggi", "fr": "Le charme d'hier, l'élégance d'aujourd'hui" },
         "keywords": "homepage keywords",
         "robots": "all"
       }
@@ -21,14 +21,14 @@
     {
       "id": 1,
       "schema": "about",
-      "slug": "about",
-      "title": "About",
-      "abstract": "About abstract.",
-      "description": "<p>About description</p>",
+      "slug": { "en": "who-we-are", "it": "chi-siamo", "fr": "qui-nous-sommes" },
+      "title": { "en": "Who we are", "it": "Chi Siamo", "fr": "Qui nous sommes" },
+      "abstract": { "en": "The Nouvelle Vague line is a springboard towards a future capable of exploring new spaces and frontiers without ever forgetting the roots that anchor it to a tradition made of genius and respect, imagination and deep knowledge of natural materials, including captivating shapes, lace, lace and undisputed technical capacity.", "it": "La linea Nouvelle Vague è un trampolino verso un futuro capace di esplorare nuovi spazi e frontiere senza mai dimenticare le radici che la ancora ad una tradizione fatta di genialità e rispetto, fantasia e profonda conoscenza di materiali naturali, tra forme accattivanti, pizzi, merletti e indiscussa capacità tecnica.", "fr": "La ligne Nouvelle Vague est un tremplin vers un futur capable d'explorer de nouveaux espaces et frontières sans jamais oublier les racines qui l'ancrent dans une tradition faite de génie et de respect, d'imagination et de connaissance approfondie des matériaux naturels, y compris les formes captivantes, la dentelle, la dentelle et capacité technique incontestée." },
+      "description": { "en": "Born from the genius of those who have been able to look beyond the rigid rules imposed by a past that was close to a world in continuous evolution, Nouvelle Vague thus manages to combine the attention to the undisputed quality of materials, all strictly Italian, the continuous scientific updating and technological, and the unstoppable desire to make lenses and eyewear engines of emotion and color.", "it": "Nata dal genio di chi ha saputo guardare oltre le rigide regole imposte da un passato che stava stretto ad un mondo in continua evoluzione, Nouvelle Vague riesce così a coniugare l’attenzione per la qualità indiscussa di materiali, tutti rigorosamente italiani, il continuo aggiornamento scientifico e tecnologico, e l’inarrestabile voglia di fare di lenti e occhiali motori di emozione e colore.", "fr": "Née du génie de ceux qui ont su regarder au-delà des règles rigides imposées par un passé proche d'un monde en constante évolution, Nouvelle Vague parvient ainsi à allier l'attention à la qualité incontestée des matériaux, tous strictement italiens, la une mise à jour scientifique et technologique continue, et le désir irrésistible de faire des verres et des lunettes des moteurs d'émotion et de couleur." },
       "categoryId": 2,
       "meta": {
-        "title": "About",
-        "description": "About description",
+        "title": { "en": "Who we are", "it": "Chi Siamo", "fr": "Qui nous sommes" },
+        "description": { "en": "The Nouvelle Vague line is a springboard towards future.", "it": "La linea Nouvelle Vague è un trampolino verso il futuro.", "fr": "La ligne Nouvelle Vague est un tremplin vers le futur." },
         "keywords": "about keywords",
         "robots": "all"
       }
@@ -38,14 +38,14 @@
     {
       "id": 1,
       "schema": "product_index",
-      "slug": "products",
-      "title": { "en": "Products", "it": "Prodotti" },
-      "abstract": "Products abstract.",
-      "description": "<p>Products description</p>",
+      "slug": { "en": "products", "it": "prodotti", "fr": "produits" },
+      "title": { "en": "Products", "it": "Prodotti", "fr": "Produits" },
+      "abstract": { "en": "The charm of yesterday, the elegance of today", "it": "Il fascino di ieri, l'eleganza di oggi", "fr": "Le charme d'hier, l'élégance d'aujourd'hui" },
+      "description": { "en": "All-Italian tradition and passion: over 30 years of history in the ancient art of producing eyewear", "it": "Tradizione e passione tutta italiana: oltre 30 anni di storia nell’arte antica di produrre occhiali", "fr": "Tradition et passion entièrement italiennes : plus de 30 ans d'histoire dans l'art ancien de la fabrication de lunettes" },
       "categoryId": 3,
       "meta": {
-        "title": "Products",
-        "description": "Products description",
+        "title": { "en": "Products", "it": "Prodotti", "fr": "Produits" },
+        "description": { "en": "The charm of yesterday, the elegance of today", "it": "Il fascino di ieri, l'eleganza di oggi", "fr": "Le charme d'hier, l'élégance d'aujourd'hui" },
         "keywords": "products keywords",
         "robots": "all"
       }
@@ -57,14 +57,14 @@
       "schema": "product",
       "slug": "t-shirt",
       "title": "T-Shirt",
-      "abstract": "Your perfect t-shirt for everyday use and walks in the forest.",
-      "description": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>",
+      "abstract": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
+      "description": { "en": "<p>This t-shirt is a must-have in your wardrobe, combining the timeless fit of a classic tee with an intricate embroidered detail that brings the shirt to a whole new level. It's soft and durable, so be prepared to have a new favorite t-shirt!</p>", "it": "<p>Questa t-shirt è un must nel tuo guardaroba, combina la vestibilità senza tempo di una t-shirt classica con un intricato dettaglio ricamato che porta la maglia a un livello completamente nuovo. È morbido e resistente, quindi preparati ad avere una nuova maglietta preferita!</p>", "fr": "<p>Ce t-shirt est un incontournable de votre garde-robe, combinant la coupe intemporelle d'un t-shirt classique avec un détail brodé complexe qui amène la chemise à un tout autre niveau. Il est doux et résistant, alors préparez-vous à avoir un nouveau t-shirt préféré !</p>" },
       "image": "/assets/products/t-shirt.webp",
       "price": 160.12,
       "categoryId": 6,
       "meta": {
         "title": "T-Shirt",
-        "description": "T-Shirt description",
+        "description": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
         "keywords": "t-shirt keywords",
         "robots": "all"
       }
@@ -72,16 +72,16 @@
     {
       "id": 2,
       "schema": "product",
-      "slug": "unisex-skinny-joggers",
-      "title": "Unisex Skinny Joggers",
-      "abstract": "Your perfect joggers for everyday use and walks in the forest.",
-      "description": "<p>It looks like you found your next favorite workout sweatpants—the slim fit joggers are light and breathable, making them perfect for sports. Or if you feel like lounging on the couch, these soft joggers are just what you need. • 65% polyester, 35% cotton • Fabric weight: 250 g/m² (10.5 oz/y²) • Elastic waistband with a self-colored flat cord • Brushed metal eyelets for the cord • Double layer ribbed ankle cuffs • Side pockets with double layered ribbed hem • Back patch pocket • Slim fit (women may want to order a size down)</p>",
+      "slug": { "en": "unisex-skinny-joggers", "it": "pantaloni-skinny-da-jogging-unisex", "fr": "jogging-skinny-unisexe" },
+      "title": { "en": "Unisex Skinny Joggers", "it": "Pantaloni skinny da jogging unisex", "fr": "Jogging skinny unisexe" },
+      "abstract": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
+      "description": { "en": "<p>It looks like you found your next favorite workout sweatpants—the slim fit joggers are light and breathable, making them perfect for sports. Or if you feel like lounging on the couch, these soft joggers are just what you need. • 65% polyester, 35% cotton • Fabric weight: 250 g/m² (10.5 oz/y²) • Elastic waistband with a self-colored flat cord • Brushed metal eyelets for the cord • Double layer ribbed ankle cuffs • Side pockets with double layered ribbed hem • Back patch pocket • Slim fit (women may want to order a size down)</p>", "it": "<p>Sembra che tu abbia trovato i tuoi prossimi pantaloni della tuta da allenamento preferiti: i jogger slim fit sono leggeri e traspiranti, il che li rende perfetti per lo sport. O se hai voglia di sdraiarti sul divano, questi morbidi jogger sono proprio quello di cui hai bisogno. • 65% poliestere, 35% cotone • Peso del tessuto: 250 g/m² (10.5 oz/y²) • Cintura elastica con cordino piatto in tinta • Occhielli in metallo spazzolato per il cordino • Polsini alla caviglia a costine doppio strato • Tasche laterali con doppio orlo a costine a strati • Tasca applicata sul retro • Vestibilità slim (le donne potrebbero voler ordinare una taglia in meno)</p>", "fr": "<p>Il semble que vous ayez trouvé votre prochain pantalon de survêtement d'entraînement préféré : les pantalons de jogging slim sont légers et respirants, ce qui les rend parfaits pour le sport. Ou si vous avez envie de vous prélasser sur le canapé, ces pantalons de jogging doux sont exactement ce dont vous avez besoin. • 65 % polyester, 35 % coton • Poids du tissu : 250 g/m² (10,5 oz/y²) • Taille élastique avec un cordon plat de même couleur • Œillets en métal brossé pour le cordon • Chevilles côtelées à double épaisseur • Poches latérales avec double ourlet côtelé superposé • Poche arrière plaquée • Coupe ajustée (les femmes peuvent vouloir commander une taille en dessous)</p>" },
       "image": "/assets/products/trouser.webp",
       "price": 160.12,
       "categoryId": 7,
       "meta": {
-        "title": "Unisex Skinny Joggers",
-        "description": "Unisex Skinny Joggers description",
+        "title": { "en": "Unisex Skinny Joggers", "it": "Pantaloni skinny da jogging unisex", "fr": "Jogging skinny unisexe" },
+        "description": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
         "keywords": "unisex skinny joggers keywords",
         "robots": "all"
       }
@@ -89,16 +89,16 @@
     {
       "id": 3,
       "schema": "product",
-      "slug": "lightweight-jacket",
-      "title": "Lightweight Jacket",
-      "abstract": "Your perfect jacket for everyday use and walks in the forest.",
-      "description": "<p>Add a little zing to your winter wardrobe with this vibrant Winter-breaker Jacket. With a brushed fleece inside, and a relaxed unisex fit, this jacket is just the stuff of the dreams, so be quick to grab yourself one!     Long sleeve ripstop jacket colorblocked in black. Rough pattern in obsidian black and brown printed throughout. Printed graphic in white throughout. Logo-woven webbing trim in white and black throughout. Bungee-style drawstring at hood featuring rubberized logo hardware. Zip closure at front. Rubberized logo appliqué at chest. Welt pockets and textile logo patch in orange at waist. Elasticized cuffs. Partially lined. Black hardware.</p>",
+      "slug": { "en": "lightweight-jacket", "it": "giacca-leggera", "fr": "veste-legere" },
+      "title": { "en": "Lightweight Jacket", "it": "Giacca Leggera", "fr": "Veste légère" },
+      "abstract": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
+      "description": { "en": "<p>Add a little zing to your winter wardrobe with this vibrant Winter-breaker Jacket. With a brushed fleece inside, and a relaxed unisex fit, this jacket is just the stuff of the dreams, so be quick to grab yourself one!     Long sleeve ripstop jacket colorblocked in black. Rough pattern in obsidian black and brown printed throughout. Printed graphic in white throughout. Logo-woven webbing trim in white and black throughout. Bungee-style drawstring at hood featuring rubberized logo hardware. Zip closure at front. Rubberized logo appliqué at chest. Welt pockets and textile logo patch in orange at waist. Elasticized cuffs. Partially lined. Black hardware.</p>", "it": "<p>Aggiungi un po' di brio al tuo guardaroba invernale con questa vivace giacca invernale. Con un pile spazzolato all'interno e una vestibilità unisex rilassata, questa giacca è solo la roba dei sogni, quindi affrettati a prenderne una! Giacca in ripstop a maniche lunghe colorblock in nero. Motivo grezzo in ossidiana nero e marrone stampato ovunque. Grafica stampata in bianco dappertutto. Finiture in tessuto con logo in bianco e nero. Coulisse in stile bungee sul cappuccio con logo in gomma. Chiusura con zip sul davanti. Logo gommato applicato sul petto. Tasche a filetto e patch logo in tessuto in arancione in vita. Polsini elasticizzati. Parzialmente foderato. Hardware nero.</p>", "fr": "<p>Ajoutez un peu de piquant à votre garde-robe d'hiver avec cette éclatante veste Winter-breaker. Avec un intérieur en polaire brossée et une coupe unisexe décontractée, cette veste est tout ce dont vous rêvez, alors n'hésitez pas à vous en procurer une ! Blouson à manches longues anti-déchirures contrasté noir. Motif rugueux en noir obsidienne et marron imprimé sur l'ensemble. Image blanche imprimée sur l'ensemble. Garniture nattée à logo tissée blanche et noire sur l'ensemble. Cordon coulissant de style élastique à la capuche à ferrure à logo caoutchoutée. Fermeture zippée à l'avant. Appliqué à logo caoutchouté à la poitrine. Poches passepoilées et écusson à logo en tissu orange à la taille. Poignets élastiqués. Partiellement doublé. Quincaillerie noire.</p>" },
       "image": "/assets/products/jacket.webp",
       "price": 249.99,
       "categoryId": 8,
       "meta": {
-        "title": "Lightweight Jacket",
-        "description": "Lightweight Jacket description",
+        "title": { "en": "Lightweight Jacket", "it": "Giacca Leggera", "fr": "Veste légère" },
+        "description": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
         "keywords": "lightweight jacket keywords",
         "robots": "all"
       }
@@ -106,16 +106,16 @@
     {
       "id": 4,
       "schema": "product",
-      "slug": "black-beanie",
-      "title": "Black Beanie",
-      "abstract": "Your perfect beanie for everyday use and walks in the forest.",
-      "description": "<p>The Next.js beanie has arrived! This embroidered beauty has a snug fit that ensures you're going to feel cozy and warm whatever you're doing.</p><ol><li>60% cotton, 40% acrylic</li><li>Breathable cotton blend</li><li>Form-fitting shape</li><li>One size fits most</li></ol>",
+      "slug": { "en": "black-beanie", "it": "berretto-nero", "fr": "bonnet-noir" },
+      "title": { "en": "Black Beanie", "it": "Berretto Nero", "fr": "Bonnet Noir" },
+      "abstract": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
+      "description": { "en": "<p>The Next.js beanie has arrived! This embroidered beauty has a snug fit that ensures you're going to feel cozy and warm whatever you're doing.</p><ol><li>60% cotton, 40% acrylic</li><li>Breathable cotton blend</li><li>Form-fitting shape</li><li>One size fits most</li></ol>", "it": "<p>Il berretto Next.js è arrivato! Questa bellezza ricamata ha una vestibilità aderente che ti assicura di sentirti comodo e caldo qualunque cosa tu stia facendo.</p><ol><li>60% cotone, 40% acrilico</li><li>Cotone traspirante misto</li><li>Forma aderente</li><li>Taglia unica</li></ol>", "fr": "<p>Le bonnet Next.js est arrivé ! Cette beauté brodée a une coupe ajustée qui garantit que vous vous sentirez confortable et au chaud quoi que vous fassiez.</p> <ol> <li>60 % coton, 40 % acrylique</li> <li>Coton respirant blend</li><li>Forme ajustée</li><li>Taille unique</li></ol>" },
       "image": "/assets/products/hat.webp",
       "price": 160.12,
       "categoryId": 9,
       "meta": {
-        "title": "Black Beanie",
-        "description": "Black Beanie description",
+        "title": { "en": "Black Beanie", "it": "Berretto Nero", "fr": "Bonnet Noir" },
+        "description": { "en": "Your perfect item for everyday use and walks in the forest.", "it": "Il tuo capo perfetto per l'uso quotidiano e le passeggiate nella foresta.", "fr": "Votre article parfait pour un usage quotidien et des promenades en forêt." },
         "keywords": "black beanie keywords",
         "robots": "all"
       }
@@ -125,8 +125,8 @@
     {
       "id": 1,
       "name": "homepage",
-      "title": "Homepage",
       "slug": "",
+      "title": "home",
       "categoryId": null,
       "pageSchema": "homepage",
       "pageId": 1
@@ -134,8 +134,8 @@
     {
       "id": 2,
       "name": "about",
-      "title": "About",
-      "slug": "about",
+      "slug": { "en": "who-we-are", "it": "chi-siamo", "fr": "qui-nous-sommes" },
+      "title": { "en": "Who we are", "it": "Chi Siamo", "fr": "Qui nous sommes" },
       "categoryId": 1,
       "pageSchema": "about",
       "pageId": 1
@@ -143,8 +143,8 @@
     {
       "id": 3,
       "name": "product_index",
-      "title": "Products",
-      "slug": "products",
+      "slug": { "en": "products", "it": "prodotti", "fr": "produits" },
+      "title": { "en": "Products", "it": "Prodotti", "fr": "Produits" },
       "categoryId": 1,
       "pageSchema": "product_index",
       "pageId": 1
@@ -152,43 +152,43 @@
     {
       "id": 4,
       "name": "apparel",
-      "title": "Apparel",
-      "slug": "apparel",
+      "slug": { "en": "apparel", "it": "abbigliamento", "fr": "vetements" },
+      "title": { "en": "Apparel", "it": "Abbigliamento", "fr": "Vêtements" },
       "categoryId": 3
     },
     {
       "id": 5,
       "name": "menswear",
-      "title": "Menswear",
-      "slug": "menswear",
+      "slug": { "en": "menswear", "it": "uomo", "fr": "homme" },
+      "title": { "en": "Menswear", "it": "Uomo", "fr": "Homme" },
       "categoryId": 4
     },
     {
       "id": 6,
       "name": "t-shirts",
-      "title": "T-Shirts",
       "slug": "t-shirts",
+      "title": "T-Shirts",
       "categoryId": 5
     },
     {
       "id": 7,
       "name": "trousers",
-      "title": "Trousers",
-      "slug": "trousers",
+      "slug": { "en": "trousers", "it": "pantaloni", "fr": "pantalons" },
+      "title": { "en": "Trousers", "it": "Pantaloni", "fr": "Pantalons" },
       "categoryId": 5
     },
     {
       "id": 8,
       "name": "jackets",
-      "title": "Jackets",
-      "slug": "jackets",
+      "slug": { "en": "jackets", "it": "giacche", "fr": "vestes" },
+      "title": { "en": "Jackets", "it": "Giacche", "fr": "Vestes" },
       "categoryId": 5
     },
     {
       "id": 9,
       "name": "hats",
-      "title": "Hats",
-      "slug": "hats",
+      "slug": { "en": "hats", "it": "cappelli", "fr": "chapeaux" },
+      "title": { "en": "Hats", "it": "Cappelli", "fr": "Chapeaux" },
       "categoryId": 5
     }
   ],
@@ -197,7 +197,7 @@
       "id": "header",
       "items": [
         {
-          "name": "Homepage",
+          "name": "home",
           "href": "/ww/en"
         },
         {

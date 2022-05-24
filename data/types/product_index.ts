@@ -4,10 +4,10 @@ import { IEquatable, ILocalizedString } from '@core/entity/entity';
 export interface Product_index {
   id: IEquatable;
   schema: string;
-  slug: string;
+  slug: ILocalizedString;
   title: ILocalizedString;
-  abstract: string;
-  description: string;
+  abstract: ILocalizedString;
+  description: ILocalizedString;
   categoryId: IEquatable;
   meta: any;
 }

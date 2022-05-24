@@ -5,6 +5,7 @@ import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
+import { PageFull } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { P } from '@pipes/pipes';
@@ -40,7 +41,7 @@ export default function ProductPage({ page, params }: ProductPageProps) {
           <Grid xs={12} justify="center" alignItems="flex-start">
 
             <Card width="100%">
-              {page.description && <Text p>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
+              {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
                 <Button type="success" icon={<ArrowRight />} auto>Buy {P(page.price, P.price())}</Button>
               </Card.Footer>
@@ -59,7 +60,7 @@ export default function ProductPage({ page, params }: ProductPageProps) {
 }
 
 export interface ProductPageProps extends PageType {
-  page: any;
+  page: PageFull;
   params: { id: IEquatable, market: string, locale: string };
 }
 

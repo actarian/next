@@ -1,4 +1,4 @@
-import { FindManyParams, FindParams, IEntity, IEquatable, IQuerable } from '../entity/entity';
+import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '../entity/entity';
 
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
   collection: T[];
@@ -7,28 +7,29 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     this.collection = collection;
   }
 
-  findOne(id: IEquatable, params: FindParams = {}): Promise<T | null> {
+  findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null> {
     return new Promise<T>((resolve, reject) => {
-      const item = this.collection.find(x => x.id === id);
-      if (item) {
-        resolve(this.decorator_(item, params));
+      const params = toFindParams(idOrParams);
+      const items = this.where_(this.collection, params);
+      if (items.length > 0) {
+        resolve(this.decorator_(items[0], params));
       } else {
         resolve(null);
       }
     });
   }
 
-  findMany(params: FindManyParams = {}): Promise<T[]> {
+  findMany(params: FindParams = {}): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
       let collection = this.collection;
-      collection = this.where_(collection, params.where);
+      collection = this.where_(collection, params);
       if (params.where) {
         const keys = Object.keys(params.where);
         collection = collection.filter(x => keys.reduce((p: boolean, c: string) => {
           return p && (x[c] === params.where[c]);
         }, true));
       }
-      resolve(collection.map(x => this.decorator_(x, params.params)));
+      resolve(collection.map(x => this.decorator_(x, params)));
     });
   }
 
@@ -72,7 +73,8 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     });
   }
 
-  protected where_(items: any[], where: { [key: string]: any }): any[] {
+  protected where_(items: any[], params: FindParams): any[] {
+    const where = params.where;
     if (where) {
       const keys = Object.keys(where);
       items = items.filter(x => {

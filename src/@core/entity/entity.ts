@@ -7,16 +7,29 @@ export interface IEntity {
 }
 
 export interface IQuerable<T extends IEntity> {
-  findMany(params?: FindManyParams): Promise<T[]>;
-  findOne(id: IEquatable, params?: FindParams): Promise<T | null>;
+  findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null>;
+  findMany(params?: FindParams): Promise<T[]>;
   create(payload: T): Promise<T>;
   update(payload: T): Promise<T>;
   delete(id: IEquatable): Promise<T | null>;
 }
 
-export type FindManyParams = {
+export type FindParams = {
   where?: { [key: string]: any },
-  params?: FindParams;
+  market?: string,
+  locale?: string,
 };
 
-export type FindParams = { [key: string]: any };
+export type FindWhereParams = {
+  where: { [key: string]: any },
+  market?: string,
+  locale?: string,
+};
+
+export function toFindParams(idOrParams: IEquatable | FindWhereParams): FindWhereParams {
+  if (typeof idOrParams === 'number' || typeof idOrParams === 'string') {
+    return { where: { id: idOrParams } };
+  } else {
+    return idOrParams;
+  }
+}

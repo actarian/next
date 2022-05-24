@@ -5,9 +5,9 @@ export interface Homepage {
   id: IEquatable;
   schema: string;
   slug: string;
-  title: string;
-  abstract: string;
-  description: string;
+  title: ILocalizedString;
+  abstract: ILocalizedString;
+  description: ILocalizedString;
   image: string;
   categoryId: IEquatable;
   meta: any;

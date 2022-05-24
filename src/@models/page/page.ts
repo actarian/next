@@ -1,6 +1,8 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
 import { IEquatable } from '@core/entity/entity';
-import { SchemaType } from '@models/route/route';
+import { RouteLink, SchemaType } from '@models/route/route';
+import { Locale } from 'data/types/locale';
+import { Market } from 'data/types/market';
 
 export interface Page {
   id: IEquatable;
@@ -14,9 +16,18 @@ export interface Page {
   updatedAt?: Date;
   meta?: Meta;
   images: Image[];
-  // locale?: string;
-  // markets?: string[];
-  breadcrumb?: Breadcrumb[];
+}
+
+export interface PageFull extends Page {
+  market: string;
+  locale: string;
+  markets: Market[];
+  locales: Locale[];
+  href: string;
+  alternate: string[];
+  tree: RouteLink;
+  breadcrumb: RouteLink[];
+  [key: string]: any;
 }
 
 export interface Meta {

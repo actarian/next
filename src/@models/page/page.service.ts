@@ -1,46 +1,37 @@
 import { IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { Breadcrumb } from '@models/breadcrumb/breadcrumb';
-import { getBreadcrumbFromCategoryTree } from '@models/breadcrumb/breadcrumb.service';
 import { Category } from '@models/category/category';
 import { getCategoryTree } from '@models/category/category.service';
-import { Page } from './page';
+import { RouteLink } from '@models/route/route';
+import { getBreadcrumbFromCategoryTree, getRouteLinkTree } from '@models/route/route.service';
+import { PageFull } from './page';
 
-export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<Page | null> {
+export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<PageFull | null> {
   const store = await getStore();
-  if (!store) {
-    return null;
-  }
-  const page = store.page;
-  if (!page) {
-    return null;
-  }
-  const pages = await page.findMany({
-    where: { schema, id },
-    params: { locale }
-  });
-  if (!pages.length) {
-    return null;
-  }
-  const item: any = pages[0]; // !!! any
-  if (item) {
-    item.market = market;
-    item.locale = locale;
-    const markets = await store.market.findMany({ params: { locale } });
-    item.markets = markets;
-    const locales = await store.locale.findMany({ params: { locale } });
-    item.locales = locales;
-    const header = await store.menu.findOne('header', { params: { locale } });
-    item.header = header;
+  const page = await store.page.findOne({ where: { schema, id }, market, locale }) as any;
+  // console.log(page, market, locale);
+  if (page) {
+    page.market = market;
+    page.locale = locale;
+    const markets = await store.market.findMany({ locale });
+    page.markets = markets;
+    const locales = await store.locale.findMany({ locale });
+    page.locales = locales;
+    const tree = await getRouteLinkTree(market, locale);
+    page.tree = tree;
+    /*
+    const header = await store.menu.findOne({ where: { id: 'header' }, locale });
+    page.header = header;
+    */
     const routes = await store.route.findMany({ where: { pageSchema: schema, pageId: id } });
-    const href = routes.find(x => x.market === market && x.locale === locale);
-    item.href = href;
-    const alternate = routes.filter(x => x.market === market && x.locale !== locale);
-    item.alternate = alternate;
-    const categoryTree: Category[] = await getCategoryTree(item, { params: { locale } });
-    const breadcrumb: Breadcrumb[] = await getBreadcrumbFromCategoryTree(categoryTree);
-    item.breadcrumb = breadcrumb;
-    return item;
+    const currentRoute = routes.find(x => x.market === market && x.locale === locale);
+    page.href = currentRoute.href;
+    const alternateRoutes = routes.filter(x => x.market === market && x.locale !== locale);
+    page.alternates = alternateRoutes;
+    const categoryTree: Category[] = await getCategoryTree(page, { locale });
+    const breadcrumb: RouteLink[] = await getBreadcrumbFromCategoryTree(categoryTree);
+    page.breadcrumb = breadcrumb;
+    return page;
   } else {
     console.log('PageService.getPage.notfound', schema, id, locale);
     return null;

@@ -3,7 +3,7 @@ import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
-import { Page } from '@models/page/page';
+import { PageFull } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { PageType } from 'types';
@@ -26,7 +26,7 @@ export default function About({ page, params }: AboutProps) {
 }
 
 export interface AboutProps extends PageType {
-  page: Page;
+  page: PageFull;
   params: { id: IEquatable, market: string, locale: string };
 }
 

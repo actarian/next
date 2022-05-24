@@ -1,14 +1,14 @@
-import { FindManyParams } from '@core/entity/entity';
+import { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
 import { Category, ICategorized } from './category';
 
-export async function getCategories(params: FindManyParams = {}): Promise<Category[]> {
+export async function getCategories(params: FindParams = {}): Promise<Category[]> {
   const store = await getStore();
   const categories: any = await store.category.findMany(params); // !!! any
   return categories;
 }
 
-export async function getCategoryTree(item: ICategorized, params: FindManyParams = {}): Promise<Category[]> {
+export async function getCategoryTree(item: ICategorized, params: FindParams = {}): Promise<Category[]> {
   const categories: Category[] = await getCategories(params);
   return getCategoryTreeWithCategories(item, categories);
 }

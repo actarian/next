@@ -14,9 +14,10 @@ export interface Route {
 }
 
 export interface RouteLink {
-  href: string;
-  title: string;
-  categoryId: IEquatable;
+  href?: string;
+  title?: string;
+  categoryId?: IEquatable;
+  items: RouteLink[];
 }
 
 interface RouteRequest extends NextApiRequest {

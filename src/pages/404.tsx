@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { PageType } from 'types';
 
 export default function Custom404({ page, params }: Custom404Props) {
-  console.log('Custom404.params', page, params);
+  // console.log('Custom404.params', page, params);
   return (
     <>
       <Layout page={page}>

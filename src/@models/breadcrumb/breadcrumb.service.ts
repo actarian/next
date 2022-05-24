@@ -1,3 +1,4 @@
+import { isLocalizedString, localizedToString } from '@core/locale/locale.service';
 import { Breadcrumb } from '@models/breadcrumb/breadcrumb';
 import { Category } from '@models/category/category';
 import { Route } from '@models/route/route';
@@ -13,9 +14,13 @@ export async function getBreadcrumbFromCategoryTree(categoryTree: Category[], ma
       r.locale === locale
     ) : null;
     const href = route ? route.href : null;
+    let title = x.title;
+    if (isLocalizedString(title)) {
+      title = localizedToString(title, locale);
+    }
     return {
       categoryId: x.id,
-      title: x.title,
+      title,
       href,
     }
   });

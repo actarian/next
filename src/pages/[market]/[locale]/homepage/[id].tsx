@@ -4,7 +4,7 @@ import Layout from '@components/_layout';
 import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { Page } from '@models/page/page';
+import { PageFull } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import React from 'react';
@@ -63,7 +63,7 @@ export default function Homepage({ page, params }: HomepageProps) {
 }
 
 export interface HomepageProps extends PageType {
-  page: Page;
+  page: PageFull;
   params: { id: IEquatable, market: string, locale: string };
 }
 
