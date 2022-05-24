@@ -2,6 +2,7 @@ import { Breadcrumbs, Spacer } from '@geist-ui/core';
 import NextLink from 'next/link';
 
 export default function Breadcrumb({ items }) {
+  console.log('Breadcrumb', items);
   return (
     <>
       <Breadcrumbs>

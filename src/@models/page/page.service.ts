@@ -28,8 +28,8 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
     page.href = currentRoute.href;
     const alternateRoutes = routes.filter(x => x.market === market && x.locale !== locale);
     page.alternates = alternateRoutes;
-    const categoryTree: Category[] = await getCategoryTree(page, { locale });
-    const breadcrumb: RouteLink[] = await getBreadcrumbFromCategoryTree(categoryTree);
+    const categoryTree: Category[] = await getCategoryTree(page);
+    const breadcrumb: RouteLink[] = await getBreadcrumbFromCategoryTree(categoryTree, market, locale);
     page.breadcrumb = breadcrumb;
     return page;
   } else {
