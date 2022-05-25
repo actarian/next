@@ -1,5 +1,5 @@
 import JsonService from '@core/json/json.service';
-import { localizeItem } from '@core/locale/locale.service';
+import { localizeItem } from '@models/locale/locale.service';
 import { FindParams, IEntity } from '../entity/entity';
 
 export default class MockService<T extends IEntity> extends JsonService<T> {

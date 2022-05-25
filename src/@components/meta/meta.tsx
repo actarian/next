@@ -1,14 +1,15 @@
+import { PageLayout } from '@models/page/page';
 import Head from 'next/head';
 
 const origin = process.env.NEXT_PUBLIC_URL;
 
-export default function Meta({ page }) {
+export default function Meta({ page }: MetaProps) {
   return (
     <Head>
-      <title>{page.meta.title}</title>
-      <meta name="description" content={page.meta.description} />
-      <meta name="keywords" content={page.meta.keywords} />
-      <meta name="robots" content={page.meta.robots} />
+      <title>{page.meta?.title}</title>
+      <meta name="description" content={page.meta?.description} />
+      <meta name="keywords" content={page.meta?.keywords} />
+      <meta name="robots" content={page.meta?.robots} />
       {page.href && <link rel="canonical" href={origin + page.href} />}
       {page.alternates && page.alternates.map(alternate => (
         <link key={`${alternate.market}-${alternate.locale}`} rel="alternate" href={origin + alternate.href} />
@@ -26,4 +27,8 @@ export default function Meta({ page }) {
       <meta name="theme-color" content="#000" />
     </Head>
   )
+}
+
+export interface MetaProps {
+  page: PageLayout;
 }

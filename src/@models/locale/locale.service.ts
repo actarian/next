@@ -1,4 +1,12 @@
-import { ILocalizedString } from '@core/entity/entity';
+import { FindParams, ILocalizedString } from '@core/entity/entity';
+import { getStore } from '@core/store/store.service';
+import { Locale } from './locale';
+
+export async function getLocales(params: FindParams = {}): Promise<Locale[]> {
+  const store = await getStore();
+  const items: any = await store.locale.findMany(params); // !!! any
+  return items;
+}
 
 export function isLocalizedString(value: any): value is ILocalizedString {
   let isLocalizedString = false;

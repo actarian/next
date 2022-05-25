@@ -7,11 +7,11 @@ const pluralize = require('pluralize');
 
 import { IEntity } from '@core/entity/entity';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
-import { isLocalizedString, localizedToString } from '@core/locale/locale.service';
 import { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
 import { ICategorized } from '@models/category/category';
 import { getCategoryTreeWithCategories } from '@models/category/category.service';
+import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
 import { PAGES } from '../../pages';
 
 if (process.env && process.env.NODE_ENV) {
@@ -203,6 +203,8 @@ function getType(key: string, value: any, collections: CollectionDescription[]):
     type = 'null';
   } else if (equatableIds.indexOf(key) !== -1) {
     type = 'IEquatable';
+  } else if (typeof value === 'boolean') {
+    type = 'boolean';
   } else if (typeof value === 'string') {
     type = 'string';
   } else if (typeof value === 'number') {

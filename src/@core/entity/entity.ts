@@ -1,6 +1,7 @@
 
 export type IEquatable = string | number;
 export type ILocalizedString = { [key: string]: string };
+
 export interface IEntity {
   id: IEquatable;
   [key: string]: any;

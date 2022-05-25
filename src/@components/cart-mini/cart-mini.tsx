@@ -1,8 +1,8 @@
 
 import { Drawer } from '@geist-ui/core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-export default function CartMini({ children, active, setActive }) {
+export default function CartMini({ children, active, setActive }: CartMiniProps) {
   return (
     <Drawer visible={active} onClose={() => setActive(false)} placement="right">
       <Drawer.Title>Drawer</Drawer.Title>
@@ -12,4 +12,10 @@ export default function CartMini({ children, active, setActive }) {
       </Drawer.Content>
     </Drawer>
   )
+}
+
+export interface CartMiniProps {
+  children: ReactNode;
+  active: boolean;
+  setActive: (active: boolean) => void;
 }

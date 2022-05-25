@@ -6,7 +6,7 @@ export interface Market {
   schema: string;
   code: string;
   title: string;
-  isDefault: any;
+  isDefault: boolean;
   countries?: any[];
   languages?: any[];
 }

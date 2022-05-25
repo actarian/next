@@ -3,9 +3,10 @@ import Header from '@components/header/header';
 import Main from '@components/main/main';
 import Meta from '@components/meta/meta';
 import { Page } from '@geist-ui/core';
-import React from 'react';
+import { PageLayout } from '@models/page/page';
+import React, { ReactNode } from 'react';
 
-export default function Layout({ page, children }) {
+export default function Layout({ page, children }: LayoutProps) {
   return (
     <>
       <Meta page={page} />
@@ -22,4 +23,9 @@ export default function Layout({ page, children }) {
       </Page>
     </>
   )
+}
+
+export interface LayoutProps {
+  page: PageLayout;
+  children: ReactNode;
 }

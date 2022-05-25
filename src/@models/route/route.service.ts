@@ -1,7 +1,7 @@
 import { FindParams } from '@core/entity/entity';
-import { isLocalizedString, localizedToString } from '@core/locale/locale.service';
 import { getStore } from '@core/store/store.service';
 import { Category } from '@models/category/category';
+import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
 // import { parseMockApi } from '@core/mock/mock.server';
 import { Route, RouteLink } from './route';
 

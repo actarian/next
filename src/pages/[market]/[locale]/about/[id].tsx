@@ -1,10 +1,9 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
-import { PageFull } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
+import { PageLayout, PageParams } from '@models/page/page';
+import { getPageLayout } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { PageType } from 'types';
 
@@ -26,15 +25,15 @@ export default function About({ page, params }: AboutProps) {
 }
 
 export interface AboutProps extends PageType {
-  page: PageFull;
-  params: { id: IEquatable, market: string, locale: string };
+  page: PageLayout;
+  params: PageParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPage('about', id, market, locale);
+  const page = await getPageLayout('about', id, market, locale);
   const props = asStaticProps({ ...context, page });
   // console.log('About getStaticProps', props);
   return {

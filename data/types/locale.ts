@@ -6,5 +6,5 @@ export interface Locale {
   schema: string;
   code: string;
   title: string;
-  isDefault: any;
+  isDefault: boolean;
 }

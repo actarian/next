@@ -1,12 +1,11 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { PageFull } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
+import { PageLayout, PageParams } from '@models/page/page';
+import { getPageLayout } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { P } from '@pipes/pipes';
 import { PageType } from 'types';
@@ -60,15 +59,15 @@ export default function ProductPage({ page, params }: ProductPageProps) {
 }
 
 export interface ProductPageProps extends PageType {
-  page: PageFull;
-  params: { id: IEquatable, market: string, locale: string };
+  page: PageLayout;
+  params: PageParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPage('product', id, market, locale);
+  const page = await getPageLayout('product', id, market, locale);
   // console.log('Product getStaticProps', id);
   const props = asStaticProps({ ...context, page });
   // console.log('Product getStaticProps', props);

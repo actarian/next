@@ -1,22 +1,19 @@
 import CartMini from '@components/cart-mini/cart-mini';
-import { Button, Image, Link, Popover, Spacer, Tabs, Text } from '@geist-ui/core';
+import { MarketSelector } from '@components/market-selector/market-selector';
+import { Button, Image, Popover, Tabs } from '@geist-ui/core';
 import { Menu, ShoppingCart } from '@geist-ui/icons';
+import { PageLayout } from '@models/page/page';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import styles from './header.module.scss';
 
-export default function Header({ page }) {
+export default function Header({ page }: HeaderProps) {
   const router = useRouter();
 
   const [active, setActive] = useState(false);
 
   const menu = page.tree;
-  const locales = page.locales;
-  const markets = page.markets.map(x => ({
-    ...x,
-    locales: x.languages ? locales.filter(l => x.languages.includes(l.id)) : locales,
-  }));
 
   const brand = 'Brand Name';
   const currentTab = page.href;
@@ -51,7 +48,7 @@ export default function Header({ page }) {
         </nav>
         <nav className={styles.right}>
           <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => setActive(true)}></Button>
-          <Popover content={<MarketSelector markets={markets} locales={locales} market={page.market} locale={page.locale} alternates={page.alternates} />}>
+          <Popover content={<MarketSelector page={page} />}>
             <Button icon={<Menu />} auto scale={2 / 3} px={0.6}>{page.locale}</Button>
           </Popover>
         </nav>
@@ -60,32 +57,7 @@ export default function Header({ page }) {
     </header>
   )
 }
-function MarketSelector({ markets, locales, market, locale, alternates }) {
 
-  const getHref = useCallback((market, locale) => {
-    const items = alternates || [];
-    const alternateItem = items.find(x => x.market === market && x.locale === locale);
-    if (alternateItem) {
-      return alternateItem.href;
-    } else {
-      return `/${market}/${locale}`;
-    }
-  }, [alternates]);
-
-  return (
-    <div style={{ padding: '0 10px' }}>
-      {markets && markets.map(market => (
-        <div key={`${market.id}`}>
-          <Text type="secondary" margin={0}>{market.title}</Text>
-          <Spacer h={.5} />
-          {market.locales && market.locales.map(locale => (
-            <div key={`${locale.id}`}>
-              <Link href={getHref(market.id, locale.code)}>{locale.title}</Link>
-            </div>
-          ))}
-          <Spacer h={.5} />
-        </div>
-      ))}
-    </div>
-  )
+export interface HeaderProps {
+  page: PageLayout;
 }

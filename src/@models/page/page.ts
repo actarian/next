@@ -1,51 +1,13 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
 import { IEquatable } from '@core/entity/entity';
-import { RouteLink, SchemaType } from '@models/route/route';
-import { Locale } from 'data/types/locale';
-import { Market } from 'data/types/market';
-
-export interface Page {
-  id: IEquatable;
-  slug: string;
-  schema: SchemaType;
-  title?: string;
-  abstract?: string;
-  description?: string;
-  content?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-  meta?: Meta;
-  images: Image[];
-}
-
-export interface PageFull extends Page {
-  market: string;
-  locale: string;
-  markets: Market[];
-  locales: Locale[];
-  href: string;
-  alternate: string[];
-  tree: RouteLink;
-  breadcrumb: RouteLink[];
-  [key: string]: any;
-}
+import { Layout } from '@models/layout/layout';
+import { Route, RouteLink, SchemaType } from '@models/route/route';
 
 export interface Meta {
   title?: string;
   description?: string;
   keywords?: string;
   robots?: string;
-}
-
-// !!! MenuItem ?
-export interface Breadcrumb {
-  id: IEquatable;
-  name?: string;
-  title?: string;
-  categoryId?: IEquatable;
-  schema?: SchemaType;
-  schemaId?: IEquatable;
-  href: string;
 }
 
 export interface Image {
@@ -57,3 +19,31 @@ export interface Image {
   width?: number;
   height?: number;
 }
+
+export interface Page {
+  id: IEquatable;
+  schema: SchemaType;
+  categoryId?: IEquatable;
+  slug?: string;
+  href: string;
+  alternates: Route[];
+  breadcrumb: RouteLink[];
+  title?: string;
+  abstract?: string;
+  description?: string;
+  content?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  meta?: Meta;
+  images: Image[];
+  [key: string]: any;
+}
+
+export interface PageLayout extends Page, Layout { }
+
+export type PageParams = {
+  id: IEquatable,
+  market: string,
+  locale: string,
+  [key: string]: any,
+};

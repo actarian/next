@@ -1,11 +1,10 @@
 import Banner from '@components/banner/banner';
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { PageFull } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
+import { PageLayout, PageParams } from '@models/page/page';
+import { getPageLayout } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import React from 'react';
 import { PageType } from 'types';
@@ -63,15 +62,15 @@ export default function Homepage({ page, params }: HomepageProps) {
 }
 
 export interface HomepageProps extends PageType {
-  page: PageFull;
-  params: { id: IEquatable, market: string, locale: string };
+  page: PageLayout;
+  params: PageParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPage('homepage', id, market, locale);
+  const page = await getPageLayout('homepage', id, market, locale);
   const props = asStaticProps({ ...context, page });
   // console.log('Homepage getStaticProps', props, context);
   return {
