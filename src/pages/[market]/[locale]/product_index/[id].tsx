@@ -26,7 +26,7 @@ export default function Products({ layout, page, products, params }: ProductsPag
         {products &&
           <Grid.Container gap={2} justify="flex-start">
             {products.map((item) =>
-              <Grid xs={8} key={item.id}>
+              <Grid xs={24} sm={12} md={8} key={item.id}>
 
                 <ProductItem item={item} />
 

@@ -1,11 +1,13 @@
 import { Breadcrumbs, Spacer } from '@geist-ui/core';
+import { IRouteLink } from '@models/route/route';
 import NextLink from 'next/link';
+import styles from './breadcrumb.module.scss';
 
-export default function Breadcrumb({ items }) {
+export default function Breadcrumb({ items }: BreadcrumbProps) {
   // console.log('Breadcrumb', items);
   return (
     <>
-      <Breadcrumbs>
+      <Breadcrumbs className={styles.breadcrumbs}>
         {items.map((x, i) => (
           i < items.length - 1 && x.href ?
             <NextLink key={i} href={x.href}>
@@ -27,3 +29,7 @@ export default function Breadcrumb({ items }) {
     </>
   );
 }
+
+export type BreadcrumbProps = {
+  items: IRouteLink[];
+};

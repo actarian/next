@@ -31,14 +31,14 @@ export default function ProductPage({ layout, page, params }: ProductPageProps) 
         <Headline title={page.title} abstract={page.abstract}></Headline>
 
         <Grid.Container gap={1.5}>
-          <Grid xs={12} justify="center" alignItems="flex-start">
+          <Grid sm={24} md={12} justify="center" alignItems="flex-start">
 
             <Card width="100%" type="dark">
               <Image alt={page.title} src={page.image} />
             </Card>
 
           </Grid>
-          <Grid xs={12} justify="center" alignItems="flex-start">
+          <Grid sm={24} md={12} justify="center" alignItems="flex-start">
 
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
