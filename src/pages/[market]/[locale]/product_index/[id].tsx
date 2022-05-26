@@ -5,10 +5,8 @@ import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Grid } from '@geist-ui/core';
 import { PageLayout, PageParams } from '@models/page/page';
-import { getPageLayout } from '@models/page/page.service';
 import { Product } from '@models/product/product';
-import { getProducts } from '@models/product/product.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+import { store } from '@models/store';
 import { PageType } from 'types';
 
 export default function Products({ page, products, params }: ProductsPageProps) {
@@ -50,8 +48,8 @@ export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPageLayout('product_index', id, market, locale);
-  const products = await getProducts({ market, locale });
+  const page = await store.getPageLayout('product_index', id, market, locale);
+  const products = await store.getProducts({ market, locale });
   const props = asStaticProps({ ...context, page, products });
   // console.log('Products getStaticProps', props);
   return {
@@ -60,7 +58,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getStaticPathsForSchema('product_index');
+  const paths = await store.getStaticPathsForSchema('product_index');
   return {
     paths,
     fallback: true,

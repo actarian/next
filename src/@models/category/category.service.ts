@@ -17,7 +17,7 @@ export function getCategoryTreeWithCategories(item: ICategorized, categories: Ca
   const categoryTree: Category[] = [];
   let categoryId = item.categoryId || null;
   let skipLast = false;
-  while (categoryId !== null) {
+  while (categoryId != null) { // !!! loose
     const c = categories.find(c => c.id === categoryId);
     if (c) {
       const b = { ...c };

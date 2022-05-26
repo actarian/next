@@ -98,6 +98,7 @@ function getRouteService(store: SerializedStore): SerializedCollection {
         m.languages.forEach(l => {
 
           const href = categoryTree.reduce((p, c, i) => {
+            // !!! page.slug || category.slug
             let slug = c.slug;
             if (isLocalizedString(slug)) {
               slug = localizedToString(slug, l);

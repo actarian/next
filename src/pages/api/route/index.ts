@@ -1,10 +1,10 @@
 import { apiHandler } from '@core/api/api.helper';
-import { getRoute, getRoutes } from '@models/route/route.service';
+import { store } from '@models/store';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
-    const data = await getRoutes();
+    const data = await store.getRoutes();
     if (data) {
       response.status(200).json(data);
     } else {
@@ -13,7 +13,7 @@ export default apiHandler({
   },
   post: async (request: NextApiRequest, response: NextApiResponse) => {
     const { href } = request.body;
-    const data = await getRoute(href);
+    const data = await store.getRoute(href);
     // console.log('route.apiHandler', href, '->', data);
     if (data) {
       response.status(200).json(data);
@@ -28,7 +28,7 @@ export default apiHandler({
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
   if (request.method === 'POST') {
     const { href } = request.body;
-    const data = await getRoutes(href);
+    const data = await store.getRoutes(href);
     response.status(200).json(data);
   } else {
     response.setHeader('Allow', ['POST']);

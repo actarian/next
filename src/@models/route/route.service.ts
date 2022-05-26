@@ -32,13 +32,11 @@ export async function decorateHref(item: any, market: string = 'ww', locale: str
 }
 
 export async function getBreadcrumbFromCategoryTree(categoryTree: Category[], market: string = 'ww', locale: string = 'en'): Promise<RouteLink[]> {
-  const routes: Route[] = await getRoutes();
+  const routes: Route[] = await getRoutes({ where: { market, locale } });
   return categoryTree.map(x => {
     const route = x.pageSchema && x.pageId ? routes.find(r =>
       r.pageSchema === x.pageSchema &&
-      r.pageId === x.pageId &&
-      r.market === market &&
-      r.locale === locale
+      r.pageId === x.pageId
     ) : null;
     const href = route ? route.href : null;
     let title = x.title;

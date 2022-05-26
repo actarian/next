@@ -2,9 +2,9 @@ import { IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
 import { Category } from '@models/category/category';
 import { getCategoryTree } from '@models/category/category.service';
-import { getLayout } from '@models/layout/layout.service';
 import { RouteLink } from '@models/route/route';
 import { getBreadcrumbFromCategoryTree } from '@models/route/route.service';
+import { store } from '@models/store';
 import { Page, PageLayout } from './page';
 
 export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<Page | null> {
@@ -32,7 +32,7 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
 export async function getPageLayout(schema: string, id: IEquatable, market?: string, locale?: string): Promise<PageLayout | null> {
   const page = await getPage(schema, id, market, locale);
   if (page) {
-    const layout = await getLayout(market, locale);
+    const layout = await store.getLayout(market, locale);
     return {
       ...page,
       ...layout,

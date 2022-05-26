@@ -5,8 +5,7 @@ import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
 import { PageLayout, PageParams } from '@models/page/page';
-import { getPageLayout } from '@models/page/page.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+import { store } from '@models/store';
 import { P } from '@pipes/pipes';
 import { PageType } from 'types';
 // import PropTypes from 'prop-types';
@@ -67,7 +66,7 @@ export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPageLayout('product', id, market, locale);
+  const page = await store.getPageLayout('product', id, market, locale);
   // console.log('Product getStaticProps', id);
   const props = asStaticProps({ ...context, page });
   // console.log('Product getStaticProps', props);
@@ -78,7 +77,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getStaticPathsForSchema('product');
+  const paths = await store.getStaticPathsForSchema('product');
   return {
     paths,
     fallback: true,

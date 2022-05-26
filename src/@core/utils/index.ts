@@ -46,3 +46,19 @@ export function getIsDevelopment(): boolean {
 }
 
 export const isDevelopment = getIsDevelopment();
+
+export enum StoreStrategy {
+  Api = 'api',
+  Store = 'store',
+  Mock = 'mock',
+};
+
+export function getStoreStrategy(): StoreStrategy {
+  let storeStrategy = StoreStrategy.Mock;
+  if (process && process.env.STORE_STRATEGY) {
+    storeStrategy = process.env.STORE_STRATEGY as StoreStrategy;
+  }
+  return storeStrategy;
+}
+
+export const storeStrategy: StoreStrategy = getStoreStrategy();

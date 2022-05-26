@@ -3,8 +3,7 @@ import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { PageLayout, PageParams } from '@models/page/page';
-import { getPageLayout } from '@models/page/page.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+import { store } from '@models/store';
 import { PageType } from 'types';
 
 export default function About({ page, params }: AboutProps) {
@@ -33,7 +32,7 @@ export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await getPageLayout('about', id, market, locale);
+  const page = await store.getPageLayout('about', id, market, locale);
   const props = asStaticProps({ ...context, page });
   // console.log('About getStaticProps', props);
   return {
@@ -42,7 +41,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getStaticPathsForSchema('about');
+  const paths = await store.getStaticPathsForSchema('about');
   return {
     paths,
     fallback: true,
