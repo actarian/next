@@ -4,7 +4,7 @@ import { ICategorized, ICategory } from './category';
 
 export async function getCategories(params: FindParams = {}): Promise<ICategory[]> {
   const store = await getStore();
-  const categories: any = await store.category.findMany(params); // !!! any
+  const categories = await store.category.findMany(params);
   return categories;
 }
 

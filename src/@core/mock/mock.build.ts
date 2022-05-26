@@ -20,7 +20,6 @@ if (process.env && process.env.NODE_ENV) {
   dotenv.config({ path: '.env.development' });
 }
 
-const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
 const dataSrc = './data/data.json';
 
 export async function BuildAndWatch() {

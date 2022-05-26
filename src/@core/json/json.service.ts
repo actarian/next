@@ -1,16 +1,16 @@
 import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '../entity/entity';
 
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
-  collection: T[];
+  items: T[];
 
-  constructor(collection: T[]) {
-    this.collection = collection;
+  constructor(items: T[]) {
+    this.items = items;
   }
 
   findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null> {
     return new Promise<T>((resolve, reject) => {
       const params = toFindParams(idOrParams);
-      const items = this.where_(this.collection, params);
+      const items = this.where_(this.items, params);
       if (items.length > 0) {
         resolve(this.decorator_(items[0], params));
       } else {
@@ -21,15 +21,9 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
 
   findMany(params: FindParams = {}): Promise<T[]> {
     return new Promise<T[]>((resolve, reject) => {
-      let collection = this.collection;
-      collection = this.where_(collection, params);
-      if (params.where) {
-        const keys = Object.keys(params.where);
-        collection = collection.filter(x => keys.reduce((p: boolean, c: string) => {
-          return p && (x[c] === params.where[c]);
-        }, true));
-      }
-      resolve(collection.map(x => this.decorator_(x, params)));
+      let items = this.items;
+      items = this.where_(items, params);
+      resolve(items.map(x => this.decorator_(x, params)));
     });
   }
 
@@ -37,7 +31,7 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     return new Promise<T | null>((resolve, reject) => {
       try {
         const item = { ...payload, id: this.newUUID_() };
-        this.collection.push(item);
+        this.items.push(item);
         resolve(item);
       } catch (error) {
         reject(error);
@@ -47,12 +41,12 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
 
   update(payload): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      const index = this.collection.reduce((p, c, i) => {
+      const index = this.items.reduce((p, c, i) => {
         return c.id === payload.id ? i : p;
       }, -1);
       if (index !== -1) {
-        const item = { ...this.collection[index], payload };
-        this.collection[index] = item;
+        const item = { ...this.items[index], payload };
+        this.items[index] = item;
         return resolve(item);
       }
       reject();
@@ -61,12 +55,12 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
 
   delete(id: IEquatable) {
     return new Promise<T>((resolve, reject) => {
-      const index = this.collection.reduce((p, c, i) => {
+      const index = this.items.reduce((p, c, i) => {
         return c.id === id ? i : p;
       }, -1);
       if (index !== -1) {
-        const item = this.collection[index];
-        this.collection.splice(index, 1);
+        const item = this.items[index];
+        this.items.splice(index, 1);
         return resolve(item);
       }
       resolve(null);

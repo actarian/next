@@ -4,6 +4,6 @@ import { IMarket } from './market';
 
 export async function getMarkets(params: FindParams = {}): Promise<IMarket[]> {
   const store = await getStore();
-  const items: any = await store.market.findMany(params); // !!! any
+  const items = await store.market.findMany(params);
   return items;
 }

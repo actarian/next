@@ -4,12 +4,12 @@ import { IMenu } from './menu';
 
 export async function getMenu(id: IEquatable): Promise<IMenu> {
   const store = await getStore();
-  const item: any = await store.menu.findOne(id); // !!! any
+  const item = await store.menu.findOne(id);
   return item;
 }
 
 export async function getMenus(): Promise<IMenu[]> {
   const store = await getStore();
-  const items: any[] = await store.menu.findMany(); // !!! any
+  const items = await store.menu.findMany();
   return items;
 }

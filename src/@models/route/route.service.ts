@@ -7,14 +7,14 @@ import { IRoute, IRouteLink } from './route';
 
 export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
   const store = await getStore();
-  const routes: any[] = await store.route.findMany(params); // !!! any
+  const routes = await store.route.findMany(params);
   return routes;
 }
 
 export async function getRoute(href: string): Promise<IRoute | null> {
   const store = await getStore();
   const routes = await store.route.findMany();
-  const route: any = routes.find(x => x.href === href) || null; // !!! any
+  const route = routes.find(x => x.href === href) || null;
   // console.log('getRoute', href, '->', route);
   return route;
 }

@@ -4,7 +4,7 @@ import { ILabel } from './label';
 
 export async function getLabels(params: FindParams = {}): Promise<ILabel[]> {
   const store = await getStore();
-  const items: any = await store.label.findMany(params); // !!! any
+  const items = await store.label.findMany(params);
   return items;
 }
 

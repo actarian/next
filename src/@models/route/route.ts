@@ -6,6 +6,7 @@ import { PAGES } from '../../pages';
 export type SchemaType = keyof typeof PAGES;
 
 export interface IRoute {
+  id: IEquatable;
   href: string;
   market: string;
   locale: string;

@@ -2,7 +2,7 @@ import { isExistingApiRoute } from '@core/middleware/middleware.service';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
+const API_MOCK = (process.env.NEXT_PUBLIC_API_MOCK === 'true') || false;
 
 export async function mockInterceptor(request: NextRequest, next: NextFetchEvent) {
   if (!API_MOCK) {

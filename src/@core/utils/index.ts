@@ -29,7 +29,11 @@ export function merge(target, source) {
 }
 
 export function resolveRoute(route: IRoute) {
-  return PAGES[route.pageSchema](route);
+  console.log('resolveRoute', route.pageSchema);
+  const resolver = PAGES[route.pageSchema];
+  if (typeof resolver === 'function') {
+    return resolver(route);
+  }
 }
 
 export function asStaticProps(props: any): any {
