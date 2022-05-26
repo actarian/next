@@ -1,9 +1,12 @@
-import { PageLayout } from '@models/page/page';
+import { usePage } from '@hooks/usePage/usePage';
 import Head from 'next/head';
 
 const origin = process.env.NEXT_PUBLIC_URL;
 
-export default function Meta({ page }: MetaProps) {
+export default function Meta() {
+
+  const page = usePage();
+
   return (
     <Head>
       <title>{page.meta?.title}</title>
@@ -27,8 +30,4 @@ export default function Meta({ page }: MetaProps) {
       <meta name="theme-color" content="#000" />
     </Head>
   )
-}
-
-export interface MetaProps {
-  page: PageLayout;
 }

@@ -475,6 +475,40 @@
       }
     ]
   },
+  "label": {
+    "singularName": "label",
+    "pluralName": "labels",
+    "displayName": "Label",
+    "items": [
+      {
+        "id": "navigation.back",
+        "text": {
+          "en": "Back",
+          "it": "Indietro",
+          "fr": "Retour"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "notfound.title",
+        "text": {
+          "en": "Page not found",
+          "it": "Pagina non trovata",
+          "fr": "Page non trouvée"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "notfound.abstract",
+        "text": {
+          "en": "The page you are looking for does not exist.",
+          "it": "La pagina che stai cercando non esiste.",
+          "fr": "La page que vous recherchez n'existe pas."
+        },
+        "schema": "label"
+      }
+    ]
+  },
   "market": {
     "singularName": "market",
     "pluralName": "markets",

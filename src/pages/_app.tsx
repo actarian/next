@@ -1,12 +1,18 @@
 // import App from 'next/app'
 import { CssBaseline, GeistProvider } from '@geist-ui/core';
+import LabelProvider from '@models/label/label.provider';
+import { ILayout } from '@models/layout/layout';
+import LayoutProvider from '@models/layout/layout.provider';
+import { IPage } from '@models/page/page';
+import PageProvider from '@models/page/page.provider';
+import { IRouteParams } from '@models/route/route';
 // import Router from 'next/router';
 // import { useEffect } from "react";
 import '../styles/styles.scss';
 
 // let count = 0;
 
-export default function CustomApp({ Component, pageProps }) {
+export default function CustomApp({ Component, pageProps }: CustomAppProps) {
   // const router = useRouter();
   // console.log('Component', Component);
   // console.log('pageProps', pageProps);
@@ -31,12 +37,30 @@ export default function CustomApp({ Component, pageProps }) {
   }, []);
   */
 
+  const { layout, page } = pageProps;
+
   return (
-    <GeistProvider themeType="dark">
-      <CssBaseline />
-      <Component {...pageProps} />
-    </GeistProvider>
+    <LayoutProvider layout={layout}>
+      <LabelProvider>
+        <PageProvider page={page}>
+          <GeistProvider themeType="dark">
+            <CssBaseline />
+            <Component {...pageProps} />
+          </GeistProvider>
+        </PageProvider>
+      </LabelProvider>
+    </LayoutProvider>
   );
+}
+
+export type CustomAppProps = {
+  Component: any;
+  pageProps: {
+    layout: ILayout,
+    page: IPage,
+    params: IRouteParams,
+    [key: string]: any
+  };
 }
 
 // Only uncomment this method if you have blocking data requirements for

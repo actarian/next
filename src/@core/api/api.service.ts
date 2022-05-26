@@ -14,30 +14,30 @@ const defaultOptions: FetchRequestOptions = {
 
 // typeof eval === 'function' ? defaultOptions.mode = 'cors' : null;
 
-export async function apiFetch(pathname, options: any = {}) {
+export async function apiFetch(pathname: string, options: FetchRequestOptions = {}): Promise<any> {
   const url = `${URL}${API}${pathname}`;
   const apiOptions = merge({ ...defaultOptions }, options);
   const apiResponse = await httpFetch(url, apiOptions);
   return apiResponse;
 }
 
-export async function apiGet(url, options = {}) {
+export async function apiGet(url: string, options: FetchRequestOptions = {}): Promise<any> {
   return await apiFetch(url, { ...options, method: 'GET' });
 }
 
-export async function apiPost(url, payload, options = {}) {
+export async function apiPost(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await apiFetch(url, { ...options, method: 'POST', body: JSON.stringify(payload) });
 }
 
-export async function apiPut(url, payload, options = {}) {
+export async function apiPut(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await apiFetch(url, { ...options, method: 'PUT', body: JSON.stringify(payload) });
 }
 
-export async function apiPatch(url, payload, options = {}) {
+export async function apiPatch(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await apiFetch(url, { ...options, method: 'PATCH', body: JSON.stringify(payload) });
 }
 
-export async function apiDelete(url, options = {}) {
+export async function apiDelete(url: string, options: FetchRequestOptions = {}): Promise<any> {
   return await apiFetch(url, { ...options, method: 'DELETE' });
 }
 

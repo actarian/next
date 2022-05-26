@@ -4,4 +4,5 @@ export const PAGES = {
   about: (route) => `/${route.market}/${route.locale}/about/${route.pageId}`,
   product_index: (route) => `/${route.market}/${route.locale}/product_index/${route.pageId}`,
   product: (route) => `/${route.market}/${route.locale}/product/${route.pageId}`, // '/product/:id' // !!!
+  notfound: (route) => `/${route.market}/${route.locale}/notfound/${route.pageId}`,
 };

@@ -4,14 +4,16 @@ import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { PageLayout, PageParams } from '@models/page/page';
+import { ILayout } from '@models/layout/layout';
+import { IPage } from '@models/page/page';
+import { IRouteParams } from '@models/route/route';
 import { store } from '@models/store';
 import { P } from '@pipes/pipes';
 import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
-export default function ProductPage({ page, params }: ProductPageProps) {
+export default function ProductPage({ layout, page, params }: ProductPageProps) {
   /*
   const router = useRouter()
   const { id } = router.query;
@@ -22,7 +24,7 @@ export default function ProductPage({ page, params }: ProductPageProps) {
   // console.log('Product', page.description);
   return (
     <>
-      <Layout page={page}>
+      <Layout>
 
         <Breadcrumb items={page.breadcrumb} />
 
@@ -58,17 +60,19 @@ export default function ProductPage({ page, params }: ProductPageProps) {
 }
 
 export interface ProductPageProps extends PageType {
-  page: PageLayout;
-  params: PageParams;
+  layout: ILayout;
+  page: IPage;
+  params: IRouteParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await store.getPageLayout('product', id, market, locale);
+  const layout = await store.getLayout(market, locale);
+  const page = await store.getPage('product', id, market, locale);
   // console.log('Product getStaticProps', id);
-  const props = asStaticProps({ ...context, page });
+  const props = asStaticProps({ ...context, layout, page });
   // console.log('Product getStaticProps', props);
   return {
     props,

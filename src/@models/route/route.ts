@@ -5,7 +5,7 @@ import { PAGES } from '../../pages';
 
 export type SchemaType = keyof typeof PAGES;
 
-export interface Route {
+export interface IRoute {
   href: string;
   market: string;
   locale: string;
@@ -13,14 +13,21 @@ export interface Route {
   pageId: IEquatable;
 }
 
-export interface RouteLink {
+export interface IRouteLink {
   href?: string;
   title?: string;
   categoryId?: IEquatable;
-  items: RouteLink[];
+  items: IRouteLink[];
 }
 
-interface RouteRequest extends NextApiRequest {
+export interface IRouteParams {
+  id: IEquatable,
+  market: string,
+  locale: string,
+  [key: string]: any,
+}
+
+interface IRouteRequest extends NextApiRequest {
   query: {
     href: string
   }

@@ -1,6 +1,6 @@
 import { IEquatable } from '@core/entity/entity';
 
-export interface Market {
+export interface IMarket {
   id: IEquatable;
   schema?: string;
   code?: string;

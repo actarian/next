@@ -24,7 +24,7 @@ const API_MOCK = process.env.NEXT_PUBLIC_API_MOCK || false;
 const dataSrc = './data/data.json';
 
 export async function BuildAndWatch() {
-  console.log('BuildAndWatch');
+  console.log('MockBuild.BuildAndWatch');
   await readStore(dataSrc);
   fs.watchFile(dataSrc, { interval: 2000 }, async (current, previous) => {
     await readStore(dataSrc);
@@ -39,9 +39,9 @@ async function readStore(pathname): Promise<SerializedStore> {
   // const pathname = path.join(process.cwd(), 'data', 'data.json');
   // const pathname = pathJoin('data', 'data.json'); // !!! not working
   const json = await fsReadJson(pathname);
-  console.log('readStore');
+  console.log('MockBuild.readStore');
   const store = await buildStore(json);
-  console.log('buildStore');
+  console.log('MockBuild.buildStore');
   const outname = path.join(process.cwd(), 'data', 'store', `store.json`);
   await fsWriteJson(outname, store);
   return store;
@@ -68,8 +68,12 @@ function getPageService(store: SerializedStore): SerializedCollection {
   const pages = [];
   for (const key of keys) {
     const collection = store[key];
-    const items = collection.items as ICategorized[];
-    pages.push(...items);
+    if (collection) {
+      const items = collection.items as ICategorized[];
+      pages.push(...items);
+    } else {
+      console.warn(`MockBuild.getPageService.collection not found [${key}]`);
+    }
   }
   // console.log('pages', pages);
   const pageCollection = remapCollection('page');
@@ -90,46 +94,50 @@ function getRouteService(store: SerializedStore): SerializedCollection {
       languages: x.languages || languages,
     }));
     const collection = store[key];
-    const items = collection.items;
-    for (let item of items) {
-      const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
-      let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
-      availableMarkets.forEach(m => {
-        m.languages.forEach(l => {
+    if (collection) {
+      const items = collection.items;
+      for (let item of items) {
+        const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
+        let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
+        availableMarkets.forEach(m => {
+          m.languages.forEach(l => {
 
-          const href = categoryTree.reduce((p, c, i) => {
-            // !!! page.slug || category.slug
-            let slug = c.slug;
-            if (isLocalizedString(slug)) {
-              slug = localizedToString(slug, l);
-            }
-            slug = `${p}/${slug}`;
-            return slug === '/' ? '' : slug;
-          }, '');
-          // console.log('href', href);
+            const href = categoryTree.reduce((p, c, i) => {
+              // !!! page.slug || category.slug
+              let slug = c.slug;
+              if (isLocalizedString(slug)) {
+                slug = localizedToString(slug, l);
+              }
+              slug = `${p}/${slug}`;
+              return slug === '/' ? '' : slug;
+            }, '');
+            // console.log('href', href);
 
-          const route = {
-            href: `/${m.id}/${l}${href}`,
-            market: m.id,
-            locale: l,
+            const route = {
+              href: `/${m.id}/${l}${href}`,
+              market: m.id,
+              locale: l,
+              pageSchema: key,
+              pageId: item.id,
+            };
+            // console.log(route.href);
+            routes.push(route);
+          });
+        });
+        if (key === 'homepage') {
+          const defaultMarket = markets[0].id;
+          const defaultLocale = markets[0].languages[0];
+          routes.push({
+            href: `/`,
+            market: defaultMarket,
+            locale: defaultLocale,
             pageSchema: key,
             pageId: item.id,
-          };
-          // console.log(route.href);
-          routes.push(route);
-        });
-      });
-      if (key === 'homepage') {
-        const defaultMarket = markets[0].id;
-        const defaultLocale = markets[0].languages[0];
-        routes.push({
-          href: `/`,
-          market: defaultMarket,
-          locale: defaultLocale,
-          pageSchema: key,
-          pageId: item.id,
-        });
+          });
+        }
       }
+    } else {
+      console.warn(`MockBuild.getRouteService.collection not found [${key}]`);
     }
   }
   // console.log('routes', routes);
@@ -187,7 +195,7 @@ async function addType(items, c, collections: CollectionDescription[]): Promise<
   const type = `
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface ${c.displayName} {
+export interface I${c.displayName} {
   ${keys.map(key => `${key}${optionalKeys.indexOf(key) !== -1 ? '?' : ''}: ${types[key].join(' | ')};`).join('\n  ')}
 }
 `;

@@ -3,29 +3,33 @@ import Header from '@components/header/header';
 import Main from '@components/main/main';
 import Meta from '@components/meta/meta';
 import { Page } from '@geist-ui/core';
-import { PageLayout } from '@models/page/page';
 import React, { ReactNode } from 'react';
 
-export default function Layout({ page, children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
+
+  // console.log('pageContext', pageContext);
+
   return (
     <>
-      <Meta page={page} />
+      <Meta />
       <Page width="1024px" style={{ maxWidth: 'calc(100vw - 40px)', margin: '0 auto' }} padding={0}>
         <Page.Header>
-          <Header page={page}></Header>
+          <Header></Header>
         </Page.Header>
         <Page.Content>
           <Main>{children}</Main>
         </Page.Content>
+        { /*
         <Page.Footer>
-          <Footer />
+          <Footer page={page} />
         </Page.Footer>
+        */ }
+        <Footer />
       </Page>
     </>
   )
 }
 
 export interface LayoutProps {
-  page: PageLayout;
   children: ReactNode;
 }

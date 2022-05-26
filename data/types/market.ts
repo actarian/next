@@ -1,7 +1,7 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface Market {
+export interface IMarket {
   id: IEquatable;
   schema: string;
   code: string;

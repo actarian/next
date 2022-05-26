@@ -1,8 +1,8 @@
 import { FindParams, ILocalizedString } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { Locale } from './locale';
+import { ILocale } from './locale';
 
-export async function getLocales(params: FindParams = {}): Promise<Locale[]> {
+export async function getLocales(params: FindParams = {}): Promise<ILocale[]> {
   const store = await getStore();
   const items: any = await store.locale.findMany(params); // !!! any
   return items;
@@ -26,18 +26,21 @@ export function localizedToString(json: ILocalizedString, locale: string = 'en',
   return localizedString;
 }
 
+export function localizeValue(value: any, locale: string = 'en', defaultLocale: string = 'en'): any {
+  if (value) {
+    if (isLocalizedString(value)) {
+      return localizedToString(value, locale, defaultLocale);
+    } else {
+      return localizeItem(value, locale, defaultLocale);
+    }
+  }
+}
+
 export function localizeItem(item: any, locale: string = 'en', defaultLocale: string = 'en'): any {
   if (!Array.isArray(item) && typeof item === 'object') {
     item = { ...item };
     Object.keys(item).forEach(key => {
-      const value = item[key];
-      if (value) {
-        if (isLocalizedString(value)) {
-          item[key] = localizedToString(value, locale, defaultLocale);
-        } else {
-          item[key] = localizeItem(value, locale, defaultLocale);
-        }
-      }
+      item[key] = localizeValue(item[key], locale, defaultLocale);
     });
   }
   return item;

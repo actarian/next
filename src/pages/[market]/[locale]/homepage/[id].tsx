@@ -3,7 +3,9 @@ import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { PageLayout, PageParams } from '@models/page/page';
+import { ILayout } from '@models/layout/layout';
+import { IPage } from '@models/page/page';
+import { IRouteParams } from '@models/route/route';
 import { store } from '@models/store';
 import React from 'react';
 import { PageType } from 'types';
@@ -11,7 +13,7 @@ import { PageType } from 'types';
 const githubRepoUrl = 'https://github.com/actarian/next';
 const documentationUrl = 'https://geist-ui.dev/en-us/guide/colors';
 
-export default function Homepage({ page, params }: HomepageProps) {
+export default function Homepage({ layout, page, params }: HomepageProps) {
   if (!page) {
     return;
   }
@@ -31,7 +33,7 @@ export default function Homepage({ page, params }: HomepageProps) {
     <>
       <Banner />
 
-      <Layout page={page}>
+      <Layout>
 
         <Breadcrumb items={page.breadcrumb} />
 
@@ -61,16 +63,18 @@ export default function Homepage({ page, params }: HomepageProps) {
 }
 
 export interface HomepageProps extends PageType {
-  page: PageLayout;
-  params: PageParams;
+  layout: ILayout;
+  page: IPage;
+  params: IRouteParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const page = await store.getPageLayout('homepage', id, market, locale);
-  const props = asStaticProps({ ...context, page });
+  const layout = await store.getLayout(market, locale);
+  const page = await store.getPage('homepage', id, market, locale);
+  const props = asStaticProps({ ...context, layout, page });
   // console.log('Homepage getStaticProps', props, context);
   return {
     props,

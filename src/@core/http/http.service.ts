@@ -14,7 +14,7 @@ const defaultOptions: FetchRequestOptions = {
   // body: JSON.stringify(data) // body data type must match 'Content-Type' header
 };
 
-export async function httpFetch(url, options: FetchRequestOptions = {}) {
+export async function httpFetch(url: string, options: FetchRequestOptions = {}): Promise<any> {
   // console.log('httpFetch', url, options);
   const httpOptions = merge({ ...defaultOptions }, options);
   const httpResponse = await fetch(url, httpOptions);
@@ -35,27 +35,25 @@ export async function httpFetch(url, options: FetchRequestOptions = {}) {
   */
 }
 
-export async function httpGet(url, options = {}) {
+export async function httpGet(url: string, options: FetchRequestOptions = {}): Promise<any> {
   return await httpFetch(url, { ...options, method: 'GET' });
 }
 
-export async function httpPost(url, payload, options = {}) {
+export async function httpPost(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await httpFetch(url, { ...options, method: 'POST', body: JSON.stringify(payload) });
 }
 
-export async function httpPut(url, payload, options = {}) {
+export async function httpPut(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await httpFetch(url, { ...options, method: 'PUT', body: JSON.stringify(payload) });
 }
 
-export async function httpPatch(url, payload, options = {}) {
+export async function httpPatch(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
   return await httpFetch(url, { ...options, method: 'PATCH', body: JSON.stringify(payload) });
 }
 
-export async function httpDelete(url, options = {}) {
+export async function httpDelete(url: string, options: FetchRequestOptions = {}): Promise<any> {
   return await httpFetch(url, { ...options, method: 'DELETE' });
 }
-
-
 
 export type FetchRequestOptions = {
   method?: string;
@@ -93,3 +91,5 @@ export type FetchRequestOptions = {
   signal?: AbortSignal;
   // An AbortSignal object instance; allows you to communicate with a fetch request and abort it if desired via an AbortController.
 }
+
+export type FetchService = (url: string, options?: FetchRequestOptions) => Promise<any>;

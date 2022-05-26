@@ -1,6 +1,6 @@
 import { IEquatable } from '@core/entity/entity';
 
-export interface Product {
+export interface IProduct {
   id: IEquatable;
   slug: string;
   title: string;

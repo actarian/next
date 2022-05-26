@@ -1,12 +1,14 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
-import { Locale } from '@models/locale/locale';
-import { Market } from '@models/market/market';
-import { RouteLink } from '@models/route/route';
+import { ILabel } from '@models/label/label';
+import { ILocale } from '@models/locale/locale';
+import { IMarket } from '@models/market/market';
+import { IRouteLink } from '@models/route/route';
 
-export interface Layout {
+export interface ILayout {
   market: string;
   locale: string;
-  markets: Market[];
-  locales: Locale[];
-  tree: RouteLink;
+  markets: IMarket[];
+  locales: ILocale[];
+  labels: ILabel[];
+  tree: IRouteLink;
 }

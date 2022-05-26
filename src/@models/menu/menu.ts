@@ -1,11 +1,11 @@
 import { IEquatable } from '@core/entity/entity';
 
-export interface Menu {
+export interface IMenu {
   id: IEquatable;
-  items: MenuItem[];
+  items: IMenuItem[];
 }
 
-export interface MenuItem {
+export interface IMenuItem {
   name: string;
   href: string;
 }

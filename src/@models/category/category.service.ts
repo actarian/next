@@ -1,20 +1,20 @@
 import { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { Category, ICategorized } from './category';
+import { ICategorized, ICategory } from './category';
 
-export async function getCategories(params: FindParams = {}): Promise<Category[]> {
+export async function getCategories(params: FindParams = {}): Promise<ICategory[]> {
   const store = await getStore();
   const categories: any = await store.category.findMany(params); // !!! any
   return categories;
 }
 
-export async function getCategoryTree(item: ICategorized, params: FindParams = {}): Promise<Category[]> {
-  const categories: Category[] = await getCategories(params);
+export async function getCategoryTree(item: ICategorized, params: FindParams = {}): Promise<ICategory[]> {
+  const categories: ICategory[] = await getCategories(params);
   return getCategoryTreeWithCategories(item, categories);
 }
 
-export function getCategoryTreeWithCategories(item: ICategorized, categories: Category[]): Category[] {
-  const categoryTree: Category[] = [];
+export function getCategoryTreeWithCategories(item: ICategorized, categories: ICategory[]): ICategory[] {
+  const categoryTree: ICategory[] = [];
   let categoryId = item.categoryId || null;
   let skipLast = false;
   while (categoryId != null) { // !!! loose

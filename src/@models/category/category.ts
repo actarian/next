@@ -1,6 +1,6 @@
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface Category {
+export interface ICategory {
   id: IEquatable;
   name: string;
   title?: ILocalizedString | string;
@@ -10,8 +10,8 @@ export interface Category {
   pageId?: IEquatable;
 }
 
-export interface CategoryItem extends Category {
-  items: Category[];
+export interface ICategoryItem extends ICategory {
+  items: ICategory[];
 }
 
 export interface ICategorized {

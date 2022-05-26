@@ -2,11 +2,11 @@ import { apiPost } from '@core/api/api.service';
 import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { Route } from './route';
+import { IRoute } from './route';
 
 export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;
-  let route: Route = null;
+  let route: IRoute = null;
   // const pathname = url.pathname;
   // const { market, language, pathname } = decompose(url.pathname);
   try {

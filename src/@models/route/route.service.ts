@@ -1,17 +1,17 @@
 import { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { Category } from '@models/category/category';
+import { ICategory } from '@models/category/category';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
 // import { parseMockApi } from '@core/mock/mock.server';
-import { Route, RouteLink } from './route';
+import { IRoute, IRouteLink } from './route';
 
-export async function getRoutes(params: FindParams = {}): Promise<Route[]> {
+export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
   const store = await getStore();
   const routes: any[] = await store.route.findMany(params); // !!! any
   return routes;
 }
 
-export async function getRoute(href: string): Promise<Route | null> {
+export async function getRoute(href: string): Promise<IRoute | null> {
   const store = await getStore();
   const routes = await store.route.findMany();
   const route: any = routes.find(x => x.href === href) || null; // !!! any
@@ -31,8 +31,8 @@ export async function decorateHref(item: any, market: string = 'ww', locale: str
   return { ...item, href };
 }
 
-export async function getBreadcrumbFromCategoryTree(categoryTree: Category[], market: string = 'ww', locale: string = 'en'): Promise<RouteLink[]> {
-  const routes: Route[] = await getRoutes({ where: { market, locale } });
+export async function getBreadcrumbFromCategoryTree(categoryTree: ICategory[], market: string = 'ww', locale: string = 'en'): Promise<IRouteLink[]> {
+  const routes: IRoute[] = await getRoutes({ where: { market, locale } });
   return categoryTree.map(x => {
     const route = x.pageSchema && x.pageId ? routes.find(r =>
       r.pageSchema === x.pageSchema &&
@@ -52,10 +52,10 @@ export async function getBreadcrumbFromCategoryTree(categoryTree: Category[], ma
   });
 }
 
-export async function getRouteLinkTree(market: string = 'ww', locale: string = 'en'): Promise<RouteLink> {
+export async function getRouteLinkTree(market: string = 'ww', locale: string = 'en'): Promise<IRouteLink> {
   const store = await getStore();
-  const routes: Route[] = await store.route.findMany() as any[];
-  const categories: Category[] = await store.category.findMany() as any[];
+  const routes: IRoute[] = await store.route.findMany() as any[];
+  const categories: ICategory[] = await store.category.findMany() as any[];
   // console.log(categories);
   /*
   const routes: Route[] = await getRoutes();
@@ -69,11 +69,11 @@ export async function getRouteLinkTree(market: string = 'ww', locale: string = '
   }
 }
 
-export function getChildCategories(routes: Route[], categories: Category[], category: Category, market: string = 'ww', locale: string = 'en'): RouteLink[] {
+export function getChildCategories(routes: IRoute[], categories: ICategory[], category: ICategory, market: string = 'ww', locale: string = 'en'): IRouteLink[] {
   return categories.filter(x => x.categoryId === category.id).map(x => categoryToRouteLink(routes, categories, x, market, locale));
 }
 
-export function categoryToRouteLink(routes: Route[], categories: Category[], category: Category, market: string = 'ww', locale: string = 'en'): RouteLink {
+export function categoryToRouteLink(routes: IRoute[], categories: ICategory[], category: ICategory, market: string = 'ww', locale: string = 'en'): IRouteLink {
   const route = category.pageSchema && category.pageId ? routes.find(r =>
     r.pageSchema === category.pageSchema &&
     r.pageId === category.pageId &&

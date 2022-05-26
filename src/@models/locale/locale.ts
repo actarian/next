@@ -1,6 +1,6 @@
 import { IEquatable } from '@core/entity/entity';
 
-export interface Locale {
+export interface ILocale {
   id: IEquatable;
   schema?: string;
   code?: string;

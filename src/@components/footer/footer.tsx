@@ -1,9 +1,33 @@
+import { useLayout } from '@hooks/useLayout/useLayout';
+import { IRouteLink } from '@models/route/route';
+import NextLink from 'next/link';
 import styles from './footer.module.scss';
 
 export default function Footer() {
+
+  const layout = useLayout();
+
+  const items = layout.tree ? layout.tree.items : [];
   return (
-    <footer className={styles.footer}>
-      footer
-    </footer>
+    <div className={styles.footer}>
+      {items && <FooterMenu items={items} />}
+    </div>
   )
+}
+
+function FooterMenu({ items }: any) {
+  return (
+    <ul>
+      {items && items.map((item, i) => (
+        <li key={`${item.title}-${i}`}>
+          {item.href ? <NextLink href={item.href}>{item.title}</NextLink> : item.title}
+          {(item.items && item.items.length ? <FooterMenu items={item.items} /> : null)}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export interface FooterMenuProps {
+  items: IRouteLink[];
 }

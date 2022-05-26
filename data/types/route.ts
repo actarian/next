@@ -1,7 +1,7 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface Route {
+export interface IRoute {
   href: string;
   market: string;
   locale: string;
