@@ -1,7 +1,7 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface IPage {
+export type IPage = {
   id: IEquatable;
   schema: string;
   slug: string | ILocalizedString;
@@ -12,4 +12,4 @@ export interface IPage {
   categoryId: IEquatable;
   meta: any;
   price?: number;
-}
+};

@@ -517,14 +517,12 @@
       {
         "id": "ww",
         "schema": "market",
-        "code": "ww",
         "title": "International",
         "isDefault": true
       },
       {
         "id": "eu",
         "schema": "market",
-        "code": "eu",
         "title": "Europe",
         "countries": [
           "it",
@@ -545,20 +543,17 @@
       {
         "id": "en",
         "schema": "locale",
-        "code": "en",
         "title": "English",
         "isDefault": true
       },
       {
         "id": "it",
         "schema": "locale",
-        "code": "it",
         "title": "Italiano"
       },
       {
         "id": "fr",
         "schema": "locale",
-        "code": "fr",
         "title": "Français"
       }
     ]
@@ -571,19 +566,16 @@
       {
         "id": "us",
         "schema": "country",
-        "code": "us",
         "title": "United States"
       },
       {
         "id": "it",
         "schema": "country",
-        "code": "it",
         "title": "Italy"
       },
       {
         "id": "fr",
         "schema": "country",
-        "code": "fr",
         "title": "France"
       }
     ]
@@ -867,254 +859,254 @@
     "displayName": "Route",
     "items": [
       {
-        "href": "/ww/en",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/ww/it",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/ww/fr",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/eu/it",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/eu/fr",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/",
-        "market": "ww",
-        "locale": "en",
+        "id": "/",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "homepage",
         "pageId": 1
       },
       {
-        "href": "/ww/en/who-we-are",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/who-we-are",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "about",
         "pageId": 1
       },
       {
-        "href": "/ww/it/chi-siamo",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/chi-siamo",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "about",
         "pageId": 1
       },
       {
-        "href": "/ww/fr/qui-nous-sommes",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/qui-nous-sommes",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "about",
         "pageId": 1
       },
       {
-        "href": "/eu/it/chi-siamo",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/chi-siamo",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "about",
         "pageId": 1
       },
       {
-        "href": "/eu/fr/qui-nous-sommes",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/qui-nous-sommes",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "about",
         "pageId": 1
       },
       {
-        "href": "/ww/en/products",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/products",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "product_index",
         "pageId": 1
       },
       {
-        "href": "/ww/it/prodotti",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/prodotti",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "product_index",
         "pageId": 1
       },
       {
-        "href": "/ww/fr/produits",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/produits",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "product_index",
         "pageId": 1
       },
       {
-        "href": "/eu/it/prodotti",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/prodotti",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "product_index",
         "pageId": 1
       },
       {
-        "href": "/eu/fr/produits",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/produits",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "product_index",
         "pageId": 1
       },
       {
-        "href": "/ww/en/products/apparel/menswear/t-shirts/t-shirt",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/products/apparel/menswear/t-shirts/t-shirt",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "product",
         "pageId": 1
       },
       {
-        "href": "/ww/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 1
       },
       {
-        "href": "/ww/fr/produits/vetements/homme/t-shirts/t-shirt",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/produits/vetements/homme/t-shirts/t-shirt",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 1
       },
       {
-        "href": "/eu/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 1
       },
       {
-        "href": "/eu/fr/produits/vetements/homme/t-shirts/t-shirt",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/produits/vetements/homme/t-shirts/t-shirt",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 1
       },
       {
-        "href": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "product",
         "pageId": 2
       },
       {
-        "href": "/ww/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 2
       },
       {
-        "href": "/ww/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 2
       },
       {
-        "href": "/eu/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 2
       },
       {
-        "href": "/eu/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 2
       },
       {
-        "href": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "product",
         "pageId": 3
       },
       {
-        "href": "/ww/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 3
       },
       {
-        "href": "/ww/fr/produits/vetements/homme/vestes/veste-legere",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/produits/vetements/homme/vestes/veste-legere",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 3
       },
       {
-        "href": "/eu/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 3
       },
       {
-        "href": "/eu/fr/produits/vetements/homme/vestes/veste-legere",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/produits/vetements/homme/vestes/veste-legere",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 3
       },
       {
-        "href": "/ww/en/products/apparel/menswear/hats/black-beanie",
-        "market": "ww",
-        "locale": "en",
+        "id": "/ww/en/products/apparel/menswear/hats/black-beanie",
+        "marketId": "ww",
+        "localeId": "en",
         "pageSchema": "product",
         "pageId": 4
       },
       {
-        "href": "/ww/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
-        "market": "ww",
-        "locale": "it",
+        "id": "/ww/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
+        "marketId": "ww",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 4
       },
       {
-        "href": "/ww/fr/produits/vetements/homme/chapeaux/bonnet-noir",
-        "market": "ww",
-        "locale": "fr",
+        "id": "/ww/fr/produits/vetements/homme/chapeaux/bonnet-noir",
+        "marketId": "ww",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 4
       },
       {
-        "href": "/eu/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
-        "market": "eu",
-        "locale": "it",
+        "id": "/eu/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
+        "marketId": "eu",
+        "localeId": "it",
         "pageSchema": "product",
         "pageId": 4
       },
       {
-        "href": "/eu/fr/produits/vetements/homme/chapeaux/bonnet-noir",
-        "market": "eu",
-        "locale": "fr",
+        "id": "/eu/fr/produits/vetements/homme/chapeaux/bonnet-noir",
+        "marketId": "eu",
+        "localeId": "fr",
         "pageSchema": "product",
         "pageId": 4
       }

@@ -1,9 +1,8 @@
 import { IEquatable } from '@core/entity/entity';
 
 export interface IMarket {
-  id: IEquatable;
+  id: string;
   schema?: string;
-  code?: string;
   title?: string;
   isDefault?: boolean;
   countries?: IEquatable[];

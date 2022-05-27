@@ -1,9 +1,8 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface ICountry {
+export type ICountry = {
   id: IEquatable;
   schema: string;
-  code: string;
   title: string;
-}
+};

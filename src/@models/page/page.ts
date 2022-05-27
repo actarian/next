@@ -1,7 +1,7 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
 import { IEquatable } from '@core/entity/entity';
 import { ILayout } from '@models/layout/layout';
-import { IRoute, IRouteLink, SchemaType } from '@models/route/route';
+import { IRoute, IRouteLink, IRouteParams, SchemaType } from '@models/route/route';
 
 export interface IMeta {
   title?: string;
@@ -40,3 +40,12 @@ export interface IPage {
 }
 
 export interface IPageLayout extends IPage, ILayout { }
+
+export type PageProps = {
+  layout: ILayout;
+  page: IPage;
+  params: IRouteParams;
+  locales?: string[];
+  locale?: string;
+  defaultLocale?: string;
+};

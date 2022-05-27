@@ -16,34 +16,28 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
       return;
     }
   } catch (error) {
-    console.log('routeInterceptor.error', url.pathname, error.status, error.statusText);
+    console.log('routeInterceptor.error', url.pathname, error);
     return;
   }
   // console.log('routeInterceptor.route.found', url.pathname, '->', route);
   url = request.nextUrl.clone();
   const resolvedPathname = resolveRoute(route);
+  // console.log('resolvedPathname', resolvedPathname);
   url.pathname = resolvedPathname;
   // url.pathname = `/${market}/${language}${resolvedPathname}`;
   // url.pathname = url.locale ? `/${url.locale}${resolvedPathname}` : resolvedPathname;
   // url.searchParams.set('market', market);
   // url.searchParams.set('language', language);
-  // console.log('routeInterceptor.route', route.pageSchema, route.pageId, route.market, route.locale);
+  // console.log('routeInterceptor.route', route.pageSchema, route.pageId, route.marketId, route.localeId);
   const response = NextResponse.rewrite(url);
   return response;
 }
 
+/*
 const defaultMarket = 'ww';
 const defaultLanguage = 'en';
 const markets = ['ww', 'eu'];
 const languages = ['en', 'it', 'fr'];
-
-const routeStrategies = {
-  None: 0,
-  Language: 1,
-  MarketLanguage: 2,
-}
-
-const routeStrategy = routeStrategies.MarketLanguage;
 
 function decompose(pathname: string) {
   const components = pathname.split('/');
@@ -65,3 +59,4 @@ function decompose(pathname: string) {
   }
   return { market, language, pathname };
 }
+*/

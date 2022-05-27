@@ -4,17 +4,18 @@ import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Grid } from '@geist-ui/core';
-import { ILayout } from '@models/layout/layout';
-import { IPage } from '@models/page/page';
+import { getLayout } from '@models/layout/layout.service';
+import { PageProps } from '@models/page/page';
+import { getPage } from '@models/page/page.service';
 import { IProduct } from '@models/product/product';
-import { IRouteParams } from '@models/route/route';
-import { store } from '@models/store';
-import { PageType } from 'types';
+import { getProducts } from '@models/product/product.service';
+import { getStaticPathsForSchema } from '@models/route/route.service';
 
-export default function Products({ layout, page, products, params }: ProductsPageProps) {
+export default function Products({ layout, page, products, params }: ProductsProps) {
   if (!page) {
     return;
   }
+
   return (
     <>
       <Layout>
@@ -40,20 +41,17 @@ export default function Products({ layout, page, products, params }: ProductsPag
   )
 }
 
-export interface ProductsPageProps extends PageType {
-  layout: ILayout;
-  page: IPage;
+export interface ProductsProps extends PageProps {
   products: IProduct[];
-  params: IRouteParams;
 }
 
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const layout = await store.getLayout(market, locale);
-  const page = await store.getPage('product_index', id, market, locale);
-  const products = await store.getProducts({ market, locale });
+  const layout = await getLayout(market, locale);
+  const page = await getPage('product_index', id, market, locale);
+  const products = await getProducts({ market, locale });
   const props = asStaticProps({ ...context, layout, page, products });
   // console.log('Products getStaticProps', props);
   return {
@@ -62,7 +60,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await store.getStaticPathsForSchema('product_index');
+  const paths = await getStaticPathsForSchema('product_index');
   return {
     paths,
     fallback: true,

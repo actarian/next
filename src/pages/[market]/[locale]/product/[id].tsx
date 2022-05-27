@@ -4,16 +4,15 @@ import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { ILayout } from '@models/layout/layout';
-import { IPage } from '@models/page/page';
-import { IRouteParams } from '@models/route/route';
-import { store } from '@models/store';
+import { getLayout } from '@models/layout/layout.service';
+import { PageProps } from '@models/page/page';
+import { getPage } from '@models/page/page.service';
+import { getStaticPathsForSchema } from '@models/route/route.service';
 import { P } from '@pipes/pipes';
-import { PageType } from 'types';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
-export default function ProductPage({ layout, page, params }: ProductPageProps) {
+export default function ProductPage({ layout, page, params }: PageProps) {
   /*
   const router = useRouter()
   const { id } = router.query;
@@ -59,18 +58,12 @@ export default function ProductPage({ layout, page, params }: ProductPageProps) 
   )
 }
 
-export interface ProductPageProps extends PageType {
-  layout: ILayout;
-  page: IPage;
-  params: IRouteParams;
-}
-
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const layout = await store.getLayout(market, locale);
-  const page = await store.getPage('product', id, market, locale);
+  const layout = await getLayout(market, locale);
+  const page = await getPage('product', id, market, locale);
   // console.log('Product getStaticProps', id);
   const props = asStaticProps({ ...context, layout, page });
   // console.log('Product getStaticProps', props);
@@ -81,7 +74,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await store.getStaticPathsForSchema('product');
+  const paths = await getStaticPathsForSchema('product');
   return {
     paths,
     fallback: true,

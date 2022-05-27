@@ -1,6 +1,6 @@
 import { apiHandler } from '@core/api/api.helper';
 import { resolveRoute } from '@core/utils';
-import { store } from '@models/store';
+import { getRoute } from '@models/route/route.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
@@ -15,7 +15,7 @@ export default apiHandler({
       { "id": 1, "schema": "product", "href": "/product/xxxx" }
       */
       const { href } = request.body;
-      const route = await store.getRoute(href);
+      const route = await getRoute(href);
       if (!route) {
         // console.log('route.notfound', href);
         return response.status(404).send('Route not found');

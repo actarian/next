@@ -1,13 +1,11 @@
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
-import { ILayout } from '@models/layout/layout';
-import { IPage } from '@models/page/page';
-import { store } from '@models/store';
+import { PageProps } from '@models/page/page';
+import { getErrorPageLayout } from '@models/page/page.service';
 import Head from 'next/head';
-import { PageType } from 'types';
 
-export default function Custom404({ layout, page, params }: Custom404Props) {
+export default function Custom404({ layout, page, params }: PageProps) {
   // console.log('Custom404.params', page, params);
   return (
     <>
@@ -24,13 +22,8 @@ export default function Custom404({ layout, page, params }: Custom404Props) {
   )
 }
 
-export interface Custom404Props extends PageType {
-  layout: ILayout;
-  page: IPage;
-}
-
 export async function getStaticProps(context) {
-  const { layout, page } = await store.getErrorPageLayout();
+  const { layout, page } = await getErrorPageLayout();
   // console.log('Custom404 getStaticProps', props);
   const props = asStaticProps({ ...context, layout, page });
   return {

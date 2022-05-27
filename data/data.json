@@ -245,14 +245,12 @@
     {
       "id": "ww",
       "schema": "market",
-      "code": "ww",
       "title": "International",
       "isDefault": true
     },
     {
       "id": "eu",
       "schema": "market",
-      "code": "eu",
       "title": "Europe",
       "countries": ["it", "fr"],
       "languages": ["it", "fr"]
@@ -262,20 +260,17 @@
     {
       "id": "en",
       "schema": "locale",
-      "code": "en",
       "title": "English",
       "isDefault": true
     },
     {
       "id": "it",
       "schema": "locale",
-      "code": "it",
       "title": "Italiano"
     },
     {
       "id": "fr",
       "schema": "locale",
-      "code": "fr",
       "title": "Français"
     }
   ],
@@ -283,19 +278,16 @@
     {
       "id": "us",
       "schema": "country",
-      "code": "us",
       "title": "United States"
     },
     {
       "id": "it",
       "schema": "country",
-      "code": "it",
       "title": "Italy"
     },
     {
       "id": "fr",
       "schema": "country",
-      "code": "fr",
       "title": "France"
     }
   ]

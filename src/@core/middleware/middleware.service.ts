@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import type { NextRequest } from 'next/server';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 
-export type Middleware = (request: NextApiRequest, response: NextApiResponse) => unknown;
+export type RouteMiddleware = (request: NextRequest, event: NextFetchEvent) => Promise<Response | undefined> | Response | undefined;
+
+export type ApiMiddleware = (request: NextApiRequest, response: NextApiResponse) => unknown;
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
@@ -21,11 +23,11 @@ export default function useApiMiddleware(middleware) {
  * @description combine multiple middleware before handling your API endpoint
  * @param middlewares
  */
-export function withApiMiddleware(...middlewares: Middleware[]) {
+export function withApiMiddleware(...middlewares: ApiMiddleware[]) {
 
   return async function withMiddlewareHandler(request: NextApiRequest, response: NextApiResponse) {
 
-    async function evaluateHandler(middleware: Middleware, innerMiddleware?: Middleware | undefined) {
+    async function evaluateHandler(middleware: ApiMiddleware, innerMiddleware?: ApiMiddleware | undefined) {
       // return early when the request has
       // been ended by a previous middleware
       if (response.headersSent) {

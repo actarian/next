@@ -1,16 +1,14 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
 import { IEquatable } from '@core/entity/entity';
-import { NextApiRequest } from 'next';
-import { PAGES } from '../../pages';
+import { PAGES } from 'types';
 
 export type SchemaType = keyof typeof PAGES;
 
 export interface IRoute {
-  id: IEquatable;
-  href: string;
-  market: string;
-  locale: string;
-  pageSchema: SchemaType;
+  id: string;
+  marketId: string;
+  localeId: string;
+  pageSchema: string;
   pageId: IEquatable;
 }
 
@@ -26,10 +24,4 @@ export interface IRouteParams {
   market: string,
   locale: string,
   [key: string]: any,
-}
-
-interface IRouteRequest extends NextApiRequest {
-  query: {
-    href: string
-  }
 }

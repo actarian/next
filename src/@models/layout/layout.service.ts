@@ -1,15 +1,18 @@
 import { ILabel } from '@models/label/label';
+import { getLabels } from '@models/label/label.service';
 import { ILocale } from '@models/locale/locale';
+import { getLocales } from '@models/locale/locale.service';
 import { IMarket } from '@models/market/market';
-import { store } from '@models/store';
+import { getMarkets } from '@models/market/market.service';
+import { getRouteLinkTree } from '@models/route/route.service';
 import { ILayout } from './layout';
 
 export async function getLayout(market?: string, locale?: string): Promise<ILayout | null> {
   // const store = await getStore();
-  const markets: IMarket[] = await store.getMarkets({ locale });
-  const locales: ILocale[] = await store.getLocales({ locale });
-  const labels: ILabel[] = await store.getLabels({ locale });
-  const tree = await store.getRouteLinkTree(market, locale);
+  const markets: IMarket[] = await getMarkets({ locale });
+  const locales: ILocale[] = await getLocales({ locale });
+  const labels: ILabel[] = await getLabels({ locale });
+  const tree = await getRouteLinkTree(market, locale);
   // console.log('getLayout', market, locale);
   return {
     markets,

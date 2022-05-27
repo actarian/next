@@ -1,9 +1,13 @@
-import { getApiStore } from '@core/api/api.store';
 import { getMockStore } from '@core/mock/mock.store';
-import { AppStore } from 'src/entities';
-
-const API_MOCK = (process.env.NEXT_PUBLIC_API_MOCK === 'true') || false;
+import { getApiStore } from '@core/store-api/store-api.store';
+import { AppStore } from 'types';
+import { StoreStrategy, storeStrategy } from './store';
 
 export async function getStore(): Promise<AppStore> {
-  return API_MOCK ? getMockStore() : getApiStore();
+  switch (storeStrategy) {
+    case StoreStrategy.Api:
+      return getApiStore();
+    default:
+      return getMockStore();
+  }
 }

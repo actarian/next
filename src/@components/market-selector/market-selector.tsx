@@ -14,9 +14,9 @@ export function MarketSelector() {
 
   const getHref = useCallback((market, locale) => {
     const items = alternates || [];
-    const alternateItem = items.find(x => x.market === market && x.locale === locale);
+    const alternateItem = items.find(x => x.marketId === market && x.localeId === locale);
     if (alternateItem) {
-      return alternateItem.href;
+      return alternateItem.id.toString();
     } else {
       return `/${market}/${locale}`;
     }
@@ -30,7 +30,7 @@ export function MarketSelector() {
           <Spacer h={.5} />
           {item.locales && item.locales.map(locale => (
             <div key={`${locale.id}`}>
-              <Link href={getHref(item.id, locale.code)}>{locale.title}</Link>
+              <Link href={getHref(item.id, locale.id)}>{locale.title}</Link>
             </div>
           ))}
           <Spacer h={.5} />

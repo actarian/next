@@ -1,10 +1,10 @@
 import { apiHandler } from '@core/api/api.helper';
-import { store } from '@models/store';
+import { getProducts } from '@models/product/product.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
-    const data = await store.getProducts();
+    const data = await getProducts();
     if (data) {
       response.status(200).json(data);
     } else {

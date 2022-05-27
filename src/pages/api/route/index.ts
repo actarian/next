@@ -1,10 +1,10 @@
 import { apiHandler } from '@core/api/api.helper';
-import { store } from '@models/store';
+import { getRoute, getRoutes } from '@models/route/route.service';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
-    const data = await store.getRoutes();
+    const data = await getRoutes();
     if (data) {
       response.status(200).json(data);
     } else {
@@ -13,7 +13,7 @@ export default apiHandler({
   },
   post: async (request: NextApiRequest, response: NextApiResponse) => {
     const { href } = request.body;
-    const data = await store.getRoute(href);
+    const data = await getRoute(href);
     // console.log('route.apiHandler', href, '->', data);
     if (data) {
       response.status(200).json(data);

@@ -11,34 +11,33 @@ export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
   return routes;
 }
 
-export async function getRoute(href: string): Promise<IRoute | null> {
+export async function getRoute(id: string): Promise<IRoute | null> {
   const store = await getStore();
-  const routes = await store.route.findMany();
-  const route = routes.find(x => x.href === href) || null;
+  const route = await store.route.findOne(id);
   // console.log('getRoute', href, '->', route);
   return route;
 }
 
 export async function getStaticPathsForSchema(schema: string): Promise<StaticPath[]> {
   const store = await getStore();
-  const routes = await store.route.findMany();
-  return routes.filter(x => x.pageSchema === schema).map(x => ({ params: { id: x.pageId.toString(), market: x.market, locale: x.locale } }));
+  const routes = await store.route.findMany({ where: { pageSchema: schema } });
+  return routes.map(x => ({ params: { id: x.pageId.toString(), market: x.marketId, locale: x.localeId } }));
 }
 
 export async function decorateHref(item: any, market: string = 'ww', locale: string = 'en'): Promise<any> {
-  const routes = await getRoutes({ where: { pageSchema: item.schema, pageId: item.id, market, locale } });
-  const href = routes.length ? routes[0].href : null;
+  const routes = await getRoutes({ where: { pageSchema: item.schema, pageId: item.id, marketId: market, localeId: locale } });
+  const href = routes.length ? routes[0].id : null;
   return { ...item, href };
 }
 
 export async function getBreadcrumbFromCategoryTree(categoryTree: ICategory[], market: string = 'ww', locale: string = 'en'): Promise<IRouteLink[]> {
-  const routes: IRoute[] = await getRoutes({ where: { market, locale } });
+  const routes: IRoute[] = await getRoutes({ where: { marketId: market, localeId: locale } });
   return categoryTree.map(x => {
     const route = x.pageSchema && x.pageId ? routes.find(r =>
       r.pageSchema === x.pageSchema &&
       r.pageId === x.pageId
     ) : null;
-    const href = route ? route.href : null;
+    const href = route ? route.id.toString() : null;
     let title = x.title;
     if (isLocalizedString(title)) {
       title = localizedToString(title, locale);
@@ -77,10 +76,10 @@ export function categoryToRouteLink(routes: IRoute[], categories: ICategory[], c
   const route = category.pageSchema && category.pageId ? routes.find(r =>
     r.pageSchema === category.pageSchema &&
     r.pageId === category.pageId &&
-    r.market === market &&
-    r.locale === locale
+    r.marketId === market &&
+    r.localeId === locale
   ) : null;
-  const href = route ? route.href : null;
+  const href = route ? route.id.toString() : null;
   let title = category.title;
   if (isLocalizedString(title)) {
     title = localizedToString(title, locale);

@@ -2,13 +2,12 @@ import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
-import { ILayout } from '@models/layout/layout';
-import { IPage } from '@models/page/page';
-import { IRouteParams } from '@models/route/route';
-import { store } from '@models/store';
-import { PageType } from 'types';
+import { getLayout } from '@models/layout/layout.service';
+import { PageProps } from '@models/page/page';
+import { getPage } from '@models/page/page.service';
+import { getStaticPathsForSchema } from '@models/route/route.service';
 
-export default function About({ layout, page, params }: AboutProps) {
+export default function About({ layout, page, params }: PageProps) {
   if (!page) {
     return;
   }
@@ -25,18 +24,12 @@ export default function About({ layout, page, params }: AboutProps) {
   )
 }
 
-export interface AboutProps extends PageType {
-  layout: ILayout;
-  page: IPage;
-  params: IRouteParams;
-}
-
 export async function getStaticProps(context) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
-  const layout = await store.getLayout(market, locale);
-  const page = await store.getPage('about', id, market, locale);
+  const layout = await getLayout(market, locale);
+  const page = await getPage('about', id, market, locale);
   const props = asStaticProps({ ...context, layout, page });
   // console.log('About getStaticProps', props);
   return {
@@ -45,7 +38,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const paths = await store.getStaticPathsForSchema('about');
+  const paths = await getStaticPathsForSchema('about');
   return {
     paths,
     fallback: true,

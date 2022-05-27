@@ -20,3 +20,19 @@ export type SerializedCollection = {
 export type SerializedStore = {
   [key: string]: SerializedCollection;
 };
+
+export enum StoreStrategy {
+  Api = 'api',
+  Data = 'data',
+  Mock = 'mock',
+};
+
+function getStoreStrategy(): StoreStrategy {
+  let storeStrategy = StoreStrategy.Mock;
+  if (process && process.env.STORE_STRATEGY) {
+    storeStrategy = process.env.STORE_STRATEGY as StoreStrategy;
+  }
+  return storeStrategy;
+}
+
+export const storeStrategy: StoreStrategy = getStoreStrategy();

@@ -1,7 +1,7 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface IProduct_index {
+export type IProduct_index = {
   id: IEquatable;
   schema: string;
   slug: ILocalizedString;
@@ -10,4 +10,4 @@ export interface IProduct_index {
   description: ILocalizedString;
   categoryId: IEquatable;
   meta: any;
-}
+};

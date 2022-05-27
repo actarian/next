@@ -12,7 +12,8 @@ import { awaitAll } from '@core/utils';
 import { ICategorized } from '@models/category/category';
 import { getCategoryTreeWithCategories } from '@models/category/category.service';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
-import { PAGES } from '../../pages';
+import { IRoute } from '@models/route/route';
+import { PAGES } from 'types';
 
 if (process.env && process.env.NODE_ENV) {
   dotenv.config({ path: '.env.' + process.env.NODE_ENV });
@@ -83,6 +84,16 @@ function getPageService(store: SerializedStore): SerializedCollection {
   return pageService;
 }
 
+function getRoute(href: string, marketId: string, localeId: string, pageSchema: string, pageId: string): IRoute {
+  return {
+    id: href,
+    marketId,
+    localeId,
+    pageSchema,
+    pageId,
+  }
+}
+
 function getRouteService(store: SerializedStore): SerializedCollection {
   const keys = Object.keys(PAGES);
   const routes = [];
@@ -112,27 +123,15 @@ function getRouteService(store: SerializedStore): SerializedCollection {
             }, '');
             // console.log('href', href);
 
-            const route = {
-              href: `/${m.id}/${l}${href}`,
-              market: m.id,
-              locale: l,
-              pageSchema: key,
-              pageId: item.id,
-            };
-            // console.log(route.href);
+            const route = getRoute(`/${m.id}/${l}${href}`, m.id, l, key, item.id);
             routes.push(route);
           });
         });
         if (key === 'homepage') {
           const defaultMarket = markets[0].id;
           const defaultLocale = markets[0].languages[0];
-          routes.push({
-            href: `/`,
-            market: defaultMarket,
-            locale: defaultLocale,
-            pageSchema: key,
-            pageId: item.id,
-          });
+          const route = getRoute(`/`, defaultMarket, defaultLocale, key, item.id);
+          routes.push(route);
         }
       }
     } else {
@@ -194,9 +193,9 @@ async function addType(items, c, collections: CollectionDescription[]): Promise<
   const type = `
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface I${c.displayName} {
+export type I${c.displayName} = {
   ${keys.map(key => `${key}${optionalKeys.indexOf(key) !== -1 ? '?' : ''}: ${types[key].join(' | ')};`).join('\n  ')}
-}
+};
 `;
   // console.log(type);
   const pathname = path.join(process.cwd(), 'data', 'types', `${c.singularName}.ts`);

@@ -1,11 +1,10 @@
 import { isExistingApiRoute } from '@core/middleware/middleware.service';
+import { StoreStrategy, storeStrategy } from '@core/store/store';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-const API_MOCK = (process.env.NEXT_PUBLIC_API_MOCK === 'true') || false;
-
 export async function mockInterceptor(request: NextRequest, next: NextFetchEvent) {
-  if (!API_MOCK) {
+  if (storeStrategy !== StoreStrategy.Mock) {
     return;
   }
   if (!isExistingApiRoute(request)) {

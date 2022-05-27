@@ -1,10 +1,9 @@
 
 import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
-export interface ILocale {
+export type ILocale = {
   id: IEquatable;
   schema: string;
-  code: string;
   title: string;
   isDefault: boolean;
-}
+};

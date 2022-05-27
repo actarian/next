@@ -1,4 +1,4 @@
-import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '../entity/entity';
+import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '@core/entity/entity';
 
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
   items: T[];

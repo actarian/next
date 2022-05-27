@@ -1,9 +1,7 @@
-import { IEquatable } from '@core/entity/entity';
 
 export interface ILocale {
-  id: IEquatable;
+  id: string;
   schema?: string;
-  code?: string;
   title?: string;
   isDefault?: boolean;
 }
