@@ -8,7 +8,7 @@ import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
-import { P } from '@pipes/pipes';
+import { toPrice } from '@pipes/pipes';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
@@ -42,7 +42,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
-                <Button type="success" icon={<ArrowRight />} auto>Buy {P(page.price, P.price())}</Button>
+                <Button type="success" icon={<ArrowRight />} auto>Buy {toPrice(page.price)}</Button>
               </Card.Footer>
             </Card>
 

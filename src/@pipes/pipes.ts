@@ -1,23 +1,7 @@
+import { useMemo } from 'react';
 
-export type Pipe = (value: any) => any
-
-function pipe(value: any, ...pipes: Pipe[]): string {
-  value = pipes.reduce((p, c, i) => {
-    return c(p);
-  }, value);
-  return value.toString();
-}
-
-function price(options: any = {}) {
-  return (value: any): any => {
+export function toPrice(value, { a, b } = { a: null, b: null }): string {
+  return useMemo(() => {
     return value + '€';
-  };
+  }, [value, a, b]);
 }
-
-pipe.price = price;
-
-export const P = pipe;
-
-/*
-// !!! use hooks?
-*/
