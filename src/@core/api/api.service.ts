@@ -3,8 +3,7 @@ import { FetchRequestOptions, httpFetch } from '@core/http/http.service';
 import { merge } from '@core/utils';
 import { FindParams, FindWhereParams, IEquatable, IQuerable, toFindParams } from '../entity/entity';
 
-// const URL = process.env.NEXT_PUBLIC_URL === 'https://' ? 'https://localhost:3000' : process.env.NEXT_PUBLIC_URL;
-const URL = process.env.NEXT_PUBLIC_STORE_URL;
+const URL = process.env.NEXT_PUBLIC_URL === 'https://' ? 'https://localhost:3000' : process.env.NEXT_PUBLIC_URL;
 const API = process.env.NEXT_PUBLIC_API || '/api';
 const BEARER = process.env.NEXT_PUBLIC_STRAPI_BEARER || '7584f15d12972fb1e7695e998dd5e4c754f46c74d06a08e8d76f556adcd045e48cd52bed6faac098784471ac273ee40243194b9cff7eba3c4a768f8f41d2d51959a7f767b943c7f0170f6e5f632db523803c357083bf7a7bf03ee8e0df2d8ce5cd52e0211283b34d7781313da775018a9e950433d2b6faf711c20e5a63b25243';
 
@@ -44,6 +43,44 @@ export async function apiDelete(url: string, options: FetchRequestOptions = {}):
   return await apiFetch(url, { ...options, method: 'DELETE' });
 }
 
+const STORE_URL = process.env.NEXT_PUBLIC_STORE_URL;
+const STORE_API = process.env.NEXT_PUBLIC_API || '/api';
+const STORE_BEARER = process.env.NEXT_PUBLIC_STRAPI_BEARER || '7584f15d12972fb1e7695e998dd5e4c754f46c74d06a08e8d76f556adcd045e48cd52bed6faac098784471ac273ee40243194b9cff7eba3c4a768f8f41d2d51959a7f767b943c7f0170f6e5f632db523803c357083bf7a7bf03ee8e0df2d8ce5cd52e0211283b34d7781313da775018a9e950433d2b6faf711c20e5a63b25243';
+
+const defaultStoreOptions: FetchRequestOptions = {
+  // mode: 'cors',
+  headers: {
+    Authorization: `Bearer ${STORE_BEARER}`,
+  },
+};
+
+export async function storeFetch(pathname: string, options: FetchRequestOptions = {}): Promise<any> {
+  const url = `${STORE_URL}${STORE_API}${pathname}`;
+  const apiOptions = merge({ ...defaultStoreOptions }, options);
+  const apiResponse = await httpFetch(url, apiOptions);
+  return apiResponse;
+}
+
+export async function storeGet(url: string, options: FetchRequestOptions = {}): Promise<any> {
+  return await storeFetch(url, { ...options, method: 'GET' });
+}
+
+export async function storePost(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
+  return await storeFetch(url, { ...options, method: 'POST', body: JSON.stringify(payload) });
+}
+
+export async function storePut(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
+  return await storeFetch(url, { ...options, method: 'PUT', body: JSON.stringify(payload) });
+}
+
+export async function storePatch(url: string, payload: any, options: FetchRequestOptions = {}): Promise<any> {
+  return await storeFetch(url, { ...options, method: 'PATCH', body: JSON.stringify(payload) });
+}
+
+export async function storeDelete(url: string, options: FetchRequestOptions = {}): Promise<any> {
+  return await storeFetch(url, { ...options, method: 'DELETE' });
+}
+
 export default class ApiService<T extends IEntity> implements IQuerable<IEntity> {
   key: string;
 
@@ -56,31 +93,32 @@ export default class ApiService<T extends IEntity> implements IQuerable<IEntity>
 
   async findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null> {
     const params = toFindParams(idOrParams);
-    console.log(`ApiService.${this.key}.findOne.params`, params);
-    const item = await apiGet(`/${this.key}/${params.where.id}`);
+    const search = this.search_(params);
+    console.log(`ApiService.${this.key}.findOne`, search, params);
+    const item = await storeGet(`/${this.key}/${params.where.id}${search}`);
     return this.decorator_(item, params);
   }
 
   async findMany(params: FindParams = {}): Promise<T[]> {
-    console.log(`ApiService.${this.key}.findMany.params`, params);
-    let items = await apiGet(`/${this.key}`);
-    console.log(items);
+    const search = this.search_(params);
+    console.log(`ApiService.${this.key}.findMany`, search, params);
+    let items = await storeGet(`/${this.key}${search}`);
     items = this.where_(items, params);
     return items.map(x => this.decorator_(x, params));
   }
 
   async create(payload): Promise<T> {
-    const item = await apiPost(`/${this.key}`, payload);
+    const item = await storePost(`/${this.key}`, payload);
     return this.decorator_(item);
   }
 
   async update(payload): Promise<T> {
-    const item = await apiPut(`/${this.key}`, payload);
+    const item = await storePut(`/${this.key}`, payload);
     return this.decorator_(item);
   }
 
   async delete(id: IEquatable) {
-    const item = await apiDelete(`/${this.key}/${id.toString()}`);
+    const item = await storeDelete(`/${this.key}/${id.toString()}`);
     return this.decorator_(item);
   }
 
@@ -101,6 +139,14 @@ export default class ApiService<T extends IEntity> implements IQuerable<IEntity>
     return item;
   }
 
+  protected search_(params:FindParams):string {
+    const search = {};
+    Object.entries(params).forEach(([key, value]) => {
+      if (typeof value !== 'object') {
+        search[key] = value.toString();
+      }
+    });
+    return Object.keys(search).length ? '?' + new URLSearchParams(search).toString() : '';
+  }
+
 }
-
-
