@@ -1,0 +1,632 @@
+[
+  {
+    "id": "lookeffetto",
+    "schema": "feature_type",
+    "title": "Look",
+    "features": [
+      {
+        "id": 2816,
+        "schema": "feature",
+        "title": "3D & DECOR",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/53e34a66-c466-4d74-ba8d-c0e5f525f539/sccw3m/std/256x256/AtlasConcorde_3DWallDesign_White_40x80_Matte_8DWM_Twist.jpg?scalemode=auto&format=WEBP"
+      },
+      {
+        "id": 2811,
+        "schema": "feature",
+        "title": "Effetto Marmo",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/dfdbcdd1-f1ce-4ac4-a280-a3c074f3014d/sccw3m/std/256x256/AtlasConcorde_Marvel_CalacattaExtra_160x160_Polished_AO51_1.jpg?scalemode=auto&format=WEBP"
+      },
+      {
+        "id": 2812,
+        "schema": "feature",
+        "title": "Effetto Pietra",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/83e10863-c549-4780-88b0-3bfb90611145/sccw3m/std/256x256/AtlasConcorde_Brave_Grey_75x75_Matte_AXAL.jpg?scalemode=auto&format=WEBP"
+      },
+      {
+        "id": 2813,
+        "schema": "feature",
+        "title": "Effetto Cemento",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/e4651284-1332-4800-8ffc-41f84cf1c5a2/sccw3m/std/256x256/AtlasConcorde_Boost_Grey_75x75_Matte_AMGV_1.jpg?scalemode=auto&format=WEBP"
+      },
+      {
+        "id": 2810,
+        "schema": "feature",
+        "title": "Effetto Legno",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/f9ffee6e-a95a-441c-8ac0-775d6e3f5b6a/sccw3m/std/256x256/AtlasConcorde_Exence_Almond_20x120_Matte_AO48_6.jpg?scalemode=auto&format=WEBP"
+      },
+      {
+        "id": 3648,
+        "schema": "feature",
+        "title": "Effetto Metallo",
+        "image": "https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/0715ee4a-c6a8-45e3-adc9-67a86f069db0/sccw3m/std/256x256/AtlasConcorde_Blaze_Corten_120x120_Matte_A05F_3.jpg?scalemode=auto&format=WEBP"
+      }
+    ]
+  },
+  {
+    "id": "colors",
+    "schema": "feature_type",
+    "title": "Colori",
+    "features": [
+      {
+        "id": 2826,
+        "schema": "feature",
+        "title": "Bianco",
+        "image": "/media/immagini/170_t_01.jpg"
+      },
+      {
+        "id": 2827,
+        "schema": "feature",
+        "title": "Grigio",
+        "image": "/media/immagini/171_t_02.jpg"
+      },
+      {
+        "id": 2828,
+        "schema": "feature",
+        "title": "Nero",
+        "image": "/media/immagini/172_t_03.jpg"
+      },
+      {
+        "id": 2829,
+        "schema": "feature",
+        "title": "Avorio",
+        "image": "/media/immagini/173_t_04.jpg"
+      },
+      {
+        "id": 2830,
+        "schema": "feature",
+        "title": "Crema",
+        "image": "/media/immagini/174_t_05.jpg"
+      },
+      {
+        "id": 2831,
+        "schema": "feature",
+        "title": "Beige",
+        "image": "/media/immagini/175_t_06.jpg"
+      },
+      {
+        "id": 2832,
+        "schema": "feature",
+        "title": "Marrone",
+        "image": "/media/immagini/176_t_07.jpg"
+      },
+      {
+        "id": 2833,
+        "schema": "feature",
+        "title": "Oro",
+        "image": "/media/immagini/177_t_08.jpg"
+      },
+      {
+        "id": 2834,
+        "schema": "feature",
+        "title": "Giallo",
+        "image": "/media/immagini/178_t_09.jpg"
+      },
+      {
+        "id": 2835,
+        "schema": "feature",
+        "title": "Rosa",
+        "image": "/media/immagini/179_t_10.jpg"
+      },
+      {
+        "id": 2837,
+        "schema": "feature",
+        "title": "Rosso",
+        "image": "/media/immagini/181_t_12.jpg"
+      },
+      {
+        "id": 2838,
+        "schema": "feature",
+        "title": "Azzurro",
+        "image": "/media/immagini/182_t_13.jpg"
+      },
+      {
+        "id": 2839,
+        "schema": "feature",
+        "title": "Blu",
+        "image": "/media/immagini/183_t_14.jpg"
+      },
+      {
+        "id": 2840,
+        "schema": "feature",
+        "title": "Verde",
+        "image": "/media/immagini/184_t_15.jpg"
+      },
+      {
+        "id": 2841,
+        "schema": "feature",
+        "title": "Viola",
+        "image": "/media/immagini/185_t_16.jpg"
+      }
+    ]
+  },
+  {
+    "id": "brand",
+    "schema": "feature_type",
+    "title": "Brand",
+    "features": [
+      {
+        "id": "atlas-concorde",
+        "schema": "feature",
+        "title": "Atlas Concorde"
+      },
+      {
+        "id": "atlas-concorde-solution",
+        "schema": "feature",
+        "title": "Atlas Concorde Solution"
+      },
+      {
+        "schema": "feature",
+        "id": "atlas-concorde-leroy-merlin"
+      }
+    ]
+  },
+  {
+    "id": "format",
+    "schema": "feature_type",
+    "title": "Formati",
+    "features": [
+      {
+        "id": "s:8x31,5",
+        "schema": "feature",
+        "title": "8x31,5 cm"
+      },
+      {
+        "id": "s:15x30",
+        "schema": "feature",
+        "title": "15x30 cm"
+      },
+      {
+        "id": "s:15x90",
+        "schema": "feature",
+        "title": "15x90 cm"
+      },
+      {
+        "id": "s:18,5x150",
+        "schema": "feature",
+        "title": "18,5x150 cm"
+      },
+      {
+        "id": "s:20x20",
+        "schema": "feature",
+        "title": "20x20 cm"
+      },
+      {
+        "id": "s:20x120",
+        "schema": "feature",
+        "title": "20x120 cm"
+      },
+      {
+        "id": "s:22,5x22,5",
+        "schema": "feature",
+        "title": "22,5x22,5 cm"
+      },
+      {
+        "id": "s:22,5x45,3",
+        "schema": "feature",
+        "title": "22,5x45,3 cm"
+      },
+      {
+        "id": "s:22,5x45,4",
+        "schema": "feature",
+        "title": "22,5x45,4 cm"
+      },
+      {
+        "id": "s:22,5x90",
+        "schema": "feature",
+        "title": "22,5x90 cm"
+      },
+      {
+        "id": "s:25x150",
+        "schema": "feature",
+        "title": "25x150 cm"
+      },
+      {
+        "id": "s:30x30",
+        "schema": "feature",
+        "title": "30x30 cm"
+      },
+      {
+        "id": "s:30x60",
+        "schema": "feature",
+        "title": "30x60 cm"
+      },
+      {
+        "id": "s:30x120",
+        "schema": "feature",
+        "title": "30x120 cm"
+      },
+      {
+        "id": "s:30,5x56",
+        "schema": "feature",
+        "title": "30,5x56 cm"
+      },
+      {
+        "id": "s:30,5x91,5",
+        "schema": "feature",
+        "title": "30,5x91,5 cm"
+      },
+      {
+        "id": "s:37,5x75",
+        "schema": "feature",
+        "title": "37,5x75 cm"
+      },
+      {
+        "id": "s:40x80",
+        "schema": "feature",
+        "title": "40x80 cm"
+      },
+      {
+        "id": "s:45x90",
+        "schema": "feature",
+        "title": "45x90 cm"
+      },
+      {
+        "id": "s:50x120",
+        "schema": "feature",
+        "title": "50x120 cm"
+      },
+      {
+        "id": "s:60x60",
+        "schema": "feature",
+        "title": "60x60 cm"
+      },
+      {
+        "id": "s:60x90",
+        "schema": "feature",
+        "title": "60x90 cm"
+      },
+      {
+        "id": "s:60x120",
+        "schema": "feature",
+        "title": "60x120 cm"
+      },
+      {
+        "id": "s:75x75",
+        "schema": "feature",
+        "title": "75x75 cm"
+      },
+      {
+        "id": "s:75x150",
+        "schema": "feature",
+        "title": "75x150 cm"
+      },
+      {
+        "id": "s:80x80",
+        "schema": "feature",
+        "title": "80x80 cm"
+      },
+      {
+        "id": "s:90x90",
+        "schema": "feature",
+        "title": "90x90 cm"
+      },
+      {
+        "id": "s:120x120",
+        "schema": "feature",
+        "title": "120x120 cm"
+      },
+      {
+        "id": "s:120x240",
+        "schema": "feature",
+        "title": "120x240 cm"
+      },
+      {
+        "id": "s:120x278",
+        "schema": "feature",
+        "title": "120x278 cm"
+      },
+      {
+        "id": "s:160x160",
+        "schema": "feature",
+        "title": "160x160 cm"
+      },
+      {
+        "id": "s:160x320",
+        "schema": "feature",
+        "title": "160x320 cm"
+      }
+    ]
+  },
+  {
+    "id": "finish",
+    "schema": "feature_type",
+    "title": "Finitura",
+    "features": [
+      {
+        "id": 2234,
+        "schema": "feature",
+        "title": "Lappato/Lucido"
+      },
+      {
+        "id": 2235,
+        "schema": "feature",
+        "title": "Matt"
+      },
+      {
+        "id": 2772,
+        "schema": "feature",
+        "title": "Antiscivolo"
+      },
+      {
+        "id": 27315,
+        "schema": "feature",
+        "title": "Silk"
+      }
+    ]
+  },
+  {
+    "id": "thickness",
+    "schema": "feature_type",
+    "title": "Spessore",
+    "features": [
+      {
+        "id": "t:600",
+        "schema": "feature",
+        "title": "6mm"
+      },
+      {
+        "id": "t:800",
+        "schema": "feature",
+        "title": "8mm"
+      },
+      {
+        "id": "t:850",
+        "schema": "feature",
+        "title": "8.5mm"
+      },
+      {
+        "id": "t:860.0001",
+        "schema": "feature",
+        "title": "8.6mm"
+      },
+      {
+        "id": "t:900",
+        "schema": "feature",
+        "title": "9mm"
+      },
+      {
+        "id": "t:950",
+        "schema": "feature",
+        "title": "9.5mm"
+      },
+      {
+        "id": "t:1000",
+        "schema": "feature",
+        "title": "10mm"
+      },
+      {
+        "id": "t:1100",
+        "schema": "feature",
+        "title": "11mm"
+      },
+      {
+        "id": "t:2000",
+        "schema": "feature",
+        "title": "20mm"
+      },
+      {
+        "id": "t:3000",
+        "schema": "feature",
+        "title": "30mm"
+      }
+    ]
+  },
+  {
+    "id": "application",
+    "schema": "feature_type",
+    "title": "Applicazione",
+    "features": [
+      {
+        "id": "li:235",
+        "schema": "feature",
+        "title": "Pavimenti interni"
+      },
+      {
+        "id": "li:236",
+        "schema": "feature",
+        "title": "Pavimenti esterni"
+      },
+      {
+        "id": "li:238",
+        "schema": "feature",
+        "title": "Rivestimenti interni"
+      },
+      {
+        "id": "li:239",
+        "schema": "feature",
+        "title": "Rivestimenti esterni"
+      }
+    ]
+  },
+  {
+    "id": "tecnologia",
+    "schema": "feature_type",
+    "title": "Tecnologia",
+    "features": [
+      {
+        "id": 2221,
+        "schema": "feature",
+        "title": "Gres Porcellanato"
+      },
+      {
+        "id": 2223,
+        "schema": "feature",
+        "title": "Rivestimenti"
+      }
+    ]
+  },
+  {
+    "id": "destination",
+    "schema": "feature_type",
+    "title": "Calpestio",
+    "features": [
+      {
+        "id": "destination:2",
+        "schema": "feature",
+        "title": "Calpestio medio"
+      },
+      {
+        "id": "destination:3",
+        "schema": "feature",
+        "title": "Calpestio pesante"
+      }
+    ]
+  },
+  {
+    "id": "certifications",
+    "schema": "feature_type",
+    "title": "Certificazioni",
+    "features": [
+      {
+        "id": "c:EPD",
+        "schema": "feature",
+        "title": "EPD"
+      },
+      {
+        "id": "c:PEF",
+        "schema": "feature",
+        "title": "PEF"
+      },
+      {
+        "id": "c:FDES",
+        "schema": "feature",
+        "title": "FDES"
+      },
+      {
+        "id": "c:HPD",
+        "schema": "feature",
+        "title": "HPD"
+      },
+      {
+        "id": "c:UPEC",
+        "schema": "feature",
+        "title": "UPEC"
+      }
+    ]
+  },
+  {
+    "id": "din51130",
+    "schema": "feature_type",
+    "title": "Metodo della rampa calzato - classi R9 -R12 (DIN 51130)",
+    "features": [
+      {
+        "id": "sr:R9 ON DEMAND",
+        "schema": "feature",
+        "title": "R9 ON DEMAND"
+      },
+      {
+        "id": "sr:R12",
+        "schema": "feature",
+        "title": "R12"
+      },
+      {
+        "id": "sr:R11",
+        "schema": "feature",
+        "title": "R11"
+      },
+      {
+        "id": "sr:R10",
+        "schema": "feature",
+        "title": "R10"
+      },
+      {
+        "id": "sr:R9",
+        "schema": "feature",
+        "title": "R9"
+      },
+      {
+        "id": "sr:N.C.",
+        "schema": "feature",
+        "title": "N.C."
+      }
+    ]
+  },
+  {
+    "id": "din51097",
+    "schema": "feature_type",
+    "title": "Metodo della rampa a piedi nudi – gruppo A – B – C (DIN 51097)",
+    "features": [
+      {
+        "id": "bf:A+B+C",
+        "schema": "feature",
+        "title": "A+B+C"
+      },
+      {
+        "id": "bf:A+B",
+        "schema": "feature",
+        "title": "A+B"
+      },
+      {
+        "id": "bf:A",
+        "schema": "feature",
+        "title": "A"
+      }
+    ]
+  },
+  {
+    "id": "BS7976",
+    "schema": "feature_type",
+    "title": "Metodo del pendolo – PTV (BS 7976)",
+    "features": [
+      {
+        "id": "bs:>= 36 Dry <= 24 Wet",
+        "schema": "feature",
+        "title": ">= 36 Dry <= 24 Wet"
+      },
+      {
+        "id": "bs:>=36Dry <=24Wet",
+        "schema": "feature",
+        "title": ">=36Dry <=24Wet"
+      },
+      {
+        "id": "bs:>=36Dry >=36Wet",
+        "schema": "feature",
+        "title": ">=36Dry >=36Wet"
+      },
+      {
+        "id": "bs:PTV >= 36 Wet on demand",
+        "schema": "feature",
+        "title": "PTV >= 36 Wet on demand"
+      }
+    ]
+  },
+  {
+    "id": "AS4586",
+    "schema": "feature_type",
+    "title": "Metodo del pendolo – Classe P3 – P4 (AS 4586)",
+    "features": [
+      {
+        "id": "li:233",
+        "schema": "feature",
+        "title": "Class P4"
+      },
+      {
+        "id": "li:234",
+        "schema": "feature",
+        "title": "P3 on demand"
+      },
+      {
+        "id": "li:232",
+        "schema": "feature",
+        "title": "Class P3"
+      }
+    ]
+  },
+  {
+    "id": "UNEENV12633",
+    "schema": "feature_type",
+    "title": "Metodo del pendolo - Classe C2 – C3 (UNE-ENV 12633)",
+    "features": [
+      {
+        "id": "pf:20",
+        "schema": "feature",
+        "title": "Class C2"
+      },
+      {
+        "id": "pf:30",
+        "schema": "feature",
+        "title": "Class C3"
+      }
+    ]
+  }
+]

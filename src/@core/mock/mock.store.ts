@@ -1,7 +1,7 @@
 const path = require('path');
 
 import { fsReadJson } from '@core/fs/fs.service';
-import { AppStore } from 'types';
+import { AppStore } from 'src/types';
 import MockService from './mock.service';
 
 let STORE_: AppStore;

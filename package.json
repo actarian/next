@@ -3,7 +3,7 @@
     "mock:build": "tsc --project ./tsconfig.server.json",
     "mock:run": "node .build/@core/mock/mock.build.js",
     "dev:mock": "run-s mock:*",
-    "dev:next": "next dev",
+    "dev:next": "next dev -p 3007",
     "dev": "run-p dev:*",
     "build:clean": "rimraf .cache/* \"!.cache/.gitkeep\"",
     "build:next": "next build",

@@ -1,4 +1,4 @@
-import { AppStore } from 'types';
+import { AppStore, PAGES } from 'src/types';
 import StoreApiService from './store-api.service';
 
 let STORE_: AppStore;
@@ -9,7 +9,8 @@ export async function getApiStore(): Promise<AppStore> {
   }
   // console.log('getApiStore');
   const store = {};
-  const routes = ['about', 'category', 'country', 'homepage', 'label', 'locale', 'market', 'menu', 'notfound', 'page', 'product_index', 'product', 'route'];
+  const keys = Object.keys(PAGES);
+  const routes = [...keys, 'page', 'route', 'country', 'label', 'locale', 'market', 'menu'];
   routes.forEach(key => {
     store[key] = new StoreApiService<any>(key);
   });

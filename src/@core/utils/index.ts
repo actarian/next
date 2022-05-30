@@ -1,5 +1,5 @@
 import { IRoute } from '@models/route/route';
-import { PAGES } from 'types';
+import { PAGES } from 'src/types';
 
 export function merge(target, source) {
   // override null values

@@ -10,13 +10,13 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
   // const pathname = url.pathname;
   // const { market, language, pathname } = decompose(url.pathname);
   try {
-    route = await apiPost(`/route`, { href: url.pathname });
+    route = await apiPost(`/route`, { pathname: url.pathname });
     if (!route) {
       console.log('routeInterceptor.route.notfound', url.pathname);
       return;
     }
   } catch (error) {
-    console.log('routeInterceptor.error', url.pathname, error);
+    console.log('routeInterceptor.error', url.pathname, error.url, error.status, error.statusText);
     return;
   }
   // console.log('routeInterceptor.route.found', url.pathname, '->', route);

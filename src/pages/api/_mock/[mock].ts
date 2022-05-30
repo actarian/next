@@ -1,11 +1,11 @@
 import { apiHandler } from '@core/api/api.helper';
-import { resolveMockApi } from '@core/mock/mock.api';
+import { parseMockApi } from '@core/mock/mock.api';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
     const { query: { mock } } = request;
-    const data = await resolveMockApi(mock as string);
+    const data = await parseMockApi(mock as string); // use resolveMockApi(mock as string) and set header as content-type: application/json
     if (data) {
       response.status(200).json(data);
     } else {

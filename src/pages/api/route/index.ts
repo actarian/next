@@ -12,9 +12,9 @@ export default apiHandler({
     }
   },
   post: async (request: NextApiRequest, response: NextApiResponse) => {
-    const { href } = request.body;
-    const data = await getRoute(href);
-    // console.log('route.apiHandler', href, '->', data);
+    const { pathname } = request.body;
+    const data = await getRoute(pathname);
+    console.log('route.apiHandler', pathname, '->', data);
     if (data) {
       response.status(200).json(data);
     } else {

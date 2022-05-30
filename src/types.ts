@@ -1,5 +1,6 @@
 import { IEntity, IQuerable } from "@core/entity/entity";
 import { ICategory } from "@models/category/category";
+import { IFeatureType } from "@models/feature_type/feature_type";
 import { ILabel } from "@models/label/label";
 import { ILocale } from "@models/locale/locale";
 import { IMarket } from "@models/market/market";
@@ -7,6 +8,7 @@ import { IMenu } from "@models/menu/menu";
 import { IPage } from "@models/page/page";
 import { IProduct } from "@models/product/product";
 import { IRoute } from "@models/route/route";
+import { ITile } from "@models/tile/tile";
 
 export type AppStore = {
   about: IQuerable<any>;
@@ -21,6 +23,8 @@ export type AppStore = {
   page: IQuerable<IPage>;
   product_index: IQuerable<any>;
   product: IQuerable<IProduct>;
+  tile: IQuerable<ITile>;
+  feature_type: IQuerable<IFeatureType>;
   route: IQuerable<IRoute>;
 
   [key: string]: IQuerable<IEntity>;
@@ -30,6 +34,7 @@ export const PAGES = {
   homepage: 'homepage',
   about: 'about',
   product_index: 'product_index',
+  product_search: 'product_search',
   product: 'product',
   notfound: 'notfound',
 };
