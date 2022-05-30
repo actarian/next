@@ -14,7 +14,7 @@ export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
 export async function getRoute(id: string): Promise<IRoute | null> {
   const store = await getStore();
   const route = await store.route.findOne(id);
-  console.log('getRoute', id, '->', route);
+  // console.log('getRoute', id, '->', route);
   return route;
 }
 

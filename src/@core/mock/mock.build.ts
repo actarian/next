@@ -96,7 +96,7 @@ function getRoute(href: string, marketId: string, localeId: string, pageSchema: 
 
 function getRouteService(store: SerializedStore): SerializedCollection {
   const keys = Object.keys(PAGES);
-  console.log('getRouteService', keys);
+  // console.log('getRouteService', keys);
   const routes = [];
   for (const key of keys) {
     const languages = store.locale.items.map(x => x.id);
@@ -107,7 +107,7 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     const collection = store[key];
     if (collection) {
       const items = collection.items;
-      console.log('getRouteService', key, items.length);
+      // console.log('getRouteService', key, items.length);
       for (let item of items) {
         const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
         let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;

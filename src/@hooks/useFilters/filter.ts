@@ -30,7 +30,7 @@ export class Filter {
   }
 
   filter(item, value) {
-    return item.options.indexOf(value) !== -1;
+    return item.featureIds.includes(value);
   }
 
   match(item) {
@@ -72,38 +72,38 @@ export class Filter {
     return this.values.length > 0;
   }
 
-  has(item) {
-    return this.values.indexOf(item.value) !== -1;
+  has(option) {
+    return this.values.indexOf(option.id) !== -1;
   }
 
-  set(item) {
+  set(option) {
     if (this.mode === FilterMode.QUERY) {
-      this.values = item ? [item] : [];
+      this.values = option ? [option] : [];
     } else {
       if (this.mode === FilterMode.SELECT) {
         this.values = [];
       }
-      const index = this.values.indexOf(item.value);
+      const index = this.values.indexOf(option.id);
       if (index === -1) {
-        if (item.value != null) {
-          this.values.push(item.value);
+        if (option.id != null) {
+          this.values.push(option.id);
         }
       }
     }
   }
 
-  remove(item) {
-    const index = this.values.indexOf(item.value);
+  remove(option) {
+    const index = this.values.indexOf(option.id);
     if (index !== -1) {
       this.values.splice(index, 1);
     }
   }
 
-  toggle(item) {
-    if (this.has(item)) {
-      this.remove(item);
+  toggle(option) {
+    if (this.has(option)) {
+      this.remove(option);
     } else {
-      this.set(item);
+      this.set(option);
     }
   }
 

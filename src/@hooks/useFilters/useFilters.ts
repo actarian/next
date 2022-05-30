@@ -77,7 +77,7 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
       setMaxLength(newMaxLength);
       setHasMore(newMaxLength < filteredItems.length);
     }
-  }, [items, filters]);
+  }, [maxLength, visibleItems.length, filteredItems.length]);
 
   // initial call to setFilter
   useEffect(() => {

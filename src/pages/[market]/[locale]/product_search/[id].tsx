@@ -1,4 +1,5 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
+import { FilterRecap } from '@components/filter/filter-recap';
 import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
@@ -51,7 +52,8 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
             schema: "tile",
             categoryId: x.collection.id,
             categoryName: x.collection.name,
-            title: x.tile.name,
+            title: `${x.collection.name} ${x.tile.name}`,
+            abstract: `${minimal.size} ${minimal.finish}`,
             image: x.tile.image,
             href: minimal.url,
             finish: minimal.finish,
@@ -73,12 +75,14 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
         <Headline title={page.title} abstract={page.abstract}></Headline>
 
         <Grid.Container gap={2} justify="flex-start">
-          <Grid xs={24} sm={8}>
+          <Grid xs={24} sm={6} direction="column">
+
+            <FilterRecap filters={filters} onChange={onFilterSidebarDidChange}></FilterRecap>
 
             <FilterSidebar filters={filters} values={values} onChange={onFilterSidebarDidChange}></FilterSidebar>
 
           </Grid>
-          <Grid xs={24} sm={16} direction="column">
+          <Grid xs={24} sm={18} direction="column">
 
             <Note type="warning" marginBottom={1}>{total} items found</Note>
 
@@ -86,7 +90,7 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
               <Grid.Container gap={2} justify="flex-start">
                 {visibleItems.map((item) =>
                   <Grid xs={24} sm={12} md={8} key={item.id}>
-                    <ProductItem item={item} />
+                    <ProductItem item={item} showImage={false} />
                   </Grid>
                 )}
               </Grid.Container>

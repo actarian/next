@@ -7,6 +7,7 @@ export type ITile = {
   categoryId: IEquatable;
   categoryName: string;
   title: string;
+  abstract: string;
   image: string;
   href: string;
   finish: string;
