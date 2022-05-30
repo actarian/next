@@ -1,14 +1,16 @@
 import { IEquatable } from '@core/entity/entity';
+import { useLocation } from '@hooks/useLocation/useLocation';
 import { IFeatureType } from '@models/feature_type/feature_type';
 import { ITile } from '@models/tile/tile';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Filter, FilterMode } from './filter';
 
 export const PER_PAGE = 15;
+// let q = 0;
 
 export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterMap: (key: string, item: any, value: IEquatable) => boolean) {
 
-  const initialValues = []; // !!!
+  const { deserialize, serialize } = useLocation();
 
   const [maxLength, setMaxLength] = useState(PER_PAGE);
   const [hasMore, setHasMore] = useState(false);
@@ -17,6 +19,10 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
 
   // creating filters with useMemo because is an heavy operation
   const filters = useMemo(() => {
+
+    const params = deserialize('filters');
+    console.log('params', params);
+
     return featureTypes.map(featureType => {
       const filter = new Filter(featureType, FilterMode.OR);
       filter.filter = (item, value) => {
@@ -26,6 +32,11 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
         return false;
       };
       filter.removeInvalidOptions(items);
+      /* !!! cause hydration error
+      if (params && params[filter.id]) {
+        filter.values = params[filter.id];
+      }
+      */
       return filter;
     });
   }, [featureTypes, filterMap]);
@@ -65,6 +76,26 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
     const newMaxLength = Math.min(filteredItems.length, maxLength);
     setVisibleItems(filteredItems.slice(0, newMaxLength));
     setHasMore(newMaxLength < filteredItems.length);
+
+    // serializing filters
+    let params = {};
+    let any = false;
+    selectedFilters.forEach(filter => {
+      params[filter.id] = filter.values;
+      any = true;
+    });
+    if (!any) {
+      params = null;
+    }
+    serialize('filters', params);
+
+    /*
+    if (document && window.history) {
+      const url = new URL(window.location.href);
+      console.log(url);
+      history.replaceState(history.state, document.title, `${url.origin}${url.pathname}?q=${++q}`);
+    }
+    */
 
   }, [items, filters]);
 
