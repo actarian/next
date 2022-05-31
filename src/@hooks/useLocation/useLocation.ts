@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useMemo } from 'react';
 
 const isBrowser = typeof window !== 'undefined';
 
@@ -72,10 +73,18 @@ function serialize(keyOrValue, value) {
   set('params', encoded);
 }
 
+function decode_(base64) {
+  return isBrowser ? window.atob(base64) : Buffer.from(base64, 'base64').toString();
+}
+
+function encode_(text) {
+  return isBrowser ? window.btoa(text) : Buffer.from(text).toString('base64');
+}
+
 function decode(encoded, key?: string) {
   let decoded = null;
   if (encoded) {
-    const json = window.atob(encoded);
+    const json = decode_(encoded);
     decoded = JSON.parse(json);
   }
   if (key && decoded) {
@@ -93,14 +102,35 @@ function encode(params: any, keyOrValue, value) {
     params = keyOrValue;
   }
   const json = JSON.stringify(params);
-  encoded = window.btoa(json);
+  encoded = encode_(json);
   return encoded;
 }
 
-export function useLocation() {
+export function useLocation(key) {
 
-  const [url, setUrl] = useState(getCurrentUrl());
+  const router = useRouter();
 
-  return { url, deserialize, serialize };
+  const initialValue = useMemo(() => {
+
+    console.log(router.asPath);
+    const search = router.asPath.split('?')[1];
+    const searchParams = new URLSearchParams(search);
+    const params = searchParams.get('params');
+    console.log('useLocation', search, params);
+
+    const initialValue = params ? decode(params, key) : null;
+    console.log('initialValue', initialValue);
+
+    return initialValue;
+  }, []);
+
+  const params = initialValue;
+  // const [params, setParams_] = useState(initialValue);
+
+  const setParams = useCallback((key, params) => {
+    serialize(key, params);
+  }, []);
+
+  return { params, setParams };
 
 }

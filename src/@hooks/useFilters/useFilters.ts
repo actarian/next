@@ -10,7 +10,8 @@ export const PER_PAGE = 15;
 
 export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterMap: (key: string, item: any, value: IEquatable) => boolean) {
 
-  const { deserialize, serialize } = useLocation();
+  const { params, setParams } = useLocation('filters');
+  // console.log('useFilters', params);
 
   const [maxLength, setMaxLength] = useState(PER_PAGE);
   const [hasMore, setHasMore] = useState(false);
@@ -19,9 +20,6 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
 
   // creating filters with useMemo because is an heavy operation
   const filters = useMemo(() => {
-
-    const params = deserialize('filters');
-    console.log('params', params);
 
     return featureTypes.map(featureType => {
       const filter = new Filter(featureType, FilterMode.OR);
@@ -32,11 +30,9 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
         return false;
       };
       filter.removeInvalidOptions(items);
-      /* !!! cause hydration error
       if (params && params[filter.id]) {
         filter.values = params[filter.id];
       }
-      */
       return filter;
     });
   }, [featureTypes, filterMap]);
@@ -87,7 +83,8 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
     if (!any) {
       params = null;
     }
-    serialize('filters', params);
+
+    setParams('filters', params);
 
     /*
     if (document && window.history) {
