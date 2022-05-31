@@ -4,41 +4,38 @@ import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
-import { Button, Grid, Note } from '@geist-ui/core';
+import { Grid, Note, Pagination } from '@geist-ui/core';
 import { useApiGet } from '@hooks/useApi/useApi';
 import { useFilters } from '@hooks/useFilters/useFilters';
+import { usePagination } from '@hooks/usePagination/usePagination';
 import { IFeatureType } from '@models/feature_type/feature_type';
 import { getFeatureTypes } from '@models/feature_type/feature_type.service';
 import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
+import { filterProductItem } from '@models/product_search/product_search.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
 import { useCallback } from 'react';
 
-export default function ProductSearch({ layout, page, tiles, featureTypes, params }: ProductSearchProps) {
+export default function ProductSearchCSR({ layout, page, tiles, featureTypes, params }: ProductSearchCSRProps) {
 
   if (!page) {
     return;
   }
 
-  const filterMap = useCallback((key: string, item: ITile, value: IEquatable) => {
-    switch (key) {
-      case 'title':
-        return item.title.toLowerCase().includes(value.toString().toLowerCase());
-      default:
-        return item.featureIds.includes(value);
-    }
-  }, []);
+  const filterItem = useCallback(filterProductItem, []);
 
-  const { visibleItems, filters, setFilter, values, hasMore, viewMore, total } = useFilters(tiles, featureTypes, filterMap);
+  const { filteredItems, filters, setFilter, values } = useFilters<ITile>(tiles, featureTypes, filterItem);
+
+  const pagination = usePagination<ITile>(filteredItems);
 
   const onFilterSidebarDidChange = (filter, values) => {
-    console.log('ProductSearch.onFilterSidebarDidChange', filter, values);
+    console.log('ProductSearchCSR.onFilterSidebarDidChange', filter, values);
     setFilter(filter, values);
+    pagination.goToPage(0);
   };
 
   if (false) {
@@ -84,11 +81,11 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
           </Grid>
           <Grid xs={24} sm={18} direction="column">
 
-            <Note type="warning" marginBottom={1}>{total} items found</Note>
+            <Note type="warning" marginBottom={1}>{filteredItems.length} items found</Note>
 
-            {visibleItems &&
+            {pagination.items &&
               <Grid.Container gap={2} justify="flex-start">
-                {visibleItems.map((item) =>
+                {pagination.items.map((item) =>
                   <Grid xs={24} sm={12} md={8} key={item.id}>
                     <ProductItem item={item} showImage={false} />
                   </Grid>
@@ -96,13 +93,21 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
               </Grid.Container>
             }
 
-            {hasMore &&
+            {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Button type="success" ghost auto onClick={viewMore}>View More</Button>
+                  <Pagination count={pagination.pages} initialPage={pagination.page} onChange={(page: number) => pagination.goToPage(page)} />
                 </Grid>
               </Grid.Container>
             }
+
+            {/*pagination.page < pagination.pages &&
+              <Grid.Container gap={2}>
+                <Grid xs={24} padding={2} justify="center">
+                  <Button type="success" ghost auto onClick={pagination.nextPage}>View More</Button>
+                </Grid>
+              </Grid.Container>
+          */}
 
           </Grid>
         </Grid.Container>
@@ -112,7 +117,7 @@ export default function ProductSearch({ layout, page, tiles, featureTypes, param
   )
 }
 
-export interface ProductSearchProps extends PageProps {
+export interface ProductSearchCSRProps extends PageProps {
   tiles: ITile[];
   featureTypes: IFeatureType[];
 }
@@ -122,18 +127,18 @@ export async function getStaticProps(context) {
   const market = context.params.market;
   const locale = context.params.locale;
   const layout = await getLayout(market, locale);
-  const page = await getPage('product_search', id, market, locale);
+  const page = await getPage('product_search_csr', id, market, locale);
   const tiles = await getTiles({ market, locale });
   const featureTypes = await getFeatureTypes({ market, locale });
   const props = asStaticProps({ ...context, layout, page, tiles, featureTypes });
-  // console.log('ProductSearch getStaticProps', props);
+  // console.log('ProductSearchCSR getStaticProps', props);
   return {
     props,
   };
 }
 
 export async function getStaticPaths() {
-  const paths = await getStaticPathsForSchema('product_search');
+  const paths = await getStaticPathsForSchema('product_search_csr');
   return {
     paths,
     fallback: true,

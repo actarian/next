@@ -39,8 +39,6 @@ export interface IPage {
   [key: string]: any;
 }
 
-export interface IPageLayout extends IPage, ILayout { }
-
 export type PageProps = {
   layout: ILayout;
   page: IPage;
@@ -49,3 +47,7 @@ export type PageProps = {
   locale?: string;
   defaultLocale?: string;
 };
+
+/*
+export interface IPageLayout extends IPage, ILayout { }
+*/

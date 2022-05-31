@@ -34,7 +34,8 @@ export const PAGES = {
   homepage: 'homepage',
   about: 'about',
   product_index: 'product_index',
-  product_search: 'product_search',
+  product_search_csr: 'product_search_csr',
+  product_search_ssr: 'product_search_ssr',
   product: 'product',
   notfound: 'notfound',
 };

@@ -1,44 +1,27 @@
 import { IEquatable } from '@core/entity/entity';
-import { useLocation } from '@hooks/useLocation/useLocation';
+import { useSearchParams } from '@hooks/useSearchParams/useSearchParams';
 import { IFeatureType } from '@models/feature_type/feature_type';
-import { ITile } from '@models/tile/tile';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Filter, FilterMode } from './filter';
+import { Filter } from './filter';
+import { filtersToParams, getFilters } from './filter.service';
 
-export const PER_PAGE = 15;
-// let q = 0;
+export type FilterParams = { [key: string]: IEquatable[] };
+export type FilterValues = IEquatable[][];
 
-export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterMap: (key: string, item: any, value: IEquatable) => boolean) {
+export function useFilters<T>(items: T[], featureTypes: IFeatureType[], filterItem: (key: string, item: any, value: IEquatable) => boolean, ssrItems?: T[], ssrValues: FilterParams = {}) {
 
-  const { params, setParams } = useLocation('filters');
+  const { params, replaceParamsSilently } = useSearchParams('filters');
   // console.log('useFilters', params);
 
-  const [maxLength, setMaxLength] = useState(PER_PAGE);
-  const [hasMore, setHasMore] = useState(false);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [visibleItems, setVisibleItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState<T[]>([]);
 
   // creating filters with useMemo because is an heavy operation
   const filters = useMemo(() => {
-
-    return featureTypes.map(featureType => {
-      const filter = new Filter(featureType, FilterMode.OR);
-      filter.filter = (item, value) => {
-        if (typeof filterMap === 'function') {
-          return filterMap(featureType.id, item, value);
-        }
-        return false;
-      };
-      filter.removeInvalidOptions(items);
-      if (params && params[filter.id]) {
-        filter.values = params[filter.id];
-      }
-      return filter;
-    });
-  }, [featureTypes, filterMap]);
+    return getFilters<T>(items, featureTypes, filterItem, params);
+  }, [featureTypes, filterItem]);
 
   // setting initial values
-  const [values, setValues] = useState(filters.map(x => x.values));
+  const [values, setValues] = useState<FilterValues>(filters.map(x => x.values));
 
   // setFilter is called when user select a filter value
   const setFilter = useCallback((filter?: Filter, values?: IEquatable[]) => {
@@ -52,8 +35,7 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
     // selecting all filters with values
     const selectedFilters = filters.filter(x => x.values.length > 0);
 
-    // resetting maxLength and values
-    setMaxLength(PER_PAGE);
+    // resetting values
     setValues(filters.map(x => x.values));
 
     // filtering items
@@ -68,23 +50,9 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
     });
     setFilteredItems(filteredItems);
 
-    // setting visible items
-    const newMaxLength = Math.min(filteredItems.length, maxLength);
-    setVisibleItems(filteredItems.slice(0, newMaxLength));
-    setHasMore(newMaxLength < filteredItems.length);
-
     // serializing filters
-    let params = {};
-    let any = false;
-    selectedFilters.forEach(filter => {
-      params[filter.id] = filter.values;
-      any = true;
-    });
-    if (!any) {
-      params = null;
-    }
-
-    setParams('filters', params);
+    const params = filtersToParams(filters);
+    replaceParamsSilently(params);
 
     /*
     if (document && window.history) {
@@ -96,24 +64,16 @@ export function useFilters(items: ITile[], featureTypes: IFeatureType[], filterM
 
   }, [items, filters]);
 
-  // viewMore is called when user click on "View more" button
-  const viewMore = useCallback(() => {
-    console.log('viewMore', visibleItems.length, filteredItems.length);
-    if (visibleItems.length < filteredItems.length) {
-      const newMaxLength = Math.min(visibleItems.length + PER_PAGE, filteredItems.length);
-      setVisibleItems(filteredItems.slice(0, newMaxLength));
-      setMaxLength(newMaxLength);
-      setHasMore(newMaxLength < filteredItems.length);
-    }
-  }, [maxLength, visibleItems.length, filteredItems.length]);
-
   // initial call to setFilter
   useEffect(() => {
     console.log('useFilters', values);
+    if (ssrItems) {
+      return;
+    }
     setFilter();
     return () => { };
   }, [items, featureTypes]);
 
-  return { visibleItems, filters, setFilter, values, hasMore, viewMore, total: filteredItems.length };
+  return { filteredItems, filters, setFilter, values };
 
 }

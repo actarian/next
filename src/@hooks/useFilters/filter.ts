@@ -8,25 +8,50 @@ export enum FilterMode {
   QUERY = 'query',
 };
 
+export interface IFilter {
+  id?: string;
+  title?: string;
+  mode?: FilterMode;
+  options?: { id: IEquatable, title: string }[];
+  values?: IEquatable[];
+}
+
 export class Filter {
 
   id: string;
   title: string;
   mode: FilterMode;
   options: { id: IEquatable, title: string }[];
-  values: IEquatable[] = [];
+  values: IEquatable[];
 
-  constructor(featureType: IFeatureType, mode: FilterMode = FilterMode.AND) {
-    this.id = featureType.id;
-    this.title = featureType.title;
-    this.mode = mode;
-    this.options = featureType.features;
-    if (mode === FilterMode.SELECT) {
+  constructor(options?: IFilter) {
+    if (options) {
+      Object.assign(this, options);
+    }
+    if (!this.mode) {
+      this.mode = FilterMode.AND;
+    }
+    if (!this.options) {
+      this.options = [];
+    }
+    if (!this.values) {
+      this.values = [];
+    }
+    if (this.mode === FilterMode.SELECT) {
       this.options.unshift({
         id: undefined,
         title: 'select',
       });
     }
+  }
+
+  static fromFeatureType(featureType: IFeatureType, mode: FilterMode = FilterMode.AND): Filter {
+    return new Filter({
+      id: featureType.id,
+      title: featureType.title,
+      mode,
+      options: featureType.features,
+    });
   }
 
   filter(item, value) {

@@ -7,7 +7,7 @@ import { ILayout } from '@models/layout/layout';
 import { getLayout } from '@models/layout/layout.service';
 import { IRouteLink, SchemaType } from '@models/route/route';
 import { getBreadcrumbFromCategoryTree } from '@models/route/route.service';
-import { IPage, IPageLayout } from './page';
+import { IPage } from './page';
 
 export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<IPage | null> {
   const store = await getStore();
@@ -30,19 +30,6 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
     };
   } else {
     console.log('PageService.getPage.notfound', schema, id, locale);
-    return null;
-  }
-}
-
-export async function getPageLayout(schema: string, id: IEquatable, market?: string, locale?: string): Promise<IPageLayout | null> {
-  const page = await getPage(schema, id, market, locale);
-  if (page) {
-    const layout = await getLayout(market, locale);
-    return {
-      ...page,
-      ...layout,
-    };
-  } else {
     return null;
   }
 }
@@ -71,3 +58,18 @@ export async function getErrorPageLayout(): Promise<{ layout: ILayout, page: IPa
   };
   return { layout, page };
 }
+
+/*
+export async function getPageLayout(schema: string, id: IEquatable, market?: string, locale?: string): Promise<IPageLayout | null> {
+  const page = await getPage(schema, id, market, locale);
+  if (page) {
+    const layout = await getLayout(market, locale);
+    return {
+      ...page,
+      ...layout,
+    };
+  } else {
+    return null;
+  }
+}
+*/
