@@ -54,3 +54,5 @@ export function getIsDevelopment(): boolean {
 }
 
 export const isDevelopment = getIsDevelopment();
+
+export const isBrowser = typeof window !== 'undefined';

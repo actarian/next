@@ -1,9 +1,8 @@
+import { isBrowser } from '@core/utils';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 
 const USE_ENCRYPTION = true;
-
-const isBrowser = typeof window !== 'undefined';
 
 function decode_(base64: string): string {
   if (!USE_ENCRYPTION) return base64;
@@ -16,6 +15,7 @@ function encode_(text: string): string {
 }
 
 function searchParams_(url: string) {
+  // console.log('searchParams_', url);
   return new URLSearchParams(url);
 }
 
@@ -90,7 +90,7 @@ export function decode(encoded: string, key?: string): any {
     const json = decode_(encoded);
     decoded = JSON.parse(json);
   }
-  console.log('useSearchParams.decode', decoded);
+  // console.log('useSearchParams.decode', decoded);
   if (key && decoded) {
     decoded = decoded[key];
   }
@@ -105,7 +105,7 @@ function encode(params: any, value: any, key?: string) {
   } else if (typeof value === 'object') {
     params = Object.assign(params, value);
   }
-  console.log('useSearchParams.encode', params);
+  // console.log('useSearchParams.encode', params);
   const json = JSON.stringify(params);
   encoded = encode_(json);
   return encoded;

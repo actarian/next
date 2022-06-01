@@ -35,13 +35,13 @@ export default function ProductSearchSSR({ page, serializedFilters, pagination }
     filter.values = values || [];
     const params = filtersToParams(filters);
     const { pathname, query } = updateSearchParams(router.asPath, { filter: params, pagination: { page: 1 } });
-    router.push({ pathname, query });
+    router.replace({ pathname, query });
   };
 
   // fires when user make a change on pagination
   function onPaginationChange(page: number) {
     const { pathname, query } = updateSearchParams(router.asPath, { pagination: { page } });
-    router.push({ pathname, query });
+    router.replace({ pathname, query });
   };
 
   return (

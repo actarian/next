@@ -33,6 +33,7 @@ export class Filter {
 
   constructor(options?: IFilter) {
     if (options) {
+      // console.log(options.values);
       Object.assign(this, options);
     }
     if (!this.mode) {
