@@ -20,43 +20,25 @@ export function getFilters<T>(items: T[], featureTypes: IFeatureType[], filterMa
   });
 }
 
-export function setFilter<T>(items: T[], filters: Filter[], filter?: Filter, values?: IEquatable[]): T[] {
+export function setFilters<T>(items: T[], filters: Filter[], filter?: Filter, values?: IEquatable[]): T[] {
 
   // if passed featureType and values with set filter values
   if (filter) {
-    console.log('setFilter', filter.id, values);
+    // console.log('setFilter', filter.id, values);
     filter.values = values || [];
   }
 
   // selecting all filters with values
   const selectedFilters = filters.filter(x => x.values.length > 0);
 
-  // resetting maxLength and values
-  /*
-  setMaxLength(PER_PAGE);
-  setValues(filters.map(x => x.values));
-  */
-
   // filtering items
   const filteredItems = items.filter(item => {
     let has = true;
     selectedFilters.forEach(filter => {
-      // if (filter !== skipFilter) {
       has = has && filter.match(item);
-      // }
     });
     return has;
   });
-
-  /*
-  setFilteredItems(filteredItems);
-
-  // setting visible items
-  const newMaxLength = Math.min(filteredItems.length, maxLength);
-  setVisibleItems(filteredItems.slice(0, newMaxLength));
-  setHasMore(newMaxLength < filteredItems.length);
-  */
-
   return filteredItems;
 }
 

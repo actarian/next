@@ -1,30 +1,37 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getPaginationInfo } from './pagination.service';
+import { useEffect, useState } from 'react';
+import { getPagedItems } from './pagination.service';
 
-export function usePagination<T>(items: T[], page: number = 0, perPage: number = 15) {
+export function usePagination<T>($items: T[], $page: number = 0, $perPage: number = 15) {
 
-  const [pagination, setPagination] = useState(() => getPaginationInfo<T>(items, page, perPage));
+  let total = $items.length;
 
-  console.log(pagination.items);
+  const [page, setPage] = useState($page);
+  const [perPage, setPerPage] = useState($perPage);
+  const [items, setItems] = useState(getPagedItems<T>($items, $page, $perPage));
+
+  const pages = Math.ceil(total / perPage);
 
   useEffect(() => {
-    setPagination(getPaginationInfo<T>(items, page, perPage));
-  }, [items, perPage]);
+    console.log('reset');
+    setPage(0);
+    setItems(getPagedItems<T>($items, 0, perPage));
+  }, [$items, perPage]);
 
-  const goToPage = useCallback((num) => {
-    if (num > 0 && num < pagination.total) {
-      const pagination = getPaginationInfo<T>(items, num, perPage);
-      setPagination(pagination);
+  function goToPage(num) {
+    if (num >= 0 && num < total) {
+      console.log('goToPage', num);
+      setPage(num);
+      setItems(getPagedItems<T>($items, num, perPage));
     }
-  }, [items, pagination, perPage]);
+  }
 
   function nextPage() {
-    goToPage(pagination.page + 1);
+    goToPage(page + 1);
   }
 
   function previousPage() {
-    goToPage(pagination.page - 1);
+    goToPage(page - 1);
   }
 
-  return { ...pagination, nextPage, previousPage, goToPage };
+  return { items, page, pages, total, nextPage, previousPage, goToPage, setPerPage };
 }

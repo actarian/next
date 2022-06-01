@@ -1,13 +1,17 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 
+const encription = true;
+
 const isBrowser = typeof window !== 'undefined';
 
 function decode_(base64: string): string {
+  if (!encription) return base64;
   return isBrowser ? window.atob(base64) : Buffer.from(base64, 'base64').toString();
 }
 
 function encode_(text: string): string {
+  if (!encription) return text;
   return isBrowser ? window.btoa(text) : Buffer.from(text).toString('base64');
 }
 

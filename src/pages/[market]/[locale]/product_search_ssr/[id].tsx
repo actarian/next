@@ -4,11 +4,11 @@ import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
 import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Grid, Note, Pagination } from '@geist-ui/core';
 import { Filter, IFilter } from '@hooks/useFilters/filter';
-import { filtersToParams, getFilters, setFilter } from '@hooks/useFilters/filter.service';
+import { filtersToParams, getFilters, setFilters } from '@hooks/useFilters/filter.service';
+import { getPaginationInfo } from '@hooks/usePagination/pagination.service';
 import { decode, pushSearchParams } from '@hooks/useSearchParams/useSearchParams';
 import { getFeatureTypes } from '@models/feature_type/feature_type.service';
 import { getLayout } from '@models/layout/layout.service';
@@ -19,7 +19,7 @@ import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
 import { useRouter } from 'next/router';
 
-export default function ProductSearchSSR({ page, ssrFilters, values, pagination }: ProductSearchSSRProps) {
+export default function ProductSearchSSR({ page, ssrFilters, pagination }: ProductSearchSSRProps) {
   if (!page) {
     return;
   }
@@ -51,7 +51,7 @@ export default function ProductSearchSSR({ page, ssrFilters, values, pagination 
 
             <FilterRecap filters={filters} onChange={onFilterSidebarDidChange}></FilterRecap>
 
-            <FilterSidebar filters={filters} values={values} onChange={onFilterSidebarDidChange}></FilterSidebar>
+            <FilterSidebar filters={filters} onChange={onFilterSidebarDidChange}></FilterSidebar>
 
           </Grid>
           <Grid xs={24} sm={18} direction="column">
@@ -71,7 +71,7 @@ export default function ProductSearchSSR({ page, ssrFilters, values, pagination 
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} initialPage={pagination.page} onChange={setPagination} />
+                  <Pagination count={pagination.pages} page={pagination.page + 1} onChange={(page:number) => setPagination(page - 1)} />
                 </Grid>
               </Grid.Container>
             }
@@ -93,7 +93,6 @@ export default function ProductSearchSSR({ page, ssrFilters, values, pagination 
 }
 
 export interface ProductSearchSSRProps extends PageProps {
-  values: IEquatable[][];
   ssrFilters: IFilter[];
   pagination: { page: number, pages: number, total: number, items: ITile[] };
 }
@@ -112,25 +111,19 @@ export async function getServerSideProps(context) {
 
   // Search
   const query = context.query;
+  const filterParams = (query && query.params) ? decode(query.params, 'filter') : null;
+
   const tiles = await getTiles({ market, locale });
   const featureTypes = await getFeatureTypes({ market, locale });
 
-  const filterParams = (query && query.params) ? decode(query.params, 'filter') : null;
-  const pagination = (query && query.params ? decode(query.params, 'pagination') : null) || {};
-
   const filters = getFilters(tiles, featureTypes, filterProductItem, filterParams);
-  const filteredItems = setFilter(tiles, filters);
-  const items = filteredItems;
-  const values = filters.map(x => x.values);
+  const items = setFilters(tiles, filters);
 
+  // Pagination
+  let pagination = (query && query.params ? decode(query.params, 'pagination') : null) || {};
+  pagination = getPaginationInfo<ITile>(items, pagination.page, pagination.perPage);
 
-
-  pagination.page = pagination.page || 0;
-  pagination.total = items.length;
-  pagination.pages = Math.ceil(pagination.total / 15);
-  pagination.items = filteredItems.slice(pagination.page * 15, Math.min(filteredItems.length, (pagination.page + 1) * 15));
-
-  const props = asStaticProps({ params, query, layout, page, values, ssrFilters: filters, pagination });
+  const props = asStaticProps({ params, query, layout, page, ssrFilters: filters, pagination });
   // console.log('ProductSearchSSR getStaticProps', props);
   return {
     props,

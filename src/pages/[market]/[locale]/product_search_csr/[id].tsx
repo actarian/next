@@ -20,22 +20,21 @@ import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
 import { useCallback } from 'react';
 
-export default function ProductSearchCSR({ layout, page, tiles, featureTypes, params }: ProductSearchCSRProps) {
-
+export default function ProductSearchCSR({ page, tiles, featureTypes }: ProductSearchCSRProps) {
   if (!page) {
     return;
   }
 
   const filterItem = useCallback(filterProductItem, []);
 
-  const { filteredItems, filters, setFilter, values } = useFilters<ITile>(tiles, featureTypes, filterItem);
+  const { filteredItems, filters, setFilter } = useFilters<ITile>(tiles, featureTypes, filterItem);
 
   const pagination = usePagination<ITile>(filteredItems);
 
   const onFilterSidebarDidChange = (filter, values) => {
     console.log('ProductSearchCSR.onFilterSidebarDidChange', filter, values);
     setFilter(filter, values);
-    pagination.goToPage(0);
+    // pagination.goToPage(0);
   };
 
   if (false) {
@@ -76,7 +75,7 @@ export default function ProductSearchCSR({ layout, page, tiles, featureTypes, pa
 
             <FilterRecap filters={filters} onChange={onFilterSidebarDidChange}></FilterRecap>
 
-            <FilterSidebar filters={filters} values={values} onChange={onFilterSidebarDidChange}></FilterSidebar>
+            <FilterSidebar filters={filters} onChange={onFilterSidebarDidChange}></FilterSidebar>
 
           </Grid>
           <Grid xs={24} sm={18} direction="column">
@@ -96,7 +95,7 @@ export default function ProductSearchCSR({ layout, page, tiles, featureTypes, pa
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} initialPage={pagination.page} onChange={(page: number) => pagination.goToPage(page)} />
+                  <Pagination count={pagination.pages} page={pagination.page + 1} onChange={(page: number) => pagination.goToPage(page - 1)} />
                 </Grid>
               </Grid.Container>
             }
@@ -123,13 +122,20 @@ export interface ProductSearchCSRProps extends PageProps {
 }
 
 export async function getStaticProps(context) {
+
+  // Layout
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;
   const layout = await getLayout(market, locale);
+
+  // Page
   const page = await getPage('product_search_csr', id, market, locale);
+
+  // Search
   const tiles = await getTiles({ market, locale });
   const featureTypes = await getFeatureTypes({ market, locale });
+
   const props = asStaticProps({ ...context, layout, page, tiles, featureTypes });
   // console.log('ProductSearchCSR getStaticProps', props);
   return {

@@ -1,7 +1,7 @@
 
 import { Checkbox, Collapse } from '@geist-ui/core';
 
-export function FilterSidebar({ filters, values, onChange }) {
+export function FilterSidebar({ filters, onChange }) {
 
   const onFeatureDidChange = (filter, values) => {
     console.log('onFeatureDidChange', filter, values);
@@ -14,7 +14,7 @@ export function FilterSidebar({ filters, values, onChange }) {
         {filters && filters.map((filter, i) => (
           <Collapse key={filter.id} title={filter.title}>
             {filter.options &&
-              <Checkbox.Group style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} value={values[i]} onChange={(values) => onFeatureDidChange(filter, values)}>
+              <Checkbox.Group style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} value={filter.values} onChange={(values) => onFeatureDidChange(filter, values)}>
                 {filter.options.map((option) => (
                   option.title && <Checkbox key={option.id} value={option.id} marginBottom="10px">{option.title}</Checkbox>
                 ))}

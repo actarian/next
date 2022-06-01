@@ -16,6 +16,6 @@ export function getPaginationInfo<T>(items: T[], page: number = 0, perPage: numb
   const total = items.length;
   const pages = Math.ceil(total / perPage);
   const pagedItems = getPagedItems(items, page, perPage);
-  console.log(items.length, '->', pagedItems.length);
+  // console.log(items.length, '->', pagedItems.length);
   return { items: pagedItems, total, pages, page, perPage };
 }
