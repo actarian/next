@@ -1,14 +1,16 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import { FilterRecap } from '@components/filter/filter-recap';
+import FilterResult from '@components/filter/filter-result';
 import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
-import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Grid, Note, Pagination } from '@geist-ui/core';
 import { useApiGet } from '@hooks/useApi/useApi';
+import { filtersToParams } from '@hooks/useFilters/filter.service';
 import { useFilters } from '@hooks/useFilters/useFilters';
 import { usePagination } from '@hooks/usePagination/usePagination';
+import { useSearchParams } from '@hooks/useSearchParams/useSearchParams';
 import { IFeatureType } from '@models/feature_type/feature_type';
 import { getFeatureTypes } from '@models/feature_type/feature_type.service';
 import { getLayout } from '@models/layout/layout.service';
@@ -20,21 +22,40 @@ import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
 import { useCallback } from 'react';
 
-export default function ProductSearchCSR({ page, tiles, featureTypes }: ProductSearchCSRProps) {
+export default function ProductSearchCSR({ page, items, featureTypes }: ProductSearchCSRProps) {
   if (!page) {
     return;
   }
 
+  // deserialize queryString encoded params
+  const { params, replaceParamsSilently } = useSearchParams();
+
+  // using item filter callback from service
   const filterItem = useCallback(filterProductItem, []);
 
-  const { filteredItems, filters, setFilter } = useFilters<ITile>(tiles, featureTypes, filterItem);
+  // initialize filters with items, featureTypes and queryString params
+  const filterParams = params && params.filter;
+  const { filteredItems, filters, setFilter } = useFilters<ITile>(items, featureTypes, filterItem, filterParams);
 
-  const pagination = usePagination<ITile>(filteredItems);
+  // initialize pagination with filteredItems and queryString params
+  const paginationParams = (params && params.pagination) || {};
+  const pagination = usePagination<ITile>(filteredItems, paginationParams.page, paginationParams.perPage);
 
-  const onFilterSidebarDidChange = (filter, values) => {
-    console.log('ProductSearchCSR.onFilterSidebarDidChange', filter, values);
+  // fires when user make a change on filters
+  function onFilterChange(filter, values) {
+    // console.log('ProductSearchCSR.onFilterChange', filter, values);
     setFilter(filter, values);
-    // pagination.goToPage(0);
+    pagination.goToPage(1);
+    // serializing querystring filter
+    const filterParams = filtersToParams(filters);
+    replaceParamsSilently({ filter: filterParams, pagination: { page: 1 } });
+  };
+
+  // fires when user make a change on pagination
+  function onPaginationChange(page: number) {
+    pagination.goToPage(page);
+    // serializing querystring pagination
+    replaceParamsSilently({ pagination: { page } });
   };
 
   if (false) {
@@ -73,20 +94,20 @@ export default function ProductSearchCSR({ page, tiles, featureTypes }: ProductS
         <Grid.Container gap={2} justify="flex-start">
           <Grid xs={24} sm={6} direction="column">
 
-            <FilterRecap filters={filters} onChange={onFilterSidebarDidChange}></FilterRecap>
-
-            <FilterSidebar filters={filters} onChange={onFilterSidebarDidChange}></FilterSidebar>
+            <FilterSidebar filters={filters} onChange={onFilterChange}></FilterSidebar>
 
           </Grid>
           <Grid xs={24} sm={18} direction="column">
 
-            <Note type="warning" marginBottom={1}>{filteredItems.length} items found</Note>
+            <Note type="warning" label={false} marginBottom={1}>{filteredItems.length} items found</Note>
+
+            <FilterRecap filters={filters} onChange={onFilterChange}></FilterRecap>
 
             {pagination.items &&
               <Grid.Container gap={2} justify="flex-start">
                 {pagination.items.map((item) =>
                   <Grid xs={24} sm={12} md={8} key={item.id}>
-                    <ProductItem item={item} showImage={false} />
+                    <FilterResult item={item} showImage={false} />
                   </Grid>
                 )}
               </Grid.Container>
@@ -95,7 +116,7 @@ export default function ProductSearchCSR({ page, tiles, featureTypes }: ProductS
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} page={pagination.page + 1} onChange={(page: number) => pagination.goToPage(page - 1)} />
+                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={onPaginationChange} />
                 </Grid>
               </Grid.Container>
             }
@@ -117,7 +138,7 @@ export default function ProductSearchCSR({ page, tiles, featureTypes }: ProductS
 }
 
 export interface ProductSearchCSRProps extends PageProps {
-  tiles: ITile[];
+  items: ITile[];
   featureTypes: IFeatureType[];
 }
 
@@ -133,10 +154,10 @@ export async function getStaticProps(context) {
   const page = await getPage('product_search_csr', id, market, locale);
 
   // Search
-  const tiles = await getTiles({ market, locale });
+  const items = await getTiles({ market, locale });
   const featureTypes = await getFeatureTypes({ market, locale });
 
-  const props = asStaticProps({ ...context, layout, page, tiles, featureTypes });
+  const props = asStaticProps({ ...context, layout, page, items, featureTypes });
   // console.log('ProductSearchCSR getStaticProps', props);
   return {
     props,

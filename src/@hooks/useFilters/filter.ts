@@ -8,11 +8,18 @@ export enum FilterMode {
   QUERY = 'query',
 };
 
+export interface IFilterOption {
+  id: IEquatable;
+  title: string;
+  count?: number;
+  disabled?: boolean;
+}
+
 export interface IFilter {
   id?: string;
   title?: string;
   mode?: FilterMode;
-  options?: { id: IEquatable, title: string }[];
+  options?: IFilterOption[];
   values?: IEquatable[];
 }
 
@@ -21,7 +28,7 @@ export class Filter {
   id: string;
   title: string;
   mode: FilterMode;
-  options: { id: IEquatable, title: string }[];
+  options: IFilterOption[];
   values: IEquatable[];
 
   constructor(options?: IFilter) {

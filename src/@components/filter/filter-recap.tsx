@@ -1,5 +1,5 @@
 
-import { Button, Text } from '@geist-ui/core';
+import { Button, ButtonGroup, Text } from '@geist-ui/core';
 import { XCircleFill } from '@geist-ui/icons';
 
 export function FilterRecap({ filters, onChange }) {
@@ -9,19 +9,27 @@ export function FilterRecap({ filters, onChange }) {
     const index = values.indexOf(option.id);
     if (index !== -1) {
       values.splice(index, 1);
-      console.log('onRemove', filter.id, option.id, values);
+      // console.log('onRemove', filter.id, option.id, values);
       onChange(filter, values);
     }
   }
 
   return (
-    <div style={{ padding: '0 10px' }}>
+    <div style={{ padding: '0 10px', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
       {filters && filters.filter(x => x.hasAny()).map((filter, i) => (
-        <div key={filter.id}>
-          <Text>{filter.title}</Text>
-          {filter.options && filter.options.filter(x => filter.has(x)).map((option) => (
+        <div key={filter.id} style={{ display: 'flex', alignItems: 'center', padding: '0 10px 0 0' }}>
+          <Text paddingRight="10px">{filter.title}</Text>
+
+          {false && filter.options && filter.options.filter(x => filter.has(x)).map((option) => (
             <Button key={option.id} type="abort" icon={<XCircleFill />} auto padding={0} scale={0.5} onClick={() => onRemove(filter, option)}>{option.title}</Button>
           ))}
+
+          <ButtonGroup scale={1 / 3}>
+            {filter.options && filter.options.filter(x => filter.has(x)).map((option) => (
+              <Button key={option.id} scale={1 / 3} icon={<XCircleFill />} onClick={() => onRemove(filter, option)}>{option.title}</Button>
+            ))}
+          </ButtonGroup>
+
         </div>
       ))}
     </div>

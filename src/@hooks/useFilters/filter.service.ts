@@ -20,6 +20,40 @@ export function getFilters<T>(items: T[], featureTypes: IFeatureType[], filterMa
   });
 }
 
+export function updateFilterStates<T>(items: T[], filters: Filter[]) {
+  filters.forEach(filter => {
+    const filteredItems = this.filterItems(items, filter);
+    filter.options.forEach(option => {
+      let count = 0;
+      if (option.id) {
+        let i = 0;
+        while (i < filteredItems.length) {
+          const item = filteredItems[i];
+          if (filter.filter(item, option.id)) {
+            count++;
+          }
+          i++;
+        }
+      } else {
+        count = filteredItems.length;
+      }
+      option.count = count;
+      option.disabled = count === 0;
+    });
+  });
+}
+
+export function getFilteredItems<T>(items: T[], selectedFilters: Filter[]): T[] {
+  const filteredItems = items.filter(item => {
+    let has = true;
+    selectedFilters.forEach(filter => {
+      has = has && filter.match(item);
+    });
+    return has;
+  });
+  return filteredItems;
+}
+
 export function setFilters<T>(items: T[], filters: Filter[], filter?: Filter, values?: IEquatable[]): T[] {
 
   // if passed featureType and values with set filter values
@@ -32,13 +66,31 @@ export function setFilters<T>(items: T[], filters: Filter[], filter?: Filter, va
   const selectedFilters = filters.filter(x => x.values.length > 0);
 
   // filtering items
-  const filteredItems = items.filter(item => {
-    let has = true;
-    selectedFilters.forEach(filter => {
-      has = has && filter.match(item);
+  const filteredItems = getFilteredItems<T>(items, selectedFilters);
+
+  // updating filter options
+  filters.forEach(filter => {
+    const otherFilters = selectedFilters.filter(x => x !== filter);
+    const filteredItems = getFilteredItems<T>(items, otherFilters);
+    filter.options.forEach(option => {
+      let count = 0;
+      if (option.id) {
+        let i = 0;
+        while (i < filteredItems.length) {
+          const item = filteredItems[i];
+          if (filter.filter(item, option.id)) {
+            count++;
+          }
+          i++;
+        }
+      } else {
+        count = filteredItems.length;
+      }
+      option.count = count;
+      option.disabled = count === 0;
     });
-    return has;
   });
+
   return filteredItems;
 }
 

@@ -1,15 +1,15 @@
 import Breadcrumb from '@components/breadcrumb/breadcrumb';
 import { FilterRecap } from '@components/filter/filter-recap';
+import FilterResult from '@components/filter/filter-result';
 import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
-import ProductItem from '@components/product-item/product-item';
 import Layout from '@components/_layout';
 import { asStaticProps } from '@core/utils';
 import { Grid, Note, Pagination } from '@geist-ui/core';
 import { Filter, IFilter } from '@hooks/useFilters/filter';
 import { filtersToParams, getFilters, setFilters } from '@hooks/useFilters/filter.service';
 import { getPaginationInfo } from '@hooks/usePagination/pagination.service';
-import { decode, pushSearchParams } from '@hooks/useSearchParams/useSearchParams';
+import { decode, updateSearchParams } from '@hooks/useSearchParams/useSearchParams';
 import { getFeatureTypes } from '@models/feature_type/feature_type.service';
 import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
@@ -19,23 +19,29 @@ import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
 import { useRouter } from 'next/router';
 
-export default function ProductSearchSSR({ page, ssrFilters, pagination }: ProductSearchSSRProps) {
+export default function ProductSearchSSR({ page, serializedFilters, pagination }: ProductSearchSSRProps) {
   if (!page) {
     return;
   }
 
+  // using router to update queryString searchParams
   const router = useRouter();
 
-  const filters = ssrFilters.map(x => new Filter(x));
+  // deserialize serialized filters to instances with methods
+  const filters = serializedFilters.map(x => new Filter(x));
 
-  const onFilterSidebarDidChange = (filter, values) => {
+  // fires when user make a change on filters
+  function onFilterChange(filter, values) {
     filter.values = values || [];
     const params = filtersToParams(filters);
-    pushSearchParams(router, 'filter', params);
+    const { pathname, query } = updateSearchParams(router.asPath, { filter: params, pagination: { page: 1 } });
+    router.push({ pathname, query });
   };
 
-  const setPagination = (page: number) => {
-    pushSearchParams(router, 'pagination', { page });
+  // fires when user make a change on pagination
+  function onPaginationChange(page: number) {
+    const { pathname, query } = updateSearchParams(router.asPath, { pagination: { page } });
+    router.push({ pathname, query });
   };
 
   return (
@@ -49,20 +55,20 @@ export default function ProductSearchSSR({ page, ssrFilters, pagination }: Produ
         <Grid.Container gap={2} justify="flex-start">
           <Grid xs={24} sm={6} direction="column">
 
-            <FilterRecap filters={filters} onChange={onFilterSidebarDidChange}></FilterRecap>
-
-            <FilterSidebar filters={filters} onChange={onFilterSidebarDidChange}></FilterSidebar>
+            <FilterSidebar filters={filters} onChange={onFilterChange}></FilterSidebar>
 
           </Grid>
           <Grid xs={24} sm={18} direction="column">
 
-            <Note type="warning" marginBottom={1}>{pagination.total} items found</Note>
+            <Note type="warning" label={false} marginBottom={1}>{pagination.total} items found</Note>
+
+            <FilterRecap filters={filters} onChange={onFilterChange}></FilterRecap>
 
             {pagination.items &&
               <Grid.Container gap={2} justify="flex-start">
                 {pagination.items.map((item) =>
                   <Grid xs={24} sm={12} md={8} key={item.id}>
-                    <ProductItem item={item} showImage={false} />
+                    <FilterResult item={item} showImage={false} />
                   </Grid>
                 )}
               </Grid.Container>
@@ -71,7 +77,7 @@ export default function ProductSearchSSR({ page, ssrFilters, pagination }: Produ
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} page={pagination.page + 1} onChange={(page:number) => setPagination(page - 1)} />
+                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={(page: number) => onPaginationChange(page)} />
                 </Grid>
               </Grid.Container>
             }
@@ -93,14 +99,16 @@ export default function ProductSearchSSR({ page, ssrFilters, pagination }: Produ
 }
 
 export interface ProductSearchSSRProps extends PageProps {
-  ssrFilters: IFilter[];
+  serializedFilters: IFilter[];
   pagination: { page: number, pages: number, total: number, items: ITile[] };
 }
 
 export async function getServerSideProps(context) {
 
-  // Layout
   const params = context.params;
+  const query = context.query;
+
+  // Layout
   const id = parseInt(params.id);
   const market = params.market;
   const locale = params.locale;
@@ -109,21 +117,21 @@ export async function getServerSideProps(context) {
   // Page
   const page = await getPage('product_search_ssr', id, market, locale);
 
-  // Search
-  const query = context.query;
-  const filterParams = (query && query.params) ? decode(query.params, 'filter') : null;
+  // Decode search params
+  const searchParams = decode(context.query.params);
 
-  const tiles = await getTiles({ market, locale });
+  // Search
+  const items = await getTiles({ market, locale });
   const featureTypes = await getFeatureTypes({ market, locale });
 
-  const filters = getFilters(tiles, featureTypes, filterProductItem, filterParams);
-  const items = setFilters(tiles, filters);
+  const filters = getFilters(items, featureTypes, filterProductItem, searchParams?.filter);
+  const filteredItems = setFilters(items, filters);
 
   // Pagination
-  let pagination = (query && query.params ? decode(query.params, 'pagination') : null) || {};
-  pagination = getPaginationInfo<ITile>(items, pagination.page, pagination.perPage);
+  let pagination = searchParams?.pagination || {};
+  pagination = getPaginationInfo<ITile>(filteredItems, pagination.page, pagination.perPage);
 
-  const props = asStaticProps({ params, query, layout, page, ssrFilters: filters, pagination });
+  const props = asStaticProps({ params, query, layout, page, serializedFilters: filters, pagination });
   // console.log('ProductSearchSSR getStaticProps', props);
   return {
     props,

@@ -17,7 +17,7 @@ const defaultApiOptions: FetchRequestOptions = {
 export async function apiFetch(pathname: string, options: FetchRequestOptions = {}): Promise<any> {
   const url = `${LOCAL_API_URL}${LOCAL_API_BASE}${pathname}`;
   const apiOptions = merge({ ...defaultApiOptions }, options);
-  console.log('apiFetch', url, options);
+  // console.log('apiFetch', url, options);
   const apiResponse = await httpFetch(url, apiOptions);
   return apiResponse;
 }

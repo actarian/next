@@ -1,17 +1,17 @@
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 
-const encription = true;
+const USE_ENCRYPTION = true;
 
 const isBrowser = typeof window !== 'undefined';
 
 function decode_(base64: string): string {
-  if (!encription) return base64;
+  if (!USE_ENCRYPTION) return base64;
   return isBrowser ? window.atob(base64) : Buffer.from(base64, 'base64').toString();
 }
 
 function encode_(text: string): string {
-  if (!encription) return text;
+  if (!USE_ENCRYPTION) return text;
   return isBrowser ? window.btoa(text) : Buffer.from(text).toString('base64');
 }
 
@@ -77,9 +77,9 @@ function deserialize_(url: string, key?: string) {
   return decode(encoded, key);
 }
 
-function serialize_(url: string, keyOrValue, value): URLSearchParams {
+function serialize_(url: string, value: any, key?: string): URLSearchParams {
   let params = deserialize_(url);
-  const encoded = encode(params, keyOrValue, value);
+  const encoded = encode(params, value, key);
   params = set_(url, 'params', encoded);
   return params;
 }
@@ -90,26 +90,28 @@ export function decode(encoded: string, key?: string): any {
     const json = decode_(encoded);
     decoded = JSON.parse(json);
   }
+  console.log('useSearchParams.decode', decoded);
   if (key && decoded) {
     decoded = decoded[key];
   }
   return decoded || null;
 }
 
-function encode(params: any, keyOrValue, value) {
+function encode(params: any, value: any, key?: string) {
   params = params || {};
   let encoded = null;
-  if (typeof keyOrValue === 'string') {
-    params[keyOrValue] = value;
-  } else {
-    params = keyOrValue;
+  if (typeof key === 'string') {
+    params[key] = value;
+  } else if (typeof value === 'object') {
+    params = Object.assign(params, value);
   }
+  console.log('useSearchParams.encode', params);
   const json = JSON.stringify(params);
   encoded = encode_(json);
   return encoded;
 }
 
-function searchParamsToObject_(params: URLSearchParams): any {
+function searchParamsToObject_(params: URLSearchParams): { [key: string]: string } {
   const entries = params.entries();
   const result = {}
   for (const [key, value] of entries) { // each 'entry' is a [key, value] tupple
@@ -118,42 +120,43 @@ function searchParamsToObject_(params: URLSearchParams): any {
   return result;
 }
 
-export function getSearchParams(url: string, key: string): any {
+export function getSearchParams(url: string, key?: string): any {
   const components = url.split('?');
   const search = components[1] || '';
   const searchParams = new URLSearchParams(search);
   const params = searchParams.get('params');
   const value = params ? decode(params, key) : null;
-  console.log('getSearchParams', value, params, search);
+  // console.log('getSearchParams', value, params, search);
   return value;
 }
 
-export function replaceSearchParams(router: NextRouter, key: string, value: any) {
-  const components = router.asPath.split('?');
-  const searchParams = serialize_(components[1] || '', key, value);
+export function updateSearchParams(currentPath: string, value: any, key?: string): { pathname: string, query: { [key: string]: string } } {
+  const components = currentPath.split('?');
+  const searchParams = serialize_(components[1] || '', value, key);
   const query = searchParamsToObject_(searchParams);
   const pathname = components[0] || '';
-  console.log(pathname, query);
+  // console.log(pathname, query);
+  return { pathname, query };
+}
+
+export function replaceSearchParams(router: NextRouter, value: any, key?: string) {
+  const { pathname, query } = updateSearchParams(router.asPath, value, key);
   router.replace({ pathname, query });
 }
 
-export function pushSearchParams(router: NextRouter, key: string, value: any) {
-  const components = router.asPath.split('?');
-  const searchParams = serialize_(components[1] || '', key, value);
-  const query = searchParamsToObject_(searchParams);
-  const pathname = components[0] || '';
-  console.log(pathname, query);
+export function pushSearchParams(router: NextRouter, value: any, key?: string) {
+  const { pathname, query } = updateSearchParams(router.asPath, value, key);
   router.push({ pathname, query });
 }
 
-export function replaceSearchParamsSilently(key: string, value: any) {
+export function replaceSearchParamsSilently(value: any, key?: string) {
   if (isBrowser) {
-    const searchParams = serialize_(window.location.search, key, value);
+    const searchParams = serialize_(window.location.search, value, key);
     replace_(searchParams);
   }
 }
 
-export function useSearchParams(key: string) {
+export function useSearchParams(key?: string) {
   const router = useRouter();
 
   const initialValue = useMemo(() => {
@@ -162,14 +165,15 @@ export function useSearchParams(key: string) {
   }, []);
 
   const params = initialValue;
+  // console.log('useSearchParams', params);
   // const [params, setParams_] = useState(initialValue);
 
   const setParams = useCallback((params) => {
-    replaceSearchParams(router, key, params);
+    replaceSearchParams(router, params, key);
   }, [key]);
 
   const replaceParamsSilently = useCallback((params) => {
-    replaceSearchParamsSilently(key, params);
+    replaceSearchParamsSilently(params, key);
   }, [key]);
 
   return { params, replaceParamsSilently };

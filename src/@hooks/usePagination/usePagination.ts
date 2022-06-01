@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPagedItems } from './pagination.service';
 
-export function usePagination<T>($items: T[], $page: number = 0, $perPage: number = 15) {
+export function usePagination<T>($items: T[], $page: number = 1, $perPage: number = 15) {
 
   let total = $items.length;
 
@@ -12,14 +12,13 @@ export function usePagination<T>($items: T[], $page: number = 0, $perPage: numbe
   const pages = Math.ceil(total / perPage);
 
   useEffect(() => {
-    console.log('reset');
-    setPage(0);
-    setItems(getPagedItems<T>($items, 0, perPage));
-  }, [$items, perPage]);
+    // console.log('setPagination');
+    setItems(getPagedItems<T>($items, page, perPage));
+  }, [$items]);
 
   function goToPage(num) {
-    if (num >= 0 && num < total) {
-      console.log('goToPage', num);
+    if (num > 0 && num <= total) {
+      // console.log('goToPage', num);
       setPage(num);
       setItems(getPagedItems<T>($items, num, perPage));
     }
