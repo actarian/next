@@ -1,5 +1,5 @@
-import { IEquatable } from "@core/entity/entity";
-import { IFeatureType } from "@models/feature_type/feature_type";
+import type { IEquatable } from "@core/entity/entity";
+import type { IFeatureType } from "@models/feature_type/feature_type";
 
 export enum FilterMode {
   SELECT = 'select',
@@ -25,29 +25,20 @@ export interface IFilter {
 
 export class Filter {
 
-  id: string;
-  title: string;
-  mode: FilterMode;
-  options: IFilterOption[];
-  values: IEquatable[];
+  id: string = 'filter';
+  title: string = 'Filter';
+  mode: FilterMode = FilterMode.OR;
+  options: IFilterOption[] = [];
+  values: IEquatable[] = [];
 
   constructor(options?: IFilter) {
     if (options) {
       // console.log(options.values);
       Object.assign(this, options);
     }
-    if (!this.mode) {
-      this.mode = FilterMode.AND;
-    }
-    if (!this.options) {
-      this.options = [];
-    }
-    if (!this.values) {
-      this.values = [];
-    }
     if (this.mode === FilterMode.SELECT) {
       this.options.unshift({
-        id: undefined,
+        id: -1, // !!! should be undefined
         title: 'select',
       });
     }
@@ -62,12 +53,12 @@ export class Filter {
     });
   }
 
-  filter(item, value) {
+  filter(item: any, value: IEquatable): boolean {
     return item.featureIds.includes(value);
   }
 
-  match(item) {
-    let match;
+  match(item: any): boolean {
+    let match: boolean;
     if (this.mode === FilterMode.OR) {
       // OR: if item has any of the selected values
       match = this.values.length ? false : true;
@@ -84,7 +75,7 @@ export class Filter {
     return match;
   }
 
-  removeInvalidOptions(items) {
+  removeInvalidOptions(items: any[]): void {
     this.options = this.options.filter(option => {
       const hasItemWithOption = items.reduce((p, item) => {
         return p || this.filter(item, option.id);
@@ -93,7 +84,7 @@ export class Filter {
     });
   }
 
-  getLabel() {
+  getLabel(): string | null {
     if (this.hasAny()) {
       return this.options.filter(x => x.id && this.values.indexOf(x.id) !== -1).map(x => x.title).join(', ');
     } else {
@@ -101,17 +92,17 @@ export class Filter {
     }
   }
 
-  hasAny() {
+  hasAny(): boolean {
     return this.values.length > 0;
   }
 
-  has(option) {
+  has(option: IFilterOption): boolean {
     return this.values.indexOf(option.id) !== -1;
   }
 
-  set(option) {
+  set(option: IFilterOption): void {
     if (this.mode === FilterMode.QUERY) {
-      this.values = option ? [option] : [];
+      this.values = option ? [option.toString()] : [];
     } else {
       if (this.mode === FilterMode.SELECT) {
         this.values = [];
@@ -125,14 +116,14 @@ export class Filter {
     }
   }
 
-  remove(option) {
+  remove(option: IFilterOption): void {
     const index = this.values.indexOf(option.id);
     if (index !== -1) {
       this.values.splice(index, 1);
     }
   }
 
-  toggle(option) {
+  toggle(option: IFilterOption): void {
     if (this.has(option)) {
       this.remove(option);
     } else {
@@ -140,7 +131,7 @@ export class Filter {
     }
   }
 
-  clear() {
+  clear(): void {
     this.values = [];
   }
 

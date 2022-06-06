@@ -8,7 +8,8 @@ import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
-import { toPrice } from '@pipes/pipes';
+import { usePrice } from '@pipes/pipes';
+import { GetStaticPropsContext } from 'next';
 // import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 
@@ -17,10 +18,8 @@ export default function ProductPage({ layout, page, params }: PageProps) {
   const router = useRouter()
   const { id } = router.query;
   */
-  if (!page) {
-    return;
-  }
-  // console.log('Product', page.description);
+
+  console.log('Product', page);
   return (
     <>
       <Layout>
@@ -42,7 +41,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
-                <Button type="success" icon={<ArrowRight />} auto>Buy {toPrice(page.price)}</Button>
+                <Button type="success" icon={<ArrowRight />} auto>Buy {usePrice(page.price)}</Button>
               </Card.Footer>
             </Card>
 
@@ -58,7 +57,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext<any>) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;

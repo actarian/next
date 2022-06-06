@@ -17,7 +17,7 @@ export default class CustomDocument extends Document {
     )
   }
 
-  static async getInitialProps(context): Promise<any> {
+  static async getInitialProps(context: any): Promise<any> {
     const initialProps = await Document.getInitialProps(context);
     const styles = CssBaseline.flush();
     return {

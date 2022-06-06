@@ -1,15 +1,24 @@
 import React from 'react';
-import { ILayout } from './layout';
+import type { ILayout } from './layout';
 
 export type ILayoutContext = {
   layout: ILayout,
 };
 
 export const LayoutContext = React.createContext<ILayoutContext>({
-  layout: null,
+  layout: {
+    market: '',
+    locale: '',
+    markets: [],
+    locales: [],
+    labels: [],
+    tree: {
+      items: [],
+    }
+  },
 });
 
-export default function LayoutProvider({ children, layout }) {
+export default function LayoutProvider({ children, layout }: { children?: React.ReactNode, layout: ILayout }) {
 
   const context = {
     layout,

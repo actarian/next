@@ -9,10 +9,10 @@ export function MarketSelector() {
 
   const items = markets.map(x => ({
     ...x,
-    locales: x.languages ? locales.filter(l => x.languages.includes(l.id)) : locales,
+    locales: x.languages ? locales.filter(l => x.languages ? x.languages.includes(l.id) : true) : locales,
   }));
 
-  const getHref = useCallback((market, locale) => {
+  const getHref = useCallback((market: string, locale: string) => {
     const items = alternates || [];
     const alternateItem = items.find(x => x.marketId === market && x.localeId === locale);
     if (alternateItem) {

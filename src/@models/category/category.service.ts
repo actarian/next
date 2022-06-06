@@ -1,6 +1,6 @@
-import { FindParams } from '@core/entity/entity';
+import type { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { ICategorized, ICategory } from './category';
+import type { ICategorized, ICategory } from './category';
 
 export async function getCategories(params: FindParams = {}): Promise<ICategory[]> {
   const store = await getStore();

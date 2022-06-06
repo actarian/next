@@ -1,15 +1,15 @@
-import { FindParams } from '@core/entity/entity';
+import type { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { awaitAll } from '@core/utils';
-import { decorateHref } from '@models/route/route.service';
-import { IFeatureType } from './feature_type';
+// import { awaitAll } from '@core/utils';
+// import { decorateHref } from '@models/route/route.service';
+import type { IFeatureType } from './feature_type';
 
 export async function getFeatureTypes(params: FindParams = {}): Promise<IFeatureType[]> {
   const store = await getStore();
   const items = await store.feature_type.findMany(params);
   // console.log('getTiles', items.length);
   return items;
-  return await awaitAll(items, async (p) => await decorateHref(p, params.market, params.locale));
+  // return await awaitAll(items, async (p) => await decorateHref(p, params.market, params.locale));
 }
 
 /*

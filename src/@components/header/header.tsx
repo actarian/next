@@ -44,7 +44,7 @@ export default function Header() {
           {menu &&
             <Tabs leftSpace={0} activeClassName="current" align="center" value={currentTab} onChange={onTabChange}>
               {menu.items.map((item, i) => (
-                <Tabs.Item key={`${item.title}-${i}`} font="14px" label={item.title} value={item.href} />
+                <Tabs.Item key={`${item.title}-${i}`} font="14px" label={item.title} value={item.href || ''} />
               ))}
             </Tabs>
           }
@@ -56,7 +56,7 @@ export default function Header() {
           </Popover>
         </nav>
       </nav>
-      <CartMini children={null} active={active} setActive={setActive}></CartMini>
+      <CartMini active={active} setActive={setActive}>{null}</CartMini>
     </header>
   )
 }

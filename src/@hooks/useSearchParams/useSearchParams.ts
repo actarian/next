@@ -29,7 +29,7 @@ function get_(url: string, key: string): any {
   return params.get(key);
 }
 
-function set_(url: string, keyOrValue, value): URLSearchParams {
+function set_(url: string, keyOrValue: any, value: any): URLSearchParams { // !!! any
   const params = searchParams_(url);
   if (typeof keyOrValue === 'string') {
     params.set(keyOrValue, value);
@@ -42,7 +42,7 @@ function set_(url: string, keyOrValue, value): URLSearchParams {
 }
 
 function push_(params: URLSearchParams) {
-  if (window.history && window.history.pushState) {
+  if (window.history) {
     const title = document.title;
     const url = `${window.location.href.split('?')[0]}?${params.toString()}`;
     window.history.pushState(params.toString(), title, url);
@@ -50,7 +50,7 @@ function push_(params: URLSearchParams) {
 }
 
 function replace_(params: URLSearchParams) {
-  if (window.history && window.history.pushState) {
+  if (window.history) {
     const title = document.title;
     const url = `${window.location.href.split('?')[0]}?${params.toString()}`;
     window.history.replaceState(params.toString(), title, url);
@@ -84,7 +84,7 @@ function serialize_(url: string, value: any, key?: string): URLSearchParams {
   return params;
 }
 
-export function decode(encoded: string, key?: string): any {
+export function decode(encoded?: string, key?: string): any {
   let decoded = null;
   if (encoded) {
     const json = decode_(encoded);
@@ -113,7 +113,7 @@ function encode(params: any, value: any, key?: string) {
 
 function searchParamsToObject_(params: URLSearchParams): { [key: string]: string } {
   const entries = params.entries();
-  const result = {}
+  const result: { [key: string]: string } = {};
   for (const [key, value] of entries) { // each 'entry' is a [key, value] tupple
     result[key] = value;
   }
@@ -168,11 +168,11 @@ export function useSearchParams(key?: string) {
   // console.log('useSearchParams', params);
   // const [params, setParams_] = useState(initialValue);
 
-  const setParams = useCallback((params) => {
+  const setParams = useCallback((params: any) => {
     replaceSearchParams(router, params, key);
   }, [key]);
 
-  const replaceParamsSilently = useCallback((params) => {
+  const replaceParamsSilently = useCallback((params: any) => {
     replaceSearchParamsSilently(params, key);
   }, [key]);
 

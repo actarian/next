@@ -1,4 +1,4 @@
-import { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core/entity/entity';
 
 export interface IProduct {
   id: IEquatable;

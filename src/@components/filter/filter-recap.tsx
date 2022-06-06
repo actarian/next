@@ -1,10 +1,12 @@
 
+import { IEquatable } from '@core/entity/entity';
 import { Button, ButtonGroup, Text } from '@geist-ui/core';
 import { XCircleFill } from '@geist-ui/icons';
+import { Filter, IFilterOption } from '@hooks/useFilters/filter';
 
-export function FilterRecap({ filters, onChange }) {
+export function FilterRecap({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
 
-  const onRemove = (filter, option) => {
+  const onRemove = (filter: Filter, option: IFilterOption) => {
     let values = [...filter.values];
     const index = values.indexOf(option.id);
     if (index !== -1) {

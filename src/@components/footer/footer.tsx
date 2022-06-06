@@ -18,7 +18,7 @@ export default function Footer() {
 function FooterMenu({ items }: any) {
   return (
     <ul>
-      {items && items.map((item, i) => (
+      {items && items.map((item: IRouteLink, i: number) => (
         <li key={`${item.title}-${i}`}>
           {item.href ? <NextLink href={item.href}>{item.title}</NextLink> : item.title}
           {(item.items && item.items.length ? <FooterMenu items={item.items} /> : null)}

@@ -16,7 +16,7 @@ export function usePagination<T>($items: T[], $page: number = 1, $perPage: numbe
     setItems(getPagedItems<T>($items, page, perPage));
   }, [$items]);
 
-  function goToPage(num) {
+  function goToPage(num: number) {
     if (num > 0 && num <= total) {
       // console.log('goToPage', num);
       setPage(num);

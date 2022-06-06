@@ -7,7 +7,7 @@ import { getMarkets } from '@models/market/market.service';
 import { getRouteLinkTree } from '@models/route/route.service';
 import { ILayout } from './layout';
 
-export async function getLayout(market?: string, locale?: string): Promise<ILayout | null> {
+export async function getLayout(market: string, locale: string): Promise<ILayout> {
   // const store = await getStore();
   const markets: IMarket[] = await getMarkets({ locale });
   const locales: ILocale[] = await getLocales({ locale });

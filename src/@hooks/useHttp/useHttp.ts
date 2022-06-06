@@ -1,15 +1,16 @@
-import { FetchRequestOptions, FetchService, httpFetch } from '@core/http/http.service';
+import type { FetchRequestOptions, FetchService } from '@core/http/http.service';
+import { httpFetch } from '@core/http/http.service';
 import { useEffect, useState } from 'react';
 
 export function useHttpFetch(pathname: string, options: FetchRequestOptions = {}, service: FetchService = httpFetch) {
   const [response, setResponse] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any>(null);
   useEffect(() => {
     // const source = axios.CancelToken.source();
     const fetchData = async () => {
       loading ? null : setLoading(true);
-      error ? setError(false) : null;
+      error ? setError(null) : null;
       try {
         const response = await service(pathname, options);
         // console.log('useHttp.response', response);
@@ -31,15 +32,15 @@ export function useHttpGet(pathname: string, options: FetchRequestOptions = {}) 
 }
 
 export function useHttpPost(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'POST', body: payload ? JSON.stringify(payload) : null });
+  return useHttpFetch(pathname, { ...options, method: 'POST', body: payload ? JSON.stringify(payload) : undefined });
 }
 
 export function useHttpPut(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'PUT', body: payload ? JSON.stringify(payload) : null });
+  return useHttpFetch(pathname, { ...options, method: 'PUT', body: payload ? JSON.stringify(payload) : undefined });
 }
 
 export function useHttpPatch(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'PATCH', body: payload ? JSON.stringify(payload) : null });
+  return useHttpFetch(pathname, { ...options, method: 'PATCH', body: payload ? JSON.stringify(payload) : undefined });
 }
 
 export function useHttpDelete(pathname: string, options: FetchRequestOptions = {}) {

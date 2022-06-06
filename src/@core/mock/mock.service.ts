@@ -1,4 +1,4 @@
-import { FindParams, IEntity } from '@core/entity/entity';
+import type { FindParams, IEntity } from '@core/entity/entity';
 import JsonService from '@core/json/json.service';
 import { localizeItem } from '@models/locale/locale.service';
 

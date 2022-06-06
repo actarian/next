@@ -1,8 +1,8 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
-import { ILabel } from '@models/label/label';
-import { ILocale } from '@models/locale/locale';
-import { IMarket } from '@models/market/market';
-import { IRouteLink } from '@models/route/route';
+import type { ILabel } from '@models/label/label';
+import type { ILocale } from '@models/locale/locale';
+import type { IMarket } from '@models/market/market';
+import type { IRouteLink } from '@models/route/route';
 
 export interface ILayout {
   market: string;
@@ -10,5 +10,5 @@ export interface ILayout {
   markets: IMarket[];
   locales: ILocale[];
   labels: ILabel[];
-  tree: IRouteLink;
+  tree?: IRouteLink;
 }

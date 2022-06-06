@@ -10,11 +10,9 @@ import { getPage } from '@models/page/page.service';
 import { IProduct } from '@models/product/product';
 import { getProducts } from '@models/product/product.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
+import { GetStaticPropsContext } from 'next/types';
 
 export default function Products({ layout, page, products, params }: ProductsProps) {
-  if (!page) {
-    return;
-  }
 
   return (
     <>
@@ -45,7 +43,7 @@ export interface ProductsProps extends PageProps {
   products: IProduct[];
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext<any>) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;

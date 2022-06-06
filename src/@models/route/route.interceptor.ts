@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-server-import-in-page */
 import { apiPost } from '@core/api/api.service';
 import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
@@ -6,7 +7,7 @@ import { IRoute } from './route';
 
 export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;
-  let route: IRoute = null;
+  let route: IRoute;
   // const pathname = url.pathname;
   // const { market, language, pathname } = decompose(url.pathname);
   try {
@@ -15,8 +16,9 @@ export async function routeInterceptor(request: NextRequest, next: NextFetchEven
       console.log('routeInterceptor.route.notfound', url.pathname);
       return;
     }
-  } catch (error) {
-    console.log('routeInterceptor.error', url.pathname, error.url, error.status, error.statusText);
+  } catch (error: any) {
+
+    console.log('routeInterceptor.error', url.pathname, error, error.url, error.status, error.statusText);
     return;
   }
   // console.log('routeInterceptor.route.found', url.pathname, '->', route);

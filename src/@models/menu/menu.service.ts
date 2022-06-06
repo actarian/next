@@ -1,8 +1,8 @@
-import { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { IMenu } from './menu';
+import type { IMenu } from './menu';
 
-export async function getMenu(id: IEquatable): Promise<IMenu> {
+export async function getMenu(id: IEquatable): Promise<IMenu | null> {
   const store = await getStore();
   const item = await store.menu.findOne(id);
   return item;

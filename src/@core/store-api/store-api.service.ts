@@ -1,5 +1,7 @@
-import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '@core/entity/entity';
-import { FetchRequestOptions, httpFetch } from '@core/http/http.service';
+import type { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable } from '@core/entity/entity';
+import { toFindParams } from '@core/entity/entity';
+import type { FetchRequestOptions } from '@core/http/http.service';
+import { httpFetch } from '@core/http/http.service';
 import { merge } from '@core/utils';
 
 // !!! these keys are server-side only
@@ -64,19 +66,19 @@ export default class StoreApiService<T extends IEntity> implements IQuerable<IEn
 
   async findMany(params: FindParams = {}): Promise<T[]> {
     const search = this.search_(params);
-    const url = `/${this.key}${search}`;
+    // const url = `/${this.key}${search}`;
     // console.log('ApiService', this.key, 'findMany', url);
-    let items = await storeGet(`/${this.key}${search}`);
+    let items: T[] = await storeGet(`/${this.key}${search}`);
     items = this.where_(items, params);
     return items.map(x => this.decorator_(x, params));
   }
 
-  async create(payload): Promise<T> {
+  async create(payload: any): Promise<T> {
     const item = await storePost(`/${this.key}`, payload);
     return this.decorator_(item);
   }
 
-  async update(payload): Promise<T> {
+  async update(payload: T): Promise<T> {
     const item = await storePut(`/${this.key}`, payload);
     return this.decorator_(item);
   }
@@ -104,7 +106,7 @@ export default class StoreApiService<T extends IEntity> implements IQuerable<IEn
   }
 
   protected search_(params: FindParams): string {
-    let search = {};
+    let search: { [key: string]: string; } = {};
     Object.entries(params).forEach(([key, value]) => {
       if (typeof value !== 'object') {
         search[key] = value.toString();

@@ -4,9 +4,11 @@ import FilterResult from '@components/filter/filter-result';
 import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
+import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-import { useApiGet } from '@hooks/useApi/useApi';
+// import { useApiGet } from '@hooks/useApi/useApi';
+import { Filter } from '@hooks/useFilters/filter';
 import { filtersToParams } from '@hooks/useFilters/filter.service';
 import { useFilters } from '@hooks/useFilters/useFilters';
 import { usePagination } from '@hooks/usePagination/usePagination';
@@ -20,12 +22,10 @@ import { filterProductItem } from '@models/product_search/product_search.service
 import { getStaticPathsForSchema } from '@models/route/route.service';
 import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
+import { GetStaticPropsContext } from 'next/types';
 import { useCallback } from 'react';
 
 export default function ProductSearchCSR({ page, items, featureTypes }: ProductSearchCSRProps) {
-  if (!page) {
-    return;
-  }
 
   // deserialize queryString encoded params
   const { params, replaceParamsSilently } = useSearchParams();
@@ -42,7 +42,7 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
   const pagination = usePagination<ITile>(filteredItems, paginationParams.page, paginationParams.perPage);
 
   // fires when user make a change on filters
-  function onFilterChange(filter, values) {
+  function onFilterChange(filter: Filter, values?: IEquatable[]) {
     // console.log('ProductSearchCSR.onFilterChange', filter, values);
     setFilter(filter, values);
     pagination.goToPage(1);
@@ -58,6 +58,7 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
     replaceParamsSilently({ pagination: { page } });
   };
 
+  /*
   if (false) {
     const { response: items } = useApiGet('/tiles');
     if (items) {
@@ -82,6 +83,7 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
       console.log('mappedItems', JSON.stringify(mappedItems));
     }
   }
+  */
 
   return (
     <>
@@ -142,7 +144,7 @@ export interface ProductSearchCSRProps extends PageProps {
   featureTypes: IFeatureType[];
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext<any>) {
 
   // Layout
   const id = parseInt(context.params.id);

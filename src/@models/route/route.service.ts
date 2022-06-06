@@ -1,9 +1,9 @@
-import { FindParams } from '@core/entity/entity';
+import type { FindParams } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { ICategory } from '@models/category/category';
+import type { ICategory } from '@models/category/category';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
 // import { parseMockApi } from '@core/mock/mock.server';
-import { IRoute, IRouteLink } from './route';
+import type { IRoute, IRouteLink } from './route';
 
 export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
   const store = await getStore();
@@ -32,12 +32,12 @@ export async function decorateHref(item: any, market: string = 'ww', locale: str
 
 export async function getBreadcrumbFromCategoryTree(categoryTree: ICategory[], market: string = 'ww', locale: string = 'en'): Promise<IRouteLink[]> {
   const routes: IRoute[] = await getRoutes({ where: { marketId: market, localeId: locale } });
-  return categoryTree.map(x => {
+  const tree: IRouteLink[] = categoryTree.map(x => {
     const route = x.pageSchema && x.pageId ? routes.find(r =>
       r.pageSchema === x.pageSchema &&
       r.pageId === x.pageId
     ) : null;
-    const href = route ? route.id.toString() : null;
+    const href = route ? route.id.toString() : undefined;
     let title = x.title;
     if (isLocalizedString(title)) {
       title = localizedToString(title, locale);
@@ -49,9 +49,10 @@ export async function getBreadcrumbFromCategoryTree(categoryTree: ICategory[], m
       items: [],
     }
   });
+  return tree;
 }
 
-export async function getRouteLinkTree(market: string = 'ww', locale: string = 'en'): Promise<IRouteLink> {
+export async function getRouteLinkTree(market: string = 'ww', locale: string = 'en'): Promise<IRouteLink | undefined> {
   const store = await getStore();
   const routes: IRoute[] = await store.route.findMany() as any[];
   const categories: ICategory[] = await store.category.findMany() as any[];
@@ -79,7 +80,7 @@ export function categoryToRouteLink(routes: IRoute[], categories: ICategory[], c
     r.marketId === market &&
     r.localeId === locale
   ) : null;
-  const href = route ? route.id.toString() : null;
+  const href = route ? route.id.toString() : undefined;
   let title = category.title;
   if (isLocalizedString(title)) {
     title = localizedToString(title, locale);

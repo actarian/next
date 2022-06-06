@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 require('module-alias/register');
 
 const dotenv = require('dotenv');
@@ -5,14 +6,15 @@ const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
 
-import { IEntity } from '@core/entity/entity';
+import type { IEntity } from '@core/entity/entity';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
-import { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
+import type { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
-import { ICategorized } from '@models/category/category';
+import type { ICategorized } from '@models/category/category';
 import { getCategoryTreeWithCategories } from '@models/category/category.service';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
-import { IRoute } from '@models/route/route';
+import type { IMarket } from '@models/market/market';
+import type { IRoute } from '@models/route/route';
 import { PAGES } from 'src/types';
 
 if (process.env && process.env.NODE_ENV) {
@@ -26,7 +28,7 @@ const dataSrc = './data/data.json';
 export async function BuildAndWatch() {
   console.log('MockBuild.BuildAndWatch');
   await readStore(dataSrc);
-  fs.watchFile(dataSrc, { interval: 2000 }, async (current, previous) => {
+  fs.watchFile(dataSrc, { interval: 2000 }, async () => { // (current, previous) => {}
     await readStore(dataSrc);
   });
 }
@@ -35,7 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
   BuildAndWatch();
 }
 
-async function readStore(pathname): Promise<SerializedStore> {
+async function readStore(pathname: string): Promise<SerializedStore> {
   // const pathname = path.join(process.cwd(), 'data', 'data.json');
   // const pathname = pathJoin('data', 'data.json'); // !!! not working
   const json = await fsReadJson(pathname);
@@ -47,7 +49,7 @@ async function readStore(pathname): Promise<SerializedStore> {
   return store;
 }
 
-async function buildStore(json: JSON): Promise<SerializedStore> {
+async function buildStore(json: { [key: string]: IEntity[] }): Promise<SerializedStore> {
   let store: SerializedStore = {};
   let collections: CollectionDescription[] = Object.keys(json).map(key => remapCollection(key));
   collections.forEach((c) => {
@@ -99,8 +101,8 @@ function getRouteService(store: SerializedStore): SerializedCollection {
   // console.log('getRouteService', keys);
   const routes = [];
   for (const key of keys) {
-    const languages = store.locale.items.map(x => x.id);
-    const markets = store.market.items.map(x => ({
+    const languages: string[] = store.locale.items.map(x => x.id);
+    const markets: IMarket[] = store.market.items.map(x => ({
       id: x.id,
       languages: x.languages || languages,
     }));
@@ -112,7 +114,7 @@ function getRouteService(store: SerializedStore): SerializedCollection {
         const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
         let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
         availableMarkets.forEach(m => {
-          m.languages.forEach(l => {
+          (m.languages || languages).forEach(l => {
 
             const href = categoryTree.reduce((p, c, i) => {
               // !!! page.slug || category.slug
@@ -131,7 +133,7 @@ function getRouteService(store: SerializedStore): SerializedCollection {
         });
         if (key === 'homepage') {
           const defaultMarket = markets[0].id;
-          const defaultLocale = markets[0].languages[0];
+          const defaultLocale = markets[0].languages ? markets[0].languages[0] : languages[0];
           const route = getRoute(`/`, defaultMarket, defaultLocale, key, item.id);
           routes.push(route);
         }
@@ -167,10 +169,12 @@ function toServiceSchema(c: CollectionDescription, collection: IEntity[]): Seria
   };
 }
 
-async function addType(items, c, collections: CollectionDescription[]): Promise<string> {
-  const types = {};
-  const keys = [];
-  const optionalKeys = [];
+async function addType(items: IEntity[], c: CollectionDescription, collections: CollectionDescription[]): Promise<string | undefined> {
+  const types: {
+    [key: string]: string[]
+  } = {};
+  const keys: string[] = [];
+  const optionalKeys: string[] = [];
   if (Array.isArray(items)) {
     items.forEach((item, i) => {
       Object.keys(item).forEach(key => {

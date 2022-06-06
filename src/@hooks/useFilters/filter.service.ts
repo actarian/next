@@ -1,7 +1,7 @@
-import { IEquatable } from "@core/entity/entity";
-import { IFeatureType } from "@models/feature_type/feature_type";
-import { Filter, FilterMode } from "./filter";
-import { FilterParams } from "./useFilters";
+import type { IEquatable } from '@core/entity/entity';
+import type { IFeatureType } from '@models/feature_type/feature_type';
+import { Filter, FilterMode } from './filter';
+import type { FilterParams } from './useFilters';
 
 export function getFilters<T>(items: T[], featureTypes: IFeatureType[], filterMap: (key: string, item: any, value: IEquatable) => boolean, params?: { [key: string]: IEquatable[] }): Filter[] {
   return featureTypes.map(featureType => {
@@ -17,29 +17,6 @@ export function getFilters<T>(items: T[], featureTypes: IFeatureType[], filterMa
       filter.values = params[filter.id];
     }
     return filter;
-  });
-}
-
-export function updateFilterStates<T>(items: T[], filters: Filter[]) {
-  filters.forEach(filter => {
-    const filteredItems = this.filterItems(items, filter);
-    filter.options.forEach(option => {
-      let count = 0;
-      if (option.id) {
-        let i = 0;
-        while (i < filteredItems.length) {
-          const item = filteredItems[i];
-          if (filter.filter(item, option.id)) {
-            count++;
-          }
-          i++;
-        }
-      } else {
-        count = filteredItems.length;
-      }
-      option.count = count;
-      option.disabled = count === 0;
-    });
   });
 }
 
@@ -94,15 +71,15 @@ export function setFilters<T>(items: T[], filters: Filter[], filter?: Filter, va
   return filteredItems;
 }
 
-export function filtersToParams(filters: Filter[]): FilterParams {
-  let params = {};
+export function filtersToParams(filters: Filter[]): FilterParams | null {
+  let params: { [key: string]: IEquatable[] } = {};
   let any = false;
   filters.filter(x => x.hasAny()).forEach(filter => {
     params[filter.id] = filter.values;
     any = true;
   });
   if (!any) {
-    params = null;
+    return null;
   }
   return params;
 }

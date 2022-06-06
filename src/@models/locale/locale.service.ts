@@ -1,6 +1,6 @@
-import { FindParams, ILocalizedString } from '@core/entity/entity';
+import type { FindParams, ILocalizedString } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { ILocale } from './locale';
+import type { ILocale } from './locale';
 
 export async function getLocales(params: FindParams = {}): Promise<ILocale[]> {
   const store = await getStore();

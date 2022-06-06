@@ -1,5 +1,5 @@
-import { IEquatable } from '@core/entity/entity';
-import { ITile } from '@models/tile/tile';
+import type { IEquatable } from '@core/entity/entity';
+import type { ITile } from '@models/tile/tile';
 
 export function filterProductItem(key: string, item: ITile, value: IEquatable) {
   switch (key) {

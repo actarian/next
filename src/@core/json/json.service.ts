@@ -1,4 +1,5 @@
-import { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable, toFindParams } from '@core/entity/entity';
+import type { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable } from '@core/entity/entity';
+import { toFindParams } from '@core/entity/entity';
 
 export default class JsonService<T extends IEntity> implements IQuerable<IEntity> {
   items: T[];
@@ -8,7 +9,7 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
   }
 
   findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null> {
-    return new Promise<T>((resolve, reject) => {
+    return new Promise<T | null>((resolve, reject) => {
       const params = toFindParams(idOrParams);
       const items = this.where_(this.items, params);
       if (items.length > 0) {
@@ -27,8 +28,8 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     });
   }
 
-  create(payload): Promise<T> {
-    return new Promise<T | null>((resolve, reject) => {
+  create(payload: any): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
       try {
         const item = { ...payload, id: this.newUUID_() };
         this.items.push(item);
@@ -39,7 +40,7 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     });
   }
 
-  update(payload): Promise<T> {
+  update(payload: any): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       const index = this.items.reduce((p, c, i) => {
         return c.id === payload.id ? i : p;
@@ -53,8 +54,8 @@ export default class JsonService<T extends IEntity> implements IQuerable<IEntity
     });
   }
 
-  delete(id: IEquatable) {
-    return new Promise<T>((resolve, reject) => {
+  delete(id: IEquatable): Promise<T | null> {
+    return new Promise<T | null>((resolve, reject) => {
       const index = this.items.reduce((p, c, i) => {
         return c.id === id ? i : p;
       }, -1);

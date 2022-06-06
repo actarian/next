@@ -4,6 +4,7 @@ import FilterResult from '@components/filter/filter-result';
 import { FilterSidebar } from '@components/filter/filter-sidebar';
 import Headline from '@components/headline/headline';
 import Layout from '@components/_layout';
+import { IEquatable } from '@core/entity/entity';
 import { asStaticProps } from '@core/utils';
 import { Grid, Note, Pagination } from '@geist-ui/core';
 import { Filter, IFilter } from '@hooks/useFilters/filter';
@@ -17,12 +18,10 @@ import { getPage } from '@models/page/page.service';
 import { filterProductItem } from '@models/product_search/product_search.service';
 import { ITile } from '@models/tile/tile';
 import { getTiles } from '@models/tile/tile.service';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useRouter } from 'next/router';
 
 export default function ProductSearchSSR({ page, serializedFilters, pagination }: ProductSearchSSRProps) {
-  if (!page) {
-    return;
-  }
 
   // using router to update queryString searchParams
   const router = useRouter();
@@ -31,7 +30,7 @@ export default function ProductSearchSSR({ page, serializedFilters, pagination }
   const filters = serializedFilters.map(x => new Filter(x));
 
   // fires when user make a change on filters
-  function onFilterChange(filter, values) {
+  function onFilterChange(filter: Filter, values?: IEquatable[]) {
     filter.values = values || [];
     const params = filtersToParams(filters);
     const { pathname, query } = updateSearchParams(router.asPath, { filter: params, pagination: { page: 1 } });
@@ -103,7 +102,7 @@ export interface ProductSearchSSRProps extends PageProps {
   pagination: { page: number, pages: number, total: number, items: ITile[] };
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext<any>): Promise<GetServerSidePropsResult<ProductSearchSSRProps>> {
 
   const params = context.params;
   const query = context.query;
@@ -118,7 +117,7 @@ export async function getServerSideProps(context) {
   const page = await getPage('product_search_ssr', id, market, locale);
 
   // Decode search params
-  const searchParams = decode(context.query.params);
+  const searchParams = decode(context.query.params as string);
 
   // Search
   const items = await getTiles({ market, locale });

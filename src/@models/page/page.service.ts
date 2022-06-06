@@ -1,13 +1,13 @@
-import { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
-import { ICategory } from '@models/category/category';
+import type { ICategory } from '@models/category/category';
 import { getCategoryTree } from '@models/category/category.service';
 import { resolveLabel } from '@models/label/label.service';
-import { ILayout } from '@models/layout/layout';
+import type { ILayout } from '@models/layout/layout';
 import { getLayout } from '@models/layout/layout.service';
-import { IRouteLink, SchemaType } from '@models/route/route';
+import type { IRouteLink, SchemaType } from '@models/route/route';
 import { getBreadcrumbFromCategoryTree } from '@models/route/route.service';
-import { IPage } from './page';
+import type { IPage } from './page';
 
 export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<IPage | null> {
   const store = await getStore();
@@ -34,7 +34,7 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
   }
 }
 
-export async function getErrorPageLayout(): Promise<{ layout: ILayout, page: IPage } | null> {
+export async function getErrorPageLayout(): Promise<{ layout: ILayout, page: IPage }> {
   const defaultMarket = 'ww';
   const defaultLocale = 'en';
   const layout = await getLayout(defaultMarket, defaultLocale);

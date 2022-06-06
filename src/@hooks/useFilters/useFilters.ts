@@ -1,7 +1,7 @@
-import { IEquatable } from '@core/entity/entity';
-import { IFeatureType } from '@models/feature_type/feature_type';
+import type { IEquatable } from '@core/entity/entity';
+import type { IFeatureType } from '@models/feature_type/feature_type';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Filter } from './filter';
+import type { Filter } from './filter';
 import { getFilters, setFilters } from './filter.service';
 
 export type FilterParams = { [key: string]: IEquatable[] };

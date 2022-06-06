@@ -1,4 +1,6 @@
-import { AppStore, PAGES } from 'src/types';
+import type { IEntity, IQuerable } from '@core/entity/entity';
+import type { AppStore } from 'src/types';
+import { PAGES } from 'src/types';
 import StoreApiService from './store-api.service';
 
 let STORE_: AppStore;
@@ -8,7 +10,7 @@ export async function getApiStore(): Promise<AppStore> {
     return STORE_;
   }
   // console.log('getApiStore');
-  const store = {};
+  const store: { [key: string]: IQuerable<IEntity> } = {};
   const keys = Object.keys(PAGES);
   const routes = [...keys, 'page', 'route', 'country', 'label', 'locale', 'market', 'menu'];
   routes.forEach(key => {

@@ -7,16 +7,13 @@ import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
+import { GetStaticPropsContext } from 'next/types';
 import React from 'react';
 
 const githubRepoUrl = 'https://github.com/actarian/next';
 const documentationUrl = 'https://geist-ui.dev/en-us/guide/colors';
 
 export default function Homepage({ layout, page, params }: PageProps) {
-  if (!page) {
-    return;
-  }
-
   // console.log('Homepage.params', params);
   // console.log('Homepage.page', page);
 
@@ -61,7 +58,7 @@ export default function Homepage({ layout, page, params }: PageProps) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext<any>) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;

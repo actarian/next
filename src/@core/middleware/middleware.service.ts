@@ -1,5 +1,7 @@
+import type { NextRequest } from 'next/server';
+
+/*
 import { NextApiRequest, NextApiResponse } from 'next';
-import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export type RouteMiddleware = (request: NextRequest, event: NextFetchEvent) => Promise<Response | undefined> | Response | undefined;
 
@@ -18,11 +20,9 @@ export default function useApiMiddleware(middleware) {
   })
 }
 
-/**
  * @name withMiddleware
  * @description combine multiple middleware before handling your API endpoint
  * @param middlewares
- */
 export function withApiMiddleware(...middlewares: ApiMiddleware[]) {
 
   return async function withMiddlewareHandler(request: NextApiRequest, response: NextApiResponse) {
@@ -56,6 +56,7 @@ export function withApiMiddleware(...middlewares: ApiMiddleware[]) {
     }
   };
 }
+*/
 
 export function isStaticRequest(request: NextRequest) {
   const url = request.nextUrl;

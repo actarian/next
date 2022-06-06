@@ -6,11 +6,9 @@ import { getLayout } from '@models/layout/layout.service';
 import { PageProps } from '@models/page/page';
 import { getPage } from '@models/page/page.service';
 import { getStaticPathsForSchema } from '@models/route/route.service';
+import { GetStaticPropsContext } from 'next/types';
 
 export default function About({ layout, page, params }: PageProps) {
-  if (!page) {
-    return;
-  }
   return (
     <>
       <Layout>
@@ -24,7 +22,7 @@ export default function About({ layout, page, params }: PageProps) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context: GetStaticPropsContext<any>) {
   const id = parseInt(context.params.id);
   const market = context.params.market;
   const locale = context.params.locale;

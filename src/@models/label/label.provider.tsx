@@ -1,6 +1,6 @@
 import { useLayout } from '@hooks/useLayout/useLayout';
 import React from 'react';
-import { ILabel } from './label';
+import type { ILabel } from './label';
 
 export type ILabelContext = {
   locale: string,
@@ -11,10 +11,10 @@ export type ILabelContext = {
 export const LabelContext = React.createContext<ILabelContext>({
   locale: '',
   labels: [],
-  getLabel: (key: string) => key,
+  getLabel: (key) => key,
 });
 
-export default function LabelProvider({ children }) {
+export default function LabelProvider({ children }: { children?: React.ReactNode }) {
 
   const { locale, labels } = useLayout() || { locale: '*', labels: [] };
 
@@ -23,8 +23,8 @@ export default function LabelProvider({ children }) {
   const context = {
     locale,
     labels,
-    getLabel: (key) => {
-      return dictionary[key] || key;
+    getLabel: (key: string): string => {
+      return (dictionary[key] || key) as string;
     },
   };
 

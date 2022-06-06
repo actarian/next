@@ -4,7 +4,7 @@ import { ILabelContext, LabelContext } from '@models/label/label.provider';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 
-export default function Headline({ title, abstract }) {
+export default function Headline({ title, abstract }: { title?: string, abstract?: string }) {
   const router = useRouter();
   const { getLabel } = useContext<ILabelContext>(LabelContext);
   return (

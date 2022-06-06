@@ -1,10 +1,11 @@
 
 import { Card, Image, Text } from '@geist-ui/core';
+import { ITile } from '@models/tile/tile';
 import NextLink from 'next/link';
 import React from 'react';
 import styles from './filter-result.module.scss';
 
-export default function FilterResult({ item, showImage = true }) {
+export default function FilterResult({ item, showImage = true }: { item: ITile, showImage?: boolean }) {
   return (
     <>
       <Card shadow hoverable width="100%" style={{ cursor: 'pointer' }}>

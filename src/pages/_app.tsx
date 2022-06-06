@@ -39,6 +39,10 @@ export default function CustomApp({ Component, pageProps }: CustomAppProps) {
 
   const { layout, page } = pageProps;
 
+  if (!layout || !page) {
+    return;
+  }
+
   return (
     <LayoutProvider layout={layout}>
       <LabelProvider>

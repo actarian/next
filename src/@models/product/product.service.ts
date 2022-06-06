@@ -1,8 +1,8 @@
-import { FindParams, IEquatable } from '@core/entity/entity';
+import type { FindParams, IEquatable } from '@core/entity/entity';
 import { getStore } from '@core/store/store.service';
 import { awaitAll } from '@core/utils';
 import { decorateHref } from '@models/route/route.service';
-import { IProduct } from './product';
+import type { IProduct } from './product';
 
 export async function getProducts(params: FindParams = {}): Promise<IProduct[]> {
   const store = await getStore();

@@ -1,5 +1,5 @@
 
-export default function Alert({ preview }) {
+export default function Alert({ preview }: { preview: boolean }) {
   return (
     <>
       {preview ? (
