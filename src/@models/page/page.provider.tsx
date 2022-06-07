@@ -31,30 +31,20 @@ export default function PageProvider({ children, page }: { children?: React.Reac
   );
 }
 
-
 /*
-import * as React from "react";
-import { useSidebar, UseSidebar } from "./useSidebar";
-import { createGenericContext } from "./createGenericContext";
-interface Props {
-  children: React.ReactNode;
-}
+const [usePageContext, PageContextProvider] = createGenericContext<IPageContext>();
 
-// Generate context
-const [useSidebarContext, SidebarContextProvider] = createGenericContext<
-  UseSidebar
->();
-
-// Generate provider
-const SidebarProvider = ({ children }: Props) => {
-  const [isOpen, setIsOpen] = useSidebar(true);
-
+function PageProvider_({ children, page }: { children?: React.ReactNode, page: IPage }) {
+  const context = {
+    page,
+  };
+  // console.log('PageProvider.context', context);
   return (
-    <SidebarContextProvider value={[isOpen, setIsOpen]}>
+    <PageContextProvider value={context}>
       {children}
-    </SidebarContextProvider>
+    </PageContextProvider>
   );
 };
 
-export { useSidebarContext, SidebarProvider };
+export { usePageContext, PageProvider_ };
 */
