@@ -1,15 +1,5 @@
-import type { IEntity, IQuerable } from "@core/entity/entity";
-import type { ICategory } from "@models/category/category";
-import type { IFeatureType } from "@models/feature_type/feature_type";
-import type { ILabel } from "@models/label/label";
-import type { ILocale } from "@models/locale/locale";
-import type { IMarket } from "@models/market/market";
-import type { IMenu } from "@models/menu/menu";
-import type { IPage } from "@models/page/page";
-import type { IProduct } from "@models/product/product";
-import type { IRoute } from "@models/route/route";
-import type { ITile } from "@models/tile/tile";
-// import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from "./@models";
+import type { IEntity, IQuerable } from '@core/index';
+import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models/index';
 
 /*
   * Here we define the mapping of the entities types to the physical templates in the pages/[market]/[locale] folder.

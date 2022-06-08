@@ -1,12 +1,12 @@
 import { Button, Card, Grid, Spacer, Text } from '@geist-ui/core';
 import { ArrowLeft } from '@geist-ui/icons';
-import { ILabelContext, LabelContext } from '@models/label/label.provider';
+import { useLabel } from '@hooks/index';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React from 'react';
 
 export default function Headline({ title, abstract }: { title?: string, abstract?: string }) {
   const router = useRouter();
-  const { getLabel } = useContext<ILabelContext>(LabelContext);
+  const label = useLabel();
   return (
     <>
       <Grid.Container gap={1.5}>
@@ -15,7 +15,7 @@ export default function Headline({ title, abstract }: { title?: string, abstract
             <Text h4 my={0}>{title}</Text>
             <Text p>{abstract}</Text>
             <Card.Footer>
-              <Button icon={<ArrowLeft />} auto onClick={() => router.back()}>{getLabel('navigation.back')}</Button>
+              <Button icon={<ArrowLeft />} auto onClick={() => router.back()}>{label('navigation.back')}</Button>
             </Card.Footer>
           </Card>
         </Grid>
