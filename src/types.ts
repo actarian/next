@@ -19,7 +19,7 @@ export const PAGES = {
 */
 export type AppStore = {
   about: IQuerable<any>;
-  category: IQuerable<ICategory>;
+  category: IQuerable<ICategory>; // todo refactor category slug
   country: IQuerable<any>;
   homepage: IQuerable<any>;
   label: IQuerable<ILabel>;

@@ -1,7 +1,7 @@
-import { Breadcrumb, Headline } from '@components/index';
+import { Breadcrumb, Headline, Layout } from '@components/index';
 import { asStaticProps } from '@core/index';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
-import { ArrowRight, Layout } from '@geist-ui/icons';
+import { ArrowRight } from '@geist-ui/icons';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
 import { usePrice } from '@pipes/index';
 import { GetStaticPropsContext } from 'next';
