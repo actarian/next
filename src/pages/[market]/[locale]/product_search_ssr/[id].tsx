@@ -1,23 +1,8 @@
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import { FilterRecap } from '@components/filter/filter-recap';
-import FilterResult from '@components/filter/filter-result';
-import { FilterSidebar } from '@components/filter/filter-sidebar';
-import Headline from '@components/headline/headline';
-import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
-import { asStaticProps } from '@core/utils';
+import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components/index';
+import { asStaticProps, IEquatable } from '@core/index';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-import { Filter, IFilter } from '@hooks/useFilters/filter';
-import { filtersToParams, getFilters, setFilters } from '@hooks/useFilters/filter.service';
-import { getPaginationInfo } from '@hooks/usePagination/pagination.service';
-import { decode, updateSearchParams } from '@hooks/useSearchParams/useSearchParams';
-import { getFeatureTypes } from '@models/feature_type/feature_type.service';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { filterProductItem } from '@models/product_search/product_search.service';
-import { ITile } from '@models/tile/tile';
-import { getTiles } from '@models/tile/tile.service';
+import { decode, Filter, filtersToParams, getFilters, getPaginationInfo, IFilter, setFilters, updateSearchParams } from '@hooks/index';
+import { filterProductItem, getFeatureTypes, getLayout, getPage, getTiles, ITile, PageProps } from '@models/index';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useRouter } from 'next/router';
 
@@ -115,6 +100,37 @@ export async function getServerSideProps(context: GetServerSidePropsContext<any>
 
   // Page
   const page = await getPage('product_search_ssr', id, market, locale);
+
+  /*
+  {
+    title: 'Product Search',
+    abstract: 'Product Search',
+    description: 'Product Search',
+    texts: [{
+      key: 'title',
+      value: 'Product Search',
+    }, {
+      key: 'abstract',
+      value: 'Product Search',
+      }]
+    media: [{ type: 'hero' }],
+    related: [{
+      type: 'component',
+      items: [{
+        related: [{
+          type: 'component',
+
+        }]
+      }],
+    }],
+    components: [{
+
+    }],
+    features: [{
+    }]
+  }
+*/
+
 
   // Decode search params
   const searchParams = decode(context.query.params as string);

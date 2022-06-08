@@ -16,9 +16,11 @@ export async function getMockStore(): Promise<AppStore> {
   // const pathname = pathJoin('data', 'store', 'store.json'); // !!! not working
   const json = await fsReadJson(pathname);
   const store: { [key: string]: IQuerable<IEntity> } = {};
-  Object.keys(json).forEach(key => {
-    store[key] = new MockService<any>(json[key].items);
-  });
+  if (json != null) {
+    Object.keys(json).forEach(key => {
+      store[key] = new MockService<any>(json[key].items);
+    });
+  }
   STORE_ = store as AppStore;
   return STORE_;
 }

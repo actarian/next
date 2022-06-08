@@ -9,7 +9,24 @@ import type { IPage } from "@models/page/page";
 import type { IProduct } from "@models/product/product";
 import type { IRoute } from "@models/route/route";
 import type { ITile } from "@models/tile/tile";
+// import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from "./@models";
 
+/*
+  * Here we define the mapping of the entities types to the physical templates in the pages/[market]/[locale] folder.
+*/
+export const PAGES = {
+  homepage: 'homepage',
+  about: 'about',
+  product_index: 'product_index',
+  product_search_csr: 'product_search_csr',
+  product_search_ssr: 'product_search_ssr',
+  product: 'product',
+  notfound: 'notfound',
+};
+
+/*
+  * Here we define the AppStore mapping of the entities types to the IQuerable services.
+*/
 export type AppStore = {
   about: IQuerable<any>;
   category: IQuerable<ICategory>;
@@ -29,23 +46,3 @@ export type AppStore = {
 
   [key: string]: IQuerable<IEntity>;
 }
-
-export const PAGES = {
-  homepage: 'homepage',
-  about: 'about',
-  product_index: 'product_index',
-  product_search_csr: 'product_search_csr',
-  product_search_ssr: 'product_search_ssr',
-  product: 'product',
-  notfound: 'notfound',
-};
-
-/*
-export const PAGES = {
-  homepage: '/:marketId/:localeId/homepage/:pageId',
-  about: '/:marketId/:localeId/about/:pageId',
-  product_index: '/:marketId/:localeId/product_index/:pageId',
-  product: '/:marketId/:localeId/product/:pageId',
-  notfound: '/:marketId/:localeId/notfound/:pageId',
-};
-*/

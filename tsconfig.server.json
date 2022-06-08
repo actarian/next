@@ -18,6 +18,8 @@
     "outDir": ".build",
     "baseUrl": ".",
     "paths": {
+      "@core": ["src/@core/index"],
+      "@models": ["src/@models/index"],
       "@core/*": ["src/@core/*"],
       "@models/*": ["src/@models/*"],
     }

@@ -1,27 +1,9 @@
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import { FilterRecap } from '@components/filter/filter-recap';
-import FilterResult from '@components/filter/filter-result';
-import { FilterSidebar } from '@components/filter/filter-sidebar';
-import Headline from '@components/headline/headline';
-import Layout from '@components/_layout';
-import { IEquatable } from '@core/entity/entity';
-import { asStaticProps } from '@core/utils';
+
+import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components/index';
+import { asStaticProps, IEquatable } from '@core/index';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-// import { useApiGet } from '@hooks/useApi/useApi';
-import { Filter } from '@hooks/useFilters/filter';
-import { filtersToParams } from '@hooks/useFilters/filter.service';
-import { useFilters } from '@hooks/useFilters/useFilters';
-import { usePagination } from '@hooks/usePagination/usePagination';
-import { useSearchParams } from '@hooks/useSearchParams/useSearchParams';
-import { IFeatureType } from '@models/feature_type/feature_type';
-import { getFeatureTypes } from '@models/feature_type/feature_type.service';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { filterProductItem } from '@models/product_search/product_search.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
-import { ITile } from '@models/tile/tile';
-import { getTiles } from '@models/tile/tile.service';
+import { Filter, filtersToParams, useFilters, usePagination, useSearchParams } from '@hooks/index';
+import { filterProductItem, getFeatureTypes, getLayout, getPage, getStaticPathsForSchema, getTiles, IFeatureType, ITile, PageProps } from '@models/index';
 import { GetStaticPropsContext } from 'next/types';
 import { useCallback } from 'react';
 

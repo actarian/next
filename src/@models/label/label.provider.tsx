@@ -1,4 +1,4 @@
-import { useLayout } from '@hooks/useLayout/useLayout';
+import { useLayout } from '@hooks/index';
 import React from 'react';
 import type { ILabel } from './label';
 

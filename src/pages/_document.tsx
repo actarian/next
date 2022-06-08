@@ -5,7 +5,6 @@ import React from 'react';
 export default class CustomDocument extends Document {
 
   render() {
-    // console.log(this.props);
     return (
       <Html lang="en">
         <Head />

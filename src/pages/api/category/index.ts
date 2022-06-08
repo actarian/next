@@ -1,5 +1,5 @@
-import { apiHandler } from '@core/api/api.helper';
-import { getCategories } from '@models/category/category.service';
+import { apiHandler } from '@core/index';
+import { getCategories } from '@models/index';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

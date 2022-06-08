@@ -1,25 +1,12 @@
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import Headline from '@components/headline/headline';
-import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils';
+import { Breadcrumb, Headline } from '@components/index';
+import { asStaticProps } from '@core/index';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
-import { ArrowRight } from '@geist-ui/icons';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
-import { usePrice } from '@pipes/pipes';
+import { ArrowRight, Layout } from '@geist-ui/icons';
+import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
+import { usePrice } from '@pipes/index';
 import { GetStaticPropsContext } from 'next';
-// import PropTypes from 'prop-types';
-// import { useRouter } from 'next/router';
 
 export default function ProductPage({ layout, page, params }: PageProps) {
-  /*
-  const router = useRouter()
-  const { id } = router.query;
-  */
-
-  console.log('Product', page);
   return (
     <>
       <Layout>

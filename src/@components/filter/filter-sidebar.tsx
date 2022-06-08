@@ -4,7 +4,7 @@ import { Badge, Checkbox, Collapse, Spacer, Text } from '@geist-ui/core';
 import { Filter, IFilterOption } from '@hooks/useFilters/filter';
 import styles from './filter-sidebar.module.scss';
 
-export function FilterSidebar({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
+export default function FilterSidebar({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
 
   // console.log('FilterSidebar', filters.filter(x => x.values.length).map(x => x.values.join(', ')));
 

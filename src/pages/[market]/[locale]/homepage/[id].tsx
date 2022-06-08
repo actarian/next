@@ -1,12 +1,8 @@
-import Banner from '@components/banner/banner';
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils';
+
+import { Banner, Breadcrumb, Layout } from '@components/index';
+import { asStaticProps } from '@core/index';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
 import { GetStaticPropsContext } from 'next/types';
 import React from 'react';
 

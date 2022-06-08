@@ -2,6 +2,11 @@ module.exports = {
   compiler: {
     styledComponents: true,
   },
+  webpack5: true,
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false, dotenv: false, pluralize: false };
+    return config;
+  },
   /*
   i18n: {
     localeDetection: true,

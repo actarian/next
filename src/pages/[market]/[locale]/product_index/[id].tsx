@@ -1,15 +1,8 @@
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import Headline from '@components/headline/headline';
-import ProductItem from '@components/product-item/product-item';
-import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils';
+
+import { Breadcrumb, Headline, Layout, ProductItem } from '@components/index';
+import { asStaticProps } from '@core/index';
 import { Grid } from '@geist-ui/core';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { IProduct } from '@models/product/product';
-import { getProducts } from '@models/product/product.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+import { getLayout, getPage, getProducts, getStaticPathsForSchema, IProduct, PageProps } from '@models/index';
 import { GetStaticPropsContext } from 'next/types';
 
 export default function Products({ layout, page, products, params }: ProductsProps) {

@@ -1,11 +1,7 @@
-import Breadcrumb from '@components/breadcrumb/breadcrumb';
-import Headline from '@components/headline/headline';
-import Layout from '@components/_layout';
-import { asStaticProps } from '@core/utils';
-import { getLayout } from '@models/layout/layout.service';
-import { PageProps } from '@models/page/page';
-import { getPage } from '@models/page/page.service';
-import { getStaticPathsForSchema } from '@models/route/route.service';
+
+import { Breadcrumb, Headline, Layout } from '@components/index';
+import { asStaticProps } from '@core/index';
+import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
 import { GetStaticPropsContext } from 'next/types';
 
 export default function About({ layout, page, params }: PageProps) {

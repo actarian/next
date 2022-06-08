@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Text } from '@geist-ui/core';
 import { XCircleFill } from '@geist-ui/icons';
 import { Filter, IFilterOption } from '@hooks/useFilters/filter';
 
-export function FilterRecap({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
+export default function FilterRecap({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
 
   const onRemove = (filter: Filter, option: IFilterOption) => {
     let values = [...filter.values];
