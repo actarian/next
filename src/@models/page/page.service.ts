@@ -9,9 +9,9 @@ import type { IRouteLink, SchemaType } from '@models/route/route';
 import { getBreadcrumbFromCategoryTree } from '@models/route/route.service';
 import type { IPage } from './page';
 
-export async function getPage(schema: string, id: IEquatable, market?: string, locale?: string): Promise<IPage | null> {
+export async function getPage<T extends IPage>(schema: string, id: IEquatable, market?: string, locale?: string): Promise<T | null> {
   const store = await getStore();
-  const page = await store.page.findOne({ where: { schema, id }, market, locale }) as any;
+  const page = await store.page.findOne({ where: { schema, id }, market, locale }) as T;
   // console.log(page, market, locale);
   if (page) {
     const routes = await store.route.findMany({ where: { pageSchema: schema, pageId: id } });
@@ -27,7 +27,7 @@ export async function getPage(schema: string, id: IEquatable, market?: string, l
       href: currentRoute.id, // !!! route?
       alternates,
       breadcrumb: breadcrumb,
-    };
+    } as T;
   } else {
     console.log('PageService.getPage.notfound', schema, id, locale);
     return null;
