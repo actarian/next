@@ -23,8 +23,8 @@ export default class CustomDocument extends Document {
       ...initialProps,
       styles: (
         <>
-          {initialProps.styles}
           {styles}
+          {initialProps.styles}
         </>
       ),
     }

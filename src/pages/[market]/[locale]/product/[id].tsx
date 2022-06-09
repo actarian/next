@@ -1,19 +1,27 @@
 import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
-import { ArrowRight } from '@geist-ui/icons';
+import { ArrowRight, Heart, HeartFill } from '@geist-ui/icons';
+import { useWishlist } from '@hooks/useWishlist/useWishlist';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
 
 export default function ProductPage({ layout, page, params }: PageProps) {
+
+  const { has, toggle } = useWishlist();
+  const added = has(page);
+
   return (
     <>
       <Layout>
 
         <Breadcrumb items={page.breadcrumb} />
 
-        <Headline title={page.title} abstract={page.abstract}></Headline>
+        <div style={{ position: 'relative' }}>
+          <Headline title={page.title} abstract={page.abstract}></Headline>
+          <Button auto type="abort" padding={0} style={{ position: 'absolute', top: '20px', right: '10px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => toggle(page)}>{added ? <HeartFill /> : <Heart />}</Button>
+        </div>
 
         <Grid.Container gap={1.5}>
           <Grid sm={24} md={12} justify="center" alignItems="flex-start">

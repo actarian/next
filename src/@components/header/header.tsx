@@ -1,7 +1,8 @@
 import { CartMini, MarketSelector } from '@components';
-import { Button, Image, Popover, Tabs } from '@geist-ui/core';
-import { Menu, ShoppingCart } from '@geist-ui/icons';
+import { Badge, Button, Image, Popover, Tabs } from '@geist-ui/core';
+import { Heart, Menu, ShoppingCart } from '@geist-ui/icons';
 import { useLayout, usePage } from '@hooks';
+import { useWishlist } from '@hooks/useWishlist/useWishlist';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
@@ -30,6 +31,9 @@ export default function Header() {
     router.push(pathname);
   }, [currentTab, layout.locale]);
 
+  const { count: getWishlistCount } = useWishlist();
+  const wishlistCount = getWishlistCount();
+
   return (
     <header className={styles.header}>
       <nav className={styles.menu}>
@@ -48,6 +52,10 @@ export default function Header() {
           }
         </nav>
         <nav className={styles.right}>
+          <Badge.Anchor>
+            {wishlistCount > 0 && <Badge scale={0.5}>{wishlistCount}</Badge>}
+            <Button icon={<Heart />} auto scale={2 / 3} px={0.6}></Button>
+          </Badge.Anchor>
           <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => setActive(true)}></Button>
           <Popover content={<MarketSelector />}>
             <Button icon={<Menu />} auto scale={2 / 3} px={0.6}>{layout.locale}</Button>

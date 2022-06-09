@@ -2,6 +2,7 @@ import type { IEquatable } from '@core';
 
 export interface IProduct {
   id: IEquatable;
+  schema: string;
   slug: string;
   title: string;
   abstract: string;

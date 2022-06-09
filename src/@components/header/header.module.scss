@@ -28,7 +28,7 @@
   justify-content: flex-end;
   align-items: center;
   &>*+* {
-    margin-left: 10px;
+    margin-left: 10px!important;
   }
 }
 
