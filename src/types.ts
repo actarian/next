@@ -21,6 +21,7 @@ export type AppStore = {
   about: IQuerable<any>;
   category: IQuerable<ICategory>; // todo refactor category slug
   country: IQuerable<any>;
+  feature_type: IQuerable<IFeatureType>;
   homepage: IQuerable<any>;
   label: IQuerable<ILabel>;
   locale: IQuerable<ILocale>;
@@ -30,9 +31,8 @@ export type AppStore = {
   page: IQuerable<IPage>;
   product_index: IQuerable<any>;
   product: IQuerable<IProduct>;
-  tile: IQuerable<ITile>;
-  feature_type: IQuerable<IFeatureType>;
   route: IQuerable<IRoute>;
+  tile: IQuerable<ITile>;
 
   [key: string]: IQuerable<IEntity>;
 }

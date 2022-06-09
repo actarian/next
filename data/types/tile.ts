@@ -3,7 +3,6 @@ import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
 export type ITile = {
   id: IEquatable;
-  schema: string;
   categoryId: IEquatable;
   categoryName: string;
   title: string;
@@ -13,4 +12,5 @@ export type ITile = {
   finish: string;
   size: string;
   featureIds: any[];
+  schema: string;
 };

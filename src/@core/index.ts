@@ -8,7 +8,6 @@ export type { FetchRequestOptions, FetchService } from '@core/http/http.service'
 export { default as JsonService } from '@core/json/json.service';
 export { isApiRequest, isExistingApiRoute, isStaticRequest } from '@core/middleware/middleware.service';
 export { parseMockApi, resolveMockApi } from '@core/mock/mock.api';
-export { BuildAndWatch } from '@core/mock/mock.build';
 export { mockInterceptor } from '@core/mock/mock.interceptor';
 export { default as MockService } from '@core/mock/mock.service';
 export { getMockStore } from '@core/mock/mock.store';

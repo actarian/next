@@ -3,7 +3,6 @@ import { IEquatable, ILocalizedString } from '@core/entity/entity';
 
 export type IPage = {
   id: IEquatable;
-  schema: string;
   slug: string | ILocalizedString;
   title: ILocalizedString | string;
   abstract: ILocalizedString;
@@ -11,5 +10,6 @@ export type IPage = {
   image: string;
   categoryId: IEquatable;
   meta: any;
+  schema: string;
   price?: number;
 };

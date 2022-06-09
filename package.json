@@ -1,7 +1,7 @@
 {
   "scripts": {
     "mock:build": "tsc --project ./tsconfig.server.json",
-    "mock:run": "node .build/@core/mock/mock.build.js",
+    "mock:run": "node .build/@core/mock/mock.build.js mock",
     "dev:mock": "run-s mock:*",
     "dev:next": "next dev -p 3007",
     "dev": "run-p dev:*",

@@ -11,7 +11,7 @@ import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import type { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
 import type { ICategorized } from '@models/category/category';
-import { getCategoryTreeWithCategories } from '@models/category/category.service';
+import { resolveCategoryTree } from '@models/category/category.service';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
 import type { IMarket } from '@models/market/market';
 import type { IRoute } from '@models/route/route';
@@ -23,29 +23,15 @@ if (process.env && process.env.NODE_ENV) {
   dotenv.config({ path: '.env.development' });
 }
 
-const dataSrc = './data/data.json';
-
-export async function BuildAndWatch() {
-  console.log('MockBuild.BuildAndWatch');
-  await readStore(dataSrc);
-  fs.watchFile(dataSrc, { interval: 2000 }, async () => { // (current, previous) => {}
-    await readStore(dataSrc);
-  });
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  BuildAndWatch();
-}
-
-async function readStore(pathname: string): Promise<SerializedStore> {
+async function rebuildStore(pathname: string): Promise<SerializedStore> {
   // const pathname = path.join(process.cwd(), 'data', 'data.json');
   // const pathname = pathJoin('data', 'data.json'); // !!! not working
+  console.log('MockBuild.rebuildStore', pathname);
   const json = await fsReadJson(pathname);
-  console.log('MockBuild.readStore');
   const store = await buildStore(json);
-  console.log('MockBuild.buildStore');
   const outname = path.join(process.cwd(), 'data', 'store', `store.json`);
   await fsWriteJson(outname, store);
+  console.log('MockBuild.buildComplete', outname);
   return store;
 }
 
@@ -55,9 +41,9 @@ async function buildStore(json: { [key: string]: IEntity[] }): Promise<Serialize
   collections.forEach((c) => {
     store[c.singularName] = toServiceSchema(c, json[c.singularName]);
   });
-  const pageService = getPageService(store);
+  const pageService = createPageService(store);
   store['page'] = pageService;
-  const routeService = getRouteService(store);
+  const routeService = createRouteService(store);
   store['route'] = routeService;
   // Object.keys(store).forEach(key => console.log((store[key] as MockService<any>).collection));
   collections = Object.keys(store).map(key => store[key]);
@@ -65,7 +51,7 @@ async function buildStore(json: { [key: string]: IEntity[] }): Promise<Serialize
   return store;
 }
 
-function getPageService(store: SerializedStore): SerializedCollection {
+function createPageService(store: SerializedStore): SerializedCollection {
   const keys = Object.keys(PAGES);
   const pages = [];
   for (const key of keys) {
@@ -74,7 +60,7 @@ function getPageService(store: SerializedStore): SerializedCollection {
       const items = collection.items as ICategorized[];
       pages.push(...items);
     } else {
-      console.warn(`MockBuild.getPageService.collection not found [${key}]`);
+      console.warn(`MockBuild.createPageService.collection not found [${key}]`);
     }
   }
   // console.log('pages', pages);
@@ -96,9 +82,9 @@ function getRoute(href: string, marketId: string, localeId: string, pageSchema: 
   }
 }
 
-function getRouteService(store: SerializedStore): SerializedCollection {
+function createRouteService(store: SerializedStore): SerializedCollection {
   const keys = Object.keys(PAGES);
-  // console.log('getRouteService', keys);
+  // console.log('createRouteService', keys);
   const routes = [];
   for (const key of keys) {
     const languages: string[] = store.locale.items.map(x => x.id);
@@ -109,13 +95,12 @@ function getRouteService(store: SerializedStore): SerializedCollection {
     const collection = store[key];
     if (collection) {
       const items = collection.items;
-      // console.log('getRouteService', key, items.length);
+      // console.log('createRouteService', key, items.length);
       for (let item of items) {
-        const categoryTree = getCategoryTreeWithCategories(item, store.category.items);
+        const categoryTree = resolveCategoryTree(item, store.page.items, store.category.items);
         let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
         availableMarkets.forEach(m => {
           (m.languages || languages).forEach(l => {
-
             const href = categoryTree.reduce((p, c, i) => {
               // !!! page.slug || category.slug
               let slug = c.slug;
@@ -126,7 +111,6 @@ function getRouteService(store: SerializedStore): SerializedCollection {
               return slug === '/' ? '' : slug;
             }, '');
             // console.log('href', href);
-
             const route = getRoute(`/${m.id}/${l}${href}`, m.id, l, key, item.id);
             routes.push(route);
           });
@@ -139,7 +123,7 @@ function getRouteService(store: SerializedStore): SerializedCollection {
         }
       }
     } else {
-      console.warn(`MockBuild.getRouteService.collection not found [${key}]`);
+      console.warn(`MockBuild.createRouteService.collection not found [${key}]`);
     }
   }
   // console.log('routes', routes);
@@ -230,4 +214,18 @@ function getType(key: string, value: any, collections: CollectionDescription[]):
     type = 'any';
   }
   return type;
+}
+
+async function BuildAndWatch(pathname: string) {
+  // console.log('MockBuild.BuildAndWatch');
+  await rebuildStore(pathname);
+  fs.watchFile(pathname, { interval: 2000 }, async () => { // (current, previous) => {}
+    await rebuildStore(pathname);
+  });
+}
+
+// console.log(process.argv);
+
+if (process.argv.includes('mock') && process.env.NODE_ENV !== 'production') {
+  BuildAndWatch('./data/data.json');
 }

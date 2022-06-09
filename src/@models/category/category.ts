@@ -5,9 +5,9 @@ export interface ICategory {
   name: string;
   title?: ILocalizedString | string;
   slug?: ILocalizedString | string;
-  categoryId?: IEquatable;
   pageSchema?: string;
   pageId?: IEquatable;
+  categoryId?: IEquatable;
 }
 
 export interface ICategoryItem extends ICategory {

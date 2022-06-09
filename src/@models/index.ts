@@ -1,5 +1,5 @@
 export type { ICategorized, ICategory, ICategoryItem } from '@models/category/category';
-export { getCategories, getCategoryTree, getCategoryTreeWithCategories } from '@models/category/category.service';
+export { getCategories, getCategoryTree, resolveCategoryTree } from '@models/category/category.service';
 export type { IFeatureType } from '@models/feature_type/feature_type';
 export { getFeatureTypes } from '@models/feature_type/feature_type.service';
 export type { ILabel } from '@models/label/label';
