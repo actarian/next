@@ -1,4 +1,4 @@
-import { apiHandler, parseMockApi } from '@core/index';
+import { apiHandler, parseMockApi } from '@core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

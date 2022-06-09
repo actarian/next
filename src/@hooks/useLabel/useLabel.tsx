@@ -1,5 +1,4 @@
-import { createGenericContext } from '@hooks/useGenericContext/useGenericContext';
-import { useLayout } from '@hooks/useLayout/useLayout';
+import { createGenericContext, useLayout } from '@hooks';
 import React from 'react';
 
 export type ILabelContext = (key: string) => string;
@@ -27,3 +26,4 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
 };
 
 export { useLabel, LabelProvider };
+

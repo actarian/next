@@ -1,4 +1,4 @@
-import type { IEntity, IQuerable } from '@core/entity/entity';
+import type { IEntity, IQuerable } from '@core';
 import type { AppStore } from 'src/types';
 import { PAGES } from 'src/types';
 import StoreApiService from './store-api.service';

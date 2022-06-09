@@ -9,7 +9,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -18,10 +18,10 @@
     "outDir": ".build",
     "baseUrl": ".",
     "paths": {
-      "@core": ["src/@core/index"],
-      "@models": ["src/@models/index"],
       "@core/*": ["src/@core/*"],
       "@models/*": ["src/@models/*"],
+      "@core": ["src/@core/index"],
+      "@models": ["src/@models/index"],
     }
   },
   "files": [
@@ -29,6 +29,6 @@
   ],
   "exclude": [
     "node_modules",
-    "data/**/*.ts"
+    "data/**/*.ts",
   ]
 }

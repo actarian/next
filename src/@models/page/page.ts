@@ -1,7 +1,6 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
-import type { IEquatable } from '@core/entity/entity';
-import type { ILayout } from '@models/layout/layout';
-import type { IRoute, IRouteLink, IRouteParams, SchemaType } from '@models/route/route';
+import type { IEquatable } from '@core';
+import type { ILayout, IRoute, IRouteLink, IRouteParams, SchemaType } from '@models';
 
 export interface IMeta {
   title?: string;

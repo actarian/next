@@ -1,7 +1,7 @@
 
-import { Headline, Layout } from '@components/index';
-import { asStaticProps } from '@core/index';
-import { getErrorPageLayout, PageProps } from '@models/index';
+import { Headline, Layout } from '@components';
+import { asStaticProps } from '@core';
+import { getErrorPageLayout, PageProps } from '@models';
 import Head from 'next/head';
 import { GetStaticPropsContext } from 'next/types';
 

@@ -1,6 +1,6 @@
 
-import { apiHandler, resolveRoute } from '@core/index';
-import { getRoute } from '@models/index';
+import { apiHandler } from '@core';
+import { getRoute, resolveRoute } from '@models';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

@@ -1,6 +1,6 @@
-import { apiFetch } from '@core/api/api.service';
-import type { FetchRequestOptions } from '@core/http/http.service';
-import { useHttpFetch } from '@hooks/useHttp/useHttp';
+import type { FetchRequestOptions } from '@core';
+import { apiFetch } from '@core';
+import { useHttpFetch } from '@hooks';
 
 export function useApiFetch(pathname: string, options: FetchRequestOptions = {}) {
   return useHttpFetch(pathname, { ...options, method: 'GET' }, apiFetch);

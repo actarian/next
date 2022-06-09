@@ -1,7 +1,4 @@
-import Footer from '@components/footer/footer';
-import Header from '@components/header/header';
-import Main from '@components/main/main';
-import Meta from '@components/meta/meta';
+import { Footer, Header, Main, Meta } from '@components';
 import { Page } from '@geist-ui/core';
 import React, { ReactNode } from 'react';
 

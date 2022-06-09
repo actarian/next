@@ -1,4 +1,4 @@
-import type { IEntity, IQuerable } from '@core/entity/entity';
+import type { IEntity, IQuerable } from '@core';
 import { fsReadJson } from '@core/fs/fs.service';
 import type { AppStore } from 'src/types';
 import MockService from './mock.service';

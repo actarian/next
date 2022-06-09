@@ -1,7 +1,6 @@
 
-import { isApiRequest, isStaticRequest } from '@core/middleware/middleware.service';
-import { mockInterceptor } from '@core/mock/mock.interceptor';
-import { routeInterceptor } from '@models/route/route.interceptor';
+import { isApiRequest, isStaticRequest, mockInterceptor } from '@core';
+import { routeInterceptor } from '@models';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest, next: NextFetchEvent) {

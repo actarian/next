@@ -1,5 +1,5 @@
-import type { IEquatable } from '@core/entity/entity';
-import type { IFeatureType } from '@models/feature_type/feature_type';
+import type { IEquatable } from '@core';
+import type { IFeatureType } from '@models';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Filter } from './filter';
 import { getFilters, setFilters } from './filter.service';

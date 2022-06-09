@@ -1,4 +1,4 @@
-import { usePage } from '@hooks/usePage/usePage';
+import { usePage } from '@hooks';
 import Head from 'next/head';
 
 const origin = process.env.NEXT_PUBLIC_URL;

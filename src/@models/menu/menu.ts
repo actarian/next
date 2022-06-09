@@ -1,4 +1,4 @@
-import type { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core';
 
 export interface IMenu {
   id: IEquatable;

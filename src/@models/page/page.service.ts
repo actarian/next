@@ -1,11 +1,9 @@
-import type { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core';
 import { getStore } from '@core/store/store.service';
-import type { ICategory } from '@models/category/category';
+import type { ICategory, ILayout, IRouteLink, SchemaType } from '@models';
 import { getCategoryTree } from '@models/category/category.service';
 import { resolveLabel } from '@models/label/label.service';
-import type { ILayout } from '@models/layout/layout';
 import { getLayout } from '@models/layout/layout.service';
-import type { IRouteLink, SchemaType } from '@models/route/route';
 import { getBreadcrumbFromCategoryTree } from '@models/route/route.service';
 import type { IPage } from './page';
 

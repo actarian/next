@@ -1,4 +1,4 @@
-import type { FindParams } from '@core/entity/entity';
+import type { FindParams } from '@core';
 import { getStore } from '@core/store/store.service';
 import type { ILabel } from './label';
 

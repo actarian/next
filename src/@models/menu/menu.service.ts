@@ -1,4 +1,4 @@
-import type { IEquatable } from '@core/entity/entity';
+import type { IEquatable } from '@core';
 import { getStore } from '@core/store/store.service';
 import type { IMenu } from './menu';
 

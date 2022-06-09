@@ -1,5 +1,5 @@
 import { Link, Spacer, Text } from '@geist-ui/core';
-import { useLayout, usePage } from '@hooks/index';
+import { useLayout, usePage } from '@hooks';
 import { useCallback } from 'react';
 
 export default function MarketSelector() {

@@ -1,5 +1,5 @@
-import type { FetchRequestOptions, FetchService } from '@core/http/http.service';
-import { httpFetch } from '@core/http/http.service';
+import type { FetchRequestOptions, FetchService } from '@core';
+import { httpFetch } from '@core';
 import { useEffect, useState } from 'react';
 
 export function useHttpFetch(pathname: string, options: FetchRequestOptions = {}, service: FetchService = httpFetch) {

@@ -1,5 +1,5 @@
-import { createGenericContext } from '@hooks/useGenericContext/useGenericContext';
-import type { IPage } from '@models/index';
+import { createGenericContext } from '@hooks';
+import type { IPage } from '@models';
 import React from 'react';
 
 export type IPageContext = IPage;
@@ -16,3 +16,4 @@ function PageProvider({ children, page }: { children?: React.ReactNode, page: IP
 };
 
 export { usePage, PageProvider };
+

@@ -6,15 +6,12 @@ const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
 
-import type { IEntity } from '@core/entity/entity';
+import type { CollectionDescription, IEntity, SerializedCollection, SerializedStore } from '@core';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
-import type { CollectionDescription, SerializedCollection, SerializedStore } from '@core/store/store';
 import { awaitAll } from '@core/utils';
-import type { ICategorized } from '@models/category/category';
+import type { ICategorized, IMarket, IRoute } from '@models';
 import { resolveCategoryTree } from '@models/category/category.service';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
-import type { IMarket } from '@models/market/market';
-import type { IRoute } from '@models/route/route';
 import { PAGES } from 'src/types';
 
 if (process.env && process.env.NODE_ENV) {
@@ -181,7 +178,7 @@ async function addType(items: IEntity[], c: CollectionDescription, collections: 
   }
   // console.log(types);
   const type = `
-import { IEquatable, ILocalizedString } from '@core/entity/entity';
+import { IEquatable, ILocalizedString } from '@core';
 
 export type I${c.displayName} = {
   ${keys.map(key => `${key}${optionalKeys.indexOf(key) !== -1 ? '?' : ''}: ${types[key].join(' | ')};`).join('\n  ')}
@@ -227,5 +224,6 @@ async function BuildAndWatch(pathname: string) {
 // console.log(process.argv);
 
 if (process.argv.includes('mock') && process.env.NODE_ENV !== 'production') {
+  global.Request = {} as any;
   BuildAndWatch('./data/data.json');
 }

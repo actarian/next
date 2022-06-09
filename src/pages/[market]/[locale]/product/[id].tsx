@@ -1,9 +1,9 @@
-import { Breadcrumb, Headline, Layout } from '@components/index';
-import { asStaticProps } from '@core/index';
+import { Breadcrumb, Headline, Layout } from '@components';
+import { asStaticProps } from '@core';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight } from '@geist-ui/icons';
-import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
-import { usePrice } from '@pipes/index';
+import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
+import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
 
 export default function ProductPage({ layout, page, params }: PageProps) {

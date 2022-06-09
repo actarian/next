@@ -1,8 +1,8 @@
 
-import { IEquatable } from '@core/entity/entity';
+import { IEquatable } from '@core';
 import { Button, ButtonGroup, Text } from '@geist-ui/core';
 import { XCircleFill } from '@geist-ui/icons';
-import { Filter, IFilterOption } from '@hooks/useFilters/filter';
+import { Filter, IFilterOption } from '@hooks';
 
 export default function FilterRecap({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
 

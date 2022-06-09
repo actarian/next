@@ -1,7 +1,7 @@
 
-import { IEquatable } from '@core/entity/entity';
+import { IEquatable } from '@core';
 import { Badge, Checkbox, Collapse, Spacer, Text } from '@geist-ui/core';
-import { Filter, IFilterOption } from '@hooks/useFilters/filter';
+import { Filter, IFilterOption } from '@hooks';
 import styles from './filter-sidebar.module.scss';
 
 export default function FilterSidebar({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {

@@ -1,6 +1,5 @@
-import type { FindParams, FindWhereParams, IEntity, IEquatable, IQuerable } from '@core/entity/entity';
+import type { FetchRequestOptions, FindParams, FindWhereParams, IEntity, IEquatable, IQuerable } from '@core';
 import { toFindParams } from '@core/entity/entity';
-import type { FetchRequestOptions } from '@core/http/http.service';
 import { httpFetch } from '@core/http/http.service';
 import { merge } from '@core/utils';
 

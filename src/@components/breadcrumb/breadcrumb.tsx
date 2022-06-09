@@ -1,5 +1,5 @@
 import { Breadcrumbs, Spacer } from '@geist-ui/core';
-import { IRouteLink } from '@models/route/route';
+import { IRouteLink } from '@models';
 import NextLink from 'next/link';
 import styles from './breadcrumb.module.scss';
 

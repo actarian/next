@@ -1,4 +1,4 @@
-import { isBrowser } from '@core/utils';
+import { isBrowser } from '@core';
 import { NextRouter, useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 

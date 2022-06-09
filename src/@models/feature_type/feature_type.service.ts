@@ -1,4 +1,4 @@
-import type { FindParams } from '@core/entity/entity';
+import type { FindParams } from '@core';
 import { getStore } from '@core/store/store.service';
 // import { awaitAll } from '@core/utils';
 // import { decorateHref } from '@models/route/route.service';

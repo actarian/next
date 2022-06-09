@@ -1,5 +1,5 @@
-import type { IEntity, IQuerable } from '@core/index';
-import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models/index';
+import type { IEntity, IQuerable } from '@core';
+import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models';
 
 /*
   * Here we define the mapping of the entities types to the physical templates in the pages/[market]/[locale] folder.

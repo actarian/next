@@ -1,7 +1,7 @@
-import { CartMini, MarketSelector } from '@components/index';
+import { CartMini, MarketSelector } from '@components';
 import { Button, Image, Popover, Tabs } from '@geist-ui/core';
 import { Menu, ShoppingCart } from '@geist-ui/icons';
-import { useLayout, usePage } from '@hooks/index';
+import { useLayout, usePage } from '@hooks';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';

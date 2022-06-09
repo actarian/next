@@ -19,7 +19,7 @@ export { getProduct, getProducts } from '@models/product/product.service';
 export { filterProductItem } from '@models/product_search/product_search.service';
 export type { IRoute, IRouteLink, IRouteParams, SchemaType } from '@models/route/route';
 export { routeInterceptor } from '@models/route/route.interceptor';
-export { categoryToRouteLink, decorateHref, getBreadcrumbFromCategoryTree, getChildCategories, getRoute, getRouteLinkTree, getRoutes, getStaticPathsForSchema } from '@models/route/route.service';
+export { categoryToRouteLink, decorateHref, getBreadcrumbFromCategoryTree, getChildCategories, getRoute, getRouteLinkTree, getRoutes, getStaticPathsForSchema, resolveRoute } from '@models/route/route.service';
 export type { StaticPath } from '@models/route/route.service';
 export type { ITile } from '@models/tile/tile';
 export { getTiles } from '@models/tile/tile.service';

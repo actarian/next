@@ -1,5 +1,5 @@
-import { createGenericContext } from '@hooks/useGenericContext/useGenericContext';
-import type { ILayout } from '@models/index';
+import { createGenericContext } from '@hooks';
+import type { ILayout } from '@models';
 import React from 'react';
 
 export type ILayoutContext = ILayout;
@@ -16,3 +16,4 @@ function LayoutProvider({ children, layout }: { children?: React.ReactNode, layo
 };
 
 export { useLayout, LayoutProvider };
+

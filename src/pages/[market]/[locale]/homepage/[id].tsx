@@ -1,8 +1,8 @@
 
-import { Banner, Breadcrumb, Layout } from '@components/index';
-import { asStaticProps } from '@core/index';
+import { Banner, Breadcrumb, Layout } from '@components';
+import { asStaticProps } from '@core';
 import { Button, Display, Grid, Image, Text } from '@geist-ui/core';
-import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models/index';
+import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
 import React from 'react';
 

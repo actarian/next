@@ -1,5 +1,5 @@
 
-import { IEquatable, ILocalizedString } from '@core/entity/entity';
+import { IEquatable, ILocalizedString } from '@core';
 
 export type ICountry = {
   id: IEquatable;

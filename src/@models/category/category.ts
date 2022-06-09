@@ -1,4 +1,4 @@
-import type { IEquatable, ILocalizedString } from '@core/entity/entity';
+import type { IEquatable, ILocalizedString } from '@core';
 
 export interface ICategory {
   id: IEquatable;

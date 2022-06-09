@@ -1,6 +1,6 @@
 import { Button, Card, Grid, Spacer, Text } from '@geist-ui/core';
 import { ArrowLeft } from '@geist-ui/icons';
-import { useLabel } from '@hooks/index';
+import { useLabel } from '@hooks';
 import { useRouter } from 'next/router';
 import React from 'react';
 

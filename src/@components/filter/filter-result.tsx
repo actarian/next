@@ -1,6 +1,6 @@
 
 import { Card, Image, Text } from '@geist-ui/core';
-import { ITile } from '@models/tile/tile';
+import { ITile } from '@models';
 import NextLink from 'next/link';
 import React from 'react';
 import styles from './filter-result.module.scss';

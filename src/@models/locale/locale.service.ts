@@ -1,4 +1,4 @@
-import type { FindParams, ILocalizedString } from '@core/entity/entity';
+import type { FindParams, ILocalizedString } from '@core';
 import { getStore } from '@core/store/store.service';
 import type { ILocale } from './locale';
 

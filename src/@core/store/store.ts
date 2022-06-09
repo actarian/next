@@ -1,4 +1,4 @@
-import type { IEntity, IQuerable } from '@core/entity/entity';
+import type { IEntity, IQuerable } from '@core';
 
 export type Store = {
   [key: string]: IQuerable<IEntity>;

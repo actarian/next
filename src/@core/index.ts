@@ -12,6 +12,7 @@ export { mockInterceptor } from '@core/mock/mock.interceptor';
 export { default as MockService } from '@core/mock/mock.service';
 export { getMockStore } from '@core/mock/mock.store';
 export { default as StoreApiService, storeDelete, storeFetch, storeGet, storePatch, storePost, storePut } from '@core/store-api/store-api.service';
+export { getApiStore } from '@core/store-api/store-api.store';
 export { StoreStrategy, storeStrategy } from '@core/store/store';
 export type { CollectionDescription, SerializedCollection, SerializedStore, Store } from '@core/store/store';
 export { getStore } from '@core/store/store.service';

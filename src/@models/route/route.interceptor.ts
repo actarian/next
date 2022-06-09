@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 import { apiPost } from '@core/api/api.service';
-import { resolveRoute } from '@core/utils';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { IRoute } from './route';
+import { resolveRoute } from './route.service';
 
 export async function routeInterceptor(request: NextRequest, next: NextFetchEvent) {
   let url = request.nextUrl;

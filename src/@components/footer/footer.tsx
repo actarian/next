@@ -1,5 +1,5 @@
-import { useLayout } from '@hooks/index';
-import { IRouteLink } from '@models/index';
+import { useLayout } from '@hooks';
+import { IRouteLink } from '@models';
 import NextLink from 'next/link';
 import styles from './footer.module.scss';
 

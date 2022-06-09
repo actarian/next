@@ -1,5 +1,5 @@
-import { apiHandler } from '@core/index';
-import { getMenu } from '@models/index';
+import { apiHandler } from '@core';
+import { getMenu } from '@models';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({

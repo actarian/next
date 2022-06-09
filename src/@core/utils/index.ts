@@ -1,6 +1,3 @@
-import type { IRoute } from '@models/route/route';
-import { PAGES } from 'src/types';
-
 export function merge(target: any, source: any): any {
   // override null values
   if (source === null) {
@@ -26,18 +23,6 @@ export function merge(target: any, source: any): any {
     });
   }
   return target;
-}
-
-export function resolveRoute(route: IRoute) {
-  // console.log('resolveRoute', route.pageSchema);
-  let routepath: string = (PAGES as any)[route.pageSchema];
-  return `/${route.marketId}/${route.localeId}/${routepath}/${route.pageId}`;
-  /*
-  routepath = routepath.replace(/:([^\/]*)/g, (match, p1) => {
-    return route[p1];
-  });
-  return routepath;
-  */
 }
 
 export function asStaticProps(props: any): any {

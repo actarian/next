@@ -1,8 +1,9 @@
-import type { FindParams } from '@core/entity/entity';
-import { getStore } from '@core/store/store.service';
-import type { ICategory } from '@models/category/category';
-import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
-// import { parseMockApi } from '@core/mock/mock.server';
+import type { FindParams } from '@core';
+import { getStore } from '@core';
+import type { ICategory } from '@models';
+import { isLocalizedString, localizedToString } from '@models';
+import { PAGES } from 'src/types';
+// import { parseMockApi } from '@core';
 import type { IRoute, IRouteLink } from './route';
 
 export async function getRoutes(params: FindParams = {}): Promise<IRoute[]> {
@@ -91,6 +92,18 @@ export function categoryToRouteLink(routes: IRoute[], categories: ICategory[], c
     href,
     items: getChildCategories(routes, categories, category, market, locale),
   };
+}
+
+export function resolveRoute(route: IRoute) {
+  // console.log('resolveRoute', route.pageSchema);
+  let routepath: string = (PAGES as any)[route.pageSchema];
+  return `/${route.marketId}/${route.localeId}/${routepath}/${route.pageId}`;
+  /*
+  routepath = routepath.replace(/:([^\/]*)/g, (match, p1) => {
+    return route[p1];
+  });
+  return routepath;
+  */
 }
 
 export type StaticPath = { params: { [key: string]: string } };

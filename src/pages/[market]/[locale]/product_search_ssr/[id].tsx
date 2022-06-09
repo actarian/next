@@ -1,8 +1,8 @@
-import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components/index';
-import { asStaticProps, IEquatable } from '@core/index';
+import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components';
+import { asStaticProps, IEquatable } from '@core';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-import { decode, Filter, filtersToParams, getFilters, getPaginationInfo, IFilter, setFilters, updateSearchParams } from '@hooks/index';
-import { filterProductItem, getFeatureTypes, getLayout, getPage, getTiles, ITile, PageProps } from '@models/index';
+import { decode, Filter, filtersToParams, getFilters, getPaginationInfo, IFilter, setFilters, updateSearchParams } from '@hooks';
+import { filterProductItem, getFeatureTypes, getLayout, getPage, getTiles, ITile, PageProps } from '@models';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useRouter } from 'next/router';
 
