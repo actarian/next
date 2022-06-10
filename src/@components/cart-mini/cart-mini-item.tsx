@@ -1,27 +1,27 @@
 import { IEquatable } from '@core';
 import { Button, Image, Text } from '@geist-ui/core';
 import { Trash } from '@geist-ui/icons';
-import { useCart, useMounted } from '@hooks';
+import { useCart, useMounted, useUI } from '@hooks';
 import { usePrice } from '@pipes';
 import NextLink from 'next/link';
 import React from 'react';
 import styles from './cart-mini-item.module.scss';
-
-export type ICartMiniItem = {
-  id: IEquatable;
-  schema: string;
-  image: string;
-  title: string;
-  href: string;
-  price: number;
-  qty: number;
-}
 
 export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
 
   const price = usePrice(item.price * item.qty);
 
   const { add, remove } = useCart();
+
+  const reduceUI = useUI(state => state.reduce);
+
+  function onSetDrawer(value?: string) {
+    reduceUI((state) => ({ drawer: value }));
+  }
+
+  const closeDrawer = () => {
+    return onSetDrawer();
+  };
 
   const mounted = useMounted();
   return (
@@ -32,7 +32,7 @@ export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
           <div className={styles.row}>
             <Text my={0}>{item.qty}</Text>
             <Text paddingLeft={1} paddingRight={1}>x</Text>
-            <Text className={styles.text} my={0}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
+            <Text className={styles.text} my={0} onClick={closeDrawer}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
           </div>
           <div className={styles.row}>
             <Text my={0}>{price}</Text>
@@ -44,4 +44,14 @@ export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
       </div>
     </>
   );
+}
+
+export type ICartMiniItem = {
+  id: IEquatable;
+  schema: string;
+  image: string;
+  title: string;
+  href: string;
+  price: number;
+  qty: number;
 }
