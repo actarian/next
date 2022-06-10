@@ -72,6 +72,7 @@ function createPageService(store: SerializedStore): SerializedCollection {
 function getRoute(href: string, marketId: string, localeId: string, pageSchema: string, pageId: string): IRoute {
   return {
     id: href,
+    schema: 'route',
     marketId,
     localeId,
     pageSchema,
@@ -87,6 +88,7 @@ function createRouteService(store: SerializedStore): SerializedCollection {
     const languages: string[] = store.locale.items.map(x => x.id);
     const markets: IMarket[] = store.market.items.map(x => ({
       id: x.id,
+      schema: 'market',
       languages: x.languages || languages,
     }));
     const collection = store[key];

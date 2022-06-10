@@ -1,7 +1,8 @@
+import { IEntity } from '@core';
 
-export interface ILocale {
+export interface ILocale extends IEntity {
   id: string;
-  schema?: string;
+  // schema?: string;
   title?: string;
   isDefault?: boolean;
 }

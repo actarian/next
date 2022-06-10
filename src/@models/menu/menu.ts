@@ -1,6 +1,6 @@
-import type { IEquatable } from '@core';
+import type { IEntity, IEquatable } from '@core';
 
-export interface IMenu {
+export interface IMenu extends IEntity {
   id: IEquatable;
   items: IMenuItem[];
 }

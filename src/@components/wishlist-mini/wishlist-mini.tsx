@@ -1,15 +1,14 @@
 
 import { apiGet } from '@core';
 import { Drawer } from '@geist-ui/core';
-import { useCart, useLayout } from '@hooks';
+import { useLayout, useWishlist } from '@hooks';
 import { IProduct } from '@models';
 import React, { ReactNode, useEffect, useState } from 'react';
-import CartMiniItem from './cart-mini-item';
+import WishlistMiniItem from './wishlist-mini-item';
 
-export default function CartMini({ children, visible, onClose }: CartMiniProps) {
-
+export default function WishlistMini({ children, visible, onClose }: WishlistMiniProps) {
   const { locale } = useLayout();
-  const { items } = useCart();
+  const { items } = useWishlist();
   const [products, setProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
@@ -24,22 +23,22 @@ export default function CartMini({ children, visible, onClose }: CartMiniProps) 
       };
       fetchData().catch(console.error);
     }
-  }, [visible, items]);
+  }, [visible]);
 
   return (
     <Drawer visible={visible} onClose={onClose} placement="right">
-      <Drawer.Title>Cart</Drawer.Title>
+      <Drawer.Title>Wishlist</Drawer.Title>
       <Drawer.Subtitle>{items.length} items found</Drawer.Subtitle>
       <Drawer.Content>
         {products && products.map((product) =>
-          <CartMiniItem item={product} />
+          <WishlistMiniItem item={product} />
         )}
       </Drawer.Content>
     </Drawer>
   )
 }
 
-export interface CartMiniProps {
+export interface WishlistMiniProps {
   children: ReactNode;
   visible: boolean;
   onClose: () => void;

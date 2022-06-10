@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 export default apiHandler({
   get: async (request: NextApiRequest, response: NextApiResponse) => {
     const { query: { id } } = request;
-    const data = await getProduct(id as string);
+    const data = await getProduct(id as string, request.query);
     if (data) {
       response.status(200).json(data);
     } else {

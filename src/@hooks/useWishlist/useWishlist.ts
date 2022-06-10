@@ -1,4 +1,4 @@
-import { IEquatable } from '@core';
+import { IEquatable, ISchema } from '@core';
 import create, { StateCreator } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -46,7 +46,7 @@ export const useWishlist =
     create<IWishlistStore>()(persist(wishListStore, { name: 'wishlist' })) :
     create<IWishlistStore>(wishListStore as StateCreator<any>);
 
-export interface IWishlistItem {
+export interface IWishlistItem extends ISchema {
   id: IEquatable;
   schema: string;
 }
@@ -54,34 +54,17 @@ export interface IWishlistItem {
 export interface IWishlistStore {
   items: IWishlistItem[];
   count(): number;
-  has(item: IWishlistItem): boolean;
-  add(item: IWishlistItem): void;
-  remove(item: IWishlistItem): void;
-  toggle(item: IWishlistItem): void;
+  has(item: ISchema): boolean;
+  add(item: ISchema): void;
+  remove(item: ISchema): void;
+  toggle(item: ISchema): void;
   clear(): void;
 }
 
 export type IStateCreator<T extends object> = StateCreator<T, any, [], T>;
 
 /*
-
-const MyComponent = () => {
-   const [ mounted, setMounted ] = useState(false);
-   useEffect(() => setMounted(true), []);   // at init only
-   return mounted ? ( .... ) : null;
-};
-
-function useMounted() {
-  const [ mounted, setMounted ] = useState(false);
-  useEffect(() => setMounted(true), []);   // at init only
-  return mounted;
-}
-
-*/
-
-/*
 with context example
-
 
 With v4 it should look something like
 

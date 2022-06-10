@@ -56721,6 +56721,7 @@
     "items": [
       {
         "id": "/ww/en",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "homepage",
@@ -56728,6 +56729,7 @@
       },
       {
         "id": "/ww/it",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "homepage",
@@ -56735,6 +56737,7 @@
       },
       {
         "id": "/ww/fr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "homepage",
@@ -56742,6 +56745,7 @@
       },
       {
         "id": "/eu/it",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "homepage",
@@ -56749,6 +56753,7 @@
       },
       {
         "id": "/eu/fr",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "homepage",
@@ -56756,6 +56761,7 @@
       },
       {
         "id": "/",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "homepage",
@@ -56763,6 +56769,7 @@
       },
       {
         "id": "/ww/en/who-we-are",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "about",
@@ -56770,6 +56777,7 @@
       },
       {
         "id": "/ww/it/chi-siamo",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "about",
@@ -56777,6 +56785,7 @@
       },
       {
         "id": "/ww/fr/qui-nous-sommes",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "about",
@@ -56784,6 +56793,7 @@
       },
       {
         "id": "/eu/it/chi-siamo",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "about",
@@ -56791,6 +56801,7 @@
       },
       {
         "id": "/eu/fr/qui-nous-sommes",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "about",
@@ -56798,6 +56809,7 @@
       },
       {
         "id": "/ww/en/products",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product_index",
@@ -56805,6 +56817,7 @@
       },
       {
         "id": "/ww/it/prodotti",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product_index",
@@ -56812,6 +56825,7 @@
       },
       {
         "id": "/ww/fr/produits",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product_index",
@@ -56819,6 +56833,7 @@
       },
       {
         "id": "/eu/it/prodotti",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product_index",
@@ -56826,6 +56841,7 @@
       },
       {
         "id": "/eu/fr/produits",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product_index",
@@ -56833,6 +56849,7 @@
       },
       {
         "id": "/ww/en/product-search-csr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product_search_csr",
@@ -56840,6 +56857,7 @@
       },
       {
         "id": "/ww/it/ricerca-prodotti-csr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product_search_csr",
@@ -56847,6 +56865,7 @@
       },
       {
         "id": "/ww/fr/recherche-produit-csr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product_search_csr",
@@ -56854,6 +56873,7 @@
       },
       {
         "id": "/eu/it/ricerca-prodotti-csr",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product_search_csr",
@@ -56861,6 +56881,7 @@
       },
       {
         "id": "/eu/fr/recherche-produit-csr",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product_search_csr",
@@ -56868,6 +56889,7 @@
       },
       {
         "id": "/ww/en/product-search-ssr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product_search_ssr",
@@ -56875,6 +56897,7 @@
       },
       {
         "id": "/ww/it/ricerca-prodotti-ssr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product_search_ssr",
@@ -56882,6 +56905,7 @@
       },
       {
         "id": "/ww/fr/recherche-produit-ssr",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product_search_ssr",
@@ -56889,6 +56913,7 @@
       },
       {
         "id": "/eu/it/ricerca-prodotti-ssr",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product_search_ssr",
@@ -56896,6 +56921,7 @@
       },
       {
         "id": "/eu/fr/recherche-produit-ssr",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product_search_ssr",
@@ -56903,6 +56929,7 @@
       },
       {
         "id": "/ww/en/products/apparel/menswear/t-shirts/t-shirt",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product",
@@ -56910,6 +56937,7 @@
       },
       {
         "id": "/ww/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product",
@@ -56917,6 +56945,7 @@
       },
       {
         "id": "/ww/fr/produits/vetements/homme/t-shirts/t-shirt",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product",
@@ -56924,6 +56953,7 @@
       },
       {
         "id": "/eu/it/prodotti/abbigliamento/uomo/t-shirts/t-shirt",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product",
@@ -56931,6 +56961,7 @@
       },
       {
         "id": "/eu/fr/produits/vetements/homme/t-shirts/t-shirt",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product",
@@ -56938,6 +56969,7 @@
       },
       {
         "id": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product",
@@ -56945,6 +56977,7 @@
       },
       {
         "id": "/ww/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product",
@@ -56952,6 +56985,7 @@
       },
       {
         "id": "/ww/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product",
@@ -56959,6 +56993,7 @@
       },
       {
         "id": "/eu/it/prodotti/abbigliamento/uomo/pantaloni/pantaloni-skinny-da-jogging-unisex",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product",
@@ -56966,6 +57001,7 @@
       },
       {
         "id": "/eu/fr/produits/vetements/homme/pantalons/jogging-skinny-unisexe",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product",
@@ -56973,6 +57009,7 @@
       },
       {
         "id": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product",
@@ -56980,6 +57017,7 @@
       },
       {
         "id": "/ww/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product",
@@ -56987,6 +57025,7 @@
       },
       {
         "id": "/ww/fr/produits/vetements/homme/vestes/veste-legere",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product",
@@ -56994,6 +57033,7 @@
       },
       {
         "id": "/eu/it/prodotti/abbigliamento/uomo/giacche/giacca-leggera",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product",
@@ -57001,6 +57041,7 @@
       },
       {
         "id": "/eu/fr/produits/vetements/homme/vestes/veste-legere",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product",
@@ -57008,6 +57049,7 @@
       },
       {
         "id": "/ww/en/products/apparel/menswear/hats/black-beanie",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "en",
         "pageSchema": "product",
@@ -57015,6 +57057,7 @@
       },
       {
         "id": "/ww/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "it",
         "pageSchema": "product",
@@ -57022,6 +57065,7 @@
       },
       {
         "id": "/ww/fr/produits/vetements/homme/chapeaux/bonnet-noir",
+        "schema": "route",
         "marketId": "ww",
         "localeId": "fr",
         "pageSchema": "product",
@@ -57029,6 +57073,7 @@
       },
       {
         "id": "/eu/it/prodotti/abbigliamento/uomo/cappelli/berretto-nero",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "it",
         "pageSchema": "product",
@@ -57036,6 +57081,7 @@
       },
       {
         "id": "/eu/fr/produits/vetements/homme/chapeaux/bonnet-noir",
+        "schema": "route",
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "product",

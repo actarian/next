@@ -1,11 +1,12 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
 import type { PAGES } from '@config';
-import type { IEquatable } from '@core';
+import type { IEntity, IEquatable } from '@core';
 
 export type SchemaType = keyof typeof PAGES;
 
-export interface IRoute {
+export interface IRoute extends IEntity {
   id: string;
+  // schema: string;
   marketId: string;
   localeId: string;
   pageSchema: string;

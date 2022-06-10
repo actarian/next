@@ -2,8 +2,12 @@
 export type IEquatable = string | number;
 export type ILocalizedString = { [key: string]: string };
 
-export interface IEntity {
+export interface ISchema {
   id: IEquatable;
+  schema: string;
+}
+
+export interface IEntity extends ISchema {
   [key: string]: any;
 }
 

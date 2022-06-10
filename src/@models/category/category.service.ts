@@ -41,6 +41,7 @@ export function resolveCategoryTree(item: ICategorized, items: ICategorized[], c
   if (!skipLast) {
     categoryTree.push({
       id: item.id,
+      schema: 'category',
       name: item.schema,
       title: item.title,
       slug: item.slug,

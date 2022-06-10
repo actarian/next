@@ -1,4 +1,6 @@
 export { useApiDelete, useApiFetch, useApiGet, useApiPatch, useApiPost, useApiPut } from '@hooks/useApi/useApi';
+export { useCart } from '@hooks/useCart/useCart';
+export type { ICartItem, ICartStore } from '@hooks/useCart/useCart';
 export { Filter, FilterMode } from '@hooks/useFilters/filter';
 export type { IFilter, IFilterOption } from '@hooks/useFilters/filter';
 export { filtersToParams, getFilteredItems, getFilters, setFilters } from '@hooks/useFilters/filter.service';
@@ -21,3 +23,4 @@ export type { IRouteContext } from '@hooks/useRoute/useRoute';
 export { decode, getSearchParams, pushSearchParams, replaceSearchParams, replaceSearchParamsSilently, updateSearchParams, useSearchParams } from '@hooks/useSearchParams/useSearchParams';
 export { useWishlist } from '@hooks/useWishlist/useWishlist';
 export type { IWishlistItem, IWishlistStore } from '@hooks/useWishlist/useWishlist';
+

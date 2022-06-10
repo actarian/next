@@ -1,6 +1,6 @@
-import type { IEquatable, ILocalizedString } from '@core';
+import type { IEntity, IEquatable, ILocalizedString } from '@core';
 
-export interface ICategory {
+export interface ICategory extends IEntity {
   id: IEquatable;
   name: string;
   title?: ILocalizedString | string;

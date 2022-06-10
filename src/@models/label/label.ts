@@ -1,7 +1,7 @@
-import type { IEquatable, ILocalizedString } from '@core';
+import type { IEntity, IEquatable, ILocalizedString } from '@core';
 
-export interface ILabel {
+export interface ILabel extends IEntity {
   id: IEquatable;
-  schema?: string;
+  // schema?: string;
   text?: string | ILocalizedString;
 }

@@ -1,6 +1,6 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
-import type { IEquatable } from '@core';
-import type { ILayout, IRoute, IRouteLink, IRouteParams, SchemaType } from '@models';
+import type { IEntity, IEquatable } from '@core';
+import type { ILayout, IRoute, IRouteLink, IRouteParams } from '@models';
 
 export interface IMeta {
   title?: string;
@@ -19,9 +19,9 @@ export interface IImage {
   height?: number;
 }
 
-export interface IPage {
-  id: IEquatable;
-  schema: SchemaType;
+export interface IPage extends IEntity {
+  // id: IEquatable;
+  // schema: SchemaType;
   categoryId?: IEquatable;
   slug?: string;
   href: string;

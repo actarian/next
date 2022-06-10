@@ -1,15 +1,21 @@
 import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
-import { ArrowRight, Heart, HeartFill } from '@geist-ui/icons';
-import { useLabel, useMounted, useWishlist } from '@hooks';
+import { Heart, HeartFill, ShoppingCart } from '@geist-ui/icons';
+import { useCart, useLabel, useMounted, useWishlist } from '@hooks';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
 
 export default function ProductPage({ layout, page, params }: PageProps) {
-  const { has, toggle } = useWishlist();
-  const added = has(page);
+
+  const price = usePrice(page.price);
+
+  const wishlist = useWishlist();
+  const isAddedToWishlist = wishlist.has(page);
+
+  const cart = useCart();
+  const isAddedToCart = cart.has(page);
 
   const label = useLabel();
   const mounted = useMounted();
@@ -22,7 +28,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
         <div style={{ position: 'relative' }}>
           <Headline title={page.title} abstract={page.abstract}></Headline>
           {mounted &&
-            <Button auto type="abort" padding={0} style={{ position: 'absolute', top: '20px', right: '10px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => toggle(page)}>{added ? <HeartFill /> : <Heart />}</Button>
+            <Button auto type="abort" padding={0} style={{ position: 'absolute', top: '20px', right: '10px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => wishlist.toggle(page)}>{isAddedToWishlist ? <HeartFill /> : <Heart />}</Button>
           }
         </div>
 
@@ -39,7 +45,11 @@ export default function ProductPage({ layout, page, params }: PageProps) {
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
-                <Button type="success" icon={<ArrowRight />} auto>Buy {usePrice(page.price)}</Button>
+                {mounted &&
+                  isAddedToCart ?
+                  <Button type="success" icon={<ShoppingCart />} auto>Added to cart</Button> :
+                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => cart.add(page)}>Buy {price}</Button>
+                }
               </Card.Footer>
             </Card>
 

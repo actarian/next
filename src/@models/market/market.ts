@@ -1,7 +1,8 @@
+import { IEntity } from '@core';
 
-export interface IMarket {
+export interface IMarket extends IEntity {
   id: string;
-  schema?: string;
+  // schema?: string;
   title?: string;
   isDefault?: boolean;
   countries?: string[];

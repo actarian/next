@@ -1,7 +1,7 @@
 export { apiHandler } from '@core/api/api.helper';
 export { apiDelete, apiFetch, apiGet, apiPatch, apiPost, apiPut } from '@core/api/api.service';
 export { toFindParams } from '@core/entity/entity';
-export type { FindParams, FindWhereParams, IEntity, IEquatable, ILocalizedString, IQuerable } from '@core/entity/entity';
+export type { FindParams, FindWhereParams, IEntity, IEquatable, ILocalizedString, IQuerable, ISchema } from '@core/entity/entity';
 export { fsExistOrCreateFolder, fsExists, fsRead, fsReadJson, fsWrite, fsWriteJson, pathJoin } from '@core/fs/fs.service';
 export { httpDelete, httpFetch, httpGet, httpPatch, httpPost, httpPut } from '@core/http/http.service';
 export type { FetchRequestOptions, FetchService } from '@core/http/http.service';
