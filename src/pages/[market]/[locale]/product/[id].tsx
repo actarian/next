@@ -2,18 +2,17 @@ import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { ArrowRight, Heart, HeartFill } from '@geist-ui/icons';
-import { useMounted, useWishlist } from '@hooks';
+import { useLabel, useMounted, useWishlist } from '@hooks';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
 
 export default function ProductPage({ layout, page, params }: PageProps) {
-
   const { has, toggle } = useWishlist();
   const added = has(page);
 
+  const label = useLabel();
   const mounted = useMounted();
-
   return (
     <>
       <Layout>
@@ -49,7 +48,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
 
         <Spacer h={.5} />
 
-        <Note type="warning">This note details something important.</Note>
+        <Note type="warning">{label('product.note')}</Note>
 
       </Layout>
     </>

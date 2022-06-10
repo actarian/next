@@ -17,7 +17,7 @@ export async function getPage<T extends IPage>(schema: string, id: IEquatable, m
     if (!currentRoute) {
       throw ('No route found for page ' + schema + ':' + id + ' in market ' + market + ' and locale ' + locale);
     }
-    const alternates = routes.filter(x => x.marketId === market && x.localeId !== locale);
+    const alternates = routes.filter(x => x.marketId !== market || x.localeId !== locale);
     const categoryTree: ICategory[] = await getCategoryTree(page);
     const breadcrumb: IRouteLink[] = await getBreadcrumbFromCategoryTree(categoryTree, market, locale);
     return {

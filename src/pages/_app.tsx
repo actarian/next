@@ -1,7 +1,7 @@
 import { CssBaseline, GeistProvider } from '@geist-ui/core';
 import { LabelProvider, LayoutProvider, PageProvider } from '@hooks';
 import { ILayout, IPage, IRouteParams } from '@models';
-import '../styles/styles.scss';
+import '@styles/styles.scss';
 
 export default function CustomApp({ Component, pageProps }: CustomAppProps) {
 

@@ -1,8 +1,8 @@
+import { PAGES } from '@config';
 import type { FindParams } from '@core';
 import { getStore } from '@core';
 import type { ICategory } from '@models';
 import { isLocalizedString, localizedToString } from '@models';
-import { PAGES } from 'src/types';
 // import { parseMockApi } from '@core';
 import type { IRoute, IRouteLink } from './route';
 

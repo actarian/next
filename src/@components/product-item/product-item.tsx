@@ -7,14 +7,12 @@ import React from 'react';
 import styles from './product-item.module.scss';
 
 export default function ProductItem({ item, showImage = true }: { item: IProduct, showImage?: boolean }) {
-
   const { has, toggle } = useWishlist();
   const added = has(item);
 
   // const MyLink = React.forwardRef((props, ref) => <NextLink innerRef={ref} {...props} />);
 
   const mounted = useMounted();
-
   return (
     <>
       <Card shadow hoverable width="100%" style={{ cursor: 'pointer', position: 'relative' }}>

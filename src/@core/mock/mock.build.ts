@@ -6,13 +6,13 @@ const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
 
+import { PAGES } from '@config';
 import type { CollectionDescription, IEntity, SerializedCollection, SerializedStore } from '@core';
 import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import { awaitAll } from '@core/utils';
 import type { ICategorized, IMarket, IRoute } from '@models';
 import { resolveCategoryTree } from '@models/category/category.service';
 import { isLocalizedString, localizedToString } from '@models/locale/locale.service';
-import { PAGES } from 'src/types';
 
 if (process.env && process.env.NODE_ENV) {
   dotenv.config({ path: '.env.' + process.env.NODE_ENV });

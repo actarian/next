@@ -1,6 +1,6 @@
+import type { AppStore } from '@config';
 import { getMockStore } from '@core/mock/mock.store';
 import { getApiStore } from '@core/store-api/store-api.store';
-import type { AppStore } from 'src/types';
 import { StoreStrategy, storeStrategy } from './store';
 
 export async function getStore(): Promise<AppStore> {

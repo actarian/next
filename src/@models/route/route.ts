@@ -1,6 +1,6 @@
 // import { NextApiRequest, NextApiResponse } from 'next';
+import type { PAGES } from '@config';
 import type { IEquatable } from '@core';
-import type { PAGES } from 'src/types';
 
 export type SchemaType = keyof typeof PAGES;
 

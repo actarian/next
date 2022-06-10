@@ -56237,6 +56237,42 @@
         "schema": "label"
       },
       {
+        "id": "product.note",
+        "text": {
+          "en": "This note details something important.",
+          "it": "Questa nota descrive qualcosa di importante.",
+          "fr": "Cette note détaille quelque chose d'important."
+        },
+        "schema": "label"
+      },
+      {
+        "id": "product_search.items",
+        "text": {
+          "en": "@total items found",
+          "it": "trovati @total articoli",
+          "fr": "@total articles trouvés"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "pagination.prev",
+        "text": {
+          "en": "Prev",
+          "it": "Indietro",
+          "fr": "Précédent"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "pagination.next",
+        "text": {
+          "en": "Next",
+          "it": "Avanti",
+          "fr": "Prochain"
+        },
+        "schema": "label"
+      },
+      {
         "id": "notfound.title",
         "text": {
           "en": "Page not found",

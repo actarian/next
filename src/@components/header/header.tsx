@@ -34,7 +34,6 @@ export default function Header() {
   const wishlistCount = getWishlistCount();
 
   const mounted = useMounted();
-
   return (
     <header className={styles.header}>
       <nav className={styles.menu}>

@@ -1,6 +1,6 @@
+import type { AppStore } from '@config';
 import type { IEntity, IQuerable } from '@core';
 import { fsReadJson } from '@core/fs/fs.service';
-import type { AppStore } from 'src/types';
 import MockService from './mock.service';
 
 const path = require('path');

@@ -1,6 +1,6 @@
+import type { AppStore } from '@config';
+import { PAGES } from '@config';
 import type { IEntity, IQuerable } from '@core';
-import type { AppStore } from 'src/types';
-import { PAGES } from 'src/types';
 import StoreApiService from './store-api.service';
 
 let STORE_: AppStore;

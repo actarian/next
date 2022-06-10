@@ -1,7 +1,7 @@
 import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components';
 import { asStaticProps, IEquatable } from '@core';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-import { decode, Filter, filtersToParams, getFilters, getPaginationInfo, IFilter, setFilters, updateSearchParams } from '@hooks';
+import { decode, Filter, filtersToParams, getFilters, getPaginationInfo, IFilter, setFilters, updateSearchParams, useLabel } from '@hooks';
 import { filterProductItem, getFeatureTypes, getLayout, getPage, getTiles, ITile, PageProps } from '@models';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useRouter } from 'next/router';
@@ -28,6 +28,7 @@ export default function ProductSearchSSR({ page, serializedFilters, pagination }
     router.replace({ pathname, query });
   };
 
+  const label = useLabel();
   return (
     <>
       <Layout>
@@ -44,7 +45,7 @@ export default function ProductSearchSSR({ page, serializedFilters, pagination }
           </Grid>
           <Grid xs={24} sm={18} direction="column">
 
-            <Note type="warning" label={false} marginBottom={1}>{pagination.total} items found</Note>
+            <Note type="warning" label={false} marginBottom={1}>{label('product_search.items', { total: pagination.total })}</Note>
 
             <FilterRecap filters={filters} onChange={onFilterChange}></FilterRecap>
 
@@ -61,7 +62,10 @@ export default function ProductSearchSSR({ page, serializedFilters, pagination }
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={(page: number) => onPaginationChange(page)} />
+                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={(page: number) => onPaginationChange(page)}>
+                    <Pagination.Previous>{label('pagination.prev')}</Pagination.Previous>
+                    <Pagination.Next>{label('pagination.next')}</Pagination.Next>
+                  </Pagination>
                 </Grid>
               </Grid.Container>
             }

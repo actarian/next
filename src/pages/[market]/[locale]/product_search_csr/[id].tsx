@@ -2,7 +2,7 @@
 import { Breadcrumb, FilterRecap, FilterResult, FilterSidebar, Headline, Layout } from '@components';
 import { asStaticProps, IEquatable } from '@core';
 import { Grid, Note, Pagination } from '@geist-ui/core';
-import { Filter, filtersToParams, useFilters, usePagination, useSearchParams } from '@hooks';
+import { Filter, filtersToParams, useFilters, useLabel, usePagination, useSearchParams } from '@hooks';
 import { filterProductItem, getFeatureTypes, getLayout, getPage, getStaticPathsForSchema, getTiles, IFeatureType, ITile, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
 import { useCallback } from 'react';
@@ -67,6 +67,7 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
   }
   */
 
+  const label = useLabel();
   return (
     <>
       <Layout>
@@ -83,7 +84,7 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
           </Grid>
           <Grid xs={24} sm={18} direction="column">
 
-            <Note type="warning" label={false} marginBottom={1}>{filteredItems.length} items found</Note>
+            <Note type="warning" label={false} marginBottom={1}>{label('product_search.items', { total: filteredItems.length })}</Note>
 
             <FilterRecap filters={filters} onChange={onFilterChange}></FilterRecap>
 
@@ -100,7 +101,10 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
             {pagination.items &&
               <Grid.Container gap={2}>
                 <Grid xs={24} padding={2} justify="center">
-                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={onPaginationChange} />
+                  <Pagination count={pagination.pages} initialPage={pagination.page} page={pagination.page} onChange={onPaginationChange}>
+                    <Pagination.Previous>{label('pagination.prev')}</Pagination.Previous>
+                    <Pagination.Next>{label('pagination.next')}</Pagination.Next>
+                  </Pagination>
                 </Grid>
               </Grid.Container>
             }

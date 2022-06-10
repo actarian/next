@@ -1,7 +1,7 @@
 import { createGenericContext, useLayout } from '@hooks';
 import React from 'react';
 
-export type ILabelContext = (key: string) => string;
+export type ILabelContext = (key: string, params?: { [key: string]: any }) => string;
 
 const [useLabel, LabelContextProvider] = createGenericContext<ILabelContext>();
 
@@ -13,8 +13,12 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
 
   const dictionary = Object.fromEntries(labels.map(l => [l.id, l.text]));
 
-  const context = (key: string): string => {
-    return (dictionary[key] || key) as string;
+  const context = (key: string, params?: { [key: string]: any }): string => {
+    let label = (dictionary[key] || key) as string;
+    if (params) {
+      return parseParams(label, params);
+    }
+    return label;
   };
 
   // console.log('LabelProvider.context', context);
@@ -24,6 +28,14 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
     </LabelContextProvider>
   );
 };
+
+function parseParams(label: string, params: { [key: string]: any }): string {
+  const TEMPLATE_REGEXP: RegExp = /@(\w+)/g;
+  return label.replace(TEMPLATE_REGEXP, (text: string, key: string) => {
+    const replacer: string = params[key].toString();
+    return typeof replacer !== 'undefined' ? replacer : text;
+  });
+}
 
 export { useLabel, LabelProvider };
 

@@ -54480,6 +54480,38 @@
       }
     },
     {
+      "id": "product.note",
+      "text": {
+        "en": "This note details something important.",
+        "it": "Questa nota descrive qualcosa di importante.",
+        "fr": "Cette note détaille quelque chose d'important."
+      }
+    },
+    {
+      "id": "product_search.items",
+      "text": {
+        "en": "@total items found",
+        "it": "trovati @total articoli",
+        "fr": "@total articles trouvés"
+      }
+    },
+    {
+      "id": "pagination.prev",
+      "text": {
+        "en": "Prev",
+        "it": "Indietro",
+        "fr": "Précédent"
+      }
+    },
+    {
+      "id": "pagination.next",
+      "text": {
+        "en": "Next",
+        "it": "Avanti",
+        "fr": "Prochain"
+      }
+    },
+    {
       "id": "notfound.title",
       "text": {
         "en": "Page not found",
