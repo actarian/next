@@ -20,7 +20,12 @@ export default function FilterSidebar({ filters, onChange }: { filters: Filter[]
           <Collapse key={filter.id} title={filter.title} font="11px">
             {filter.options && filter.options.map((option) => (
               option.title && <Checkbox className={styles.checkbox} key={option.id} checked={filter.has(option)} onChange={() => onOptionChange(filter, option)} marginBottom="10px" disabled={option.count === 0}>
-                <span style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
                   <Text span font="13px">{option.title}</Text> <Spacer style={{ flex: 1 }}></Spacer> {option.count ? <Badge type="success" scale={0.7}>{option.count}</Badge> : null}
                 </span>
               </Checkbox>

@@ -12,11 +12,11 @@ const cartStore: IStateCreator<ICartStore> = (set, get) => ({
   has: (item: ISchema) => {
     return get().items.find(x => x.schema === item.schema && x.id === item.id) != null;
   },
-  add: (item: ISchema) => set(state => {
+  add: (item: ISchema, qty: number = 1) => set(state => {
     const items = state.items.slice();
     const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
     if (index === -1) {
-      items.push({ id: item.id, schema: item.schema, qty: 1 });
+      items.push({ id: item.id, schema: item.schema, qty });
     }
     return { items };
   }),
@@ -46,7 +46,7 @@ export interface ICartStore {
   items: ICartItem[];
   count(): number;
   has(item: ISchema): boolean;
-  add(item: ISchema): void;
+  add(item: ISchema, qty: number): void;
   remove(item: ISchema): void;
   clear(): void;
 }

@@ -1,7 +1,7 @@
 import { CartMini, MarketSelector } from '@components';
 import WishlistMini from '@components/wishlist-mini/wishlist-mini';
 import { Badge, Button, Image, Popover, Tabs } from '@geist-ui/core';
-import { Heart, Menu, ShoppingCart } from '@geist-ui/icons';
+import { Heart, HeartFill, Menu, ShoppingCart } from '@geist-ui/icons';
 import { useCart, useLayout, useMounted, usePage, useUI, useWishlist } from '@hooks';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
@@ -61,8 +61,8 @@ export default function Header() {
         <nav className={styles.right}>
           {mounted ?
             <Badge.Anchor>
-              {wishlistCount > 0 && <Badge scale={0.5}>{wishlistCount}</Badge>}
-              <Button icon={<Heart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('wishlist')}></Button>
+              {wishlistCount > 0 && <Badge scale={0.5} type="error">{wishlistCount}</Badge>}
+              <Button icon={wishlistCount > 0 ? <HeartFill color="white" /> : <Heart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('wishlist')}></Button>
             </Badge.Anchor> :
             <Button icon={<Heart />} auto scale={2 / 3} px={0.6}></Button>
           }
@@ -74,7 +74,7 @@ export default function Header() {
             <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('cart')}></Button>
           }
           <Popover content={<MarketSelector />}>
-            <Button icon={<Menu />} auto scale={2 / 3} px={0.6}>{layout.locale}</Button>
+            <Button icon={<Menu />} auto scale={2 / 3} px={0.6}>{layout.locale.toUpperCase()}</Button>
           </Popover>
         </nav>
       </nav>

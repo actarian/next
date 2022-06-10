@@ -1,0 +1,15 @@
+.remove,
+.add {
+  flex: 0 0 40px!important;
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  width: 40px!important;
+  height: 40px!important;
+  flex: 0 0 40px!important;
+  min-width: auto!important;
+}
+
+.qty {
+  flex: 1;
+}

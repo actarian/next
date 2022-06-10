@@ -17,7 +17,7 @@ export default function WishlistMiniItem({ item }: { item: IProduct }) {
         {<Image className={styles.image} width="80px" height="80px" src={item.image} draggable={false} title={item.title} />}
         <Text className={styles.text} my={0}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
         {mounted &&
-          <Button className={styles.button} auto type="abort" padding={0} onClick={() => toggle(item)}>{added ? <HeartFill /> : <Heart />}</Button>
+          <Button className={styles.button} auto type="abort" padding={0} onClick={() => toggle(item)}>{added ? <HeartFill color="white" /> : <Heart />}</Button>
         }
       </div>
     </>

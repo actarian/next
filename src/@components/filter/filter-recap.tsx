@@ -17,9 +17,18 @@ export default function FilterRecap({ filters, onChange }: { filters: Filter[], 
   }
 
   return (
-    <div style={{ padding: '0 10px', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+    <div style={{
+      padding: '0 10px',
+      display: 'flex',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}>
       {filters && filters.filter(x => x.hasAny()).map((filter, i) => (
-        <div key={filter.id} style={{ display: 'flex', alignItems: 'center', padding: '0 10px 0 0' }}>
+        <div key={filter.id} style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 10px 0 0'
+        }}>
           <Text paddingRight="10px">{filter.title}</Text>
 
           {false && filter.options && filter.options.filter(x => filter.has(x)).map((option) => (

@@ -1,11 +1,13 @@
 import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
-import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
-import { Heart, HeartFill, ShoppingCart } from '@geist-ui/icons';
+import { Button, Card, Grid, Image, Input, Note, Spacer, Text } from '@geist-ui/core';
+import { Heart, HeartFill, MinusCircle, PlusCircle, ShoppingCart } from '@geist-ui/icons';
 import { useCart, useLabel, useMounted, useUI, useWishlist } from '@hooks';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
+import styles from './product.module.scss';
 
 export default function ProductPage({ layout, page, params }: PageProps) {
 
@@ -17,13 +19,21 @@ export default function ProductPage({ layout, page, params }: PageProps) {
   const cart = useCart();
   const isAddedToCart = cart.has(page);
 
+  const [qty, setQty] = useState(1);
+
   const reduceUI = useUI(state => state.reduce);
   function onSetDrawer(value?: string) {
     reduceUI(state => ({ drawer: value }));
   }
 
+  function onSetQty(qty: number) {
+    if (qty > 0) {
+      setQty(qty);
+    }
+  }
+
   function onAddToCart() {
-    cart.add(page);
+    cart.add(page, qty);
     // onSetDrawer('cart');
   }
 
@@ -38,7 +48,16 @@ export default function ProductPage({ layout, page, params }: PageProps) {
         <div style={{ position: 'relative' }}>
           <Headline title={page.title} abstract={page.abstract}></Headline>
           {mounted &&
-            <Button auto type="abort" padding={0} style={{ position: 'absolute', top: '20px', right: '10px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => wishlist.toggle(page)}>{isAddedToWishlist ? <HeartFill /> : <Heart />}</Button>
+            <Button auto type="abort" padding={0} style={{
+              position: 'absolute',
+              top: '20px',
+              right: '10px',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }} onClick={() => wishlist.toggle(page)}>{isAddedToWishlist ? <HeartFill color="white" /> : <Heart />}</Button>
           }
         </div>
 
@@ -55,6 +74,9 @@ export default function ProductPage({ layout, page, params }: PageProps) {
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
+                <Button className={styles.remove} type="abort" padding="0" onClick={() => onSetQty(qty - 1)} >{<MinusCircle />}</Button>
+                <Input className={styles.qty} placeholder="qty" value={qty.toString()} onChange={(value) => onSetQty(Number(value))} />
+                <Button className={styles.add} type="abort" padding="0" onClick={() => onSetQty(qty + 1)} >{<PlusCircle />}</Button>
                 {mounted &&
                   isAddedToCart ?
                   <Button type="success" icon={<ShoppingCart />} auto onClick={() => onSetDrawer('cart')}>Added to cart</Button> :
