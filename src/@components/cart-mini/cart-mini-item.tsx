@@ -19,7 +19,7 @@ export type ICartMiniItem = {
 
 export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
 
-  const price = usePrice(item.price);
+  const price = usePrice(item.price * item.qty);
 
   const { add, remove } = useCart();
 
@@ -28,10 +28,16 @@ export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
     <>
       <div className={styles.card}>
         {<Image className={styles.image} width="80px" height="80px" src={item.image} draggable={false} title={item.title} />}
-        <Text className={styles.text} my={0}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
-        <Text my={0}>{price}</Text>
-        <Text padding={1}>x</Text>
-        <Text my={0}>{item.qty}</Text>
+        <div className={styles.info}>
+          <div className={styles.row}>
+            <Text my={0}>{item.qty}</Text>
+            <Text paddingLeft={1} paddingRight={1}>x</Text>
+            <Text className={styles.text} my={0}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
+          </div>
+          <div className={styles.row}>
+            <Text my={0}>{price}</Text>
+          </div>
+        </div>
         {mounted &&
           <Button className={styles.button} auto type="abort" padding={0} onClick={() => remove(item)}>{<Trash />}</Button>
         }

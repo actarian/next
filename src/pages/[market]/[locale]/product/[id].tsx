@@ -75,7 +75,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
                 <Button className={styles.remove} type="abort" padding="0" onClick={() => onSetQty(qty - 1)} >{<MinusCircle />}</Button>
-                <Input className={styles.qty} placeholder="qty" value={qty.toString()} onChange={(value) => onSetQty(Number(value))} />
+                <Input className={styles.qty} placeholder="qty" value={qty.toString()} onChange={(e) => onSetQty(Number(e.target.value))} />
                 <Button className={styles.add} type="abort" padding="0" onClick={() => onSetQty(qty + 1)} >{<PlusCircle />}</Button>
                 {mounted &&
                   isAddedToCart ?

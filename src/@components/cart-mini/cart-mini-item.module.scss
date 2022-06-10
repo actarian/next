@@ -6,6 +6,16 @@
   border-bottom: 1px solid #222;
 }
 
+.info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
 .image {
   flex: 0 0 80px;
   display: flex;
@@ -21,11 +31,6 @@
     left: 0;
     object-fit: cover !important;
   }
-}
-
-.text {
-  flex: 1;
-  margin-right: 20px;
 }
 
 .button {
