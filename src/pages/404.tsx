@@ -1,4 +1,3 @@
-
 import { Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { getErrorPageLayout, PageProps } from '@models';

@@ -44,7 +44,7 @@ const wishListStore: IStateCreator<IWishlistStore> = (set, get) => ({
 export const useWishlist =
   PERSIST ?
     create<IWishlistStore>()(persist(wishListStore, { name: 'wishlist' })) :
-    create<IWishlistItem>(wishListStore as StateCreator<any>);
+    create<IWishlistStore>(wishListStore as StateCreator<any>);
 
 export interface IWishlistItem {
   id: IEquatable;

@@ -10,6 +10,7 @@ export { LabelProvider, useLabel } from '@hooks/useLabel/useLabel';
 export type { ILabelContext } from '@hooks/useLabel/useLabel';
 export { LayoutProvider, useLayout } from '@hooks/useLayout/useLayout';
 export type { ILayoutContext } from '@hooks/useLayout/useLayout';
+export { useMounted } from '@hooks/useMounted/useMounted';
 export { PageProvider, usePage } from '@hooks/usePage/usePage';
 export type { IPageContext } from '@hooks/usePage/usePage';
 export { getPagedItems, getPaginationInfo } from '@hooks/usePagination/pagination.service';
@@ -18,4 +19,5 @@ export { usePagination } from '@hooks/usePagination/usePagination';
 export { RouteProvider, useRoute } from '@hooks/useRoute/useRoute';
 export type { IRouteContext } from '@hooks/useRoute/useRoute';
 export { decode, getSearchParams, pushSearchParams, replaceSearchParams, replaceSearchParamsSilently, updateSearchParams, useSearchParams } from '@hooks/useSearchParams/useSearchParams';
-
+export { useWishlist } from '@hooks/useWishlist/useWishlist';
+export type { IWishlistItem, IWishlistStore } from '@hooks/useWishlist/useWishlist';
