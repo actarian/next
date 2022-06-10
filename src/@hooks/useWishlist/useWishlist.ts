@@ -1,48 +1,50 @@
 import { IEquatable } from '@core';
-import create from 'zustand';
+import create, { StateCreator } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export const useWishlist = create<IWishlistStore>()(
-  persist(
-    (set, get) => ({
-      items: [],
-      count: () => {
-        return get().items.length;
-      },
-      has: (item: IWishlistItem) => {
-        return get().items.find(x => x.schema === item.schema && x.id === item.id) != null;
-      },
-      add: (item: IWishlistItem) => set(state => {
-        const items = state.items.slice();
-        const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
-        if (index === -1) {
-          items.push({ id: item.id, schema: item.schema });
-        }
-        return { items };
-      }),
-      remove: (item: IWishlistItem) => set(state => {
-        const items = state.items.slice();
-        const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
-        if (index !== -1) {
-          items.splice(index, 1);
-        }
-        return { items };
-      }),
-      toggle: (item: IWishlistItem) => set(state => {
-        const items = state.items.slice();
-        const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
-        if (index === -1) {
-          items.push({ id: item.id, schema: item.schema });
-        } else {
-          items.splice(index, 1);
-        }
-        return { items };
-      }),
-      clear: () => set(state => ({ items: [] })),
-    }),
-    { name: 'wishlist' }
-  )
-);
+const PERSIST = true;
+
+const wishListStore: IStateCreator<IWishlistStore> = (set, get) => ({
+  items: [],
+  count: () => {
+    return get().items.length;
+  },
+  has: (item: IWishlistItem) => {
+    return get().items.find(x => x.schema === item.schema && x.id === item.id) != null;
+  },
+  add: (item: IWishlistItem) => set(state => {
+    const items = state.items.slice();
+    const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
+    if (index === -1) {
+      items.push({ id: item.id, schema: item.schema });
+    }
+    return { items };
+  }),
+  remove: (item: IWishlistItem) => set(state => {
+    const items = state.items.slice();
+    const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
+    if (index !== -1) {
+      items.splice(index, 1);
+    }
+    return { items };
+  }),
+  toggle: (item: IWishlistItem) => set(state => {
+    const items = state.items.slice();
+    const index = items.reduce((p, c, i) => (c.schema === item.schema && c.id === item.id) ? i : p, -1);
+    if (index === -1) {
+      items.push({ id: item.id, schema: item.schema });
+    } else {
+      items.splice(index, 1);
+    }
+    return { items };
+  }),
+  clear: () => set(state => ({ items: [] })),
+});
+
+export const useWishlist =
+  PERSIST ?
+    create<IWishlistStore>()(persist(wishListStore, { name: 'wishlist' })) :
+    create<IWishlistItem>(wishListStore as StateCreator<any>);
 
 export interface IWishlistItem {
   id: IEquatable;
@@ -58,6 +60,24 @@ export interface IWishlistStore {
   toggle(item: IWishlistItem): void;
   clear(): void;
 }
+
+export type IStateCreator<T extends object> = StateCreator<T, any, [], T>;
+
+/*
+
+const MyComponent = () => {
+   const [ mounted, setMounted ] = useState(false);
+   useEffect(() => setMounted(true), []);   // at init only
+   return mounted ? ( .... ) : null;
+};
+
+function useMounted() {
+  const [ mounted, setMounted ] = useState(false);
+  useEffect(() => setMounted(true), []);   // at init only
+  return mounted;
+}
+
+*/
 
 /*
 with context example
