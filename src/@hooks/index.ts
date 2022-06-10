@@ -21,6 +21,8 @@ export { usePagination } from '@hooks/usePagination/usePagination';
 export { RouteProvider, useRoute } from '@hooks/useRoute/useRoute';
 export type { IRouteContext } from '@hooks/useRoute/useRoute';
 export { decode, getSearchParams, pushSearchParams, replaceSearchParams, replaceSearchParamsSilently, updateSearchParams, useSearchParams } from '@hooks/useSearchParams/useSearchParams';
+export { useUI } from '@hooks/useUI/useUI';
+export type { IUIState, IUIStateValue, IUIStore } from '@hooks/useUI/useUI';
 export { useWishlist } from '@hooks/useWishlist/useWishlist';
 export type { IWishlistItem, IWishlistStore } from '@hooks/useWishlist/useWishlist';
 

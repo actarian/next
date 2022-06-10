@@ -31,8 +31,8 @@ export default function CartMini({ children, visible, onClose }: CartMiniProps) 
       <Drawer.Title>Cart</Drawer.Title>
       <Drawer.Subtitle>{items.length} items found</Drawer.Subtitle>
       <Drawer.Content>
-        {products && products.map((product) =>
-          <CartMiniItem item={product} />
+        {products && products.map((product, i) =>
+          <CartMiniItem key={i} item={product} />
         )}
       </Drawer.Content>
     </Drawer>

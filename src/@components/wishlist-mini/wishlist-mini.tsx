@@ -30,8 +30,8 @@ export default function WishlistMini({ children, visible, onClose }: WishlistMin
       <Drawer.Title>Wishlist</Drawer.Title>
       <Drawer.Subtitle>{items.length} items found</Drawer.Subtitle>
       <Drawer.Content>
-        {products && products.map((product) =>
-          <WishlistMiniItem item={product} />
+        {products && products.map((product, i) =>
+          <WishlistMiniItem key={i} item={product} />
         )}
       </Drawer.Content>
     </Drawer>

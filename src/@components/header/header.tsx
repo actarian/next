@@ -2,18 +2,16 @@ import { CartMini, MarketSelector } from '@components';
 import WishlistMini from '@components/wishlist-mini/wishlist-mini';
 import { Badge, Button, Image, Popover, Tabs } from '@geist-ui/core';
 import { Heart, Menu, ShoppingCart } from '@geist-ui/icons';
-import { useCart, useLayout, useMounted, usePage, useWishlist } from '@hooks';
+import { useCart, useLayout, useMounted, usePage, useUI, useWishlist } from '@hooks';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import styles from './header.module.scss';
 
 export default function Header() {
   const router = useRouter();
   const layout = useLayout();
   const page = usePage();
-
-  const [active, setActive] = useState<string | void>();
 
   const menu = layout.tree;
 
@@ -37,6 +35,11 @@ export default function Header() {
   const { count: getCartCount } = useCart();
   const cartCount = getCartCount();
 
+  const [drawer, reduceUI] = useUI(state => [state.drawer, state.reduce]);
+  function onSetDrawer(value?: string) {
+    reduceUI((state) => ({ drawer: value }));
+  }
+
   const mounted = useMounted();
   return (
     <header className={styles.header}>
@@ -59,24 +62,24 @@ export default function Header() {
           {mounted ?
             <Badge.Anchor>
               {wishlistCount > 0 && <Badge scale={0.5}>{wishlistCount}</Badge>}
-              <Button icon={<Heart />} auto scale={2 / 3} px={0.6} onClick={() => setActive('wishlist')}></Button>
+              <Button icon={<Heart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('wishlist')}></Button>
             </Badge.Anchor> :
             <Button icon={<Heart />} auto scale={2 / 3} px={0.6}></Button>
           }
           {mounted ?
             <Badge.Anchor>
               {cartCount > 0 && <Badge scale={0.5} type="error" dot />}
-              <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => setActive('cart')}></Button>
+              <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('cart')}></Button>
             </Badge.Anchor> :
-            <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => setActive('cart')}></Button>
+            <Button icon={<ShoppingCart />} auto scale={2 / 3} px={0.6} onClick={() => onSetDrawer('cart')}></Button>
           }
           <Popover content={<MarketSelector />}>
             <Button icon={<Menu />} auto scale={2 / 3} px={0.6}>{layout.locale}</Button>
           </Popover>
         </nav>
       </nav>
-      <WishlistMini visible={active === 'wishlist'} onClose={() => setActive()}>{null}</WishlistMini>
-      <CartMini visible={active === 'cart'} onClose={() => setActive()}>{null}</CartMini>
+      <WishlistMini visible={drawer === 'wishlist'} onClose={() => onSetDrawer()}>{null}</WishlistMini>
+      <CartMini visible={drawer === 'cart'} onClose={() => onSetDrawer()}>{null}</CartMini>
     </header>
   )
 }

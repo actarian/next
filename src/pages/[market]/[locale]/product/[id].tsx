@@ -2,7 +2,7 @@ import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Button, Card, Grid, Image, Note, Spacer, Text } from '@geist-ui/core';
 import { Heart, HeartFill, ShoppingCart } from '@geist-ui/icons';
-import { useCart, useLabel, useMounted, useWishlist } from '@hooks';
+import { useCart, useLabel, useMounted, useUI, useWishlist } from '@hooks';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { usePrice } from '@pipes';
 import { GetStaticPropsContext } from 'next';
@@ -16,6 +16,16 @@ export default function ProductPage({ layout, page, params }: PageProps) {
 
   const cart = useCart();
   const isAddedToCart = cart.has(page);
+
+  const reduceUI = useUI(state => state.reduce);
+  function onSetDrawer(value?: string) {
+    reduceUI(state => ({ drawer: value }));
+  }
+
+  function onAddToCart() {
+    cart.add(page);
+    // onSetDrawer('cart');
+  }
 
   const label = useLabel();
   const mounted = useMounted();
@@ -35,7 +45,7 @@ export default function ProductPage({ layout, page, params }: PageProps) {
         <Grid.Container gap={1.5}>
           <Grid sm={24} md={12} justify="center" alignItems="flex-start">
 
-            <Card width="100%" type="dark">
+            <Card width="100%">
               <Image alt={page.title} src={page.image} />
             </Card>
 
@@ -47,8 +57,8 @@ export default function ProductPage({ layout, page, params }: PageProps) {
               <Card.Footer>
                 {mounted &&
                   isAddedToCart ?
-                  <Button type="success" icon={<ShoppingCart />} auto>Added to cart</Button> :
-                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => cart.add(page)}>Buy {price}</Button>
+                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => onSetDrawer('cart')}>Added to cart</Button> :
+                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => onAddToCart()}>Buy {price}</Button>
                 }
               </Card.Footer>
             </Card>
