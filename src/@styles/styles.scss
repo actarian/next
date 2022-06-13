@@ -34,3 +34,11 @@ body {
   }
 
 }
+
+#geist-ui-drawer {
+  .wrapper {
+    .content {
+      min-height: calc(100% - 45px);
+    }
+  }
+}

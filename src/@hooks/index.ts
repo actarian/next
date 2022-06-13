@@ -1,6 +1,6 @@
 export { useApiDelete, useApiFetch, useApiGet, useApiPatch, useApiPost, useApiPut } from '@hooks/useApi/useApi';
-export { useCart } from '@hooks/useCart/useCart';
-export type { ICartItem, ICartStore } from '@hooks/useCart/useCart';
+export { useCart, useCartItems } from '@hooks/useCart/useCart';
+export type { ICartItem, ICartMiniItem, ICartStore } from '@hooks/useCart/useCart';
 export { Filter, FilterMode } from '@hooks/useFilters/filter';
 export type { IFilter, IFilterOption } from '@hooks/useFilters/filter';
 export { filtersToParams, getFilteredItems, getFilters, setFilters } from '@hooks/useFilters/filter.service';

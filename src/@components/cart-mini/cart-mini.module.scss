@@ -1,4 +1,25 @@
-
 .drawer {
   background: inherit;
+
+  .content {
+    min-height: 100%;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 100%;
+}
+
+.body {
+  flex: 1 0 auto;
+}
+
+.foot {
+  flex: 0 0 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

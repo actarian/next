@@ -1,17 +1,31 @@
-import { IEquatable } from '@core';
-import { Button, Image, Text } from '@geist-ui/core';
-import { Trash } from '@geist-ui/icons';
-import { useCart, useMounted, useUI } from '@hooks';
+import { Button, Image, Input, Text } from '@geist-ui/core';
+import { MinusCircle, PlusCircle, Trash } from '@geist-ui/icons';
+import { ICartMiniItem, useCart, useMounted, useUI } from '@hooks';
 import { usePrice } from '@pipes';
 import NextLink from 'next/link';
-import React from 'react';
 import styles from './cart-mini-item.module.scss';
 
 export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
 
   const price = usePrice(item.price * item.qty);
 
-  const { add, remove } = useCart();
+  const { update, remove } = useCart();
+
+  function onSetQty(qty: number) {
+    if (qty > 0) {
+      update({ ...item, qty });
+    } else {
+      onRemove();
+    }
+  }
+
+  function onRemove() {
+    const count = remove(item);
+    console.log('count', count);
+    if (count < 1) {
+      closeDrawer();
+    }
+  }
 
   const reduceUI = useUI(state => state.reduce);
 
@@ -35,23 +49,17 @@ export default function CartMiniItem({ item }: { item: ICartMiniItem }) {
             <Text className={styles.text} my={0} onClick={closeDrawer}>{<NextLink href={item.href || ''}>{item.title}</NextLink>}</Text>
           </div>
           <div className={styles.row}>
+            <Button className={styles.remove} type="abort" padding="0" onClick={() => onSetQty(item.qty - 1)} >{<MinusCircle />}</Button>
+            <Input className={styles.qty} placeholder="qty" value={item.qty.toString()} onChange={(e) => onSetQty(Number(e.target.value))} />
+            <Button className={styles.add} type="abort" padding="0" onClick={() => onSetQty(item.qty + 1)} >{<PlusCircle />}</Button>
             <Text my={0}>{price}</Text>
           </div>
         </div>
         {mounted &&
-          <Button className={styles.button} auto type="abort" padding={0} onClick={() => remove(item)}>{<Trash />}</Button>
+          <Button className={styles.button} auto type="abort" padding={0} onClick={onRemove}>{<Trash />}</Button>
         }
       </div>
     </>
   );
 }
 
-export type ICartMiniItem = {
-  id: IEquatable;
-  schema: string;
-  image: string;
-  title: string;
-  href: string;
-  price: number;
-  qty: number;
-}

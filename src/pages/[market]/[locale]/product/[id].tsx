@@ -1,6 +1,6 @@
 import { Breadcrumb, Headline, Layout } from '@components';
 import { asStaticProps } from '@core';
-import { Button, Card, Grid, Image, Input, Note, Spacer, Text } from '@geist-ui/core';
+import { Badge, Button, Card, Grid, Image, Input, Note, Spacer, Text } from '@geist-ui/core';
 import { Heart, HeartFill, MinusCircle, PlusCircle, ShoppingCart } from '@geist-ui/icons';
 import { useCart, useLabel, useMounted, useUI, useWishlist } from '@hooks';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
@@ -17,9 +17,10 @@ export default function ProductPage({ layout, page, params }: PageProps) {
   const isAddedToWishlist = wishlist.has(page);
 
   const cart = useCart();
-  const isAddedToCart = cart.has(page);
+  const cartItem = cart.find(page);
+  const isAddedToCart = cartItem != null;
 
-  const [qty, setQty] = useState(1);
+  const [qty, setQty] = useState(isAddedToCart ? cartItem.qty : 1);
 
   const reduceUI = useUI(state => state.reduce);
   function onSetDrawer(value?: string) {
@@ -74,13 +75,15 @@ export default function ProductPage({ layout, page, params }: PageProps) {
             <Card width="100%">
               {page.description && <Text span>{<span className="wysiwyg" dangerouslySetInnerHTML={{ __html: page.description }} />}</Text>}
               <Card.Footer>
-                <Button className={styles.remove} type="abort" padding="0" onClick={() => onSetQty(qty - 1)} >{<MinusCircle />}</Button>
-                <Input className={styles.qty} placeholder="qty" value={qty.toString()} onChange={(e) => onSetQty(Number(e.target.value))} />
-                <Button className={styles.add} type="abort" padding="0" onClick={() => onSetQty(qty + 1)} >{<PlusCircle />}</Button>
                 {mounted &&
                   isAddedToCart ?
-                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => onSetDrawer('cart')}>Added to cart</Button> :
-                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => onAddToCart()}>Buy {price}</Button>
+                  <Button type="success" icon={<ShoppingCart />} auto onClick={() => onSetDrawer('cart')}>Added to cart {<Badge marginLeft="10px">{cartItem.qty}</Badge>}</Button> :
+                  <>
+                    <Button className={styles.remove} type="abort" padding="0" onClick={() => onSetQty(qty - 1)} >{<MinusCircle />}</Button>
+                    <Input className={styles.qty} placeholder="qty" value={qty.toString()} onChange={(e) => onSetQty(Number(e.target.value))} />
+                    <Button className={styles.add} type="abort" padding="0" onClick={() => onSetQty(qty + 1)} >{<PlusCircle />}</Button>
+                    <Button type="success" icon={<ShoppingCart />} auto onClick={() => onAddToCart()}>Buy {price}</Button>
+                  </>
                 }
               </Card.Footer>
             </Card>
