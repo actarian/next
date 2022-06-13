@@ -7,6 +7,7 @@ import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProdu
 export const PAGES = {
   homepage: 'homepage',
   about: 'about',
+  contact: 'contact',
   product_index: 'product_index',
   product_search_csr: 'product_search_csr',
   product_search_ssr: 'product_search_ssr',
@@ -20,6 +21,7 @@ export const PAGES = {
 export type AppStore = {
   about: IQuerable<any>;
   category: IQuerable<ICategory>; // todo refactor category slug
+  contact: IQuerable<any>;
   country: IQuerable<any>;
   feature_type: IQuerable<IFeatureType>;
   homepage: IQuerable<any>;

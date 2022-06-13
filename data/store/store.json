@@ -88,6 +88,52 @@
       }
     ]
   },
+  "contact": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact",
+    "items": [
+      {
+        "id": 1,
+        "slug": {
+          "en": "contact-us",
+          "it": "contattaci",
+          "fr": "contactez-nous"
+        },
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "abstract": {
+          "en": "Contact request.",
+          "it": "Richiesta di contatto.",
+          "fr": "Demande de contact."
+        },
+        "description": {
+          "en": "For any request, fill out the form in all its parts, we will reply as soon as possible.",
+          "it": "Per qualsiasi richiesta, compilate il form in tutte le sue parti, vi risponderemo nel più breve tempo possibile.",
+          "fr": "Pour toute demande, remplissez le formulaire dans toutes ses parties, nous vous répondrons dans les plus brefs délais."
+        },
+        "categoryId": 12,
+        "meta": {
+          "title": {
+            "en": "Contact us",
+            "it": "Contattaci",
+            "fr": "Contactez-nous"
+          },
+          "description": {
+            "en": "Contact request.",
+            "it": "Richiesta di contatto.",
+            "fr": "Demande de contact."
+          },
+          "keywords": "contact keywords",
+          "robots": "all"
+        },
+        "schema": "contact"
+      }
+    ]
+  },
   "product_index": {
     "singularName": "product_index",
     "pluralName": "product_indices",
@@ -56053,6 +56099,19 @@
         "schema": "category"
       },
       {
+        "id": 12,
+        "name": "contact",
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "categoryId": 1,
+        "pageSchema": "contact",
+        "pageId": 1,
+        "schema": "category"
+      },
+      {
         "id": 3,
         "name": "product_index",
         "title": {
@@ -56446,6 +56505,45 @@
       {
         "id": 1,
         "slug": {
+          "en": "contact-us",
+          "it": "contattaci",
+          "fr": "contactez-nous"
+        },
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "abstract": {
+          "en": "Contact request.",
+          "it": "Richiesta di contatto.",
+          "fr": "Demande de contact."
+        },
+        "description": {
+          "en": "For any request, fill out the form in all its parts, we will reply as soon as possible.",
+          "it": "Per qualsiasi richiesta, compilate il form in tutte le sue parti, vi risponderemo nel più breve tempo possibile.",
+          "fr": "Pour toute demande, remplissez le formulaire dans toutes ses parties, nous vous répondrons dans les plus brefs délais."
+        },
+        "categoryId": 12,
+        "meta": {
+          "title": {
+            "en": "Contact us",
+            "it": "Contattaci",
+            "fr": "Contactez-nous"
+          },
+          "description": {
+            "en": "Contact request.",
+            "it": "Richiesta di contatto.",
+            "fr": "Demande de contact."
+          },
+          "keywords": "contact keywords",
+          "robots": "all"
+        },
+        "schema": "contact"
+      },
+      {
+        "id": 1,
+        "slug": {
           "en": "products",
           "it": "prodotti",
           "fr": "produits"
@@ -56805,6 +56903,46 @@
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/en/contact-us",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "en",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/it/contattaci",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "it",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/fr/contactez-nous",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "fr",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/eu/it/contattaci",
+        "schema": "route",
+        "marketId": "eu",
+        "localeId": "it",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/eu/fr/contactez-nous",
+        "schema": "route",
+        "marketId": "eu",
+        "localeId": "fr",
+        "pageSchema": "contact",
         "pageId": 1
       },
       {
