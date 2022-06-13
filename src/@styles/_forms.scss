@@ -62,7 +62,13 @@
   padding-bottom: 2.5rem;
 }
 
-.field {
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.aria-field {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -128,31 +134,6 @@
     }
   }
 
-}
-
-
-
-
-
-
-
-
-
-.form {
-  width: 280px;
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 
 .select {
@@ -237,8 +218,8 @@
   color: hsl(0, 0%, 100%);
 }
 
-.field input:focus-visible,
-.field input[data-focus-visible],
+.aria-field input:focus-visible,
+.aria-field input[data-focus-visible],
 .select:focus-visible,
 .select[data-focus-visible],
 .popover:focus-visible,
@@ -247,4 +228,122 @@
 .button[data-focus-visible] {
   outline: 2px solid hsl(204, 100%, 40%);
   outline-offset: 2px;
+}
+
+
+
+
+
+
+/* RXJS */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+
+  &.valid {
+    .field__control {
+      border-color: green;
+    }
+
+    .field__label {
+      color: green;
+    }
+  }
+
+  &.invalid {
+    .field__control {
+      border-color: #c00000;
+    }
+
+    .field__label {
+      color: #c00000;
+    }
+  }
+
+  &.disabled {
+    .field__control {
+      border-color: #888;
+      // background: #eee;
+      color: #666;
+    }
+
+    .field__label {
+      // background: #eee;
+      color: #888;
+    }
+  }
+
+  &.readonly {
+    .field__control {
+      border-color: #888;
+      color: #666;
+    }
+
+    .field__label {
+      color: #888;
+    }
+  }
+
+  &.value,
+  &.focus {
+    .field__label {
+      top: 0;
+      left: 4px;
+      transform: translateY(-50%) scale(0.7);
+      transform-origin: left;
+    }
+  }
+}
+
+.field__control {
+  position: relative;
+  display: flex;
+  padding: 8px 8px;
+  border: 2px solid grey;
+  border-radius: 7px;
+
+  .dark & {
+    &>input {
+      background: transparent;
+      border: none;
+    }
+  }
+}
+
+.field__label {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: white;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+  transition: all ease-out 150ms;
+  pointer-events: none;
+
+  .dark & {
+    background: black;
+  }
+}
+
+.field__error {
+  position: absolute;
+  left: 5px;
+  bottom: -10px;
+  padding: 4px;
+  margin-top: 2px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 300;
+  text-transform: uppercase;
+  // background: #ffacac;
+  background: #fff;
+  color: #c00000;
+
+  .dark & {
+    background: black;
+  }
 }
