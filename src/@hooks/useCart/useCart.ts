@@ -114,7 +114,7 @@ export interface ICartStore {
   items: ICartItem[];
   count(): number;
   has(item: ISchema): boolean;
-  find(item: ISchema): ICartItem;
+  find(item: ISchema): ICartItem | undefined;
   add(item: ISchema, qty: number): void;
   remove(item: ISchema): number;
   update(item: ICartItem): void;
