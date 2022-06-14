@@ -1,4 +1,4 @@
-import type { IEntity, IQuerable } from '@core';
+import type { IEntity, INamedEntity, IQuerable } from '@core';
 import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models';
 
 /*
@@ -27,12 +27,16 @@ export type AppStore = {
   homepage: IQuerable<any>;
   label: IQuerable<ILabel>;
   locale: IQuerable<ILocale>;
+  magazine: IQuerable<INamedEntity>;
   market: IQuerable<IMarket>;
   menu: IQuerable<IMenu>;
   notfound: IQuerable<any>;
+  occupation: IQuerable<INamedEntity>;
   page: IQuerable<IPage>;
   product_index: IQuerable<any>;
   product: IQuerable<IProduct>;
+  province: IQuerable<INamedEntity>;
+  region: IQuerable<INamedEntity>;
   route: IQuerable<IRoute>;
   tile: IQuerable<ITile>;
 

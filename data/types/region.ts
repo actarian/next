@@ -1,7 +1,7 @@
 
 import { IEquatable, ILocalizedString } from '@core';
 
-export type ICountry = {
+export type IRegion = {
   id: IEquatable;
   name: string;
   schema: string;

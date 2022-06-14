@@ -11,6 +11,10 @@ export interface IEntity extends ISchema {
   [key: string]: any;
 }
 
+export interface INamedEntity extends IEntity {
+  name: string | ILocalizedString;
+}
+
 export interface IQuerable<T extends IEntity> {
   findOne(idOrParams: IEquatable | FindWhereParams): Promise<T | null>;
   findMany(params?: FindParams): Promise<T[]>;

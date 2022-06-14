@@ -1,32 +1,39 @@
 
-import { IEquatable } from '@core';
+import { INamedEntity } from '@core';
 import { className } from '@core/utils';
 import { FormControl, FormGroup, useForm, Validators } from '@forms';
 import { FieldCollection } from '@forms/components/field-collection';
 import { Submit } from '@forms/components/submit';
 import { useFormBuilder } from '@forms/useFormBuilder';
 import { Grid } from '@geist-ui/core';
-import { useApiGet } from '@hooks';
 
-export default function ContactFormRxJs() {
+export type IContactForm = {
+  countries: INamedEntity[];
+  magazines: INamedEntity[];
+  occupations: INamedEntity[];
+  provinces: INamedEntity[];
+  regions: INamedEntity[];
+}
+
+export default function ContactFormRxJs({ data }: { data: IContactForm }) {
 
   const [form, setValue, setTouched, formGroup] = useFormBuilder<any, FormGroup>({
-    magazine: { schema: 'select', label: 'contact.magazine', validators: Validators.RequiredValidator() },
+    magazine: { schema: 'select', label: 'contact.magazine', options: data.magazines, validators: Validators.RequiredValidator() },
     //
     firstName: { schema: 'text', label: 'contact.firstName', validators: Validators.RequiredValidator() },
     lastName: { schema: 'text', label: 'contact.lastName', validators: Validators.RequiredValidator() },
     email: { schema: 'text', label: 'contact.email', validators: [Validators.RequiredValidator(), Validators.EmailValidator()] },
     telephone: { schema: 'text', label: 'contact.telephone', validators: Validators.RequiredValidator() },
-    occupation: { schema: 'select', label: 'contact.occupation', validators: Validators.RequiredValidator() },
-    country: { schema: 'select', label: 'contact.country', validators: Validators.RequiredValidator() },
-    region: { schema: 'select', label: 'contact.region', validators: Validators.RequiredValidator() },
+    occupation: { schema: 'select', label: 'contact.occupation', options: data.occupations, validators: Validators.RequiredValidator() },
+    country: { schema: 'select', label: 'contact.country', options: data.countries, validators: Validators.RequiredValidator() },
+    region: { schema: 'select', label: 'contact.region', options: data.regions, validators: Validators.RequiredValidator() },
     //
     printedCopy: { schema: 'checkbox', label: 'contact.printedCopy' },
     //
     shippingInfo: {
       schema: 'group', children: {
         city: { schema: 'text', label: 'contact.city' },
-        province: { schema: 'select', label: 'contact.province' },
+        province: { schema: 'select', label: 'contact.province', options: data.provinces },
         zipCode: { schema: 'text', label: 'contact.zipCode' },
         address: { schema: 'text', label: 'contact.address' },
         streetNumber: { schema: 'text', label: 'contact.streetNumber' },
@@ -35,9 +42,9 @@ export default function ContactFormRxJs() {
     },
     //
     privacy: { schema: 'checkbox', label: 'contact.privacy', validators: Validators.RequiredTrueValidator() },
-    newsletter: { schema: 'checkbox', label: 'contact.newsletter', validators: Validators.RequiredTrueValidator() },
-    commercial: { schema: 'checkbox', label: 'contact.commercial', validators: Validators.RequiredTrueValidator() },
-    promotion: { schema: 'checkbox', label: 'contact.promotion', validators: Validators.RequiredTrueValidator() },
+    newsletter: { schema: 'checkbox', label: 'contact.newsletter', validators: Validators.RequiredValidator() },
+    commercial: { schema: 'checkbox', label: 'contact.commercial', validators: Validators.RequiredValidator() },
+    promotion: { schema: 'checkbox', label: 'contact.promotion', validators: Validators.RequiredValidator() },
     //
     checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true },
     checkField: { schema: 'text', hidden: true },
@@ -105,6 +112,7 @@ export default function ContactFormRxJs() {
     return Boolean(form && form.value.country === 114);
   }
 
+  /*
   const { response } = useApiGet<{
     magazine: { id: IEquatable, name: string }[],
     occupation: { id: IEquatable, name: string }[],
@@ -120,6 +128,7 @@ export default function ContactFormRxJs() {
     (formGroup as FormGroup).controls.region.options = response.region;
     ((formGroup as FormGroup).controls.shippingInfo as FormGroup).controls.province.options = response.province;
   }
+  */
 
   // console.log('ContactFormRxJs', form.value, form.flags, form.errors);
 

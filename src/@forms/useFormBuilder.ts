@@ -1,3 +1,4 @@
+import { INamedEntity } from '@core';
 import { useObservable$ } from '@hooks/useObservable/useObservable';
 import { DependencyList, useCallback, useMemo } from 'react';
 import { map } from 'rxjs';
@@ -16,7 +17,7 @@ export interface IFormBuilderControlSchema {
   required?: boolean;
   disbled?: boolean;
   hidden?: boolean;
-  options?: Array<{ name: string, value: any }>;
+  options?: Array<INamedEntity>;
   validators?: FormValidator | FormValidator[];
   children?: IFormBuilderSchema;
 }
