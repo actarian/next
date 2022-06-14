@@ -17,6 +17,7 @@ export default function Contact({ layout, page, params }: PageProps) {
         <Headline title={page.title} abstract={page.abstract}></Headline>
 
         <Fieldset style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
           <Fieldset.Title><Text h2 style={{ maxWidth: '740px' }}>{page.description}</Text></Fieldset.Title>
 
           <ContactFormRxJs />
