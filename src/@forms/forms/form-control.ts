@@ -30,6 +30,9 @@ export class FormControl extends FormAbstract {
     } else {
       this.status = FormStatus.Pending;
     }
+    if (options?.schema) {
+      this.schema = options.schema;
+    }
     this.errors = {};
     this.initSubjects_();
     this.initObservables_();

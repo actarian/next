@@ -53,8 +53,9 @@
 }
 
 .form {
-  width: 280px;
+  max-width: 600px;
   min-height: 320px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;

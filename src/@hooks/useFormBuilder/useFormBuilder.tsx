@@ -73,7 +73,7 @@ export function FormBuilder({ form }: { form: IFormBuilder }) {
   */
 
   function renderSchema(key: string, control: IControlSchema) {
-    console.log(control.schema);
+    // console.log(control.schema);
     switch (control.schema) {
       case 'text':
         return <FormInput name={key} placeholder={control.placeholder} required={control.required} />

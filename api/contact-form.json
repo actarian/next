@@ -1,0 +1,1572 @@
+{
+  "magazine": [
+    {
+      "id": 8333,
+      "name": "GM#02"
+    },
+    {
+      "id": 8332,
+      "name": "GM#01"
+    }
+  ],
+  "occupation": [
+    {
+      "id": 227,
+      "name": "architetto / interior designer"
+    },
+    {
+      "id": 228,
+      "name": "rivenditore"
+    },
+    {
+      "id": 229,
+      "name": "imprenditore"
+    },
+    {
+      "id": 230,
+      "name": "giornalista"
+    },
+    {
+      "id": 231,
+      "name": "studente"
+    },
+    {
+      "id": 232,
+      "name": "utente privato"
+    },
+    {
+      "id": 233,
+      "name": "altro"
+    },
+    {
+      "id": 251,
+      "name": "rivenditore cucine"
+    },
+    {
+      "id": 252,
+      "name": "Agente"
+    },
+    {
+      "id": 253,
+      "name": "Filiali"
+    },
+    {
+      "id": 254,
+      "name": "Privato"
+    },
+    {
+      "id": 255,
+      "name": "Fornitore"
+    }
+  ],
+  "country": [
+    {
+      "id": 114,
+      "name": "Italy"
+    },
+    {
+      "id": 1,
+      "name": "Afghanistan"
+    },
+    {
+      "id": 240,
+      "name": "Aland Islands"
+    },
+    {
+      "id": 2,
+      "name": "Albania"
+    },
+    {
+      "id": 3,
+      "name": "Algeria"
+    },
+    {
+      "id": 190,
+      "name": "American Samoa"
+    },
+    {
+      "id": 237,
+      "name": "Andorra"
+    },
+    {
+      "id": 4,
+      "name": "Angola"
+    },
+    {
+      "id": 5,
+      "name": "Anguilla"
+    },
+    {
+      "id": 251,
+      "name": "Antarctic"
+    },
+    {
+      "id": 6,
+      "name": "Antigua and Barbuda"
+    },
+    {
+      "id": 9,
+      "name": "Argentina"
+    },
+    {
+      "id": 10,
+      "name": "Armenia"
+    },
+    {
+      "id": 11,
+      "name": "Aruba"
+    },
+    {
+      "id": 12,
+      "name": "Australia"
+    },
+    {
+      "id": 13,
+      "name": "Austria"
+    },
+    {
+      "id": 14,
+      "name": "Azerbaijan"
+    },
+    {
+      "id": 15,
+      "name": "Bahamas"
+    },
+    {
+      "id": 16,
+      "name": "Bahrain"
+    },
+    {
+      "id": 17,
+      "name": "Bangladesh"
+    },
+    {
+      "id": 18,
+      "name": "Barbados"
+    },
+    {
+      "id": 24,
+      "name": "Belarus"
+    },
+    {
+      "id": 19,
+      "name": "Belgium"
+    },
+    {
+      "id": 20,
+      "name": "Belize"
+    },
+    {
+      "id": 21,
+      "name": "Benin"
+    },
+    {
+      "id": 22,
+      "name": "Bermuda"
+    },
+    {
+      "id": 23,
+      "name": "Bhutan"
+    },
+    {
+      "id": 26,
+      "name": "Bolivia"
+    },
+    {
+      "id": 27,
+      "name": "Bosnia-Herzeg."
+    },
+    {
+      "id": 28,
+      "name": "Botswana"
+    },
+    {
+      "id": 29,
+      "name": "Bouvet Island"
+    },
+    {
+      "id": 30,
+      "name": "Brazil"
+    },
+    {
+      "id": 215,
+      "name": "British Indian Ocean Territory"
+    },
+    {
+      "id": 31,
+      "name": "Brunei Darussalam"
+    },
+    {
+      "id": 32,
+      "name": "Bulgaria"
+    },
+    {
+      "id": 33,
+      "name": "Burkina Faso"
+    },
+    {
+      "id": 34,
+      "name": "Burundi"
+    },
+    {
+      "id": 35,
+      "name": "Cambodia"
+    },
+    {
+      "id": 36,
+      "name": "Cameroon"
+    },
+    {
+      "id": 37,
+      "name": "Canada"
+    },
+    {
+      "id": 38,
+      "name": "Cape Verde"
+    },
+    {
+      "id": 103,
+      "name": "Cayman Islands"
+    },
+    {
+      "id": 177,
+      "name": "Centr. African Rep."
+    },
+    {
+      "id": 39,
+      "name": "Chad"
+    },
+    {
+      "id": 40,
+      "name": "Chile"
+    },
+    {
+      "id": 41,
+      "name": "China"
+    },
+    {
+      "id": 100,
+      "name": "Christmas Island"
+    },
+    {
+      "id": 44,
+      "name": "Cocos (Keeling) Islands"
+    },
+    {
+      "id": 45,
+      "name": "Colombia"
+    },
+    {
+      "id": 46,
+      "name": "Comoros"
+    },
+    {
+      "id": 47,
+      "name": "Congo"
+    },
+    {
+      "id": 241,
+      "name": "Congo, Dem. Rep."
+    },
+    {
+      "id": 104,
+      "name": "Cook Islands"
+    },
+    {
+      "id": 52,
+      "name": "Costa Rica"
+    },
+    {
+      "id": 51,
+      "name": "Cote d'Ivoire"
+    },
+    {
+      "id": 53,
+      "name": "Croatia"
+    },
+    {
+      "id": 54,
+      "name": "Cuba"
+    },
+    {
+      "id": 42,
+      "name": "Cyprus"
+    },
+    {
+      "id": 176,
+      "name": "Czech Republic"
+    },
+    {
+      "id": 55,
+      "name": "Denmark"
+    },
+    {
+      "id": 56,
+      "name": "Djibouti"
+    },
+    {
+      "id": 57,
+      "name": "Dominica"
+    },
+    {
+      "id": 179,
+      "name": "Dominican Republic"
+    },
+    {
+      "id": 61,
+      "name": "Ecuador"
+    },
+    {
+      "id": 58,
+      "name": "Egypt"
+    },
+    {
+      "id": 59,
+      "name": "El Salvador"
+    },
+    {
+      "id": 87,
+      "name": "Equatorial Guinea"
+    },
+    {
+      "id": 62,
+      "name": "Eritrea"
+    },
+    {
+      "id": 63,
+      "name": "Estonia"
+    },
+    {
+      "id": 64,
+      "name": "Ethiopia"
+    },
+    {
+      "id": 138,
+      "name": "Falkland Islands (Malvinas)"
+    },
+    {
+      "id": 105,
+      "name": "Faroe Islands"
+    },
+    {
+      "id": 106,
+      "name": "Fiji"
+    },
+    {
+      "id": 66,
+      "name": "Finland"
+    },
+    {
+      "id": 67,
+      "name": "France"
+    },
+    {
+      "id": 82,
+      "name": "French Guiana"
+    },
+    {
+      "id": 171,
+      "name": "French Polynesia"
+    },
+    {
+      "id": 249,
+      "name": "French South. Territ."
+    },
+    {
+      "id": 68,
+      "name": "Gabon"
+    },
+    {
+      "id": 69,
+      "name": "Gambia"
+    },
+    {
+      "id": 70,
+      "name": "Georgia"
+    },
+    {
+      "id": 72,
+      "name": "Germany"
+    },
+    {
+      "id": 73,
+      "name": "Ghana"
+    },
+    {
+      "id": 76,
+      "name": "Gibraltar"
+    },
+    {
+      "id": 79,
+      "name": "Greece"
+    },
+    {
+      "id": 80,
+      "name": "Greenland"
+    },
+    {
+      "id": 78,
+      "name": "Grenada"
+    },
+    {
+      "id": 81,
+      "name": "Guadeloupe"
+    },
+    {
+      "id": 83,
+      "name": "Guam"
+    },
+    {
+      "id": 84,
+      "name": "Guatemala"
+    },
+    {
+      "id": 243,
+      "name": "Guernsey"
+    },
+    {
+      "id": 85,
+      "name": "Guinea"
+    },
+    {
+      "id": 86,
+      "name": "Guinea-Bissau"
+    },
+    {
+      "id": 88,
+      "name": "Guyana"
+    },
+    {
+      "id": 89,
+      "name": "Haiti"
+    },
+    {
+      "id": 107,
+      "name": "Heard and McDonald Is."
+    },
+    {
+      "id": 90,
+      "name": "Honduras"
+    },
+    {
+      "id": 91,
+      "name": "Hong Kong"
+    },
+    {
+      "id": 92,
+      "name": "Hungary"
+    },
+    {
+      "id": 99,
+      "name": "Iceland"
+    },
+    {
+      "id": 93,
+      "name": "India"
+    },
+    {
+      "id": 94,
+      "name": "Indonesia"
+    },
+    {
+      "id": 97,
+      "name": "Iran"
+    },
+    {
+      "id": 96,
+      "name": "Iraq"
+    },
+    {
+      "id": 98,
+      "name": "Ireland"
+    },
+    {
+      "id": 244,
+      "name": "Isle of Man"
+    },
+    {
+      "id": 113,
+      "name": "Israel"
+    },
+    {
+      "id": 74,
+      "name": "Jamaica"
+    },
+    {
+      "id": 75,
+      "name": "Japan"
+    },
+    {
+      "id": 245,
+      "name": "Jersey"
+    },
+    {
+      "id": 77,
+      "name": "Jordan"
+    },
+    {
+      "id": 115,
+      "name": "Kazakhstan"
+    },
+    {
+      "id": 116,
+      "name": "Kenya"
+    },
+    {
+      "id": 118,
+      "name": "Kiribati"
+    },
+    {
+      "id": 49,
+      "name": "Korea, North"
+    },
+    {
+      "id": 50,
+      "name": "Korea, South"
+    },
+    {
+      "id": 119,
+      "name": "Kosovo"
+    },
+    {
+      "id": 120,
+      "name": "Kuwait"
+    },
+    {
+      "id": 117,
+      "name": "Kyrgyzstan"
+    },
+    {
+      "id": 121,
+      "name": "Laos"
+    },
+    {
+      "id": 123,
+      "name": "Latvia"
+    },
+    {
+      "id": 124,
+      "name": "Lebanon"
+    },
+    {
+      "id": 122,
+      "name": "Lesotho"
+    },
+    {
+      "id": 125,
+      "name": "Liberia"
+    },
+    {
+      "id": 126,
+      "name": "Libya"
+    },
+    {
+      "id": 127,
+      "name": "Liechtenstein"
+    },
+    {
+      "id": 128,
+      "name": "Lithuania"
+    },
+    {
+      "id": 129,
+      "name": "Luxembourg"
+    },
+    {
+      "id": 130,
+      "name": "Macao"
+    },
+    {
+      "id": 131,
+      "name": "Macedonia"
+    },
+    {
+      "id": 132,
+      "name": "Madagascar"
+    },
+    {
+      "id": 133,
+      "name": "Malawi"
+    },
+    {
+      "id": 134,
+      "name": "Malaysia"
+    },
+    {
+      "id": 135,
+      "name": "Maldives"
+    },
+    {
+      "id": 136,
+      "name": "Mali"
+    },
+    {
+      "id": 137,
+      "name": "Malta"
+    },
+    {
+      "id": 108,
+      "name": "Marshall Islands"
+    },
+    {
+      "id": 141,
+      "name": "Martinique"
+    },
+    {
+      "id": 143,
+      "name": "Mauritania"
+    },
+    {
+      "id": 142,
+      "name": "Mauritius"
+    },
+    {
+      "id": 144,
+      "name": "Mayotte"
+    },
+    {
+      "id": 145,
+      "name": "Mexico"
+    },
+    {
+      "id": 146,
+      "name": "Micronesia"
+    },
+    {
+      "id": 147,
+      "name": "Moldova"
+    },
+    {
+      "id": 148,
+      "name": "Monaco"
+    },
+    {
+      "id": 149,
+      "name": "Mongolia"
+    },
+    {
+      "id": 246,
+      "name": "Montenegro"
+    },
+    {
+      "id": 150,
+      "name": "Montserrat"
+    },
+    {
+      "id": 140,
+      "name": "Morocco"
+    },
+    {
+      "id": 151,
+      "name": "Mozambique"
+    },
+    {
+      "id": 25,
+      "name": "Myanmar"
+    },
+    {
+      "id": 152,
+      "name": "Namibia"
+    },
+    {
+      "id": 153,
+      "name": "Nauru"
+    },
+    {
+      "id": 154,
+      "name": "Nepal"
+    },
+    {
+      "id": 163,
+      "name": "Netherlands"
+    },
+    {
+      "id": 7,
+      "name": "Netherlands Antilles"
+    },
+    {
+      "id": 160,
+      "name": "New Caledonia"
+    },
+    {
+      "id": 161,
+      "name": "New Zealand"
+    },
+    {
+      "id": 155,
+      "name": "Nicaragua"
+    },
+    {
+      "id": 156,
+      "name": "Niger"
+    },
+    {
+      "id": 157,
+      "name": "Nigeria"
+    },
+    {
+      "id": 158,
+      "name": "Niue"
+    },
+    {
+      "id": 101,
+      "name": "Norfolk Island"
+    },
+    {
+      "id": 139,
+      "name": "Northern Mariana Islands"
+    },
+    {
+      "id": 159,
+      "name": "Norway"
+    },
+    {
+      "id": 162,
+      "name": "Oman"
+    },
+    {
+      "id": 164,
+      "name": "Pakistan"
+    },
+    {
+      "id": 165,
+      "name": "Palau"
+    },
+    {
+      "id": 247,
+      "name": "Palestinian Territory"
+    },
+    {
+      "id": 166,
+      "name": "Panama"
+    },
+    {
+      "id": 167,
+      "name": "Papua New Guinea"
+    },
+    {
+      "id": 168,
+      "name": "Paraguay"
+    },
+    {
+      "id": 169,
+      "name": "Peru"
+    },
+    {
+      "id": 65,
+      "name": "Philippines"
+    },
+    {
+      "id": 170,
+      "name": "Pitcairn"
+    },
+    {
+      "id": 172,
+      "name": "Poland"
+    },
+    {
+      "id": 173,
+      "name": "Portugal"
+    },
+    {
+      "id": 174,
+      "name": "Puerto Rico"
+    },
+    {
+      "id": 175,
+      "name": "Qatar"
+    },
+    {
+      "id": 180,
+      "name": "Reunion"
+    },
+    {
+      "id": 181,
+      "name": "Romania"
+    },
+    {
+      "id": 182,
+      "name": "Russian Federation"
+    },
+    {
+      "id": 183,
+      "name": "Rwanda"
+    },
+    {
+      "id": 185,
+      "name": "Saint Kitts and Nevis"
+    },
+    {
+      "id": 186,
+      "name": "Saint Lucia"
+    },
+    {
+      "id": 187,
+      "name": "Saint Pierre and Miquelon"
+    },
+    {
+      "id": 188,
+      "name": "Saint Vincent and the Grenadines"
+    },
+    {
+      "id": 189,
+      "name": "Samoa"
+    },
+    {
+      "id": 178,
+      "name": "San Marino"
+    },
+    {
+      "id": 192,
+      "name": "Sao Tome and Principe"
+    },
+    {
+      "id": 8,
+      "name": "Saudi Arabia"
+    },
+    {
+      "id": 193,
+      "name": "Senegal"
+    },
+    {
+      "id": 248,
+      "name": "Serbia"
+    },
+    {
+      "id": 195,
+      "name": "Seychelles"
+    },
+    {
+      "id": 196,
+      "name": "Sierra Leone"
+    },
+    {
+      "id": 197,
+      "name": "Singapore"
+    },
+    {
+      "id": 199,
+      "name": "Slovakia"
+    },
+    {
+      "id": 200,
+      "name": "Slovenia"
+    },
+    {
+      "id": 109,
+      "name": "Solomon Islands"
+    },
+    {
+      "id": 201,
+      "name": "Somalia"
+    },
+    {
+      "id": 205,
+      "name": "South Africa"
+    },
+    {
+      "id": 71,
+      "name": "South Georgia/the S. Sandwich Is."
+    },
+    {
+      "id": 202,
+      "name": "Spain"
+    },
+    {
+      "id": 203,
+      "name": "Sri Lanka"
+    },
+    {
+      "id": 191,
+      "name": "St Helena"
+    },
+    {
+      "id": 206,
+      "name": "Sudan"
+    },
+    {
+      "id": 207,
+      "name": "Suriname"
+    },
+    {
+      "id": 110,
+      "name": "Svalbard and Jan Mayen"
+    },
+    {
+      "id": 210,
+      "name": "Swaziland"
+    },
+    {
+      "id": 208,
+      "name": "Sweden"
+    },
+    {
+      "id": 209,
+      "name": "Switzerland"
+    },
+    {
+      "id": 198,
+      "name": "Syria"
+    },
+    {
+      "id": 212,
+      "name": "Taiwan"
+    },
+    {
+      "id": 214,
+      "name": "Tajikistan"
+    },
+    {
+      "id": 213,
+      "name": "Tanzania"
+    },
+    {
+      "id": 211,
+      "name": "Thailand"
+    },
+    {
+      "id": 216,
+      "name": "Timor Est"
+    },
+    {
+      "id": 250,
+      "name": "Timor-Leste"
+    },
+    {
+      "id": 217,
+      "name": "Togo"
+    },
+    {
+      "id": 218,
+      "name": "Tokelau"
+    },
+    {
+      "id": 219,
+      "name": "Tonga"
+    },
+    {
+      "id": 220,
+      "name": "Trinidad and Tobago"
+    },
+    {
+      "id": 221,
+      "name": "Tunisia"
+    },
+    {
+      "id": 222,
+      "name": "Turkey"
+    },
+    {
+      "id": 223,
+      "name": "Turkmenistan"
+    },
+    {
+      "id": 224,
+      "name": "Turks and Caicos Islands"
+    },
+    {
+      "id": 225,
+      "name": "Tuvalu"
+    },
+    {
+      "id": 227,
+      "name": "Uganda"
+    },
+    {
+      "id": 226,
+      "name": "Ukraine"
+    },
+    {
+      "id": 60,
+      "name": "United Arab Emirates"
+    },
+    {
+      "id": 95,
+      "name": "United Kingdom"
+    },
+    {
+      "id": 204,
+      "name": "United States"
+    },
+    {
+      "id": 228,
+      "name": "Uruguay"
+    },
+    {
+      "id": 102,
+      "name": "US Minor Outlying Islands"
+    },
+    {
+      "id": 229,
+      "name": "Uzbekistan"
+    },
+    {
+      "id": 230,
+      "name": "Vanuatu"
+    },
+    {
+      "id": 43,
+      "name": "Vatican City State"
+    },
+    {
+      "id": 231,
+      "name": "Venezuela"
+    },
+    {
+      "id": 232,
+      "name": "Vietnam"
+    },
+    {
+      "id": 112,
+      "name": "Virgin Islands UK"
+    },
+    {
+      "id": 111,
+      "name": "Virgin Islands US"
+    },
+    {
+      "id": 233,
+      "name": "Wallis and Futuna"
+    },
+    {
+      "id": 184,
+      "name": "Western Sahara"
+    },
+    {
+      "id": 234,
+      "name": "Yemen"
+    },
+    {
+      "id": 235,
+      "name": "Zambia"
+    },
+    {
+      "id": 236,
+      "name": "Zimbabwe"
+    }
+  ],
+  "region": [
+    {
+      "id": 1,
+      "name": "Abruzzo"
+    },
+    {
+      "id": 2,
+      "name": "Basilicata"
+    },
+    {
+      "id": 3,
+      "name": "Calabria"
+    },
+    {
+      "id": 4,
+      "name": "Campania"
+    },
+    {
+      "id": 5,
+      "name": "Emilia Romagna"
+    },
+    {
+      "id": 6,
+      "name": "Friuli-Venezia Giulia"
+    },
+    {
+      "id": 7,
+      "name": "Lazio"
+    },
+    {
+      "id": 8,
+      "name": "Liguria"
+    },
+    {
+      "id": 9,
+      "name": "Lombardia"
+    },
+    {
+      "id": 10,
+      "name": "Marche"
+    },
+    {
+      "id": 11,
+      "name": "Molise"
+    },
+    {
+      "id": 12,
+      "name": "Piemonte"
+    },
+    {
+      "id": 13,
+      "name": "Puglia"
+    },
+    {
+      "id": 14,
+      "name": "Sardegna"
+    },
+    {
+      "id": 15,
+      "name": "Sicilia"
+    },
+    {
+      "id": 16,
+      "name": "Toscana"
+    },
+    {
+      "id": 17,
+      "name": "Trentino-Alto Adige"
+    },
+    {
+      "id": 18,
+      "name": "Umbria"
+    },
+    {
+      "id": 19,
+      "name": "Valle d' Aosta"
+    },
+    {
+      "id": 20,
+      "name": "Veneto"
+    }
+  ],
+  "province": [
+    {
+      "id": 108,
+      "name": "Agrigento"
+    },
+    {
+      "id": 109,
+      "name": "Alessandria"
+    },
+    {
+      "id": 110,
+      "name": "Ancona"
+    },
+    {
+      "id": 206,
+      "name": "Aosta"
+    },
+    {
+      "id": 111,
+      "name": "Arezzo"
+    },
+    {
+      "id": 112,
+      "name": "Ascoli Piceno"
+    },
+    {
+      "id": 113,
+      "name": "Asti"
+    },
+    {
+      "id": 114,
+      "name": "Avellino"
+    },
+    {
+      "id": 115,
+      "name": "Bari"
+    },
+    {
+      "id": 217,
+      "name": "Barletta-Andria-Trani"
+    },
+    {
+      "id": 116,
+      "name": "Belluno"
+    },
+    {
+      "id": 117,
+      "name": "Benevento"
+    },
+    {
+      "id": 118,
+      "name": "Bergamo"
+    },
+    {
+      "id": 119,
+      "name": "Biella"
+    },
+    {
+      "id": 120,
+      "name": "Bologna"
+    },
+    {
+      "id": 121,
+      "name": "Bolzano/Bozen"
+    },
+    {
+      "id": 122,
+      "name": "Brescia"
+    },
+    {
+      "id": 123,
+      "name": "Brindisi"
+    },
+    {
+      "id": 124,
+      "name": "Cagliari"
+    },
+    {
+      "id": 125,
+      "name": "Caltanissetta"
+    },
+    {
+      "id": 126,
+      "name": "Campobasso"
+    },
+    {
+      "id": 127,
+      "name": "Carbonia-Iglesias"
+    },
+    {
+      "id": 128,
+      "name": "Caserta"
+    },
+    {
+      "id": 129,
+      "name": "Catania"
+    },
+    {
+      "id": 130,
+      "name": "Catanzaro"
+    },
+    {
+      "id": 131,
+      "name": "Chieti"
+    },
+    {
+      "id": 132,
+      "name": "Como"
+    },
+    {
+      "id": 133,
+      "name": "Cosenza"
+    },
+    {
+      "id": 134,
+      "name": "Cremona"
+    },
+    {
+      "id": 135,
+      "name": "Crotone"
+    },
+    {
+      "id": 136,
+      "name": "Cuneo"
+    },
+    {
+      "id": 137,
+      "name": "Enna"
+    },
+    {
+      "id": 216,
+      "name": "Fermo"
+    },
+    {
+      "id": 138,
+      "name": "Ferrara"
+    },
+    {
+      "id": 139,
+      "name": "Firenze"
+    },
+    {
+      "id": 140,
+      "name": "Foggia"
+    },
+    {
+      "id": 141,
+      "name": "Forlì-Cesena"
+    },
+    {
+      "id": 142,
+      "name": "Frosinone"
+    },
+    {
+      "id": 143,
+      "name": "Genova"
+    },
+    {
+      "id": 144,
+      "name": "Gorizia"
+    },
+    {
+      "id": 145,
+      "name": "Grosseto"
+    },
+    {
+      "id": 146,
+      "name": "Imperia"
+    },
+    {
+      "id": 147,
+      "name": "Isernia"
+    },
+    {
+      "id": 148,
+      "name": "La Spezia"
+    },
+    {
+      "id": 149,
+      "name": "L'Aquila"
+    },
+    {
+      "id": 150,
+      "name": "Latina"
+    },
+    {
+      "id": 151,
+      "name": "Lecce"
+    },
+    {
+      "id": 152,
+      "name": "Lecco"
+    },
+    {
+      "id": 153,
+      "name": "Livorno"
+    },
+    {
+      "id": 154,
+      "name": "Lodi"
+    },
+    {
+      "id": 155,
+      "name": "Lucca"
+    },
+    {
+      "id": 156,
+      "name": "Macerata"
+    },
+    {
+      "id": 157,
+      "name": "Mantova"
+    },
+    {
+      "id": 158,
+      "name": "Massa-Carrara"
+    },
+    {
+      "id": 159,
+      "name": "Matera"
+    },
+    {
+      "id": 160,
+      "name": "Medio Campidano"
+    },
+    {
+      "id": 161,
+      "name": "Messina"
+    },
+    {
+      "id": 162,
+      "name": "Milano"
+    },
+    {
+      "id": 163,
+      "name": "Modena"
+    },
+    {
+      "id": 215,
+      "name": "Monza - Brianza"
+    },
+    {
+      "id": 164,
+      "name": "Napoli"
+    },
+    {
+      "id": 165,
+      "name": "Novara"
+    },
+    {
+      "id": 166,
+      "name": "Nuoro"
+    },
+    {
+      "id": 167,
+      "name": "Ogliastra"
+    },
+    {
+      "id": 168,
+      "name": "Olbia-Tempio"
+    },
+    {
+      "id": 169,
+      "name": "Oristano"
+    },
+    {
+      "id": 170,
+      "name": "Padova"
+    },
+    {
+      "id": 171,
+      "name": "Palermo"
+    },
+    {
+      "id": 172,
+      "name": "Parma"
+    },
+    {
+      "id": 173,
+      "name": "Pavia"
+    },
+    {
+      "id": 174,
+      "name": "Perugia"
+    },
+    {
+      "id": 175,
+      "name": "Pesaro Urbino"
+    },
+    {
+      "id": 176,
+      "name": "Pescara"
+    },
+    {
+      "id": 177,
+      "name": "Piacenza"
+    },
+    {
+      "id": 178,
+      "name": "Pisa"
+    },
+    {
+      "id": 179,
+      "name": "Pistoia"
+    },
+    {
+      "id": 180,
+      "name": "Pordenone"
+    },
+    {
+      "id": 181,
+      "name": "Potenza"
+    },
+    {
+      "id": 182,
+      "name": "Prato"
+    },
+    {
+      "id": 183,
+      "name": "Ragusa"
+    },
+    {
+      "id": 184,
+      "name": "Ravenna"
+    },
+    {
+      "id": 185,
+      "name": "Reggio Calabria"
+    },
+    {
+      "id": 186,
+      "name": "Reggio Emilia"
+    },
+    {
+      "id": 187,
+      "name": "Rieti"
+    },
+    {
+      "id": 188,
+      "name": "Rimini"
+    },
+    {
+      "id": 189,
+      "name": "Roma"
+    },
+    {
+      "id": 190,
+      "name": "Rovigo"
+    },
+    {
+      "id": 191,
+      "name": "Salerno"
+    },
+    {
+      "id": 192,
+      "name": "Sassari"
+    },
+    {
+      "id": 193,
+      "name": "Savona"
+    },
+    {
+      "id": 194,
+      "name": "Siena"
+    },
+    {
+      "id": 195,
+      "name": "Siracusa"
+    },
+    {
+      "id": 196,
+      "name": "Sondrio"
+    },
+    {
+      "id": 197,
+      "name": "Taranto"
+    },
+    {
+      "id": 198,
+      "name": "Teramo"
+    },
+    {
+      "id": 199,
+      "name": "Terni"
+    },
+    {
+      "id": 200,
+      "name": "Torino"
+    },
+    {
+      "id": 201,
+      "name": "Trapani"
+    },
+    {
+      "id": 202,
+      "name": "Trento"
+    },
+    {
+      "id": 203,
+      "name": "Treviso"
+    },
+    {
+      "id": 204,
+      "name": "Trieste"
+    },
+    {
+      "id": 205,
+      "name": "Udine"
+    },
+    {
+      "id": 207,
+      "name": "Varese"
+    },
+    {
+      "id": 208,
+      "name": "Venezia"
+    },
+    {
+      "id": 209,
+      "name": "Verbano-Cusio-Ossola"
+    },
+    {
+      "id": 210,
+      "name": "Vercelli"
+    },
+    {
+      "id": 211,
+      "name": "Verona"
+    },
+    {
+      "id": 212,
+      "name": "Vibo Valentia"
+    },
+    {
+      "id": 213,
+      "name": "Vicenza"
+    },
+    {
+      "id": 214,
+      "name": "Viterbo"
+    }
+  ]
+}

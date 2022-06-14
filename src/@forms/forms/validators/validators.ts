@@ -31,6 +31,25 @@ export function RequiredTrueValidator(): FormValidator {
 }
 
 /**
+ * a required if condition is satisfied validator
+ */
+export function RequiredIfValidator(condition: () => boolean) {
+  return new FormValidator(function (value, params) {
+    const condition = params.condition;
+    /*
+    if (!typeof condition === 'function') {
+      return null;
+    }
+    */
+    if (Boolean(condition()) === true) {
+      return (value == null || value.length === 0) ? { required: true } : null;
+    } else {
+      return null;
+    }
+  });
+}
+
+/**
  * a min number value validator
  */
 export function MinValidator(min: number): FormValidator {
@@ -113,6 +132,19 @@ export function EmailValidator(): FormValidator {
   });
 }
 
+/**
+ * a phone number pattern validator
+ */
+export function PhoneNumberValidator() {
+  const regex = /^(\+\d{1,2}){1}[\s|-]?[(]?(\d+)[\)]?[\s|-]?(\d+)?$/;
+  return new FormValidator(function (value, params) {
+    if (!value) {
+      return null;
+    }
+    return regex.test(value) ? null : { phoneNumber: true };
+  });
+}
+
 function patternToRegEx(pattern: string | RegExp): RegExp {
   let regex;
   if (pattern instanceof RegExp) {
@@ -129,10 +161,12 @@ export const Validators = {
   NullValidator,
   RequiredValidator,
   RequiredTrueValidator,
+  RequiredIfValidator,
   MinValidator,
   MaxValidator,
   MinLengthValidator,
   MaxLengthValidator,
   PatternValidator,
+  PhoneNumberValidator,
   EmailValidator
 };

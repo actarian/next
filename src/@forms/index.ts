@@ -5,8 +5,11 @@ export { FormArray, formArray } from './forms/form-array';
 export { FormControl } from './forms/form-control';
 export { FormGroup, formGroup } from './forms/form-group';
 export { FormStatus } from './forms/types';
+export type { FormErrors, FormState, FormValidationError } from './forms/types';
 export { FormValidator } from './forms/validators/form-validator';
-export { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, NullValidator, PatternValidator, RequiredTrueValidator, RequiredValidator, Validators } from './forms/validators/validators';
+export { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, NullValidator, PatternValidator, PhoneNumberValidator, RequiredIfValidator, RequiredTrueValidator, RequiredValidator, Validators } from './forms/validators/validators';
+export { mapErrors_ } from './helpers/helpers';
+export { useControl } from './useControl';
 export { useForm } from './useForm';
 
 /*

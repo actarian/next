@@ -1,3 +1,4 @@
+import { IEquatable } from '@core';
 import { BehaviorSubject, combineLatest, isObservable, merge, Observable, of, ReplaySubject } from 'rxjs';
 import { auditTime, distinctUntilChanged, map, shareReplay, skip, switchAll, switchMap, tap } from 'rxjs/operators';
 import { FormStatus } from './types';
@@ -22,6 +23,8 @@ export abstract class FormAbstract {
   touched_: boolean = false;
   dirty_: boolean = false;
   status?: FormStatus;
+  schema: string = 'text';
+  options?: { id: IEquatable, name: string }[];
 
   validators: FormValidator[];
 

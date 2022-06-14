@@ -59,7 +59,7 @@ export function useCartItems(locale: string, shouldFetch: boolean = true) {
   const [cartItems, setCartItems] = useState<ICartMiniItem[]>([]);
 
   const fetchData = async () => {
-    console.log('useCartItems', 'fetchData');
+    // console.log('useCartItems', 'fetchData');
     const products = await apiGet(`/product?locale=${locale}`) as IProduct[];
     if (products) {
       const cartItems = items.map(x => {
@@ -77,7 +77,7 @@ export function useCartItems(locale: string, shouldFetch: boolean = true) {
     }
   };
 
-  console.log('useCartItems', items.length);
+  // console.log('useCartItems', items.length);
 
   /*
   const fetchItems = useCallback(() => {
