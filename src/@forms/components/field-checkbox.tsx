@@ -2,6 +2,7 @@
 import { FormControl, useControl } from '@forms';
 import { Checkbox, Text } from '@geist-ui/core';
 import { CheckboxEvent } from '@geist-ui/core/esm/checkbox';
+import { useLabel } from '@hooks';
 import * as React from 'react';
 
 type FieldCheckboxProps = {
@@ -10,6 +11,7 @@ type FieldCheckboxProps = {
 }
 
 export function FieldCheckbox(props: FieldCheckboxProps) {
+  const label = useLabel();
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldCheckbox', state, props.control.flags, props.control);
@@ -36,7 +38,11 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
       <input type="hidden" value={state.value || ''} />
     ) : (
       <>
-        <Text type="secondary" small marginBottom='0.5em'>{props.name}</Text>
+        {false &&
+          <Text type="secondary" small marginBottom='0.5em'>
+            {label(props.control.label)}
+          </Text>
+        }
 
         <Checkbox
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
@@ -47,11 +53,11 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
           disabled={state.flags.disabled || state.flags.readonly}
           paddingTop='1em'
           paddingBottom='1em'>
-          {props.name}
+          {label(props.control.label)}
         </Checkbox>
 
         {state.flags.touched && state.errors.map(error => (
-          <Text key={error.key} type="error" small>{`error.${error.key}`}</Text>
+          <Text key={error.key} type="error" small>{label(`error.${error.key}`)}</Text>
         ))}
       </>
     )

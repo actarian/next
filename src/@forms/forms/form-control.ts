@@ -33,6 +33,12 @@ export class FormControl extends FormAbstract {
     if (options?.schema) {
       this.schema = options.schema;
     }
+    if (options?.label) {
+      this.label = options.label;
+    }
+    if (options?.options) {
+      this.options = options.options;
+    }
     this.errors = {};
     this.initSubjects_();
     this.initObservables_();

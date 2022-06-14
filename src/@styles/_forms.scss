@@ -348,3 +348,10 @@
     background: black;
   }
 }
+
+
+.checkbox {
+  &>svg {
+    flex: 0 0 20px;
+  }
+}

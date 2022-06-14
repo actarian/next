@@ -54578,6 +54578,174 @@
         "it": "La pagina che stai cercando non esiste.",
         "fr": "La page que vous recherchez n'existe pas."
       }
+    },
+    {
+      "id": "contact.magazine",
+      "text": {
+        "en": "Magazine",
+        "it": "Magazine",
+        "fr": "Revue"
+      }
+    },
+    {
+      "id": "contact.firstName",
+      "text": {
+        "en": "Name",
+        "it": "Nome",
+        "fr": "Nom"
+      }
+    },
+    {
+      "id": "contact.lastName",
+      "text": {
+        "en": "Surname",
+        "it": "Cognome",
+        "fr": "Nom de famille"
+      }
+    },
+    {
+      "id": "contact.email",
+      "text": {
+        "en": "Email",
+        "it": "Email",
+        "fr": "E-mail"
+      }
+    },
+    {
+      "id": "contact.telephone",
+      "text": {
+        "en": "Phone",
+        "it": "Telefono",
+        "fr": "Téléphone"
+      }
+    },
+    {
+      "id": "contact.occupation",
+      "text": {
+        "en": "Occupation",
+        "it": "Occupazione",
+        "fr": "Profession"
+      }
+    },
+    {
+      "id": "contact.country",
+      "text": {
+        "en": "Country",
+        "it": "Nazione",
+        "fr": "Pays"
+      }
+    },
+    {
+      "id": "contact.region",
+      "text": {
+        "en": "Region",
+        "it": "Regione",
+        "fr": "Région"
+      }
+    },
+    {
+      "id": "contact.printedCopy",
+      "text": {
+        "en": "Would you also like to receive the printed version of the Magazine?",
+        "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
+        "fr": "Souhaitez-vous également recevoir la version papier du Magazine ?"
+      }
+    },
+    {
+      "id": "contact.city",
+      "text": {
+        "en": "Town",
+        "it": "Città",
+        "fr": "Ville"
+      }
+    },
+    {
+      "id": "contact.province",
+      "text": {
+        "en": "Province",
+        "it": "Provincia",
+        "fr": "Province"
+      }
+    },
+    {
+      "id": "contact.zipCode",
+      "text": {
+        "en": "Postcode",
+        "it": "Codice postale",
+        "fr": "Code postal"
+      }
+    },
+    {
+      "id": "contact.address",
+      "text": {
+        "en": "Street address",
+        "it": "Indirizzo",
+        "fr": "Adresse"
+      }
+    },
+    {
+      "id": "contact.streetNumber",
+      "text": {
+        "en": "Street number",
+        "it": "Numero civico",
+        "fr": "Numéro de la rue"
+      }
+    },
+    {
+      "id": "contact.phoneNumber",
+      "text": {
+        "en": "Phone Number",
+        "it": "Telefono",
+        "fr": "Téléphone"
+      }
+    },
+    {
+      "id": "contact.privacy",
+      "text": {
+        "en": "I have read the privacy policy and I consent to the processing of data *",
+        "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
+        "fr": "J'ai lu la politique de confidentialité et je consens au traitement des données *"
+      }
+    },
+    {
+      "id": "contact.newsletter",
+      "text": {
+        "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
+        "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
+        "fr": "Au traitement de mes données personnelles pour des activités de marketing direct en m'inscrivant à la newsletter. *"
+      }
+    },
+    {
+      "id": "contact.commercial",
+      "text": {
+        "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
+        "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
+        "fr": "Au traitement de mes données personnelles pour les activités de profilage, afin de recevoir des communications commerciales plus proches de mes intérêts. *"
+      }
+    },
+    {
+      "id": "contact.promotion",
+      "text": {
+        "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
+        "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",
+        "fr": "Au transfert de mes données personnelles pour des activités promotionnelles par des tiers. Les données seront transférées exclusivement aux sociétés qui font partie du Groupe. *"
+      }
+    },
+    {
+      "id": "error.required",
+      "text": {
+        "en": "Required field",
+        "it": "Campo obbligatorio",
+        "fr": "Champ obligatoire"
+      }
+    },
+    {
+      "id": "error.email",
+      "text": {
+        "en": "Invalid email",
+        "it": "EMail non valida",
+        "fr": "E-mail invalide"
+      }
     }
   ],
   "market": [

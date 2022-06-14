@@ -1,7 +1,7 @@
 
 import { FormBuilder, useFormBuilder } from '@hooks/useFormBuilder/useFormBuilder';
 
-export default function ContactForm() {
+export default function ContactFormAriaKit() {
 
   const form = useFormBuilder({
     name: { schema: 'text', label: 'Full Name', placeholder: 'Jhon Doe', required: true },

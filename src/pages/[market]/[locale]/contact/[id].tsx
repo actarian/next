@@ -1,9 +1,9 @@
 
 import { Breadcrumb, Headline, Layout } from '@components';
+import ContactFormAriaKit from '@components/contact-form-aria-kit/contact-form-aria-kit';
 import ContactFormRxJs from '@components/contact-form-rxjs/contact-form-rxjs';
-import ContactForm from '@components/contact-form/contact-form';
 import { asStaticProps } from '@core';
-import { Fieldset } from '@geist-ui/core';
+import { Fieldset, Text } from '@geist-ui/core';
 import { getLayout, getPage, getStaticPathsForSchema, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
 
@@ -16,12 +16,12 @@ export default function Contact({ layout, page, params }: PageProps) {
 
         <Headline title={page.title} abstract={page.abstract}></Headline>
 
-        <Fieldset>
-          <Fieldset.Title>{page.description}</Fieldset.Title>
+        <Fieldset style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Fieldset.Title><Text h2 style={{ maxWidth: '740px' }}>{page.description}</Text></Fieldset.Title>
 
           <ContactFormRxJs />
 
-          <ContactForm />
+          <ContactFormAriaKit />
 
         </Fieldset>
 

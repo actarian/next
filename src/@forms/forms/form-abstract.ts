@@ -24,7 +24,8 @@ export abstract class FormAbstract {
   dirty_: boolean = false;
   status?: FormStatus;
   schema: string = 'text';
-  options?: { id: IEquatable, name: string }[];
+  label: string = 'Text';
+  options: { id: IEquatable, name: string }[] = [];
 
   validators: FormValidator[];
 

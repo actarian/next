@@ -2,6 +2,7 @@
 import { className } from '@core/utils';
 import { FormControl, useControl } from '@forms';
 import { Input, Text } from '@geist-ui/core';
+import { useLabel } from '@hooks';
 import * as React from 'react';
 
 type FieldTextProps = {
@@ -10,6 +11,7 @@ type FieldTextProps = {
 }
 
 export function FieldText(props: FieldTextProps) {
+  const label = useLabel();
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldText', state, props.control.flags, props.control);
@@ -48,11 +50,11 @@ export function FieldText(props: FieldTextProps) {
           disabled={state.flags.disabled}
           readOnly={state.flags.readonly}
           width="100%">
-          {props.name}
+          {label(props.control.label)}
         </Input>
 
         {state.flags.touched && state.errors.map(error => (
-          <Text key={error.key} type="error" small>{`error.${error.key}`}</Text>
+          <Text key={error.key} type="error" small>{label(`error.${error.key}`)}</Text>
         ))}
 
         {false &&

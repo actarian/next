@@ -2,6 +2,7 @@
 import type { IEquatable } from '@core';
 import { FormControl, useControl } from '@forms';
 import { Select, Text } from '@geist-ui/core';
+import { useLabel } from '@hooks';
 import * as React from 'react';
 
 type FieldSelectProps = {
@@ -10,6 +11,7 @@ type FieldSelectProps = {
 }
 
 export function FieldSelect(props: FieldSelectProps) {
+  const label = useLabel();
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldSelect', state, props.control.flags, props.control);
@@ -48,7 +50,10 @@ export function FieldSelect(props: FieldSelectProps) {
       <input type="hidden" value={state.value || ''} />
     ) : (
       <>
-        <Text type="secondary" small marginBottom='0.5em'>{props.name}</Text>
+        <Text type="secondary" small marginBottom='0.5em'>
+          {label(props.control.label)}
+        </Text>
+
         <Select
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
           placeholder={props.name}
@@ -66,7 +71,7 @@ export function FieldSelect(props: FieldSelectProps) {
         </Select>
 
         {state.flags.touched && state.errors.map(error => (
-          <Text key={error.key} type="error" small>{`error.${error.key}`}</Text>
+          <Text key={error.key} type="error" small>{label(`error.${error.key}`)}</Text>
         ))}
       </>
     )
