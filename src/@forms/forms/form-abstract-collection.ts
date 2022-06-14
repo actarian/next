@@ -5,12 +5,17 @@ import { FormControl } from './form-control';
 import { FormStatus } from './types';
 import { FormValidator } from './validators/form-validator';
 
+export interface ControlsMap<T extends FormAbstract> {
+  [key: string]: T;
+}
+
 /**
  * Abstract class representing a form collection.
  */
-export class FormAbstractCollection extends FormAbstract {
+export class FormAbstractCollection<T extends FormAbstract> extends FormAbstract {
+  // export class FormAbstractCollection<T extends (FormAbstract[] | { [key: string]: FormAbstract })> extends FormAbstract {
 
-  controls: any;
+  controls: ControlsMap<FormAbstract>;
   changesChildren: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
 
   /**
@@ -18,7 +23,7 @@ export class FormAbstractCollection extends FormAbstract {
    * @param controls an object containing controls.
    * @param validators a list of validators.
    */
-  constructor(controls?: any, validators?: (FormValidator | FormValidator[])) {
+  constructor(controls: ControlsMap<T>, validators?: (FormValidator | FormValidator[])) {
     super(validators);
     this.controls = controls;
     this.initControls_();
@@ -26,14 +31,14 @@ export class FormAbstractCollection extends FormAbstract {
     this.initObservables_();
   }
 
-  initControl_(controlOrValue: FormAbstract | any, key: any): FormControl {
+  initControl_(controlOrValue: FormAbstract | any, key: any): FormAbstract {
     const control: FormControl = controlOrValue instanceof FormAbstract ? controlOrValue : new FormControl(controlOrValue);
     control.addValidators(...this.validators);
     control.name = key;
     return control;
   }
 
-  private initControls_(): { [key: string]: FormControl } {
+  private initControls_(): ControlsMap<T> | undefined {
     this.forEach_((control: FormAbstract, key: any) => {
       this.init(control, key);
     });
@@ -81,7 +86,7 @@ export class FormAbstractCollection extends FormAbstract {
   }
 
   protected forEach_(callback: Function): void {
-    Object.keys(this.controls).forEach(key => callback(this.controls[key], key));
+    Object.keys(this.controls).forEach((key: keyof ControlsMap<T>) => callback(this.controls[key], key));
   }
 
   protected reduce_(callback: Function, result: any): any {
@@ -182,34 +187,41 @@ export class FormAbstractCollection extends FormAbstract {
     }
   }
 
-  protected init(control: FormAbstract, key: any): void {
+  protected init(control: FormAbstract, key: keyof ControlsMap<T>): void {
     this.controls[key] = this.initControl_(control, key);
   }
 
-  get(key: any): FormAbstract {
+  get(key: keyof ControlsMap<T>): FormAbstract {
     return this.controls[key];
   }
 
-  set(control: FormAbstract, key: any): void {
+  set(control: FormAbstract, key: keyof ControlsMap<T>): void {
     delete this.controls[key];
     this.controls[key] = this.initControl_(control, key);
     this.switchSubjects_();
   }
 
   // !!! needed?
-  add(control: FormAbstract, key: any): void {
+  add(control: FormAbstract, key: keyof ControlsMap<T>): void {
     this.controls[key] = this.initControl_(control, key);
     this.switchSubjects_();
   }
 
   remove(control: FormAbstract): void {
+    this.forEach_((c: FormAbstract, k: keyof ControlsMap<T>) => {
+      if (c === control) {
+        this.removeKey(k);
+      }
+    });
+    /*
     const key = Object.keys(this.controls).find((key: string) => this.controls[key] === control ? key : null);
     if (key) {
       this.removeKey(key);
     }
+    */
   }
 
-  removeKey(key: any): void {
+  removeKey(key: keyof ControlsMap<T>): void {
     const exhist: boolean = this.controls[key] !== undefined;
     delete this.controls[key];
     if (exhist) {

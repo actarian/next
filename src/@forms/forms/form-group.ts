@@ -5,7 +5,7 @@ import { FormValidator } from './validators/form-validator';
 /**
  * Class representing a FormGroup.
  */
-export class FormGroup extends FormAbstractCollection {
+export class FormGroup extends FormAbstractCollection<FormAbstract> {
 
   /**
    * Create a FormControl.

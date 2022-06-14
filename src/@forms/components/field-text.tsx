@@ -1,5 +1,6 @@
 
 import { className } from '@core/utils';
+import { Input, Text } from '@geist-ui/core';
 import * as React from 'react';
 import { FormControl } from '../forms';
 import { useControl } from '../useControl';
@@ -37,17 +38,35 @@ export function FieldText(props: FieldTextProps) {
     control.flags.hidden ? (
       <input type="hidden" value={control.value || ''} />
     ) : (
-      <div className={className('field', control.flags, { value: control.value != null && control.value != '', focus })}>
-        <div className="field__head"></div>
-        <div className="field__control">
-          <input placeholder={props.name} value={control.value || ''} onChange={onDidChange} onBlur={onDidBlur} onFocus={onDidFocus} disabled={control.flags.disabled} readOnly={control.flags.readonly} />
-          <div className="field__label">{props.name}</div>
-          {control.flags.touched && control.errors.map(error => (
-            <div key={error.key} className="field__error">{error.key}</div>
-          ))}
+      <>
+        <Input
+          type={(control.flags.invalid && control.flags.touched) ? 'error' : 'default'}
+          placeholder={props.name}
+          value={control.value || ''}
+          onChange={onDidChange}
+          onBlur={onDidBlur}
+          onFocus={onDidFocus}
+          disabled={control.flags.disabled}
+          readOnly={control.flags.readonly}>
+          {props.name}
+        </Input>
+
+        {control.flags.touched && control.errors.map(error => (
+          <Text key={error.key} type="error" small>{`error.${error.key}`}</Text>
+        ))}
+
+        <div className={className('field', control.flags, { value: control.value != null && control.value != '', focus })}>
+          <div className="field__head"></div>
+          <div className="field__control">
+            <input placeholder={props.name} value={control.value || ''} onChange={onDidChange} onBlur={onDidBlur} onFocus={onDidFocus} disabled={control.flags.disabled} readOnly={control.flags.readonly} />
+            <div className="field__label">{props.name}</div>
+            {control.flags.touched && control.errors.map(error => (
+              <div key={error.key} className="field__error">{error.key}</div>
+            ))}
+          </div>
+          <div className="field__head"></div>
         </div>
-        <div className="field__head"></div>
-      </div>
+      </>
     )
   );
 }

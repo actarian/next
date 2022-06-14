@@ -5,7 +5,7 @@ import { FormValidator } from './validators/form-validator';
 /**
  * Class representing a FormArray.
  */
-export class FormArray extends FormAbstractCollection {
+export class FormArray extends FormAbstractCollection<FormAbstract> {
 
   /**
    * Create a FormArray.
