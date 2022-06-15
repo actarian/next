@@ -88,6 +88,52 @@
       }
     ]
   },
+  "contact": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact",
+    "items": [
+      {
+        "id": 1,
+        "slug": {
+          "en": "contact-us",
+          "it": "contattaci",
+          "fr": "contactez-nous"
+        },
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "abstract": {
+          "en": "Contact request.",
+          "it": "Richiesta di contatto.",
+          "fr": "Demande de contact."
+        },
+        "description": {
+          "en": "For any request, fill out the form in all its parts, we will reply as soon as possible.",
+          "it": "Per qualsiasi richiesta, compilate il form in tutte le sue parti, vi risponderemo nel più breve tempo possibile.",
+          "fr": "Pour toute demande, remplissez le formulaire dans toutes ses parties, nous vous répondrons dans les plus brefs délais."
+        },
+        "categoryId": 12,
+        "meta": {
+          "title": {
+            "en": "Contact us",
+            "it": "Contattaci",
+            "fr": "Contactez-nous"
+          },
+          "description": {
+            "en": "Contact request.",
+            "it": "Richiesta di contatto.",
+            "fr": "Demande de contact."
+          },
+          "keywords": "contact keywords",
+          "robots": "all"
+        },
+        "schema": "contact"
+      }
+    ]
+  },
   "product_index": {
     "singularName": "product_index",
     "pluralName": "product_indices",
@@ -56053,6 +56099,19 @@
         "schema": "category"
       },
       {
+        "id": 12,
+        "name": "contact",
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "categoryId": 1,
+        "pageSchema": "contact",
+        "pageId": 1,
+        "schema": "category"
+      },
+      {
         "id": 3,
         "name": "product_index",
         "title": {
@@ -56289,6 +56348,315 @@
           "fr": "La page que vous recherchez n'existe pas."
         },
         "schema": "label"
+      },
+      {
+        "id": "contact.magazine",
+        "text": {
+          "en": "Magazine",
+          "it": "Magazine",
+          "fr": "Revue"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.firstName",
+        "text": {
+          "en": "Name",
+          "it": "Nome",
+          "fr": "Nom"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.lastName",
+        "text": {
+          "en": "Surname",
+          "it": "Cognome",
+          "fr": "Nom de famille"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.email",
+        "text": {
+          "en": "Email",
+          "it": "Email",
+          "fr": "E-mail"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.telephone",
+        "text": {
+          "en": "Phone",
+          "it": "Telefono",
+          "fr": "Téléphone"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.occupation",
+        "text": {
+          "en": "Occupation",
+          "it": "Occupazione",
+          "fr": "Profession"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.country",
+        "text": {
+          "en": "Country",
+          "it": "Nazione",
+          "fr": "Pays"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.region",
+        "text": {
+          "en": "Region",
+          "it": "Regione",
+          "fr": "Région"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.printedCopy",
+        "text": {
+          "en": "Would you also like to receive the printed version of the Magazine?",
+          "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
+          "fr": "Souhaitez-vous également recevoir la version papier du Magazine ?"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.city",
+        "text": {
+          "en": "Town",
+          "it": "Città",
+          "fr": "Ville"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.province",
+        "text": {
+          "en": "Province",
+          "it": "Provincia",
+          "fr": "Province"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.zipCode",
+        "text": {
+          "en": "Postcode",
+          "it": "Codice postale",
+          "fr": "Code postal"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.address",
+        "text": {
+          "en": "Street address",
+          "it": "Indirizzo",
+          "fr": "Adresse"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.streetNumber",
+        "text": {
+          "en": "Street number",
+          "it": "Numero civico",
+          "fr": "Numéro de la rue"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.phoneNumber",
+        "text": {
+          "en": "Phone Number",
+          "it": "Telefono",
+          "fr": "Téléphone"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.privacy",
+        "text": {
+          "en": "I have read the privacy policy and I consent to the processing of data *",
+          "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
+          "fr": "J'ai lu la politique de confidentialité et je consens au traitement des données *"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.newsletter",
+        "text": {
+          "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
+          "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
+          "fr": "Au traitement de mes données personnelles pour des activités de marketing direct en m'inscrivant à la newsletter. *"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.commercial",
+        "text": {
+          "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
+          "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
+          "fr": "Au traitement de mes données personnelles pour les activités de profilage, afin de recevoir des communications commerciales plus proches de mes intérêts. *"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "contact.promotion",
+        "text": {
+          "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
+          "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",
+          "fr": "Au transfert de mes données personnelles pour des activités promotionnelles par des tiers. Les données seront transférées exclusivement aux sociétés qui font partie du Groupe. *"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.accept.true",
+        "text": {
+          "en": "I agree",
+          "it": "Acconsento",
+          "fr": "Je suis d'accord"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.accept.false",
+        "text": {
+          "en": "I do not agree",
+          "it": "Non acconsento",
+          "fr": "Je ne suis pas d'accord"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.submit",
+        "text": {
+          "en": "Submit",
+          "it": "Invia",
+          "fr": "Soumettre"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.reset",
+        "text": {
+          "en": "Reset",
+          "it": "Cancella",
+          "fr": "Réinitialiser"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "error.required",
+        "text": {
+          "en": "Required field",
+          "it": "Campo obbligatorio",
+          "fr": "Champ obligatoire"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "error.email",
+        "text": {
+          "en": "Invalid email",
+          "it": "EMail non valida",
+          "fr": "E-mail invalide"
+        },
+        "schema": "label"
+      }
+    ]
+  },
+  "magazine": {
+    "singularName": "magazine",
+    "pluralName": "magazines",
+    "displayName": "Magazine",
+    "items": [
+      {
+        "id": 1,
+        "name": "GM#02",
+        "schema": "magazine"
+      },
+      {
+        "id": 2,
+        "name": "GM#01",
+        "schema": "magazine"
+      }
+    ]
+  },
+  "occupation": {
+    "singularName": "occupation",
+    "pluralName": "occupations",
+    "displayName": "Occupation",
+    "items": [
+      {
+        "id": 1,
+        "name": "architetto / interior designer",
+        "schema": "occupation"
+      },
+      {
+        "id": 2,
+        "name": "rivenditore",
+        "schema": "occupation"
+      },
+      {
+        "id": 3,
+        "name": "imprenditore",
+        "schema": "occupation"
+      },
+      {
+        "id": 4,
+        "name": "giornalista",
+        "schema": "occupation"
+      },
+      {
+        "id": 5,
+        "name": "studente",
+        "schema": "occupation"
+      },
+      {
+        "id": 6,
+        "name": "utente privato",
+        "schema": "occupation"
+      },
+      {
+        "id": 7,
+        "name": "altro",
+        "schema": "occupation"
+      },
+      {
+        "id": 8,
+        "name": "rivenditore cucine",
+        "schema": "occupation"
+      },
+      {
+        "id": 9,
+        "name": "Agente",
+        "schema": "occupation"
+      },
+      {
+        "id": 10,
+        "name": "Filiali",
+        "schema": "occupation"
+      },
+      {
+        "id": 11,
+        "name": "Privato",
+        "schema": "occupation"
+      },
+      {
+        "id": 12,
+        "name": "Fornitore",
+        "schema": "occupation"
       }
     ]
   },
@@ -56347,19 +56715,1868 @@
     "displayName": "Country",
     "items": [
       {
-        "id": "us",
-        "title": "United States",
+        "id": "af",
+        "name": "Afghanistan",
         "schema": "country"
       },
       {
-        "id": "it",
-        "title": "Italy",
+        "id": "ax",
+        "name": "Åland Islands",
+        "schema": "country"
+      },
+      {
+        "id": "al",
+        "name": "Albania",
+        "schema": "country"
+      },
+      {
+        "id": "dz",
+        "name": "Algeria",
+        "schema": "country"
+      },
+      {
+        "id": "as",
+        "name": "American Samoa",
+        "schema": "country"
+      },
+      {
+        "id": "ad",
+        "name": "AndorrA",
+        "schema": "country"
+      },
+      {
+        "id": "ao",
+        "name": "Angola",
+        "schema": "country"
+      },
+      {
+        "id": "ai",
+        "name": "Anguilla",
+        "schema": "country"
+      },
+      {
+        "id": "aq",
+        "name": "Antarctica",
+        "schema": "country"
+      },
+      {
+        "id": "ag",
+        "name": "Antigua and Barbuda",
+        "schema": "country"
+      },
+      {
+        "id": "ar",
+        "name": "Argentina",
+        "schema": "country"
+      },
+      {
+        "id": "am",
+        "name": "Armenia",
+        "schema": "country"
+      },
+      {
+        "id": "aw",
+        "name": "Aruba",
+        "schema": "country"
+      },
+      {
+        "id": "au",
+        "name": "Australia",
+        "schema": "country"
+      },
+      {
+        "id": "at",
+        "name": "Austria",
+        "schema": "country"
+      },
+      {
+        "id": "az",
+        "name": "Azerbaijan",
+        "schema": "country"
+      },
+      {
+        "id": "bs",
+        "name": "Bahamas",
+        "schema": "country"
+      },
+      {
+        "id": "bh",
+        "name": "Bahrain",
+        "schema": "country"
+      },
+      {
+        "id": "bd",
+        "name": "Bangladesh",
+        "schema": "country"
+      },
+      {
+        "id": "bb",
+        "name": "Barbados",
+        "schema": "country"
+      },
+      {
+        "id": "by",
+        "name": "Belarus",
+        "schema": "country"
+      },
+      {
+        "id": "be",
+        "name": "Belgium",
+        "schema": "country"
+      },
+      {
+        "id": "bz",
+        "name": "Belize",
+        "schema": "country"
+      },
+      {
+        "id": "bj",
+        "name": "Benin",
+        "schema": "country"
+      },
+      {
+        "id": "bm",
+        "name": "Bermuda",
+        "schema": "country"
+      },
+      {
+        "id": "bt",
+        "name": "Bhutan",
+        "schema": "country"
+      },
+      {
+        "id": "bo",
+        "name": "Bolivia",
+        "schema": "country"
+      },
+      {
+        "id": "ba",
+        "name": "Bosnia and Herzegovina",
+        "schema": "country"
+      },
+      {
+        "id": "bw",
+        "name": "Botswana",
+        "schema": "country"
+      },
+      {
+        "id": "bv",
+        "name": "Bouvet Island",
+        "schema": "country"
+      },
+      {
+        "id": "br",
+        "name": "Brazil",
+        "schema": "country"
+      },
+      {
+        "id": "io",
+        "name": "British Indian Ocean Territory",
+        "schema": "country"
+      },
+      {
+        "id": "bn",
+        "name": "Brunei Darussalam",
+        "schema": "country"
+      },
+      {
+        "id": "bg",
+        "name": "Bulgaria",
+        "schema": "country"
+      },
+      {
+        "id": "bf",
+        "name": "Burkina Faso",
+        "schema": "country"
+      },
+      {
+        "id": "bi",
+        "name": "Burundi",
+        "schema": "country"
+      },
+      {
+        "id": "kh",
+        "name": "Cambodia",
+        "schema": "country"
+      },
+      {
+        "id": "cm",
+        "name": "Cameroon",
+        "schema": "country"
+      },
+      {
+        "id": "ca",
+        "name": "Canada",
+        "schema": "country"
+      },
+      {
+        "id": "cv",
+        "name": "Cape Verde",
+        "schema": "country"
+      },
+      {
+        "id": "ky",
+        "name": "Cayman Islands",
+        "schema": "country"
+      },
+      {
+        "id": "cf",
+        "name": "Central African Republic",
+        "schema": "country"
+      },
+      {
+        "id": "td",
+        "name": "Chad",
+        "schema": "country"
+      },
+      {
+        "id": "cl",
+        "name": "Chile",
+        "schema": "country"
+      },
+      {
+        "id": "cn",
+        "name": "China",
+        "schema": "country"
+      },
+      {
+        "id": "cx",
+        "name": "Christmas Island",
+        "schema": "country"
+      },
+      {
+        "id": "cc",
+        "name": "Cocos (Keeling) Islands",
+        "schema": "country"
+      },
+      {
+        "id": "co",
+        "name": "Colombia",
+        "schema": "country"
+      },
+      {
+        "id": "km",
+        "name": "Comoros",
+        "schema": "country"
+      },
+      {
+        "id": "cg",
+        "name": "Congo",
+        "schema": "country"
+      },
+      {
+        "id": "cd",
+        "name": "Congo, The Democratic Republic of the",
+        "schema": "country"
+      },
+      {
+        "id": "ck",
+        "name": "Cook Islands",
+        "schema": "country"
+      },
+      {
+        "id": "cr",
+        "name": "Costa Rica",
+        "schema": "country"
+      },
+      {
+        "id": "hr",
+        "name": "Croatia",
+        "schema": "country"
+      },
+      {
+        "id": "cu",
+        "name": "Cuba",
+        "schema": "country"
+      },
+      {
+        "id": "cy",
+        "name": "Cyprus",
+        "schema": "country"
+      },
+      {
+        "id": "cz",
+        "name": "Czech Republic",
+        "schema": "country"
+      },
+      {
+        "id": "dk",
+        "name": "Denmark",
+        "schema": "country"
+      },
+      {
+        "id": "dj",
+        "name": "Djibouti",
+        "schema": "country"
+      },
+      {
+        "id": "dm",
+        "name": "Dominica",
+        "schema": "country"
+      },
+      {
+        "id": "do",
+        "name": "Dominican Republic",
+        "schema": "country"
+      },
+      {
+        "id": "ec",
+        "name": "Ecuador",
+        "schema": "country"
+      },
+      {
+        "id": "eg",
+        "name": "Egypt",
+        "schema": "country"
+      },
+      {
+        "id": "sv",
+        "name": "El Salvador",
+        "schema": "country"
+      },
+      {
+        "id": "gq",
+        "name": "Equatorial Guinea",
+        "schema": "country"
+      },
+      {
+        "id": "er",
+        "name": "Eritrea",
+        "schema": "country"
+      },
+      {
+        "id": "ee",
+        "name": "Estonia",
+        "schema": "country"
+      },
+      {
+        "id": "et",
+        "name": "Ethiopia",
+        "schema": "country"
+      },
+      {
+        "id": "fk",
+        "name": "Falkland Islands (Malvinas)",
+        "schema": "country"
+      },
+      {
+        "id": "fo",
+        "name": "Faroe Islands",
+        "schema": "country"
+      },
+      {
+        "id": "fj",
+        "name": "Fiji",
+        "schema": "country"
+      },
+      {
+        "id": "fi",
+        "name": "Finland",
         "schema": "country"
       },
       {
         "id": "fr",
-        "title": "France",
+        "name": "France",
         "schema": "country"
+      },
+      {
+        "id": "gf",
+        "name": "French Guiana",
+        "schema": "country"
+      },
+      {
+        "id": "pf",
+        "name": "French Polynesia",
+        "schema": "country"
+      },
+      {
+        "id": "tf",
+        "name": "French Southern Territories",
+        "schema": "country"
+      },
+      {
+        "id": "ga",
+        "name": "Gabon",
+        "schema": "country"
+      },
+      {
+        "id": "gm",
+        "name": "Gambia",
+        "schema": "country"
+      },
+      {
+        "id": "ge",
+        "name": "Georgia",
+        "schema": "country"
+      },
+      {
+        "id": "de",
+        "name": "Germany",
+        "schema": "country"
+      },
+      {
+        "id": "gh",
+        "name": "Ghana",
+        "schema": "country"
+      },
+      {
+        "id": "gi",
+        "name": "Gibraltar",
+        "schema": "country"
+      },
+      {
+        "id": "gr",
+        "name": "Greece",
+        "schema": "country"
+      },
+      {
+        "id": "gl",
+        "name": "Greenland",
+        "schema": "country"
+      },
+      {
+        "id": "gd",
+        "name": "Grenada",
+        "schema": "country"
+      },
+      {
+        "id": "gp",
+        "name": "Guadeloupe",
+        "schema": "country"
+      },
+      {
+        "id": "gu",
+        "name": "Guam",
+        "schema": "country"
+      },
+      {
+        "id": "gt",
+        "name": "Guatemala",
+        "schema": "country"
+      },
+      {
+        "id": "gg",
+        "name": "Guernsey",
+        "schema": "country"
+      },
+      {
+        "id": "gn",
+        "name": "Guinea",
+        "schema": "country"
+      },
+      {
+        "id": "gw",
+        "name": "Guinea-Bissau",
+        "schema": "country"
+      },
+      {
+        "id": "gy",
+        "name": "Guyana",
+        "schema": "country"
+      },
+      {
+        "id": "ht",
+        "name": "Haiti",
+        "schema": "country"
+      },
+      {
+        "id": "hm",
+        "name": "Heard Island and Mcdonald Islands",
+        "schema": "country"
+      },
+      {
+        "id": "va",
+        "name": "Holy See (Vatican City State)",
+        "schema": "country"
+      },
+      {
+        "id": "hn",
+        "name": "Honduras",
+        "schema": "country"
+      },
+      {
+        "id": "hk",
+        "name": "Hong Kong",
+        "schema": "country"
+      },
+      {
+        "id": "hu",
+        "name": "Hungary",
+        "schema": "country"
+      },
+      {
+        "id": "is",
+        "name": "Iceland",
+        "schema": "country"
+      },
+      {
+        "id": "in",
+        "name": "India",
+        "schema": "country"
+      },
+      {
+        "id": "id",
+        "name": "Indonesia",
+        "schema": "country"
+      },
+      {
+        "id": "ir",
+        "name": "Iran, Islamic Republic Of",
+        "schema": "country"
+      },
+      {
+        "id": "iq",
+        "name": "Iraq",
+        "schema": "country"
+      },
+      {
+        "id": "ie",
+        "name": "Ireland",
+        "schema": "country"
+      },
+      {
+        "id": "im",
+        "name": "Isle of Man",
+        "schema": "country"
+      },
+      {
+        "id": "il",
+        "name": "Israel",
+        "schema": "country"
+      },
+      {
+        "id": "it",
+        "name": "Italy",
+        "schema": "country"
+      },
+      {
+        "id": "jm",
+        "name": "Jamaica",
+        "schema": "country"
+      },
+      {
+        "id": "jp",
+        "name": "Japan",
+        "schema": "country"
+      },
+      {
+        "id": "je",
+        "name": "Jersey",
+        "schema": "country"
+      },
+      {
+        "id": "jo",
+        "name": "Jordan",
+        "schema": "country"
+      },
+      {
+        "id": "kz",
+        "name": "Kazakhstan",
+        "schema": "country"
+      },
+      {
+        "id": "ke",
+        "name": "Kenya",
+        "schema": "country"
+      },
+      {
+        "id": "ki",
+        "name": "Kiribati",
+        "schema": "country"
+      },
+      {
+        "id": "kr",
+        "name": "Korea, Republic of",
+        "schema": "country"
+      },
+      {
+        "id": "kw",
+        "name": "Kuwait",
+        "schema": "country"
+      },
+      {
+        "id": "kg",
+        "name": "Kyrgyzstan",
+        "schema": "country"
+      },
+      {
+        "id": "lv",
+        "name": "Latvia",
+        "schema": "country"
+      },
+      {
+        "id": "lb",
+        "name": "Lebanon",
+        "schema": "country"
+      },
+      {
+        "id": "ls",
+        "name": "Lesotho",
+        "schema": "country"
+      },
+      {
+        "id": "lr",
+        "name": "Liberia",
+        "schema": "country"
+      },
+      {
+        "id": "ly",
+        "name": "Libyan Arab Jamahiriya",
+        "schema": "country"
+      },
+      {
+        "id": "li",
+        "name": "Liechtenstein",
+        "schema": "country"
+      },
+      {
+        "id": "lt",
+        "name": "Lithuania",
+        "schema": "country"
+      },
+      {
+        "id": "lu",
+        "name": "Luxembourg",
+        "schema": "country"
+      },
+      {
+        "id": "mo",
+        "name": "Macao",
+        "schema": "country"
+      },
+      {
+        "id": "mk",
+        "name": "Macedonia, The Former Yugoslav Republic of",
+        "schema": "country"
+      },
+      {
+        "id": "mg",
+        "name": "Madagascar",
+        "schema": "country"
+      },
+      {
+        "id": "mw",
+        "name": "Malawi",
+        "schema": "country"
+      },
+      {
+        "id": "my",
+        "name": "Malaysia",
+        "schema": "country"
+      },
+      {
+        "id": "mv",
+        "name": "Maldives",
+        "schema": "country"
+      },
+      {
+        "id": "ml",
+        "name": "Mali",
+        "schema": "country"
+      },
+      {
+        "id": "mt",
+        "name": "Malta",
+        "schema": "country"
+      },
+      {
+        "id": "mh",
+        "name": "Marshall Islands",
+        "schema": "country"
+      },
+      {
+        "id": "mq",
+        "name": "Martinique",
+        "schema": "country"
+      },
+      {
+        "id": "mr",
+        "name": "Mauritania",
+        "schema": "country"
+      },
+      {
+        "id": "mu",
+        "name": "Mauritius",
+        "schema": "country"
+      },
+      {
+        "id": "yt",
+        "name": "Mayotte",
+        "schema": "country"
+      },
+      {
+        "id": "mx",
+        "name": "Mexico",
+        "schema": "country"
+      },
+      {
+        "id": "fm",
+        "name": "Micronesia, Federated States of",
+        "schema": "country"
+      },
+      {
+        "id": "md",
+        "name": "Moldova, Republic of",
+        "schema": "country"
+      },
+      {
+        "id": "mc",
+        "name": "Monaco",
+        "schema": "country"
+      },
+      {
+        "id": "mn",
+        "name": "Mongolia",
+        "schema": "country"
+      },
+      {
+        "id": "ms",
+        "name": "Montserrat",
+        "schema": "country"
+      },
+      {
+        "id": "ma",
+        "name": "Morocco",
+        "schema": "country"
+      },
+      {
+        "id": "mz",
+        "name": "Mozambique",
+        "schema": "country"
+      },
+      {
+        "id": "mm",
+        "name": "Myanmar",
+        "schema": "country"
+      },
+      {
+        "id": "na",
+        "name": "Namibia",
+        "schema": "country"
+      },
+      {
+        "id": "nr",
+        "name": "Nauru",
+        "schema": "country"
+      },
+      {
+        "id": "np",
+        "name": "Nepal",
+        "schema": "country"
+      },
+      {
+        "id": "nl",
+        "name": "Netherlands",
+        "schema": "country"
+      },
+      {
+        "id": "an",
+        "name": "Netherlands Antilles",
+        "schema": "country"
+      },
+      {
+        "id": "nc",
+        "name": "New Caledonia",
+        "schema": "country"
+      },
+      {
+        "id": "nz",
+        "name": "New Zealand",
+        "schema": "country"
+      },
+      {
+        "id": "ni",
+        "name": "Nicaragua",
+        "schema": "country"
+      },
+      {
+        "id": "ne",
+        "name": "Niger",
+        "schema": "country"
+      },
+      {
+        "id": "ng",
+        "name": "Nigeria",
+        "schema": "country"
+      },
+      {
+        "id": "nu",
+        "name": "Niue",
+        "schema": "country"
+      },
+      {
+        "id": "nf",
+        "name": "Norfolk Island",
+        "schema": "country"
+      },
+      {
+        "id": "mp",
+        "name": "Northern Mariana Islands",
+        "schema": "country"
+      },
+      {
+        "id": "no",
+        "name": "Norway",
+        "schema": "country"
+      },
+      {
+        "id": "om",
+        "name": "Oman",
+        "schema": "country"
+      },
+      {
+        "id": "pk",
+        "name": "Pakistan",
+        "schema": "country"
+      },
+      {
+        "id": "pw",
+        "name": "Palau",
+        "schema": "country"
+      },
+      {
+        "id": "ps",
+        "name": "Palestinian Territory, Occupied",
+        "schema": "country"
+      },
+      {
+        "id": "pa",
+        "name": "Panama",
+        "schema": "country"
+      },
+      {
+        "id": "pg",
+        "name": "Papua New Guinea",
+        "schema": "country"
+      },
+      {
+        "id": "py",
+        "name": "Paraguay",
+        "schema": "country"
+      },
+      {
+        "id": "pe",
+        "name": "Peru",
+        "schema": "country"
+      },
+      {
+        "id": "ph",
+        "name": "Philippines",
+        "schema": "country"
+      },
+      {
+        "id": "pn",
+        "name": "Pitcairn",
+        "schema": "country"
+      },
+      {
+        "id": "pl",
+        "name": "Poland",
+        "schema": "country"
+      },
+      {
+        "id": "pt",
+        "name": "Portugal",
+        "schema": "country"
+      },
+      {
+        "id": "pr",
+        "name": "Puerto Rico",
+        "schema": "country"
+      },
+      {
+        "id": "qa",
+        "name": "Qatar",
+        "schema": "country"
+      },
+      {
+        "id": "re",
+        "name": "Reunion",
+        "schema": "country"
+      },
+      {
+        "id": "ro",
+        "name": "Romania",
+        "schema": "country"
+      },
+      {
+        "id": "ru",
+        "name": "Russian Federation",
+        "schema": "country"
+      },
+      {
+        "id": "rw",
+        "name": "RWANDA",
+        "schema": "country"
+      },
+      {
+        "id": "sh",
+        "name": "Saint Helena",
+        "schema": "country"
+      },
+      {
+        "id": "kn",
+        "name": "Saint Kitts and Nevis",
+        "schema": "country"
+      },
+      {
+        "id": "lc",
+        "name": "Saint Lucia",
+        "schema": "country"
+      },
+      {
+        "id": "pm",
+        "name": "Saint Pierre and Miquelon",
+        "schema": "country"
+      },
+      {
+        "id": "vc",
+        "name": "Saint Vincent and the Grenadines",
+        "schema": "country"
+      },
+      {
+        "id": "ws",
+        "name": "Samoa",
+        "schema": "country"
+      },
+      {
+        "id": "sm",
+        "name": "San Marino",
+        "schema": "country"
+      },
+      {
+        "id": "st",
+        "name": "Sao Tome and Principe",
+        "schema": "country"
+      },
+      {
+        "id": "sa",
+        "name": "Saudi Arabia",
+        "schema": "country"
+      },
+      {
+        "id": "sn",
+        "name": "Senegal",
+        "schema": "country"
+      },
+      {
+        "id": "cs",
+        "name": "Serbia and Montenegro",
+        "schema": "country"
+      },
+      {
+        "id": "sc",
+        "name": "Seychelles",
+        "schema": "country"
+      },
+      {
+        "id": "sl",
+        "name": "Sierra Leone",
+        "schema": "country"
+      },
+      {
+        "id": "sg",
+        "name": "Singapore",
+        "schema": "country"
+      },
+      {
+        "id": "sk",
+        "name": "Slovakia",
+        "schema": "country"
+      },
+      {
+        "id": "si",
+        "name": "Slovenia",
+        "schema": "country"
+      },
+      {
+        "id": "sb",
+        "name": "Solomon Islands",
+        "schema": "country"
+      },
+      {
+        "id": "so",
+        "name": "Somalia",
+        "schema": "country"
+      },
+      {
+        "id": "za",
+        "name": "South Africa",
+        "schema": "country"
+      },
+      {
+        "id": "gs",
+        "name": "South Georgia and the South Sandwich Islands",
+        "schema": "country"
+      },
+      {
+        "id": "es",
+        "name": "Spain",
+        "schema": "country"
+      },
+      {
+        "id": "lk",
+        "name": "Sri Lanka",
+        "schema": "country"
+      },
+      {
+        "id": "sd",
+        "name": "Sudan",
+        "schema": "country"
+      },
+      {
+        "id": "sr",
+        "name": "Suriname",
+        "schema": "country"
+      },
+      {
+        "id": "sj",
+        "name": "Svalbard and Jan Mayen",
+        "schema": "country"
+      },
+      {
+        "id": "sz",
+        "name": "Swaziland",
+        "schema": "country"
+      },
+      {
+        "id": "se",
+        "name": "Sweden",
+        "schema": "country"
+      },
+      {
+        "id": "ch",
+        "name": "Switzerland",
+        "schema": "country"
+      },
+      {
+        "id": "sy",
+        "name": "Syrian Arab Republic",
+        "schema": "country"
+      },
+      {
+        "id": "tw",
+        "name": "Taiwan, Province of China",
+        "schema": "country"
+      },
+      {
+        "id": "tj",
+        "name": "Tajikistan",
+        "schema": "country"
+      },
+      {
+        "id": "tz",
+        "name": "Tanzania, United Republic of",
+        "schema": "country"
+      },
+      {
+        "id": "th",
+        "name": "Thailand",
+        "schema": "country"
+      },
+      {
+        "id": "tl",
+        "name": "Timor-Leste",
+        "schema": "country"
+      },
+      {
+        "id": "tg",
+        "name": "Togo",
+        "schema": "country"
+      },
+      {
+        "id": "tk",
+        "name": "Tokelau",
+        "schema": "country"
+      },
+      {
+        "id": "to",
+        "name": "Tonga",
+        "schema": "country"
+      },
+      {
+        "id": "tt",
+        "name": "Trinidad and Tobago",
+        "schema": "country"
+      },
+      {
+        "id": "tn",
+        "name": "Tunisia",
+        "schema": "country"
+      },
+      {
+        "id": "tr",
+        "name": "Turkey",
+        "schema": "country"
+      },
+      {
+        "id": "tm",
+        "name": "Turkmenistan",
+        "schema": "country"
+      },
+      {
+        "id": "tc",
+        "name": "Turks and Caicos Islands",
+        "schema": "country"
+      },
+      {
+        "id": "tv",
+        "name": "Tuvalu",
+        "schema": "country"
+      },
+      {
+        "id": "ug",
+        "name": "Uganda",
+        "schema": "country"
+      },
+      {
+        "id": "ua",
+        "name": "Ukraine",
+        "schema": "country"
+      },
+      {
+        "id": "ae",
+        "name": "United Arab Emirates",
+        "schema": "country"
+      },
+      {
+        "id": "gb",
+        "name": "United Kingdom",
+        "schema": "country"
+      },
+      {
+        "id": "us",
+        "name": "United States",
+        "schema": "country"
+      },
+      {
+        "id": "um",
+        "name": "United States Minor Outlying Islands",
+        "schema": "country"
+      },
+      {
+        "id": "uy",
+        "name": "Uruguay",
+        "schema": "country"
+      },
+      {
+        "id": "uz",
+        "name": "Uzbekistan",
+        "schema": "country"
+      },
+      {
+        "id": "vu",
+        "name": "Vanuatu",
+        "schema": "country"
+      },
+      {
+        "id": "ve",
+        "name": "Venezuela",
+        "schema": "country"
+      },
+      {
+        "id": "vn",
+        "name": "Viet Nam",
+        "schema": "country"
+      },
+      {
+        "id": "vg",
+        "name": "Virgin Islands, British",
+        "schema": "country"
+      },
+      {
+        "id": "vi",
+        "name": "Virgin Islands, U.S.",
+        "schema": "country"
+      },
+      {
+        "id": "wf",
+        "name": "Wallis and Futuna",
+        "schema": "country"
+      },
+      {
+        "id": "eh",
+        "name": "Western Sahara",
+        "schema": "country"
+      },
+      {
+        "id": "ye",
+        "name": "Yemen",
+        "schema": "country"
+      },
+      {
+        "id": "zm",
+        "name": "Zambia",
+        "schema": "country"
+      },
+      {
+        "id": "zn",
+        "name": "Zimbabw",
+        "schema": "country"
+      }
+    ]
+  },
+  "region": {
+    "singularName": "region",
+    "pluralName": "regions",
+    "displayName": "Region",
+    "items": [
+      {
+        "id": 1,
+        "name": "Abruzzo",
+        "schema": "region"
+      },
+      {
+        "id": 2,
+        "name": "Basilicata",
+        "schema": "region"
+      },
+      {
+        "id": 3,
+        "name": "Calabria",
+        "schema": "region"
+      },
+      {
+        "id": 4,
+        "name": "Campania",
+        "schema": "region"
+      },
+      {
+        "id": 5,
+        "name": "Emilia Romagna",
+        "schema": "region"
+      },
+      {
+        "id": 6,
+        "name": "Friuli-Venezia Giulia",
+        "schema": "region"
+      },
+      {
+        "id": 7,
+        "name": "Lazio",
+        "schema": "region"
+      },
+      {
+        "id": 8,
+        "name": "Liguria",
+        "schema": "region"
+      },
+      {
+        "id": 9,
+        "name": "Lombardia",
+        "schema": "region"
+      },
+      {
+        "id": 10,
+        "name": "Marche",
+        "schema": "region"
+      },
+      {
+        "id": 11,
+        "name": "Molise",
+        "schema": "region"
+      },
+      {
+        "id": 12,
+        "name": "Piemonte",
+        "schema": "region"
+      },
+      {
+        "id": 13,
+        "name": "Puglia",
+        "schema": "region"
+      },
+      {
+        "id": 14,
+        "name": "Sardegna",
+        "schema": "region"
+      },
+      {
+        "id": 15,
+        "name": "Sicilia",
+        "schema": "region"
+      },
+      {
+        "id": 16,
+        "name": "Toscana",
+        "schema": "region"
+      },
+      {
+        "id": 17,
+        "name": "Trentino-Alto Adige",
+        "schema": "region"
+      },
+      {
+        "id": 18,
+        "name": "Umbria",
+        "schema": "region"
+      },
+      {
+        "id": 19,
+        "name": "Valle d' Aosta",
+        "schema": "region"
+      },
+      {
+        "id": 20,
+        "name": "Veneto",
+        "schema": "region"
+      }
+    ]
+  },
+  "province": {
+    "singularName": "province",
+    "pluralName": "provinces",
+    "displayName": "Province",
+    "items": [
+      {
+        "id": 108,
+        "name": "Agrigento",
+        "schema": "province"
+      },
+      {
+        "id": 109,
+        "name": "Alessandria",
+        "schema": "province"
+      },
+      {
+        "id": 110,
+        "name": "Ancona",
+        "schema": "province"
+      },
+      {
+        "id": 206,
+        "name": "Aosta",
+        "schema": "province"
+      },
+      {
+        "id": 111,
+        "name": "Arezzo",
+        "schema": "province"
+      },
+      {
+        "id": 112,
+        "name": "Ascoli Piceno",
+        "schema": "province"
+      },
+      {
+        "id": 113,
+        "name": "Asti",
+        "schema": "province"
+      },
+      {
+        "id": 114,
+        "name": "Avellino",
+        "schema": "province"
+      },
+      {
+        "id": 115,
+        "name": "Bari",
+        "schema": "province"
+      },
+      {
+        "id": 217,
+        "name": "Barletta-Andria-Trani",
+        "schema": "province"
+      },
+      {
+        "id": 116,
+        "name": "Belluno",
+        "schema": "province"
+      },
+      {
+        "id": 117,
+        "name": "Benevento",
+        "schema": "province"
+      },
+      {
+        "id": 118,
+        "name": "Bergamo",
+        "schema": "province"
+      },
+      {
+        "id": 119,
+        "name": "Biella",
+        "schema": "province"
+      },
+      {
+        "id": 120,
+        "name": "Bologna",
+        "schema": "province"
+      },
+      {
+        "id": 121,
+        "name": "Bolzano/Bozen",
+        "schema": "province"
+      },
+      {
+        "id": 122,
+        "name": "Brescia",
+        "schema": "province"
+      },
+      {
+        "id": 123,
+        "name": "Brindisi",
+        "schema": "province"
+      },
+      {
+        "id": 124,
+        "name": "Cagliari",
+        "schema": "province"
+      },
+      {
+        "id": 125,
+        "name": "Caltanissetta",
+        "schema": "province"
+      },
+      {
+        "id": 126,
+        "name": "Campobasso",
+        "schema": "province"
+      },
+      {
+        "id": 127,
+        "name": "Carbonia-Iglesias",
+        "schema": "province"
+      },
+      {
+        "id": 128,
+        "name": "Caserta",
+        "schema": "province"
+      },
+      {
+        "id": 129,
+        "name": "Catania",
+        "schema": "province"
+      },
+      {
+        "id": 130,
+        "name": "Catanzaro",
+        "schema": "province"
+      },
+      {
+        "id": 131,
+        "name": "Chieti",
+        "schema": "province"
+      },
+      {
+        "id": 132,
+        "name": "Como",
+        "schema": "province"
+      },
+      {
+        "id": 133,
+        "name": "Cosenza",
+        "schema": "province"
+      },
+      {
+        "id": 134,
+        "name": "Cremona",
+        "schema": "province"
+      },
+      {
+        "id": 135,
+        "name": "Crotone",
+        "schema": "province"
+      },
+      {
+        "id": 136,
+        "name": "Cuneo",
+        "schema": "province"
+      },
+      {
+        "id": 137,
+        "name": "Enna",
+        "schema": "province"
+      },
+      {
+        "id": 216,
+        "name": "Fermo",
+        "schema": "province"
+      },
+      {
+        "id": 138,
+        "name": "Ferrara",
+        "schema": "province"
+      },
+      {
+        "id": 139,
+        "name": "Firenze",
+        "schema": "province"
+      },
+      {
+        "id": 140,
+        "name": "Foggia",
+        "schema": "province"
+      },
+      {
+        "id": 141,
+        "name": "Forlì-Cesena",
+        "schema": "province"
+      },
+      {
+        "id": 142,
+        "name": "Frosinone",
+        "schema": "province"
+      },
+      {
+        "id": 143,
+        "name": "Genova",
+        "schema": "province"
+      },
+      {
+        "id": 144,
+        "name": "Gorizia",
+        "schema": "province"
+      },
+      {
+        "id": 145,
+        "name": "Grosseto",
+        "schema": "province"
+      },
+      {
+        "id": 146,
+        "name": "Imperia",
+        "schema": "province"
+      },
+      {
+        "id": 147,
+        "name": "Isernia",
+        "schema": "province"
+      },
+      {
+        "id": 148,
+        "name": "La Spezia",
+        "schema": "province"
+      },
+      {
+        "id": 149,
+        "name": "L'Aquila",
+        "schema": "province"
+      },
+      {
+        "id": 150,
+        "name": "Latina",
+        "schema": "province"
+      },
+      {
+        "id": 151,
+        "name": "Lecce",
+        "schema": "province"
+      },
+      {
+        "id": 152,
+        "name": "Lecco",
+        "schema": "province"
+      },
+      {
+        "id": 153,
+        "name": "Livorno",
+        "schema": "province"
+      },
+      {
+        "id": 154,
+        "name": "Lodi",
+        "schema": "province"
+      },
+      {
+        "id": 155,
+        "name": "Lucca",
+        "schema": "province"
+      },
+      {
+        "id": 156,
+        "name": "Macerata",
+        "schema": "province"
+      },
+      {
+        "id": 157,
+        "name": "Mantova",
+        "schema": "province"
+      },
+      {
+        "id": 158,
+        "name": "Massa-Carrara",
+        "schema": "province"
+      },
+      {
+        "id": 159,
+        "name": "Matera",
+        "schema": "province"
+      },
+      {
+        "id": 160,
+        "name": "Medio Campidano",
+        "schema": "province"
+      },
+      {
+        "id": 161,
+        "name": "Messina",
+        "schema": "province"
+      },
+      {
+        "id": 162,
+        "name": "Milano",
+        "schema": "province"
+      },
+      {
+        "id": 163,
+        "name": "Modena",
+        "schema": "province"
+      },
+      {
+        "id": 215,
+        "name": "Monza - Brianza",
+        "schema": "province"
+      },
+      {
+        "id": 164,
+        "name": "Napoli",
+        "schema": "province"
+      },
+      {
+        "id": 165,
+        "name": "Novara",
+        "schema": "province"
+      },
+      {
+        "id": 166,
+        "name": "Nuoro",
+        "schema": "province"
+      },
+      {
+        "id": 167,
+        "name": "Ogliastra",
+        "schema": "province"
+      },
+      {
+        "id": 168,
+        "name": "Olbia-Tempio",
+        "schema": "province"
+      },
+      {
+        "id": 169,
+        "name": "Oristano",
+        "schema": "province"
+      },
+      {
+        "id": 170,
+        "name": "Padova",
+        "schema": "province"
+      },
+      {
+        "id": 171,
+        "name": "Palermo",
+        "schema": "province"
+      },
+      {
+        "id": 172,
+        "name": "Parma",
+        "schema": "province"
+      },
+      {
+        "id": 173,
+        "name": "Pavia",
+        "schema": "province"
+      },
+      {
+        "id": 174,
+        "name": "Perugia",
+        "schema": "province"
+      },
+      {
+        "id": 175,
+        "name": "Pesaro Urbino",
+        "schema": "province"
+      },
+      {
+        "id": 176,
+        "name": "Pescara",
+        "schema": "province"
+      },
+      {
+        "id": 177,
+        "name": "Piacenza",
+        "schema": "province"
+      },
+      {
+        "id": 178,
+        "name": "Pisa",
+        "schema": "province"
+      },
+      {
+        "id": 179,
+        "name": "Pistoia",
+        "schema": "province"
+      },
+      {
+        "id": 180,
+        "name": "Pordenone",
+        "schema": "province"
+      },
+      {
+        "id": 181,
+        "name": "Potenza",
+        "schema": "province"
+      },
+      {
+        "id": 182,
+        "name": "Prato",
+        "schema": "province"
+      },
+      {
+        "id": 183,
+        "name": "Ragusa",
+        "schema": "province"
+      },
+      {
+        "id": 184,
+        "name": "Ravenna",
+        "schema": "province"
+      },
+      {
+        "id": 185,
+        "name": "Reggio Calabria",
+        "schema": "province"
+      },
+      {
+        "id": 186,
+        "name": "Reggio Emilia",
+        "schema": "province"
+      },
+      {
+        "id": 187,
+        "name": "Rieti",
+        "schema": "province"
+      },
+      {
+        "id": 188,
+        "name": "Rimini",
+        "schema": "province"
+      },
+      {
+        "id": 189,
+        "name": "Roma",
+        "schema": "province"
+      },
+      {
+        "id": 190,
+        "name": "Rovigo",
+        "schema": "province"
+      },
+      {
+        "id": 191,
+        "name": "Salerno",
+        "schema": "province"
+      },
+      {
+        "id": 192,
+        "name": "Sassari",
+        "schema": "province"
+      },
+      {
+        "id": 193,
+        "name": "Savona",
+        "schema": "province"
+      },
+      {
+        "id": 194,
+        "name": "Siena",
+        "schema": "province"
+      },
+      {
+        "id": 195,
+        "name": "Siracusa",
+        "schema": "province"
+      },
+      {
+        "id": 196,
+        "name": "Sondrio",
+        "schema": "province"
+      },
+      {
+        "id": 197,
+        "name": "Taranto",
+        "schema": "province"
+      },
+      {
+        "id": 198,
+        "name": "Teramo",
+        "schema": "province"
+      },
+      {
+        "id": 199,
+        "name": "Terni",
+        "schema": "province"
+      },
+      {
+        "id": 200,
+        "name": "Torino",
+        "schema": "province"
+      },
+      {
+        "id": 201,
+        "name": "Trapani",
+        "schema": "province"
+      },
+      {
+        "id": 202,
+        "name": "Trento",
+        "schema": "province"
+      },
+      {
+        "id": 203,
+        "name": "Treviso",
+        "schema": "province"
+      },
+      {
+        "id": 204,
+        "name": "Trieste",
+        "schema": "province"
+      },
+      {
+        "id": 205,
+        "name": "Udine",
+        "schema": "province"
+      },
+      {
+        "id": 207,
+        "name": "Varese",
+        "schema": "province"
+      },
+      {
+        "id": 208,
+        "name": "Venezia",
+        "schema": "province"
+      },
+      {
+        "id": 209,
+        "name": "Verbano-Cusio-Ossola",
+        "schema": "province"
+      },
+      {
+        "id": 210,
+        "name": "Vercelli",
+        "schema": "province"
+      },
+      {
+        "id": 211,
+        "name": "Verona",
+        "schema": "province"
+      },
+      {
+        "id": 212,
+        "name": "Vibo Valentia",
+        "schema": "province"
+      },
+      {
+        "id": 213,
+        "name": "Vicenza",
+        "schema": "province"
+      },
+      {
+        "id": 214,
+        "name": "Viterbo",
+        "schema": "province"
       }
     ]
   },
@@ -56442,6 +58659,45 @@
           "robots": "all"
         },
         "schema": "about"
+      },
+      {
+        "id": 1,
+        "slug": {
+          "en": "contact-us",
+          "it": "contattaci",
+          "fr": "contactez-nous"
+        },
+        "title": {
+          "en": "Contact us",
+          "it": "Contattaci",
+          "fr": "Contactez-nous"
+        },
+        "abstract": {
+          "en": "Contact request.",
+          "it": "Richiesta di contatto.",
+          "fr": "Demande de contact."
+        },
+        "description": {
+          "en": "For any request, fill out the form in all its parts, we will reply as soon as possible.",
+          "it": "Per qualsiasi richiesta, compilate il form in tutte le sue parti, vi risponderemo nel più breve tempo possibile.",
+          "fr": "Pour toute demande, remplissez le formulaire dans toutes ses parties, nous vous répondrons dans les plus brefs délais."
+        },
+        "categoryId": 12,
+        "meta": {
+          "title": {
+            "en": "Contact us",
+            "it": "Contattaci",
+            "fr": "Contactez-nous"
+          },
+          "description": {
+            "en": "Contact request.",
+            "it": "Richiesta di contatto.",
+            "fr": "Demande de contact."
+          },
+          "keywords": "contact keywords",
+          "robots": "all"
+        },
+        "schema": "contact"
       },
       {
         "id": 1,
@@ -56805,6 +59061,46 @@
         "marketId": "eu",
         "localeId": "fr",
         "pageSchema": "about",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/en/contact-us",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "en",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/it/contattaci",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "it",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/ww/fr/contactez-nous",
+        "schema": "route",
+        "marketId": "ww",
+        "localeId": "fr",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/eu/it/contattaci",
+        "schema": "route",
+        "marketId": "eu",
+        "localeId": "it",
+        "pageSchema": "contact",
+        "pageId": 1
+      },
+      {
+        "id": "/eu/fr/contactez-nous",
+        "schema": "route",
+        "marketId": "eu",
+        "localeId": "fr",
+        "pageSchema": "contact",
         "pageId": 1
       },
       {

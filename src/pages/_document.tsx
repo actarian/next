@@ -1,6 +1,5 @@
 import { CssBaseline } from '@geist-ui/core';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import React from 'react';
 
 export default class CustomDocument extends Document {
 
@@ -8,7 +7,7 @@ export default class CustomDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body>
+        <body className="dark">
           <Main />
           <NextScript />
         </body>

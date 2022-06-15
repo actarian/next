@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styles from './header.module.scss';
 
+let I = 0;
+
 export default function Header() {
   const router = useRouter();
   const layout = useLayout();
@@ -18,6 +20,7 @@ export default function Header() {
   const brand = 'Brand Name';
   const currentTab = page.href;
 
+  console.log('Header', ++I);
   // console.log(page.href, menu.items.map(x => x.href).join(', '));
 
   const onTabChange = useCallback((tab: string) => {

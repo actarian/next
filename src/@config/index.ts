@@ -1,4 +1,4 @@
-import type { IEntity, IQuerable } from '@core';
+import type { IEntity, INamedEntity, IQuerable } from '@core';
 import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models';
 
 /*
@@ -7,6 +7,7 @@ import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProdu
 export const PAGES = {
   homepage: 'homepage',
   about: 'about',
+  contact: 'contact',
   product_index: 'product_index',
   product_search_csr: 'product_search_csr',
   product_search_ssr: 'product_search_ssr',
@@ -20,17 +21,22 @@ export const PAGES = {
 export type AppStore = {
   about: IQuerable<any>;
   category: IQuerable<ICategory>; // todo refactor category slug
+  contact: IQuerable<any>;
   country: IQuerable<any>;
   feature_type: IQuerable<IFeatureType>;
   homepage: IQuerable<any>;
   label: IQuerable<ILabel>;
   locale: IQuerable<ILocale>;
+  magazine: IQuerable<INamedEntity>;
   market: IQuerable<IMarket>;
   menu: IQuerable<IMenu>;
   notfound: IQuerable<any>;
+  occupation: IQuerable<INamedEntity>;
   page: IQuerable<IPage>;
   product_index: IQuerable<any>;
   product: IQuerable<IProduct>;
+  province: IQuerable<INamedEntity>;
+  region: IQuerable<INamedEntity>;
   route: IQuerable<IRoute>;
   tile: IQuerable<ITile>;
 

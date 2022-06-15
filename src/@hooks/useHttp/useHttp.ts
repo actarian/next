@@ -2,8 +2,8 @@ import type { FetchRequestOptions, FetchService } from '@core';
 import { httpFetch } from '@core';
 import { useEffect, useState } from 'react';
 
-export function useHttpFetch(pathname: string, options: FetchRequestOptions = {}, service: FetchService = httpFetch) {
-  const [response, setResponse] = useState();
+export function useHttpFetch<T>(pathname: string, options: FetchRequestOptions = {}, service: FetchService = httpFetch) {
+  const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
   useEffect(() => {
@@ -27,22 +27,22 @@ export function useHttpFetch(pathname: string, options: FetchRequestOptions = {}
   return { response, loading, error, setError };
 }
 
-export function useHttpGet(pathname: string, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'GET' });
+export function useHttpGet<T>(pathname: string, options: FetchRequestOptions = {}) {
+  return useHttpFetch<T>(pathname, { ...options, method: 'GET' });
 }
 
-export function useHttpPost(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'POST', body: payload ? JSON.stringify(payload) : undefined });
+export function useHttpPost<T>(pathname: string, payload: any, options: FetchRequestOptions = {}) {
+  return useHttpFetch<T>(pathname, { ...options, method: 'POST', body: payload ? JSON.stringify(payload) : undefined });
 }
 
-export function useHttpPut(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'PUT', body: payload ? JSON.stringify(payload) : undefined });
+export function useHttpPut<T>(pathname: string, payload: any, options: FetchRequestOptions = {}) {
+  return useHttpFetch<T>(pathname, { ...options, method: 'PUT', body: payload ? JSON.stringify(payload) : undefined });
 }
 
-export function useHttpPatch(pathname: string, payload: any, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'PATCH', body: payload ? JSON.stringify(payload) : undefined });
+export function useHttpPatch<T>(pathname: string, payload: any, options: FetchRequestOptions = {}) {
+  return useHttpFetch<T>(pathname, { ...options, method: 'PATCH', body: payload ? JSON.stringify(payload) : undefined });
 }
 
-export function useHttpDelete(pathname: string, options: FetchRequestOptions = {}) {
-  return useHttpFetch(pathname, { ...options, method: 'DELETE' });
+export function useHttpDelete<T>(pathname: string, options: FetchRequestOptions = {}) {
+  return useHttpFetch<T>(pathname, { ...options, method: 'DELETE' });
 }
