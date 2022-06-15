@@ -5,6 +5,11 @@ import { FieldSelect } from '@forms/components/field-select';
 import { FieldText } from '@forms/components/field-text';
 
 /*
+  * Here we define the types of form controls.
+*/
+export type IControlSchema = 'text' | 'select' | 'checkbox' | 'radio' | 'accept';
+
+/*
   * Here we define the mapping of the form schemas to the relative components.
 */
 export const CONTROLS: IControls = {
@@ -14,11 +19,6 @@ export const CONTROLS: IControls = {
   radio: (control, uid) => <FieldCheckbox control={control} uid={uid} key={uid} />,
   accept: (control, uid) => <FieldAccept control={control} uid={uid} key={uid} />,
 };
-
-/*
-  * Here we define the types of form controls.
-*/
-export type IControlSchema = 'text' | 'select' | 'checkbox' | 'radio' | 'accept';
 
 export type IControlParam = { uid: number, control: FormControl };
 
