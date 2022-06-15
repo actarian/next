@@ -56431,6 +56431,15 @@
         "schema": "label"
       },
       {
+        "id": "contact.shippingInfo",
+        "text": {
+          "en": "Shipping Info",
+          "it": "Informazioni di spedizione",
+          "fr": "Informations d'expédition"
+        },
+        "schema": "label"
+      },
+      {
         "id": "contact.city",
         "text": {
           "en": "Town",

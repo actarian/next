@@ -1,5 +1,6 @@
 import { FormAbstract } from './form-abstract';
 import { FormAbstractCollection } from './form-abstract-collection';
+import { FormOptions } from './types';
 import { FormValidator } from './validators/form-validator';
 
 /**
@@ -21,8 +22,8 @@ export class FormGroup extends FormAbstractCollection<{ [key: string]: FormAbstr
    * @param controls an object containing controls.
    * @param validators a list of validators.
    */
-  constructor(controls: { [key: string]: FormAbstract | any } = {}, validators?: FormValidator | FormValidator[]) {
-    super(controls, validators);
+  constructor(controls: { [key: string]: FormAbstract | any } = {}, validators?: FormValidator | FormValidator[], options?: FormOptions) {
+    super(controls, validators, options);
   }
 
 }

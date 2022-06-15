@@ -351,6 +351,9 @@
 
 
 .checkbox {
+  width: 100%!important;
+  align-items: center!important;
+  justify-content: flex-start!important;
   &>svg {
     flex: 0 0 20px;
   }

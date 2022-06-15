@@ -1,7 +1,8 @@
 
 import { CONTROLS, IControlSchema } from '@config/forms';
 import { FormAbstract, FormArray, FormGroup } from '@forms';
-import { Grid } from '@geist-ui/core';
+import { Divider, Grid } from '@geist-ui/core';
+import { useLabel } from '@hooks';
 
 type FieldCollectionProps = {
   collection: FormGroup | FormArray;
@@ -9,6 +10,8 @@ type FieldCollectionProps = {
 }
 
 export function FieldCollection(props: FieldCollectionProps) {
+  const label = useLabel();
+
   let uid = props.uid || 0;
 
   const controls = (props.collection instanceof FormGroup) ?
@@ -36,13 +39,22 @@ export function FieldCollection(props: FieldCollectionProps) {
 
   return (
     <>
+      {props.collection.label &&
+        <Grid key={++uid} xs={24}>
+          <Divider h={1} type="success" width="100%">{label(props.collection.label)}</Divider>
+        </Grid>
+      }
+
       {controls.length && controls.map(item => {
         const control = item.control;
         if (!control) {
           return;
         }
         if (control instanceof FormGroup || control instanceof FormArray || control.flags.hidden) {
-          return resolveField(item);
+          // console.log(control);
+          if (!control.flags.hidden) {
+            return resolveField(item);
+          }
         } else {
           return <Grid key={++uid} xs={24} sm={['checkbox', 'accept'].includes(control.schema) ? 24 : 12} style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
             {resolveField(item)}

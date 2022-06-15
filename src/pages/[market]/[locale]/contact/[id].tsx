@@ -1,11 +1,8 @@
 
-import { Breadcrumb, Headline, Layout } from '@components';
-import ContactFormAriaKit from '@components/contact-form-aria-kit/contact-form-aria-kit';
-import ContactFormRxJs, { IContactForm } from '@components/contact-form-rxjs/contact-form-rxjs';
+import { Breadcrumb, ContactForm, Headline, IContactForm, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Fieldset, Text } from '@geist-ui/core';
-import { getCountries, getLayout, getOccupations, getPage, getProvinces, getRegions, getStaticPathsForSchema, PageProps } from '@models';
-import { getMagazines } from '@models/magazine/magazine.service';
+import { getCountries, getLayout, getMagazines, getOccupations, getPage, getProvinces, getRegions, getStaticPathsForSchema, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
 
 export default function Contact({ layout, page, data, params }: ContactProps) {
@@ -21,9 +18,7 @@ export default function Contact({ layout, page, data, params }: ContactProps) {
 
           <Fieldset.Title><Text h2 style={{ maxWidth: '740px' }}>{page.description}</Text></Fieldset.Title>
 
-          <ContactFormRxJs data={data} />
-
-          <ContactFormAriaKit />
+          <ContactForm data={data} />
 
         </Fieldset>
 

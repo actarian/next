@@ -1,5 +1,6 @@
 import { FormAbstract } from './form-abstract';
 import { FormAbstractCollection } from './form-abstract-collection';
+import { FormOptions } from './types';
 import { FormValidator } from './validators/form-validator';
 
 /**
@@ -18,8 +19,8 @@ export class FormArray extends FormAbstractCollection<FormAbstract[]> {
    * @param controls an array containing controls.
    * @param validators a list of validators.
    */
-  constructor(controls: (FormAbstract | any)[] = [], validators?: (FormValidator | FormValidator[])) {
-    super(controls, validators);
+  constructor(controls: (FormAbstract | any)[] = [], validators?: (FormValidator | FormValidator[]), options?: FormOptions) {
+    super(controls, validators, options);
   }
 
   forEach_(callback: (control: FormAbstract, key: number) => any) {

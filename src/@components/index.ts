@@ -2,6 +2,8 @@ export { default as Alert } from '@components/alert/alert';
 export { default as Banner } from '@components/banner/banner';
 export { default as Breadcrumb } from '@components/breadcrumb/breadcrumb';
 export { default as CartMini } from '@components/cart-mini/cart-mini';
+export { default as ContactForm } from '@components/contact-form/contact-form';
+export type { IContactForm } from '@components/contact-form/contact-form';
 export { default as Container } from '@components/container/container';
 export { default as FilterRecap } from '@components/filter/filter-recap';
 export { default as FilterResult } from '@components/filter/filter-result';

@@ -28,14 +28,15 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     printedCopy: { schema: 'checkbox', label: 'contact.printedCopy' },
     //
     shippingInfo: {
-      schema: 'group', children: {
+      schema: 'group', label: 'contact.shippingInfo', children: {
         city: { schema: 'text', label: 'contact.city', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
         province: { schema: 'select', label: 'contact.province', options: data.provinces, validators: Validators.RequiredIfValidator(hasPrintedCopy) },
         zipCode: { schema: 'text', label: 'contact.zipCode', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
         address: { schema: 'text', label: 'contact.address', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
         streetNumber: { schema: 'text', label: 'contact.streetNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
         phoneNumber: { schema: 'text', label: 'contact.phoneNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-      }
+      },
+      disabled: false,
     },
     //
     privacy: { schema: 'checkbox', label: 'contact.privacy', validators: Validators.RequiredTrueValidator() },

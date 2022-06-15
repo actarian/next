@@ -1,6 +1,7 @@
 import { IEquatable } from '@core';
 import { BehaviorSubject, combineLatest, isObservable, merge, Observable, of, ReplaySubject } from 'rxjs';
 import { auditTime, distinctUntilChanged, map, shareReplay, skip, switchAll, switchMap, tap } from 'rxjs/operators';
+import { FormAbstractCollection } from './form-abstract-collection';
 import { FormStatus } from './types';
 import { FormValidator } from './validators/form-validator';
 
@@ -17,16 +18,25 @@ export abstract class FormAbstract {
     this.errors_ = errors;
   }
 
+  protected status_: FormStatus = FormStatus.Pending;
+  get status(): FormStatus {
+    return this.status_;
+  }
+  set status(status: FormStatus) {
+    this.status_ = status;
+    // console.log(this.name, status);
+  }
+
   name?: string;
   value_: any = null;
   submitted_: boolean = false;
   touched_: boolean = false;
   dirty_: boolean = false;
-  status?: FormStatus;
   schema: string = 'text';
-  label: string = 'Text';
-  placeholder: string = 'insert text';
+  label?: string;
+  placeholder?: string;
   options: { id: IEquatable, name: string }[] = [];
+  parent?: FormAbstractCollection<{ [key: string]: FormAbstract } | FormAbstract[]>;
 
   validators: FormValidator[];
 

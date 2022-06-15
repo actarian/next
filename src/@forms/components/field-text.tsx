@@ -45,7 +45,7 @@ export function FieldText(props: FieldTextProps) {
           id={uniqueName}
           name={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
-          placeholder={label(props.control.placeholder || props.control.label)}
+          placeholder={label(props.control.placeholder || props.control.label || '')}
           value={state.value || ''}
           onChange={onDidChange}
           onBlur={onDidBlur}
@@ -53,7 +53,7 @@ export function FieldText(props: FieldTextProps) {
           disabled={state.flags.disabled}
           readOnly={state.flags.readonly}
           width="100%">
-          {label(props.control.label)}
+          {props.control.label && label(props.control.label)}
         </Input>
 
         {state.flags.touched && state.errors.map(error => (

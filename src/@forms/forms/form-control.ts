@@ -27,11 +27,12 @@ export class FormControl extends FormAbstract {
       this.status = FormStatus.Readonly;
     } else if (options?.hidden) {
       this.status = FormStatus.Hidden;
-    } else {
-      this.status = FormStatus.Pending;
     }
     if (options?.schema) {
       this.schema = options.schema;
+    }
+    if (options?.name) {
+      this.name = options.name;
     }
     if (options?.label) {
       this.label = options.label;

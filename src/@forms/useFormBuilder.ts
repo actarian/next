@@ -12,12 +12,14 @@ import { mapErrors_ } from './helpers/helpers';
 
 export interface IFormBuilderControlSchema {
   schema: 'group' | 'array' | IControlSchema;
+  name?: string;
   label?: string;
   value?: string;
   placeholder?: string;
   required?: boolean;
-  disbled?: boolean;
+  disabled?: boolean;
   hidden?: boolean;
+  readonly?: boolean;
   options?: Array<INamedEntity>;
   validators?: FormValidator | FormValidator[];
   children?: IFormBuilderSchema;
@@ -31,18 +33,18 @@ export type IFormBuilderGroupValues = { [key: string]: FormGroup | FormArray | F
 
 export type IFormBuilderSchema = IFormBuilderGroupSchema | IFormBuilderArraySchema;
 
-function mapGroup(schema: IFormBuilderGroupSchema): FormGroup {
+function mapGroup(children: IFormBuilderGroupSchema, schema?: IFormBuilderControlSchema): FormGroup {
   const controls: IFormBuilderGroupValues = {};
-  Object.keys(schema).forEach(key => {
-    controls[key] = mapSchema(schema[key]);
+  Object.keys(children).forEach(key => {
+    controls[key] = mapSchema({ name: key, ...children[key] });
   });
-  const group = new FormGroup(controls);
+  const group = new FormGroup(controls, schema?.validators, schema);
   return group;
 }
 
-function mapArray(schema: IFormBuilderControlSchema[]): FormArray {
-  const controls = schema.map(x => mapSchema(x));
-  const array = new FormArray(controls);
+function mapArray(children: IFormBuilderControlSchema[], schema?: IFormBuilderControlSchema): FormArray {
+  const controls = children.map(x => mapSchema(x));
+  const array = new FormArray(controls, schema?.validators, schema);
   return array;
 }
 
@@ -53,9 +55,9 @@ function mapControl(schema: IFormBuilderControlSchema): FormControl {
 function mapSchema(schema: IFormBuilderControlSchema): FormGroup | FormArray | FormControl {
   switch (schema.schema) {
     case 'group':
-      return mapGroup(schema.children as IFormBuilderGroupSchema || {});
+      return mapGroup(schema.children as IFormBuilderGroupSchema || {}, schema);
     case 'array':
-      return mapArray(schema.children as IFormBuilderArraySchema || []);
+      return mapArray(schema.children as IFormBuilderArraySchema || [], schema);
     default:
       return mapControl(schema);
   }

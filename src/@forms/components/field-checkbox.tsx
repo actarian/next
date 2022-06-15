@@ -40,11 +40,11 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
       <input type="hidden" value={state.value || ''} />
     ) : (
       <>
-        {false &&
+        {/*props.control.label &&
           <Text type="secondary" small marginBottom='0.5em'>
             {label(props.control.label)}
           </Text>
-        }
+        */}
 
         <Checkbox
           id={uniqueName}
@@ -57,7 +57,7 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
           disabled={state.flags.disabled || state.flags.readonly}
           paddingTop='1em'
           paddingBottom='1em'>
-          {label(props.control.label)}
+          {props.control.label && label(props.control.label)}
         </Checkbox>
 
         {state.flags.touched && state.errors.map(error => (

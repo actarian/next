@@ -52,14 +52,16 @@ export function FieldSelect(props: FieldSelectProps) {
       <input type="hidden" value={state.value || ''} />
     ) : (
       <>
-        <Text type="secondary" small marginBottom='0.5em'>
-          {label(props.control.label)}
-        </Text>
+        {props.control.label &&
+          <Text type="secondary" small marginBottom='0.5em'>
+            {label(props.control.label)}
+          </Text>
+        }
 
         <Select
           id={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
-          placeholder={label(props.control.placeholder || props.control.label)}
+          placeholder={label(props.control.placeholder || props.control.label || '')}
           value={state.value ? state.value.toString() : undefined}
           onChange={onDidChange}
           onBlur={onDidBlur}

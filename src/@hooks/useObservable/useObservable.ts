@@ -56,9 +56,9 @@ export function useObservable$<T>(factory: () => Observable<T>, defaultState: T,
         setState(x);
       }),
     ).subscribe();
-    console.log('sub!');
+    // console.log('sub!');
     return () => {
-      console.log('unsub!');
+      // console.log('unsub!');
       subscription.unsubscribe();
     }
   }, deps);

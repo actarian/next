@@ -2,7 +2,7 @@ import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { map, shareReplay, switchAll } from 'rxjs/operators';
 import { FormAbstract } from './form-abstract';
 import { FormControl } from './form-control';
-import { FormStatus } from './types';
+import { FormOptions, FormStatus } from './types';
 import { FormValidator } from './validators/form-validator';
 
 /**
@@ -10,6 +10,17 @@ import { FormValidator } from './validators/form-validator';
  */
 export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | FormAbstract[]> extends FormAbstract {
   // export class FormAbstractCollection<T extends (FormAbstract[] | { [key: string]: FormAbstract })> extends FormAbstract {
+
+  get status(): FormStatus {
+    return this.status_;
+  }
+  set status(status: FormStatus) {
+    this.status_ = status;
+    // console.log(this.name, status);
+    this.forEach_((control: FormAbstract, key: string) => {
+      control.status = status;
+    });
+  }
 
   controls: T;
   changesChildren: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
@@ -19,9 +30,29 @@ export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | 
    * @param controls an object containing controls.
    * @param validators a list of validators.
    */
-  constructor(controls: T, validators?: (FormValidator | FormValidator[])) {
+  constructor(controls: T, validators?: (FormValidator | FormValidator[]), options?: FormOptions) {
     super(validators);
     this.controls = controls;
+    console.log('new FormCollection', options);
+    if (options?.disabled) {
+      this.status = FormStatus.Disabled;
+    } else if (options?.readonly) {
+      this.status = FormStatus.Readonly;
+    } else if (options?.hidden) {
+      this.status = FormStatus.Hidden;
+    }
+    if (options?.name) {
+      this.name = options.name;
+    }
+    if (options?.schema) {
+      this.schema = options.schema;
+    }
+    if (options?.label) {
+      this.label = options.label;
+    }
+    if (options?.options) {
+      this.options = options.options;
+    }
     this.initControls_();
     this.initSubjects_();
     this.initObservables_();
@@ -31,6 +62,7 @@ export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | 
     const control: FormControl = controlOrValue instanceof FormAbstract ? controlOrValue : new FormControl(controlOrValue);
     control.addValidators(...this.validators);
     control.name = key;
+    control.parent = this;
     return control;
   }
 
