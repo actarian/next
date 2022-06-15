@@ -1,37 +1,38 @@
-
 import { className } from '@core/utils';
 import { FormControl, useControl } from '@forms';
 import { Input, Text } from '@geist-ui/core';
 import { useLabel } from '@hooks';
-import * as React from 'react';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 
 type FieldTextProps = {
   control: FormControl;
-  name: string;
+  uid?: number | null | undefined;
 }
 
 export function FieldText(props: FieldTextProps) {
   const label = useLabel();
+
+  const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldText', state, props.control.flags, props.control);
   // const [changes] = useObservable$<any>(() => props.control.changes$, props.control.value);
   // console.log('FieldText', 'changes', changes, props.control);
 
-  const onDidChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onDidChange = (event: ChangeEvent<HTMLInputElement>) => {
     // console.log('FieldText', event.target.value);
     setValue(event.target.value);
     // props.control.value = event.target.value;
   }
 
-  const [focus, setFocus] = React.useState(false);
+  const [focus, setFocus] = useState(false);
 
-  const onDidBlur = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidBlur = (_: FocusEvent<HTMLInputElement>) => {
     setTouched();
     setFocus(false);
   }
 
-  const onDidFocus = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidFocus = (_: FocusEvent<HTMLInputElement>) => {
     setFocus(true);
   }
 
@@ -41,8 +42,10 @@ export function FieldText(props: FieldTextProps) {
     ) : (
       <>
         <Input
+          id={uniqueName}
+          name={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
-          placeholder={props.name}
+          placeholder={label(props.control.placeholder || props.control.label)}
           value={state.value || ''}
           onChange={onDidChange}
           onBlur={onDidBlur}
@@ -61,8 +64,8 @@ export function FieldText(props: FieldTextProps) {
           <div className={className('field', state.flags, { value: state.value != null && state.value != '', focus })}>
             <div className="field__head"></div>
             <div className="field__control">
-              <input placeholder={props.name} value={state.value || ''} onChange={onDidChange} onBlur={onDidBlur} onFocus={onDidFocus} disabled={state.flags.disabled} readOnly={state.flags.readonly} />
-              <div className="field__label">{props.name}</div>
+              <input placeholder={props.control.placeholder || props.control.label} value={state.value || ''} onChange={onDidChange} onBlur={onDidBlur} onFocus={onDidFocus} disabled={state.flags.disabled} readOnly={state.flags.readonly} />
+              <div className="field__label">{props.control.label}</div>
               {state.flags.touched && state.errors.map(error => (
                 <div key={error.key} className="field__error">{error.key}</div>
               ))}

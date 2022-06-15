@@ -56521,6 +56521,42 @@
         "schema": "label"
       },
       {
+        "id": "form.accept.true",
+        "text": {
+          "en": "I agree",
+          "it": "Acconsento",
+          "fr": "Je suis d'accord"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.accept.false",
+        "text": {
+          "en": "I do not agree",
+          "it": "Non acconsento",
+          "fr": "Je ne suis pas d'accord"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.submit",
+        "text": {
+          "en": "Submit",
+          "it": "Invia",
+          "fr": "Soumettre"
+        },
+        "schema": "label"
+      },
+      {
+        "id": "form.reset",
+        "text": {
+          "en": "Reset",
+          "it": "Cancella",
+          "fr": "Réinitialiser"
+        },
+        "schema": "label"
+      },
+      {
         "id": "error.required",
         "text": {
           "en": "Required field",

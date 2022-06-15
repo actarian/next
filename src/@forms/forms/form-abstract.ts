@@ -25,6 +25,7 @@ export abstract class FormAbstract {
   status?: FormStatus;
   schema: string = 'text';
   label: string = 'Text';
+  placeholder: string = 'insert text';
   options: { id: IEquatable, name: string }[] = [];
 
   validators: FormValidator[];

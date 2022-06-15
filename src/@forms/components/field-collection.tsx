@@ -1,14 +1,11 @@
 
+import { CONTROLS, IControlSchema } from '@config/forms';
 import { FormAbstract, FormArray, FormGroup } from '@forms';
-import { FieldText } from '@forms/components/field-text';
 import { Grid } from '@geist-ui/core';
-import { FieldCheckbox } from './field-checkbox';
-import { FieldSelect } from './field-select';
 
 type FieldCollectionProps = {
   collection: FormGroup | FormArray;
-  label?: string;
-  uid?: number;
+  uid?: number | null | undefined;
 }
 
 export function FieldCollection(props: FieldCollectionProps) {
@@ -27,15 +24,12 @@ export function FieldCollection(props: FieldCollectionProps) {
     const { control, key } = item;
     ++uid;
     if (control instanceof FormGroup || control instanceof FormArray) {
-      return <FieldCollection key={uid} collection={control} uid={uid} />
+      return <FieldCollection collection={control} uid={uid} key={uid} />
     } else {
-      switch (control.schema) {
-        case 'select':
-          return <FieldSelect key={uid} name={key.toString()} control={control} />
-        case 'checkbox':
-          return <FieldCheckbox key={uid} name={key.toString()} control={control} />
-        default:
-          return <FieldText key={uid} name={key.toString()} control={control} />
+      if (control.schema in CONTROLS) {
+        return CONTROLS[control.schema as IControlSchema](control, uid);
+      } else {
+        return CONTROLS.text(control, uid);
       }
     }
   }
@@ -50,7 +44,7 @@ export function FieldCollection(props: FieldCollectionProps) {
         if (control instanceof FormGroup || control instanceof FormArray || control.flags.hidden) {
           return resolveField(item);
         } else {
-          return <Grid key={++uid} xs={24} sm={control.schema === 'checkbox' ? 24 : 12} style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+          return <Grid key={++uid} xs={24} sm={['checkbox', 'accept'].includes(control.schema) ? 24 : 12} style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
             {resolveField(item)}
           </Grid>
         }

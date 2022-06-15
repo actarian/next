@@ -54732,6 +54732,38 @@
       }
     },
     {
+      "id": "form.accept.true",
+      "text": {
+        "en": "I agree",
+        "it": "Acconsento",
+        "fr": "Je suis d'accord"
+      }
+    },
+    {
+      "id": "form.accept.false",
+      "text": {
+        "en": "I do not agree",
+        "it": "Non acconsento",
+        "fr": "Je ne suis pas d'accord"
+      }
+    },
+    {
+      "id": "form.submit",
+      "text": {
+        "en": "Submit",
+        "it": "Invia",
+        "fr": "Soumettre"
+      }
+    },
+    {
+      "id": "form.reset",
+      "text": {
+        "en": "Reset",
+        "it": "Cancella",
+        "fr": "Réinitialiser"
+      }
+    },
+    {
       "id": "error.required",
       "text": {
         "en": "Required field",

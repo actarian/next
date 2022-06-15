@@ -3,15 +3,17 @@ import type { IEquatable } from '@core';
 import { FormControl, useControl } from '@forms';
 import { Select, Text } from '@geist-ui/core';
 import { useLabel } from '@hooks';
-import * as React from 'react';
+import { FocusEvent, useState } from 'react';
 
 type FieldSelectProps = {
   control: FormControl;
-  name: string;
+  uid?: number | null | undefined;
 }
 
 export function FieldSelect(props: FieldSelectProps) {
   const label = useLabel();
+
+  const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldSelect', state, props.control.flags, props.control);
@@ -34,14 +36,14 @@ export function FieldSelect(props: FieldSelectProps) {
     // props.control.value = event.target.value;
   }
 
-  const [focus, setFocus] = React.useState(false);
+  const [focus, setFocus] = useState(false);
 
-  const onDidBlur = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidBlur = (_: FocusEvent<HTMLInputElement>) => {
     setTouched();
     setFocus(false);
   }
 
-  const onDidFocus = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidFocus = (_: FocusEvent<HTMLInputElement>) => {
     setFocus(true);
   }
 
@@ -55,8 +57,9 @@ export function FieldSelect(props: FieldSelectProps) {
         </Text>
 
         <Select
+          id={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
-          placeholder={props.name}
+          placeholder={label(props.control.placeholder || props.control.label)}
           value={state.value ? state.value.toString() : undefined}
           onChange={onDidChange}
           onBlur={onDidBlur}

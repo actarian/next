@@ -33,15 +33,10 @@ export function RequiredTrueValidator(): FormValidator {
 /**
  * a required if condition is satisfied validator
  */
-export function RequiredIfValidator(condition: () => boolean) {
-  return new FormValidator(function (value, params) {
-    const condition = params.condition;
-    /*
-    if (!typeof condition === 'function') {
-      return null;
-    }
-    */
-    if (Boolean(condition()) === true) {
+export function RequiredIfValidator(condition: (value: any) => boolean) {
+  return new FormValidator(function (value, params?: any) {
+    console.log('RequiredIfValidator', value, Boolean(condition(value)));
+    if (Boolean(condition(value)) === true) {
       return (value == null || value.length === 0) ? { required: true } : null;
     } else {
       return null;

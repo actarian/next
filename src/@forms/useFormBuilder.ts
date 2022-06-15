@@ -1,3 +1,4 @@
+import { IControlSchema } from '@config/forms';
 import { INamedEntity } from '@core';
 import { useObservable$ } from '@hooks/useObservable/useObservable';
 import { DependencyList, useCallback, useMemo } from 'react';
@@ -10,7 +11,7 @@ import { FormValidator } from './forms/validators/form-validator';
 import { mapErrors_ } from './helpers/helpers';
 
 export interface IFormBuilderControlSchema {
-  schema: 'group' | 'array' | 'text' | 'select' | 'checkbox' | 'radio';
+  schema: 'group' | 'array' | IControlSchema;
   label?: string;
   value?: string;
   placeholder?: string;
@@ -22,45 +23,52 @@ export interface IFormBuilderControlSchema {
   children?: IFormBuilderSchema;
 }
 
-export type IFormBuilderSchema = { [key: string]: IFormBuilderControlSchema } | IFormBuilderControlSchema[];
+export type IFormBuilderGroupSchema = { [key: string]: IFormBuilderControlSchema };
 
-function mapControl(schema: IFormBuilderControlSchema): FormGroup | FormArray | FormControl {
+export type IFormBuilderArraySchema = IFormBuilderControlSchema[];
+
+export type IFormBuilderGroupValues = { [key: string]: FormGroup | FormArray | FormControl };
+
+export type IFormBuilderSchema = IFormBuilderGroupSchema | IFormBuilderArraySchema;
+
+function mapGroup(schema: IFormBuilderGroupSchema): FormGroup {
+  const controls: IFormBuilderGroupValues = {};
+  Object.keys(schema).forEach(key => {
+    controls[key] = mapSchema(schema[key]);
+  });
+  const group = new FormGroup(controls);
+  return group;
+}
+
+function mapArray(schema: IFormBuilderControlSchema[]): FormArray {
+  const controls = schema.map(x => mapSchema(x));
+  const array = new FormArray(controls);
+  return array;
+}
+
+function mapControl(schema: IFormBuilderControlSchema): FormControl {
+  return new FormControl(schema.value, schema.validators, schema);
+}
+
+function mapSchema(schema: IFormBuilderControlSchema): FormGroup | FormArray | FormControl {
   switch (schema.schema) {
     case 'group':
-      const groupControls: { [key: string]: FormGroup | FormArray | FormControl } = {};
-      const children = (schema.children as { [key: string]: IFormBuilderControlSchema }) || {}
-      Object.keys(children).forEach(key => {
-        groupControls[key] = mapControl(children[key]);
-      });
-      return new FormGroup(groupControls, schema.validators);
+      return mapGroup(schema.children as IFormBuilderGroupSchema || {});
     case 'array':
-      const arrayControls = (schema.children as IFormBuilderControlSchema[] || []).map(x => mapControl(x));
-      return new FormArray(arrayControls, schema.validators);
+      return mapArray(schema.children as IFormBuilderArraySchema || []);
     default:
-      return new FormControl(schema.value, schema.validators, schema);
+      return mapControl(schema);
   }
 }
 
-function mapSchema(schema: IFormBuilderSchema | IFormBuilderControlSchema) {
-  if (Array.isArray(schema)) {
-    const controls = schema.map(x => mapControl(x));
-    const array = new FormArray(controls);
-    return array;
-  } else {
-    const controls: {
-      [key: string]: FormGroup | FormArray | FormControl
-    } = {};
-    Object.keys(schema).forEach(key => {
-      controls[key] = mapControl((schema as { [key: string]: IFormBuilderControlSchema })[key]);
-    });
-    const group = new FormGroup(controls);
-    return group;
-  }
-}
-
-export function useFormBuilder<T, U extends FormGroup | FormArray>(schemaLike: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, FormGroup | FormArray] {
+export function useFormBuilder<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
   const collection: U = useMemo<U>(() => {
-    return mapSchema(schemaLike) as U;
+    if (Array.isArray(schema)) {
+      return mapArray(schema) as U;
+    } else {
+      return mapGroup(schema) as U;
+    }
+    // return mapSchema(schema) as U;
   }, deps);
   const setValue = useCallback((value: any) => {
     collection.patch(value);
@@ -68,8 +76,11 @@ export function useFormBuilder<T, U extends FormGroup | FormArray>(schemaLike: I
   const setTouched = useCallback(() => {
     collection.touched = true;
   }, deps);
+  const reset = useCallback(() => {
+    collection.reset();
+  }, deps);
   const [state] = useObservable$<FormState<T>>(() => collection.changes$.pipe(
     map(value => ({ value: value, flags: collection.flags, errors: mapErrors_(collection.errors) })),
   ), { value: collection.value as T, flags: collection.flags, errors: mapErrors_(collection.errors) });
-  return [state, setValue, setTouched, collection];
+  return [state, setValue, setTouched, reset, collection];
 }

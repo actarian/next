@@ -3,15 +3,17 @@ import { FormControl, useControl } from '@forms';
 import { Checkbox, Text } from '@geist-ui/core';
 import { CheckboxEvent } from '@geist-ui/core/esm/checkbox';
 import { useLabel } from '@hooks';
-import * as React from 'react';
+import { FocusEvent, useState } from 'react';
 
 type FieldCheckboxProps = {
   control: FormControl;
-  name: string;
+  uid?: number | null | undefined;
 }
 
 export function FieldCheckbox(props: FieldCheckboxProps) {
   const label = useLabel();
+
+  const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
   // console.log('FieldCheckbox', state, props.control.flags, props.control);
@@ -22,14 +24,14 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
     setValue(event.target.checked);
   }
 
-  const [focus, setFocus] = React.useState(false);
+  const [focus, setFocus] = useState(false);
 
-  const onDidBlur = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidBlur = (_: FocusEvent<HTMLInputElement>) => {
     setTouched();
     setFocus(false);
   }
 
-  const onDidFocus = (_: React.FocusEvent<HTMLInputElement>) => {
+  const onDidFocus = (_: FocusEvent<HTMLInputElement>) => {
     setFocus(true);
   }
 
@@ -45,6 +47,8 @@ export function FieldCheckbox(props: FieldCheckboxProps) {
         }
 
         <Checkbox
+          id={uniqueName}
+          name={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
           checked={state.value !== null}
           onChange={onDidChange}

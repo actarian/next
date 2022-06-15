@@ -1,11 +1,90 @@
 
 import { INamedEntity } from '@core';
 import { className } from '@core/utils';
-import { FormControl, FormGroup, useForm, Validators } from '@forms';
+import { FormGroup, FormState, Validators } from '@forms';
 import { FieldCollection } from '@forms/components/field-collection';
-import { Submit } from '@forms/components/submit';
+import { FieldText } from '@forms/components/field-text';
 import { useFormBuilder } from '@forms/useFormBuilder';
 import { Grid } from '@geist-ui/core';
+import { useLabel } from '@hooks';
+import { useRef } from 'react';
+
+export default function ContactFormRxJs({ data }: { data: IContactForm }) {
+  const label = useLabel();
+
+  const formRef = useRef<FormState<any> | null>(null);
+
+  const [form, setValue, setTouched, reset, group] = useFormBuilder<any, FormGroup>({
+    magazine: { schema: 'select', label: 'contact.magazine', options: data.magazines, validators: Validators.RequiredValidator() },
+    //
+    firstName: { schema: 'text', label: 'contact.firstName', validators: Validators.RequiredValidator() },
+    lastName: { schema: 'text', label: 'contact.lastName', validators: Validators.RequiredValidator() },
+    email: { schema: 'text', label: 'contact.email', validators: [Validators.RequiredValidator(), Validators.EmailValidator()] },
+    telephone: { schema: 'text', label: 'contact.telephone', validators: Validators.RequiredValidator() },
+    occupation: { schema: 'select', label: 'contact.occupation', options: data.occupations, validators: Validators.RequiredValidator() },
+    country: { schema: 'select', label: 'contact.country', options: data.countries, validators: Validators.RequiredValidator() },
+    region: { schema: 'select', label: 'contact.region', options: data.regions, validators: Validators.RequiredIfValidator(isItaly) },
+    //
+    printedCopy: { schema: 'checkbox', label: 'contact.printedCopy' },
+    //
+    shippingInfo: {
+      schema: 'group', children: {
+        city: { schema: 'text', label: 'contact.city', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        province: { schema: 'select', label: 'contact.province', options: data.provinces, validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        zipCode: { schema: 'text', label: 'contact.zipCode', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        address: { schema: 'text', label: 'contact.address', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        streetNumber: { schema: 'text', label: 'contact.streetNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        phoneNumber: { schema: 'text', label: 'contact.phoneNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+      }
+    },
+    //
+    privacy: { schema: 'checkbox', label: 'contact.privacy', validators: Validators.RequiredTrueValidator() },
+    newsletter: { schema: 'accept', label: 'contact.newsletter', validators: Validators.RequiredValidator() },
+    commercial: { schema: 'accept', label: 'contact.commercial', validators: Validators.RequiredValidator() },
+    promotion: { schema: 'accept', label: 'contact.promotion', validators: Validators.RequiredValidator() },
+    //
+    checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true },
+    checkField: { schema: 'text', hidden: true },
+    //
+  });
+
+  formRef.current = form;
+
+  function hasPrintedCopy(): boolean {
+    return Boolean(formRef.current && formRef.current.value.printedCopy === true);
+  }
+
+  function isItaly(): boolean {
+    return Boolean(formRef.current && formRef.current.value.country === 'it');
+  }
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('ContactFormRxJs.onSubmit', group.value);
+    if (form.flags.valid) {
+      // form.value
+    } else {
+      setTouched();
+    }
+    alert(JSON.stringify({ valid: form.flags.valid, value: group.value }));
+  }
+
+  const onReset = () => {
+    console.log('ContactFormRxJs.onReset');
+    reset();
+  }
+
+  return (
+    <form className={className('form', form.flags)} onSubmit={onSubmit}>
+      <FieldText control={group.controls.magazine}></FieldText>
+      <Grid.Container gap={2} justify="center">
+        <FieldCollection collection={group} />
+      </Grid.Container>
+      <button className="button" type="submit">{label('form.submit')}</button>
+      <button className="button secondary" type="button" onClick={onReset}>{label('form.reset')}</button>
+    </form>
+  )
+}
 
 export type IContactForm = {
   countries: INamedEntity[];
@@ -15,44 +94,8 @@ export type IContactForm = {
   regions: INamedEntity[];
 }
 
-export default function ContactFormRxJs({ data }: { data: IContactForm }) {
-
-  const [form, setValue, setTouched, formGroup] = useFormBuilder<any, FormGroup>({
-    magazine: { schema: 'select', label: 'contact.magazine', options: data.magazines, validators: Validators.RequiredValidator() },
-    //
-    firstName: { schema: 'text', label: 'contact.firstName', validators: Validators.RequiredValidator() },
-    lastName: { schema: 'text', label: 'contact.lastName', validators: Validators.RequiredValidator() },
-    email: { schema: 'text', label: 'contact.email', validators: [Validators.RequiredValidator(), Validators.EmailValidator()] },
-    telephone: { schema: 'text', label: 'contact.telephone', validators: Validators.RequiredValidator() },
-    occupation: { schema: 'select', label: 'contact.occupation', options: data.occupations, validators: Validators.RequiredValidator() },
-    country: { schema: 'select', label: 'contact.country', options: data.countries, validators: Validators.RequiredValidator() },
-    region: { schema: 'select', label: 'contact.region', options: data.regions, validators: Validators.RequiredValidator() },
-    //
-    printedCopy: { schema: 'checkbox', label: 'contact.printedCopy' },
-    //
-    shippingInfo: {
-      schema: 'group', children: {
-        city: { schema: 'text', label: 'contact.city' },
-        province: { schema: 'select', label: 'contact.province', options: data.provinces },
-        zipCode: { schema: 'text', label: 'contact.zipCode' },
-        address: { schema: 'text', label: 'contact.address' },
-        streetNumber: { schema: 'text', label: 'contact.streetNumber' },
-        phoneNumber: { schema: 'text', label: 'contact.phoneNumber' },
-      }
-    },
-    //
-    privacy: { schema: 'checkbox', label: 'contact.privacy', validators: Validators.RequiredTrueValidator() },
-    newsletter: { schema: 'checkbox', label: 'contact.newsletter', validators: Validators.RequiredValidator() },
-    commercial: { schema: 'checkbox', label: 'contact.commercial', validators: Validators.RequiredValidator() },
-    promotion: { schema: 'checkbox', label: 'contact.promotion', validators: Validators.RequiredValidator() },
-    //
-    checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true },
-    checkField: { schema: 'text', hidden: true },
-    //
-  });
-
-  if (false) {
-    const [form, setValue, setTouched, formGroup] = useForm<any>(() => new FormGroup({
+/*
+    const [form, setValue, setTouched, group] = useForm<any>(() => new FormGroup({
       magazine: new FormControl(null, [Validators.RequiredValidator()], { schema: 'select' }),
       //
       firstName: new FormControl(null, [Validators.RequiredValidator()]),
@@ -73,14 +116,15 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
         address: new FormControl(null, []),
         streetNumber: new FormControl(null, []),
         phoneNumber: new FormControl(null, []),
-        /*
+
+
         city: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
         province: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
         zipCode: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
         address: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
         streetNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
         phoneNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy)), Validators.PhoneNumberValidator()]),
-        */
+
       }),
       //
       privacy: new FormControl(null, [Validators.RequiredTrueValidator()], { schema: 'checkbox' }),
@@ -90,7 +134,8 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
       checkRequest: new FormControl('window.antiforgery', [], { hidden: true }),
       checkField: new FormControl(null, [], { hidden: true }),
       //
-      /*
+
+
       hidden: new FormControl('hidden', [], { hidden: true }), // Validators.PatternValidator(/^\d+$/),
       disabled: new FormControl('disabled', [], { disabled: true }), // Validators.PatternValidator(/^\d+$/),
       readonly: new FormControl('readonly', [], { readonly: true }), // Validators.PatternValidator(/^[a-zA-Z0-9]{3}$/),
@@ -100,55 +145,9 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
         b: null,
       }),
       array: new FormArray([null, null]),
-      */
+
+
     }));
   }
 
-  function hasPrintedCopy(): boolean {
-    return Boolean(form && form.value.printedCopy === true);
-  }
-
-  function isItaly(): boolean {
-    return Boolean(form && form.value.country === 114);
-  }
-
-  /*
-  const { response } = useApiGet<{
-    magazine: { id: IEquatable, name: string }[],
-    occupation: { id: IEquatable, name: string }[],
-    country: { id: IEquatable, name: string }[],
-    region: { id: IEquatable, name: string }[],
-    province: { id: IEquatable, name: string }[],
-  }>('/contact-form');
-  if (response) {
-    // console.log('response', response);
-    (formGroup as FormGroup).controls.magazine.options = response.magazine;
-    (formGroup as FormGroup).controls.occupation.options = response.occupation;
-    (formGroup as FormGroup).controls.country.options = response.country;
-    (formGroup as FormGroup).controls.region.options = response.region;
-    ((formGroup as FormGroup).controls.shippingInfo as FormGroup).controls.province.options = response.province;
-  }
-  */
-
-  // console.log('ContactFormRxJs', form.value, form.flags, form.errors);
-
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('ContactFormRxJs.onSubmit', formGroup.value);
-    if (form.flags.valid) {
-      //
-    } else {
-      setTouched();
-    }
-    alert(JSON.stringify({ valid: form.flags.valid, value: formGroup.value }));
-  }
-
-  return (
-    <form className={className('form', form.flags)} onSubmit={onSubmit}>
-      <Grid.Container gap={2} justify="center">
-        <FieldCollection collection={formGroup} />
-      </Grid.Container>
-      <Submit label="Submit" />
-    </form>
-  )
-}
+*/
