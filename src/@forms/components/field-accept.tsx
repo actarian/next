@@ -1,7 +1,7 @@
 
-import { FormControl, useControl } from '@forms';
+import { FormControl } from '@forms';
 import { Radio, Text } from '@geist-ui/core';
-import { useLabel } from '@hooks';
+import { useControl, useLabel } from '@hooks';
 import { FocusEvent, useState } from 'react';
 
 type FieldAcceptProps = {
@@ -66,9 +66,11 @@ export function FieldAccept(props: FieldAcceptProps) {
           </Radio>
         </Radio.Group>
 
-        <Text type="secondary" small marginBottom='0.5em'>
-          {label(props.control.label)}
-        </Text>
+        {props.control.label &&
+          <Text type="secondary" small marginBottom='0.5em'>
+            {label(props.control.label)}
+          </Text>
+        }
 
         {state.flags.touched && state.errors.map(error => (
           <Text key={error.key} type="error" small>{label(`error.${error.key}`)}</Text>

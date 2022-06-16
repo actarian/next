@@ -1,8 +1,8 @@
-import { IEquatable } from '@core';
+import { INamedEntity } from '@core';
 import { BehaviorSubject, combineLatest, isObservable, merge, Observable, of, ReplaySubject } from 'rxjs';
 import { auditTime, distinctUntilChanged, map, shareReplay, skip, switchAll, switchMap, tap } from 'rxjs/operators';
 import { FormAbstractCollection } from './form-abstract-collection';
-import { FormStatus } from './types';
+import { FormOptions, FormStatus } from './types';
 import { FormValidator } from './validators/form-validator';
 
 /**
@@ -35,8 +35,52 @@ export abstract class FormAbstract {
   schema: string = 'text';
   label?: string;
   placeholder?: string;
-  options: { id: IEquatable, name: string }[] = [];
+  options?: INamedEntity[];
   parent?: FormAbstractCollection<{ [key: string]: FormAbstract } | FormAbstract[]>;
+
+  initialOptions?: FormOptions;
+
+  protected setInitialOptions(options?: FormOptions) {
+    this.initialOptions = options;
+    if (options) {
+      if (options.disabled === true) {
+        this.status = FormStatus.Disabled;
+      } else if (options.readonly === true) {
+        this.status = FormStatus.Readonly;
+      } else if (options.hidden === true) {
+        this.status = FormStatus.Hidden;
+      }
+      if (options.schema) {
+        this.schema = options.schema;
+      }
+      if (options.name) {
+        this.name = options.name;
+      }
+      if (options.label) {
+        this.label = options.label;
+      }
+      if (options.placeholder) {
+        this.label = options.placeholder;
+      }
+      if (options.options) {
+        this.options = options.options;
+      }
+    }
+  }
+
+  protected evaluateStates() {
+    const options = this.initialOptions;
+    if (options) {
+      console.log('evaluateStates', this.name, options.disabled);
+      if (typeof options.disabled === 'function' && options.disabled()) {
+        this.status = FormStatus.Disabled;
+      } else if (typeof options.readonly === 'function' && options.readonly()) {
+        this.status = FormStatus.Readonly;
+      } else if (typeof options.hidden === 'function' && options.hidden()) {
+        this.status = FormStatus.Hidden;
+      }
+    }
+  }
 
   validators: FormValidator[];
 
@@ -98,6 +142,7 @@ export abstract class FormAbstract {
    * @return an object with key, value errors
    */
   validate$(value: any): Observable<{ [key: string]: any }> {
+    this.evaluateStates();
     if (this.status === FormStatus.Disabled || this.status === FormStatus.Readonly || this.status === FormStatus.Hidden || this.submitted_ || !this.validators.length) {
       this.errors_ = {};
       if (this.status === FormStatus.Invalid) {

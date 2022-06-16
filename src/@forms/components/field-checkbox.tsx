@@ -1,8 +1,8 @@
 
-import { FormControl, useControl } from '@forms';
+import { FormControl } from '@forms';
 import { Checkbox, Text } from '@geist-ui/core';
 import { CheckboxEvent } from '@geist-ui/core/esm/checkbox';
-import { useLabel } from '@hooks';
+import { useControl, useLabel } from '@hooks';
 import { FocusEvent, useState } from 'react';
 
 type FieldCheckboxProps = {

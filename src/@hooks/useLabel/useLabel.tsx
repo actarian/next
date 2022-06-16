@@ -14,7 +14,7 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
   const dictionary = Object.fromEntries(labels.map(l => [l.id, l.text]));
 
   const context = (key: string, params?: { [key: string]: any }): string => {
-    let label = (dictionary[key] || key) as string;
+    let label = (dictionary[key] != null ? dictionary[key] : key) as string;
     if (params) {
       return parseParams(label, params);
     }

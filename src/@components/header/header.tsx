@@ -20,7 +20,7 @@ export default function Header() {
   const brand = 'Brand Name';
   const currentTab = page.href;
 
-  console.log('Header', ++I);
+  // console.log('Header', ++I);
   // console.log(page.href, menu.items.map(x => x.href).join(', '));
 
   const onTabChange = useCallback((tab: string) => {

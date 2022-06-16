@@ -1,9 +1,7 @@
-import { useObservable$ } from '@hooks/useObservable/useObservable';
+import { FormAbstract, FormState, mapErrors_ } from '@forms';
+import { useObservable$ } from '@hooks';
 import { DependencyList, useCallback, useMemo } from 'react';
 import { map } from 'rxjs';
-import { FormAbstract } from './forms/form-abstract';
-import { FormState } from './forms/types';
-import { mapErrors_ } from './helpers/helpers';
 
 export function useForm<T extends FormAbstract>(factory: () => T, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, T] {
   const collection = useMemo(factory, deps);

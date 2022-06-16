@@ -1,16 +1,14 @@
 
-export { FormAbstract } from './forms/form-abstract';
-export { FormAbstractCollection } from './forms/form-abstract-collection';
-export { FormArray, formArray } from './forms/form-array';
-export { FormControl } from './forms/form-control';
-export { FormGroup, formGroup } from './forms/form-group';
-export { FormStatus } from './forms/types';
-export type { FormErrors, FormState, FormValidationError } from './forms/types';
-export { FormValidator } from './forms/validators/form-validator';
-export { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, NullValidator, PatternValidator, PhoneNumberValidator, RequiredIfValidator, RequiredTrueValidator, RequiredValidator, Validators } from './forms/validators/validators';
+export { FormAbstract } from './form-abstract';
+export { FormAbstractCollection } from './form-abstract-collection';
+export { FormArray, formArray } from './form-array';
+export { FormControl } from './form-control';
+export { FormGroup, formGroup } from './form-group';
 export { mapErrors_ } from './helpers/helpers';
-export { useControl } from './useControl';
-export { useForm } from './useForm';
+export { FormStatus } from './types';
+export type { FormErrors, FormState, FormValidationError } from './types';
+export { FormValidator } from './validators/form-validator';
+export { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, NullValidator, PatternValidator, PhoneNumberValidator, RequiredIfValidator, RequiredTrueValidator, RequiredValidator, Validators } from './validators/validators';
 
 /*
 export { default as FormAbstractCollectionDirective } from './forms/directives/form-abstract-collection.directive';

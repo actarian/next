@@ -1,4 +1,4 @@
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, of } from 'rxjs';
 import { map, shareReplay, switchAll } from 'rxjs/operators';
 import { FormAbstract } from './form-abstract';
 import { FormControl } from './form-control';
@@ -33,26 +33,8 @@ export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | 
   constructor(controls: T, validators?: (FormValidator | FormValidator[]), options?: FormOptions) {
     super(validators);
     this.controls = controls;
-    console.log('new FormCollection', options);
-    if (options?.disabled) {
-      this.status = FormStatus.Disabled;
-    } else if (options?.readonly) {
-      this.status = FormStatus.Readonly;
-    } else if (options?.hidden) {
-      this.status = FormStatus.Hidden;
-    }
-    if (options?.name) {
-      this.name = options.name;
-    }
-    if (options?.schema) {
-      this.schema = options.schema;
-    }
-    if (options?.label) {
-      this.label = options.label;
-    }
-    if (options?.options) {
-      this.options = options.options;
-    }
+    // console.log('new FormCollection', options);
+    this.setInitialOptions(options);
     this.initControls_();
     this.initSubjects_();
     this.initObservables_();
@@ -90,7 +72,7 @@ export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | 
   }
 
   protected initObservables_(): void {
-    this.changes$ = this.changesChildren.pipe(
+    this.changes$ = merge(this.changesChildren, this.status$).pipe(
       map(() => this.value),
       shareReplay(1)
     );
@@ -156,30 +138,35 @@ export class FormAbstractCollection<T extends { [key: string]: FormAbstract } | 
     this.forEach_((control: FormAbstract) => {
       control.disabled = disabled;
     });
+    this.statusSubject.next(null);
   }
 
   set readonly(readonly: boolean) {
     this.forEach_((control: FormAbstract) => {
       control.readonly = readonly;
     });
+    this.statusSubject.next(null);
   }
 
   set hidden(hidden: boolean) {
     this.forEach_((control: FormAbstract) => {
       control.hidden = hidden;
     });
+    this.statusSubject.next(null);
   }
 
   set submitted(submitted: boolean) {
     this.forEach_((control: FormAbstract) => {
       control.submitted = submitted;
     });
+    this.statusSubject.next(null);
   }
 
   set touched(touched: boolean) {
     this.forEach_((control: FormAbstract) => {
       control.touched = touched;
     });
+    this.statusSubject.next(null);
   }
 
   get value(): { [key: string]: any } {

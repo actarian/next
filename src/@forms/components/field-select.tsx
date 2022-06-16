@@ -1,8 +1,8 @@
 
 import type { IEquatable } from '@core';
-import { FormControl, useControl } from '@forms';
+import { FormControl } from '@forms';
 import { Select, Text } from '@geist-ui/core';
-import { useLabel } from '@hooks';
+import { useControl, useLabel } from '@hooks';
 import { FocusEvent, useState } from 'react';
 
 type FieldSelectProps = {
@@ -71,7 +71,7 @@ export function FieldSelect(props: FieldSelectProps) {
           disableMatchWidth
           style={{ minWidth: '0' }}>
           {props.control.options && props.control.options.map((option, i) => (
-            <Select.Option key={i} value={option.id.toString()}>{option.name}</Select.Option>
+            <Select.Option key={i} value={option.id.toString()}>{option.name as string}</Select.Option>
           ))}
         </Select>
 

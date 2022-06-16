@@ -1,14 +1,9 @@
 import { IControlSchema } from '@config/forms';
 import { INamedEntity } from '@core';
-import { useObservable$ } from '@hooks/useObservable/useObservable';
+import { FormArray, FormControl, FormGroup, FormState, FormValidator, mapErrors_ } from '@forms';
+import { useObservable$ } from '@hooks';
 import { DependencyList, useCallback, useMemo } from 'react';
 import { map } from 'rxjs';
-import { FormArray } from './forms/form-array';
-import { FormControl } from './forms/form-control';
-import { FormGroup } from './forms/form-group';
-import { FormState } from './forms/types';
-import { FormValidator } from './forms/validators/form-validator';
-import { mapErrors_ } from './helpers/helpers';
 
 export interface IFormBuilderControlSchema {
   schema: 'group' | 'array' | IControlSchema;
@@ -17,10 +12,10 @@ export interface IFormBuilderControlSchema {
   value?: string;
   placeholder?: string;
   required?: boolean;
-  disabled?: boolean;
-  hidden?: boolean;
-  readonly?: boolean;
-  options?: Array<INamedEntity>;
+  hidden?: boolean | (() => boolean),
+  disabled?: boolean | (() => boolean),
+  readonly?: boolean | (() => boolean),
+  options?: INamedEntity[];
   validators?: FormValidator | FormValidator[];
   children?: IFormBuilderSchema;
 }

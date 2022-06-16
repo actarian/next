@@ -1,7 +1,7 @@
 import { className } from '@core/utils';
-import { FormControl, useControl } from '@forms';
+import { FormControl } from '@forms';
 import { Input, Text } from '@geist-ui/core';
-import { useLabel } from '@hooks';
+import { useControl, useLabel } from '@hooks';
 import { ChangeEvent, FocusEvent, useState } from 'react';
 
 type FieldTextProps = {

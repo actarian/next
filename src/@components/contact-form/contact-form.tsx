@@ -1,12 +1,10 @@
 
-import { INamedEntity } from '@core';
-import { className } from '@core/utils';
+import { className, INamedEntity } from '@core';
 import { FormGroup, FormState, Validators } from '@forms';
 import { FieldCollection } from '@forms/components/field-collection';
 import { FieldText } from '@forms/components/field-text';
-import { useFormBuilder } from '@forms/useFormBuilder';
 import { Grid } from '@geist-ui/core';
-import { useLabel } from '@hooks';
+import { useFormBuilder, useLabel } from '@hooks';
 import { useRef } from 'react';
 
 export default function ContactFormRxJs({ data }: { data: IContactForm }) {
@@ -29,14 +27,18 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     //
     shippingInfo: {
       schema: 'group', label: 'contact.shippingInfo', children: {
-        city: { schema: 'text', label: 'contact.city', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-        province: { schema: 'select', label: 'contact.province', options: data.provinces, validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-        zipCode: { schema: 'text', label: 'contact.zipCode', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-        address: { schema: 'text', label: 'contact.address', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-        streetNumber: { schema: 'text', label: 'contact.streetNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
-        phoneNumber: { schema: 'text', label: 'contact.phoneNumber', validators: Validators.RequiredIfValidator(hasPrintedCopy) },
+        city: { schema: 'text', label: 'contact.city' },
+        province: { schema: 'select', label: 'contact.province', options: data.provinces },
+        zipCode: { schema: 'text', label: 'contact.zipCode' },
+        address: { schema: 'text', label: 'contact.address' },
+        streetNumber: { schema: 'text', label: 'contact.streetNumber' },
+        phoneNumber: { schema: 'text', label: 'contact.phoneNumber' },
       },
-      disabled: false,
+      disabled: () => {
+        console.log('shippingInfo disabled', false);
+        return Boolean(formRef.current && formRef.current.value.printedCopy !== true);
+      },
+      validators: Validators.RequiredIfValidator(hasPrintedCopy),
     },
     //
     privacy: { schema: 'checkbox', label: 'contact.privacy', validators: Validators.RequiredTrueValidator() },
@@ -77,7 +79,9 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
 
   return (
     <form className={className('form', form.flags)} onSubmit={onSubmit}>
-      <FieldText control={group.controls.magazine}></FieldText>
+      {false &&
+        <FieldText control={group.controls.magazine}></FieldText>
+      }
       <Grid.Container gap={2} justify="center">
         <FieldCollection collection={group} />
       </Grid.Container>
