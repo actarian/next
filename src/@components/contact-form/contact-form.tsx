@@ -34,10 +34,12 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
         streetNumber: { schema: 'text', label: 'contact.streetNumber' },
         phoneNumber: { schema: 'text', label: 'contact.phoneNumber' },
       },
+      /*
       disabled: () => {
         console.log('shippingInfo disabled', false);
         return Boolean(formRef.current && formRef.current.value.printedCopy !== true);
       },
+      */
       validators: Validators.RequiredIfValidator(hasPrintedCopy),
     },
     //

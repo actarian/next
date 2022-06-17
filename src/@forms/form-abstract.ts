@@ -71,7 +71,7 @@ export abstract class FormAbstract {
   protected evaluateStates() {
     const options = this.initialOptions;
     if (options) {
-      console.log('evaluateStates', this.name, options.disabled);
+      // console.log('evaluateStates', this.name, options.disabled);
       if (typeof options.disabled === 'function' && options.disabled()) {
         this.status = FormStatus.Disabled;
       } else if (typeof options.readonly === 'function' && options.readonly()) {

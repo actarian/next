@@ -20,7 +20,7 @@ export default function Header() {
   const brand = 'Brand Name';
   const currentTab = page.href;
 
-  // console.log('Header', ++I);
+  // console.log('Header', ++I, menu?.items.length);
   // console.log(page.href, menu.items.map(x => x.href).join(', '));
 
   const onTabChange = useCallback((tab: string) => {
@@ -53,6 +53,9 @@ export default function Header() {
               <Image src="/assets/header/logo.png" width="30px" height="30px" mr={0.5} draggable={false} title={brand} />{brand}
             </a>
           </NextLink>
+          {/*menu && menu.items.map((item, i) => (
+            <NextLink key={`${item.title}-${i}`} href={item.href || ''}>{item.title}</NextLink>
+          ))*/}
           {menu &&
             <Tabs leftSpace={0} activeClassName="current" align="center" value={currentTab} onChange={onTabChange}>
               {menu.items.map((item, i) => (
