@@ -2,7 +2,7 @@
 import { Breadcrumb, ContactForm, Headline, IContactForm, Layout } from '@components';
 import { asStaticProps } from '@core';
 import { Fieldset, Text } from '@geist-ui/core';
-import { getCountries, getLayout, getMagazines, getOccupations, getPage, getProvinces, getRegions, getStaticPathsForSchema, PageProps } from '@models';
+import { getCountries, getLayout, getListByKeys, getPage, getProvinces, getRegions, getStaticPathsForSchema, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
 
 export default function Contact({ layout, page, data, params }: ContactProps) {
@@ -37,12 +37,11 @@ export async function getStaticProps(context: GetStaticPropsContext<any>) {
   const locale = context.params.locale;
   const layout = await getLayout(market, locale);
   const page = await getPage('contact', id, market, locale);
+  const lists = await getListByKeys(['magazines', 'occupations'], locale);
   const countries = await getCountries(locale);
-  const magazines = await getMagazines(locale);
-  const occupations = await getOccupations(locale);
   const provinces = await getProvinces(locale);
   const regions = await getRegions(locale);
-  const data = { countries, magazines, occupations, provinces, regions };
+  const data = { ...lists, countries, regions, provinces };
   const props = asStaticProps({ ...context, layout, page, data });
   // console.log('About getStaticProps', props);
   return {

@@ -18,9 +18,9 @@
     "outDir": ".build",
     "baseUrl": ".",
     "paths": {
-      "@config/*": ["src/@config/*"],
-      "@core/*": ["src/@core/*"],
-      "@models/*": ["src/@models/*"],
+      "@config*": ["src/@config*"],
+      "@core*": ["src/@core*"],
+      "@models*": ["src/@models*"],
       "@config": ["src/@config/index"],
       "@core": ["src/@core/index"],
       "@models": ["src/@models/index"],

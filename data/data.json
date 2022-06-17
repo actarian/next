@@ -54487,367 +54487,6 @@
       "pageId": 1
     }
   ],
-  "menu": [
-    {
-      "id": "header",
-      "items": [
-        {
-          "name": "home",
-          "href": "/ww/en"
-        },
-        {
-          "name": "About",
-          "href": "/ww/en/about"
-        },
-        {
-          "name": "Products",
-          "href": "/ww/en/products"
-        },
-        {
-          "name": "T-Shirt",
-          "href": "/ww/en/products/apparel/menswear/t-shirts/t-shirt"
-        },
-        {
-          "name": "Unisex Skinny Joggers",
-          "href": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers"
-        },
-        {
-          "name": "Lightweight Jacket",
-          "href": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket"
-        },
-        {
-          "name": "Black Beanie",
-          "href": "/ww/en/products/apparel/menswear/hats/black-beanie"
-        }
-      ]
-    }
-  ],
-  "label": [
-    {
-      "id": "navigation.back",
-      "text": {
-        "en": "Back",
-        "it": "Indietro",
-        "fr": "Retour"
-      }
-    },
-    {
-      "id": "product.note",
-      "text": {
-        "en": "This note details something important.",
-        "it": "Questa nota descrive qualcosa di importante.",
-        "fr": "Cette note détaille quelque chose d'important."
-      }
-    },
-    {
-      "id": "product_search.items",
-      "text": {
-        "en": "@total items found",
-        "it": "trovati @total articoli",
-        "fr": "@total articles trouvés"
-      }
-    },
-    {
-      "id": "pagination.prev",
-      "text": {
-        "en": "Prev",
-        "it": "Indietro",
-        "fr": "Précédent"
-      }
-    },
-    {
-      "id": "pagination.next",
-      "text": {
-        "en": "Next",
-        "it": "Avanti",
-        "fr": "Prochain"
-      }
-    },
-    {
-      "id": "notfound.title",
-      "text": {
-        "en": "Page not found",
-        "it": "Pagina non trovata",
-        "fr": "Page non trouvée"
-      }
-    },
-    {
-      "id": "notfound.abstract",
-      "text": {
-        "en": "The page you are looking for does not exist.",
-        "it": "La pagina che stai cercando non esiste.",
-        "fr": "La page que vous recherchez n'existe pas."
-      }
-    },
-    {
-      "id": "contact.magazine",
-      "text": {
-        "en": "Magazine",
-        "it": "Magazine",
-        "fr": "Revue"
-      }
-    },
-    {
-      "id": "contact.firstName",
-      "text": {
-        "en": "Name",
-        "it": "Nome",
-        "fr": "Nom"
-      }
-    },
-    {
-      "id": "contact.lastName",
-      "text": {
-        "en": "Surname",
-        "it": "Cognome",
-        "fr": "Nom de famille"
-      }
-    },
-    {
-      "id": "contact.email",
-      "text": {
-        "en": "Email",
-        "it": "Email",
-        "fr": "E-mail"
-      }
-    },
-    {
-      "id": "contact.telephone",
-      "text": {
-        "en": "Phone",
-        "it": "Telefono",
-        "fr": "Téléphone"
-      }
-    },
-    {
-      "id": "contact.occupation",
-      "text": {
-        "en": "Occupation",
-        "it": "Occupazione",
-        "fr": "Profession"
-      }
-    },
-    {
-      "id": "contact.country",
-      "text": {
-        "en": "Country",
-        "it": "Nazione",
-        "fr": "Pays"
-      }
-    },
-    {
-      "id": "contact.region",
-      "text": {
-        "en": "Region",
-        "it": "Regione",
-        "fr": "Région"
-      }
-    },
-    {
-      "id": "contact.printedCopy",
-      "text": {
-        "en": "Would you also like to receive the printed version of the Magazine?",
-        "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
-        "fr": "Souhaitez-vous également recevoir la version papier du Magazine ?"
-      }
-    },
-    {
-      "id": "contact.shippingInfo",
-      "text": {
-        "en": "Shipping Info",
-        "it": "Informazioni di spedizione",
-        "fr": "Informations d'expédition"
-      }
-    },
-    {
-      "id": "contact.city",
-      "text": {
-        "en": "Town",
-        "it": "Città",
-        "fr": "Ville"
-      }
-    },
-    {
-      "id": "contact.province",
-      "text": {
-        "en": "Province",
-        "it": "Provincia",
-        "fr": "Province"
-      }
-    },
-    {
-      "id": "contact.zipCode",
-      "text": {
-        "en": "Postcode",
-        "it": "Codice postale",
-        "fr": "Code postal"
-      }
-    },
-    {
-      "id": "contact.address",
-      "text": {
-        "en": "Street address",
-        "it": "Indirizzo",
-        "fr": "Adresse"
-      }
-    },
-    {
-      "id": "contact.streetNumber",
-      "text": {
-        "en": "Street number",
-        "it": "Numero civico",
-        "fr": "Numéro de la rue"
-      }
-    },
-    {
-      "id": "contact.phoneNumber",
-      "text": {
-        "en": "Phone Number",
-        "it": "Telefono",
-        "fr": "Téléphone"
-      }
-    },
-    {
-      "id": "contact.privacy",
-      "text": {
-        "en": "I have read the privacy policy and I consent to the processing of data *",
-        "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
-        "fr": "J'ai lu la politique de confidentialité et je consens au traitement des données *"
-      }
-    },
-    {
-      "id": "contact.newsletter",
-      "text": {
-        "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
-        "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
-        "fr": "Au traitement de mes données personnelles pour des activités de marketing direct en m'inscrivant à la newsletter. *"
-      }
-    },
-    {
-      "id": "contact.commercial",
-      "text": {
-        "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
-        "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
-        "fr": "Au traitement de mes données personnelles pour les activités de profilage, afin de recevoir des communications commerciales plus proches de mes intérêts. *"
-      }
-    },
-    {
-      "id": "contact.promotion",
-      "text": {
-        "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
-        "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",
-        "fr": "Au transfert de mes données personnelles pour des activités promotionnelles par des tiers. Les données seront transférées exclusivement aux sociétés qui font partie du Groupe. *"
-      }
-    },
-    {
-      "id": "form.accept.true",
-      "text": {
-        "en": "I agree",
-        "it": "Acconsento",
-        "fr": "Je suis d'accord"
-      }
-    },
-    {
-      "id": "form.accept.false",
-      "text": {
-        "en": "I do not agree",
-        "it": "Non acconsento",
-        "fr": "Je ne suis pas d'accord"
-      }
-    },
-    {
-      "id": "form.submit",
-      "text": {
-        "en": "Submit",
-        "it": "Invia",
-        "fr": "Soumettre"
-      }
-    },
-    {
-      "id": "form.reset",
-      "text": {
-        "en": "Reset",
-        "it": "Cancella",
-        "fr": "Réinitialiser"
-      }
-    },
-    {
-      "id": "error.required",
-      "text": {
-        "en": "Required field",
-        "it": "Campo obbligatorio",
-        "fr": "Champ obligatoire"
-      }
-    },
-    {
-      "id": "error.email",
-      "text": {
-        "en": "Invalid email",
-        "it": "EMail non valida",
-        "fr": "E-mail invalide"
-      }
-    }
-  ],
-  "magazine": [
-    {
-      "id": 1,
-      "name": "GM#02"
-    },
-    {
-      "id": 2,
-      "name": "GM#01"
-    }
-  ],
-  "occupation": [
-    {
-      "id": 1,
-      "name": "architetto / interior designer"
-    },
-    {
-      "id": 2,
-      "name": "rivenditore"
-    },
-    {
-      "id": 3,
-      "name": "imprenditore"
-    },
-    {
-      "id": 4,
-      "name": "giornalista"
-    },
-    {
-      "id": 5,
-      "name": "studente"
-    },
-    {
-      "id": 6,
-      "name": "utente privato"
-    },
-    {
-      "id": 7,
-      "name": "altro"
-    },
-    {
-      "id": 8,
-      "name": "rivenditore cucine"
-    },
-    {
-      "id": 9,
-      "name": "Agente"
-    },
-    {
-      "id": 10,
-      "name": "Filiali"
-    },
-    {
-      "id": 11,
-      "name": "Privato"
-    },
-    {
-      "id": 12,
-      "name": "Fornitore"
-    }
-  ],
   "market": [
     {
       "id": "ww",
@@ -56366,6 +56005,391 @@
     {
       "id": 214,
       "name": "Viterbo"
+    }
+  ],
+  "menu": [
+    {
+      "id": "header",
+      "items": [
+        {
+          "name": "home",
+          "href": "/ww/en"
+        },
+        {
+          "name": "About",
+          "href": "/ww/en/about"
+        },
+        {
+          "name": "Products",
+          "href": "/ww/en/products"
+        },
+        {
+          "name": "T-Shirt",
+          "href": "/ww/en/products/apparel/menswear/t-shirts/t-shirt"
+        },
+        {
+          "name": "Unisex Skinny Joggers",
+          "href": "/ww/en/products/apparel/menswear/trousers/unisex-skinny-joggers"
+        },
+        {
+          "name": "Lightweight Jacket",
+          "href": "/ww/en/products/apparel/menswear/jackets/lightweight-jacket"
+        },
+        {
+          "name": "Black Beanie",
+          "href": "/ww/en/products/apparel/menswear/hats/black-beanie"
+        }
+      ]
+    }
+  ],
+  "list": [
+    {
+      "id": 100,
+      "name": "Magazine",
+      "key": "magazines",
+      "listId": null
+    },
+    {
+      "id": 101,
+      "name": "GM#02",
+      "listId": 100
+    },
+    {
+      "id": 102,
+      "name": "GM#01",
+      "listId": 100
+    },
+    {
+      "id": 200,
+      "name": "Occupation",
+      "key": "occupations",
+      "listId": null
+    },
+    {
+      "id": 201,
+      "name": "architetto / interior designer",
+      "listId": 200
+    },
+    {
+      "id": 202,
+      "name": "rivenditore",
+      "listId": 200
+    },
+    {
+      "id": 203,
+      "name": "imprenditore",
+      "listId": 200
+    },
+    {
+      "id": 204,
+      "name": "giornalista",
+      "listId": 200
+    },
+    {
+      "id": 205,
+      "name": "studente",
+      "listId": 200
+    },
+    {
+      "id": 206,
+      "name": "utente privato",
+      "listId": 200
+    },
+    {
+      "id": 207,
+      "name": "altro",
+      "listId": 200
+    },
+    {
+      "id": 208,
+      "name": "rivenditore cucine",
+      "listId": 200
+    },
+    {
+      "id": 209,
+      "name": "Agente",
+      "listId": 200
+    },
+    {
+      "id": 210,
+      "name": "Filiali",
+      "listId": 200
+    },
+    {
+      "id": 211,
+      "name": "Privato",
+      "listId": 200
+    },
+    {
+      "id": 212,
+      "name": "Fornitore",
+      "listId": 200
+    }
+  ],
+  "label": [
+    {
+      "id": "navigation.back",
+      "text": {
+        "en": "Back",
+        "it": "Indietro",
+        "fr": "Retour"
+      }
+    },
+    {
+      "id": "product.note",
+      "text": {
+        "en": "This note details something important.",
+        "it": "Questa nota descrive qualcosa di importante.",
+        "fr": "Cette note détaille quelque chose d'important."
+      }
+    },
+    {
+      "id": "product_search.items",
+      "text": {
+        "en": "@total items found",
+        "it": "trovati @total articoli",
+        "fr": "@total articles trouvés"
+      }
+    },
+    {
+      "id": "pagination.prev",
+      "text": {
+        "en": "Prev",
+        "it": "Indietro",
+        "fr": "Précédent"
+      }
+    },
+    {
+      "id": "pagination.next",
+      "text": {
+        "en": "Next",
+        "it": "Avanti",
+        "fr": "Prochain"
+      }
+    },
+    {
+      "id": "notfound.title",
+      "text": {
+        "en": "Page not found",
+        "it": "Pagina non trovata",
+        "fr": "Page non trouvée"
+      }
+    },
+    {
+      "id": "notfound.abstract",
+      "text": {
+        "en": "The page you are looking for does not exist.",
+        "it": "La pagina che stai cercando non esiste.",
+        "fr": "La page que vous recherchez n'existe pas."
+      }
+    },
+    {
+      "id": "contact.magazine",
+      "text": {
+        "en": "Magazine",
+        "it": "Magazine",
+        "fr": "Revue"
+      }
+    },
+    {
+      "id": "contact.firstName",
+      "text": {
+        "en": "Name",
+        "it": "Nome",
+        "fr": "Nom"
+      }
+    },
+    {
+      "id": "contact.lastName",
+      "text": {
+        "en": "Surname",
+        "it": "Cognome",
+        "fr": "Nom de famille"
+      }
+    },
+    {
+      "id": "contact.email",
+      "text": {
+        "en": "Email",
+        "it": "Email",
+        "fr": "E-mail"
+      }
+    },
+    {
+      "id": "contact.telephone",
+      "text": {
+        "en": "Phone",
+        "it": "Telefono",
+        "fr": "Téléphone"
+      }
+    },
+    {
+      "id": "contact.occupation",
+      "text": {
+        "en": "Occupation",
+        "it": "Occupazione",
+        "fr": "Profession"
+      }
+    },
+    {
+      "id": "contact.country",
+      "text": {
+        "en": "Country",
+        "it": "Nazione",
+        "fr": "Pays"
+      }
+    },
+    {
+      "id": "contact.region",
+      "text": {
+        "en": "Region",
+        "it": "Regione",
+        "fr": "Région"
+      }
+    },
+    {
+      "id": "contact.printedCopy",
+      "text": {
+        "en": "Would you also like to receive the printed version of the Magazine?",
+        "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
+        "fr": "Souhaitez-vous également recevoir la version papier du Magazine ?"
+      }
+    },
+    {
+      "id": "contact.shippingInfo",
+      "text": {
+        "en": "Shipping Info",
+        "it": "Informazioni di spedizione",
+        "fr": "Informations d'expédition"
+      }
+    },
+    {
+      "id": "contact.city",
+      "text": {
+        "en": "Town",
+        "it": "Città",
+        "fr": "Ville"
+      }
+    },
+    {
+      "id": "contact.province",
+      "text": {
+        "en": "Province",
+        "it": "Provincia",
+        "fr": "Province"
+      }
+    },
+    {
+      "id": "contact.zipCode",
+      "text": {
+        "en": "Postcode",
+        "it": "Codice postale",
+        "fr": "Code postal"
+      }
+    },
+    {
+      "id": "contact.address",
+      "text": {
+        "en": "Street address",
+        "it": "Indirizzo",
+        "fr": "Adresse"
+      }
+    },
+    {
+      "id": "contact.streetNumber",
+      "text": {
+        "en": "Street number",
+        "it": "Numero civico",
+        "fr": "Numéro de la rue"
+      }
+    },
+    {
+      "id": "contact.phoneNumber",
+      "text": {
+        "en": "Phone Number",
+        "it": "Telefono",
+        "fr": "Téléphone"
+      }
+    },
+    {
+      "id": "contact.privacy",
+      "text": {
+        "en": "I have read the privacy policy and I consent to the processing of data *",
+        "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
+        "fr": "J'ai lu la politique de confidentialité et je consens au traitement des données *"
+      }
+    },
+    {
+      "id": "contact.newsletter",
+      "text": {
+        "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
+        "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
+        "fr": "Au traitement de mes données personnelles pour des activités de marketing direct en m'inscrivant à la newsletter. *"
+      }
+    },
+    {
+      "id": "contact.commercial",
+      "text": {
+        "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
+        "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
+        "fr": "Au traitement de mes données personnelles pour les activités de profilage, afin de recevoir des communications commerciales plus proches de mes intérêts. *"
+      }
+    },
+    {
+      "id": "contact.promotion",
+      "text": {
+        "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
+        "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",
+        "fr": "Au transfert de mes données personnelles pour des activités promotionnelles par des tiers. Les données seront transférées exclusivement aux sociétés qui font partie du Groupe. *"
+      }
+    },
+    {
+      "id": "form.accept.true",
+      "text": {
+        "en": "I agree",
+        "it": "Acconsento",
+        "fr": "Je suis d'accord"
+      }
+    },
+    {
+      "id": "form.accept.false",
+      "text": {
+        "en": "I do not agree",
+        "it": "Non acconsento",
+        "fr": "Je ne suis pas d'accord"
+      }
+    },
+    {
+      "id": "form.submit",
+      "text": {
+        "en": "Submit",
+        "it": "Invia",
+        "fr": "Soumettre"
+      }
+    },
+    {
+      "id": "form.reset",
+      "text": {
+        "en": "Reset",
+        "it": "Cancella",
+        "fr": "Réinitialiser"
+      }
+    },
+    {
+      "id": "error.required",
+      "text": {
+        "en": "Required field",
+        "it": "Campo obbligatorio",
+        "fr": "Champ obligatoire"
+      }
+    },
+    {
+      "id": "error.email",
+      "text": {
+        "en": "Invalid email",
+        "it": "EMail non valida",
+        "fr": "E-mail invalide"
+      }
     }
   ]
 }

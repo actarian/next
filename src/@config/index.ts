@@ -1,5 +1,6 @@
 import type { IEntity, INamedEntity, IQuerable } from '@core';
 import { ICategory, IFeatureType, ILabel, ILocale, IMarket, IMenu, IPage, IProduct, IRoute, ITile } from '@models';
+import { IList } from '@models/list/list';
 
 /*
   * Here we define the mapping of the entities types to the physical templates in the pages/[market]/[locale] folder.
@@ -26,12 +27,11 @@ export type AppStore = {
   feature_type: IQuerable<IFeatureType>;
   homepage: IQuerable<any>;
   label: IQuerable<ILabel>;
+  list: IQuerable<IList>;
   locale: IQuerable<ILocale>;
-  magazine: IQuerable<INamedEntity>;
   market: IQuerable<IMarket>;
   menu: IQuerable<IMenu>;
   notfound: IQuerable<any>;
-  occupation: IQuerable<INamedEntity>;
   page: IQuerable<IPage>;
   product_index: IQuerable<any>;
   product: IQuerable<IProduct>;
