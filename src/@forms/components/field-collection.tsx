@@ -50,9 +50,9 @@ export function FieldCollection(props: FieldCollectionProps) {
         if (!control) {
           return;
         }
-        if (control instanceof FormGroup || control instanceof FormArray || control.flags.hidden) {
+        if (control instanceof FormGroup || control instanceof FormArray || control.state.hidden) {
           // console.log(control);
-          if (!control.flags.hidden) {
+          if (!control.state.hidden) {
             return resolveField(item);
           }
         } else {

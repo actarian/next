@@ -1,30 +1,21 @@
 import { FormAbstract } from './form-abstract';
 import { FormAbstractCollection } from './form-abstract-collection';
-import { FormOptions } from './types';
-import { FormValidator } from './validators/form-validator';
+import { FormOptions, FormValidator } from './types';
 
-/**
- * Class representing a FormArray.
- */
 export class FormArray extends FormAbstractCollection<FormAbstract[]> {
 
-  /**
-   * Create a FormArray.
-   * @example
-   * const form = new FormArray([null, null, null]);
-   *
-   * form.changes$.subscribe(changes => {
-   * 	console.log(changes);
-   * });
-   * @param controls an array containing controls.
-   * @param validators a list of validators.
-   */
-  constructor(controls: (FormAbstract | any)[] = [], validators?: (FormValidator | FormValidator[]), options?: FormOptions) {
-    super(controls, validators, options);
+  constructor(controls: FormAbstract[] = [], validators?: FormValidator | FormValidator[], initialOptions?: FormOptions) {
+    super(controls, validators);
+    this.setInitialOptions(initialOptions);
+    // this.revalidate_();
   }
 
   forEach_(callback: (control: FormAbstract, key: number) => any) {
     this.controls.forEach((control: FormAbstract, key: number) => callback(control, key));
+  }
+
+  map_() {
+    return this.controls;
   }
 
   get value(): any[] {
@@ -47,25 +38,21 @@ export class FormArray extends FormAbstractCollection<FormAbstract[]> {
     // this.controls.length = Math.max(this.controls.length, key);
     // this.controls[key] = this.initControl_(control);
     this.controls.splice(key, 1, this.initControl_(control, key));
-    this.switchSubjects_();
   }
 
   add(control: FormAbstract, key: number): void {
     this.controls.length = Math.max(this.controls.length, key);
     this.controls[key] = this.initControl_(control, key);
-    this.switchSubjects_();
   }
 
   push(control: FormAbstract): void {
     // this.controls.length = Math.max(this.controls.length, key);
     // this.controls[key] = this.initControl_(control);
     this.controls.push(this.initControl_(control, this.controls.length));
-    this.switchSubjects_();
   }
 
   insert(control: FormAbstract, key: number): void {
     this.controls.splice(key, 0, this.initControl_(control, key));
-    this.switchSubjects_();
   }
 
   remove(control: FormAbstract): void {
@@ -78,19 +65,14 @@ export class FormArray extends FormAbstractCollection<FormAbstract[]> {
   removeKey(key: number): void {
     if (this.controls.length > key) {
       this.controls.splice(key, 1);
-      this.switchSubjects_();
     }
   }
 
   at(key: number) {
     return this.controls[key];
   }
-
 }
 
-/**
- * Shortcut for new FormArray
- */
-export function formArray(controls: (FormAbstract | any)[] = [], validators?: FormValidator | FormValidator[]) {
+export function formArray(controls: FormAbstract[] = [], validators?: FormValidator | FormValidator[]) {
   return new FormArray(controls, validators);
 }

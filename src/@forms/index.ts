@@ -1,31 +1,9 @@
-
 export { FormAbstract } from './form-abstract';
 export { FormAbstractCollection } from './form-abstract-collection';
 export { FormArray, formArray } from './form-array';
-export { FormControl } from './form-control';
+export { FormControl, formControl } from './form-control';
 export { FormGroup, formGroup } from './form-group';
-export { mapErrors_ } from './helpers/helpers';
-export { FormStatus } from './types';
-export type { FormErrors, FormState, FormValidationError } from './types';
-export { FormValidator } from './validators/form-validator';
-export { EmailValidator, MaxLengthValidator, MaxValidator, MinLengthValidator, MinValidator, NullValidator, PatternValidator, PhoneNumberValidator, RequiredIfValidator, RequiredTrueValidator, RequiredValidator, Validators } from './validators/validators';
+export type { ControlType, FormActivator, FormAsyncValidator, FormCollection, FormControls, FormOptions, FormState, FormValidator, ValidationError } from './types';
+export * from './utils';
+export * from './validators/index';
 
-/*
-export { default as FormAbstractCollectionDirective } from './forms/directives/form-abstract-collection.directive';
-export { default as FormArrayDirective } from './forms/directives/form-array.directive';
-export { default as FormCheckboxDirective } from './forms/directives/form-checkbox.directive';
-export { default as FormFieldComponent } from './forms/directives/form-field.component';
-export { default as FormGroupDirective } from './forms/directives/form-group.directive';
-export { default as FormInputDirective } from './forms/directives/form-input.directive';
-export { default as FormPlaceholderDirective } from './forms/directives/form-placeholder.directive';
-export { default as FormRadioDirective } from './forms/directives/form-radio.directive';
-export { default as FormSelectDirective } from './forms/directives/form-select.directive';
-export { default as FormEmailDirective } from './forms/directives/validators/form-email.directive';
-export { default as FormMaxLengthDirective } from './forms/directives/validators/form-max-length.directive';
-export { default as FormMaxDirective } from './forms/directives/validators/form-max.directive';
-export { default as FormMinLengthDirective } from './forms/directives/validators/form-min-length.directive';
-export { default as FormMinDirective } from './forms/directives/validators/form-min.directive';
-export { default as FormPatternDirective } from './forms/directives/validators/form-pattern.directive';
-export { default as FormRequiredTrueDirective } from './forms/directives/validators/form-required-true.directive';
-export { default as FormRequiredDirective } from './forms/directives/validators/form-required.directive';
-*/

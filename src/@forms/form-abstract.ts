@@ -1,55 +1,122 @@
 import { INamedEntity } from '@core';
-import { BehaviorSubject, combineLatest, isObservable, merge, Observable, of, ReplaySubject } from 'rxjs';
-import { auditTime, distinctUntilChanged, map, shareReplay, skip, switchAll, switchMap, tap } from 'rxjs/operators';
-import { FormAbstractCollection } from './form-abstract-collection';
-import { FormOptions, FormStatus } from './types';
-import { FormValidator } from './validators/form-validator';
+import { Observable, Subject } from 'rxjs';
+import { EventEmitter } from './event-emitter';
+import { ControlType, FormActivator, FormCollection, FormOptions, FormValidator, ValidationError } from './types';
+import { isThenable, validValue } from './utils';
 
-/**
- * Abstract class representing a form control.
- */
-export abstract class FormAbstract {
+export class FormAbstract extends EventEmitter {
 
-  private errors_: any;
-  get errors(): { [key: string]: any } {
-    return this.errors_;
-  }
-  set errors(errors: { [key: string]: any }) {
-    this.errors_ = errors;
-  }
+  private changes$_: Subject<any> = new Subject();
 
-  protected status_: FormStatus = FormStatus.Pending;
-  get status(): FormStatus {
-    return this.status_;
-  }
-  set status(status: FormStatus) {
-    this.status_ = status;
-    // console.log(this.name, status);
-  }
+  // callbacks_: Function[] = [];
+  errors_: ValidationError;
+  value_: any;
+  validators_: FormValidator[];
+  state_: any;
+  name?: string | number;
+  parent?: FormCollection;
 
-  name?: string;
-  value_: any = null;
-  submitted_: boolean = false;
-  touched_: boolean = false;
-  dirty_: boolean = false;
-  schema: string = 'text';
-  label?: string;
-  placeholder?: string;
+  // new
+  schema: 'group' | 'array' | ControlType = 'text';
   options?: INamedEntity[];
-  parent?: FormAbstractCollection<{ [key: string]: FormAbstract } | FormAbstract[]>;
+  protected initialOptions_?: FormOptions;
+  private markAsDirty_: boolean = false;
 
-  initialOptions?: FormOptions;
+  constructor(value: any, validators?: (FormValidator | FormValidator[])) {
+    super();
+    this.errors_ = {};
+    this.value_ = validValue(value);
+    this.validators_ = validators ? (Array.isArray(validators) ? validators : [validators]) : [];
+    this.state_ = {
+      invalid: false,
+      disabled: false,
+      hidden: false,
+      readonly: false,
+      dirty: false,
+      touched: false,
+      submitted: false,
+      // derived
+      valid: true,
+      enabled: true,
+      visible: true,
+      writeable: true,
+      pristine: true,
+      untouched: true,
+      unsubmitted: true,
+    };
+    /*
+    const self_ = this;
+    this.state_ = new Proxy({
+      invalid: false,
+      disabled: false,
+      hidden: false,
+      readonly: false,
+      dirty: false,
+      touched: false,
+      submitted: false,
+      // derived
+      valid: true,
+      enabled: true,
+      visible: true,
+      writeable: true,
+      pristine: true,
+      untouched: true,
+      unsubmitted: true,
+    },
+      {
+        get(obj, key) {
+          switch (key) {
+            case 'valid':
+              return !obj.invalid;
+            case 'enabled':
+              return !obj.disabled;
+            case 'visible':
+              return !obj.hidden;
+            case 'writeable':
+              return !obj.readonly;
+            case 'pristine':
+              return !obj.dirty;
+            case 'dirty':
+              return self_.value_ != null;
+            case 'untouched':
+              return !obj.touched;
+            case 'unsubmitted':
+              return !obj.submitted;
+            default:
+              return obj[key];
+          }
+        },
+        set(obj, key, value) {
+          switch (key) {
+            case 'disabled':
+            case 'hidden':
+            case 'readonly':
+              if (obj[key] !== value) {
+                console.log(self_.name, key, value);
+                self_.revalidate_();
+              }
+            break;
+            case 'invalid':
+            // case 'dirty':
+            case 'touched':
+            case 'submitted':
+              if (obj[key] !== value) {
+                console.log(self_.name, key, value);
+                self_.markAsDirty_ = true;
+              }
+              break;
+            default:
+              obj[key] = value;
+          }
+          return true;
+        }
+      });
+    */
+  }
 
   protected setInitialOptions(options?: FormOptions) {
-    this.initialOptions = options;
+    this.initialOptions_ = options;
     if (options) {
-      if (options.disabled === true) {
-        this.status = FormStatus.Disabled;
-      } else if (options.readonly === true) {
-        this.status = FormStatus.Readonly;
-      } else if (options.hidden === true) {
-        this.status = FormStatus.Hidden;
-      }
       if (options.schema) {
         this.schema = options.schema;
       }
@@ -60,348 +127,371 @@ export abstract class FormAbstract {
         this.label = options.label;
       }
       if (options.placeholder) {
-        this.label = options.placeholder;
+        this.placeholder = options.placeholder;
       }
       if (options.options) {
         this.options = options.options;
       }
+      /*
+      // !!! todo
+      if (options.required === true) {
+        this.state_.required = true;
+      }
+      */
+      if (options.disabled === true) {
+        this.state_.disabled = true;
+      }
+      if (options.readonly === true) {
+        this.state_.readonly = true;
+      }
+      if (options.hidden === true) {
+        this.state_.hidden = true;
+      }
     }
+    // this.updateState_();
   }
 
-  protected evaluateStates() {
-    const options = this.initialOptions;
+  protected async checkAsyncState_(root?: FormCollection): Promise<boolean> {
+    const options = this.initialOptions_;
+    let dirty = false;
     if (options) {
-      // console.log('evaluateStates', this.name, options.disabled);
-      if (typeof options.disabled === 'function' && options.disabled()) {
-        this.status = FormStatus.Disabled;
-      } else if (typeof options.readonly === 'function' && options.readonly()) {
-        this.status = FormStatus.Readonly;
-      } else if (typeof options.hidden === 'function' && options.hidden()) {
-        this.status = FormStatus.Hidden;
+      const disabledDirty = await this.checkAsyncPropState_('disabled', options.disabled, root);
+      const hiddenDirty = await this.checkAsyncPropState_('hidden', options.hidden, root);
+      const readonlyDirty = await this.checkAsyncPropState_('readonly', options.readonly, root);
+      dirty = disabledDirty || hiddenDirty || readonlyDirty;
+    }
+    return dirty;
+  }
+
+  protected async checkAsyncPropState_(key: string, option?: FormActivator, root?: FormCollection): Promise<boolean> {
+    let dirty = false;
+    if (typeof option === 'function') {
+      let result = option(this.value_, root?.value, this, root);
+      result = isThenable(result) ? await result : result;
+      if (this.state_[key] !== result) {
+        this.state_[key] = result;
+        dirty = true;
       }
     }
+    return dirty;
   }
 
-  validators: FormValidator[];
-
-  protected valueSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-  protected statusSubject: BehaviorSubject<null> = new BehaviorSubject(null);
-  protected validatorsSubject: ReplaySubject<Observable<any[]>> = new ReplaySubject<Observable<any[]>>(1);
-  protected validatorsSubjectSwitch = this.validatorsSubject.pipe(
-    switchAll()
-  );
-  public value$: Observable<any> = this.valueSubject.pipe(
-    distinctUntilChanged(),
-    skip(1),
-    tap(() => {
-      this.submitted_ = false;
-      this.dirty_ = true;
-      this.statusSubject.next(null);
-    }),
-    shareReplay(1)
-  );
-  public status$: Observable<{ [key: string]: any }> = merge(this.statusSubject, this.validatorsSubjectSwitch).pipe(
-    // auditTime(1),
-    switchMap(() => this.validate$(this.value)),
-    shareReplay(1)
-  );
-  public changes$: Observable<any> = merge(this.value$, this.status$).pipe(
-    map(() => this.value),
-    auditTime(1),
-    shareReplay(1)
-  );
-
-  /**
-   * Create a FormAbstract.
-   * @param validators a list of validators.
-   */
-  constructor(validators?: (FormValidator | FormValidator[])) {
-    this.validators = validators ? (Array.isArray(validators) ? validators : [validators]) : [];
+  protected async revalidate_() {
+    if (this.parent) {
+      return await this.parent.revalidate_();
+    }
+    // console.log('revalidate_', this.name);
+    await this.validateAndChange_();
   }
 
-  /**
-   * initialize subjects
-   */
-  protected initSubjects_(): void {
-    this.switchValidators_();
-  }
-
-  private switchValidators_(): void {
-    const validatorParams: Observable<any>[] = this.validators.map(x => x.params$);
-    let validatorParams$: Observable<any> = validatorParams.length ? combineLatest(validatorParams) : of(validatorParams);
-    this.validatorsSubject.next(validatorParams$);
-  }
-
-  /**
-   * initialize observables
-   */
-  protected initObservables_(): void { }
-
-  /**
-   * @param value the inner control value
-   * @return an object with key, value errors
-   */
-  validate$(value: any): Observable<{ [key: string]: any }> {
-    this.evaluateStates();
-    if (this.status === FormStatus.Disabled || this.status === FormStatus.Readonly || this.status === FormStatus.Hidden || this.submitted_ || !this.validators.length) {
-      this.errors_ = {};
-      if (this.status === FormStatus.Invalid) {
-        this.status = FormStatus.Valid;
-      }
-      return of(this.errors_);
+  protected async validate_(root?: FormCollection) {
+    let markAsDirty_ = await this.checkAsyncState_(root);
+    let errors: ValidationError = {};
+    if (this.validators.length === 0 || this.disabled || this.submitted) {
+      this.state_.invalid = false;
     } else {
-      return combineLatest(this.validators.map(x => {
-        let result$ = x.validate(value);
-        return isObservable(result$) ? result$ : of(result$);
-      })).pipe(
-        map(results => {
-          this.errors_ = Object.assign({}, ...results);
-          this.status = Object.keys(this.errors_).length === 0 ? FormStatus.Valid : FormStatus.Invalid;
-          return this.errors_;
-        })
-      );
+      let promises = this.validators_.map((x) => x(this.value_, root?.value, this, root)).filter((x) => x).map(x => isThenable(x) ? x : Promise.resolve(x));
+      const results = (await Promise.all(promises)).filter(x => x);
+      this.state_.invalid = results.length > 0;
+      errors = Object.assign(errors, ...results);
+      // console.log(`${this.name}.value`, '=', this.value_, '{', ...Object.keys(errors), '}');
+      // return this.errors_;
     }
+    markAsDirty_ = markAsDirty_ || Object.keys(this.errors_).join(',') !== Object.keys(errors).join(',');
+    this.errors_ = errors;
+    this.markAsDirty_ = markAsDirty_;
+    this.updateState_();
+    // console.log(this.name, this.state_, markAsDirty_);
   }
 
-  /**
-   * @return the pending status
-   */
-  get pending(): boolean { return this.status === FormStatus.Pending; }
+  async validateAndChange_(root?: FormCollection) {
+    await this.validate_(root);
+    this.markAsDirty_ = true;
+    this.change_();
+    // console.log('validateAndChange_', this);
+  }
 
-  /**
-   * @return the valid status
-   */
-  get valid(): boolean { return this.status !== FormStatus.Invalid; }
+  protected async updateStateAndChange_() {
+    this.updateState_();
+    this.markAsDirty_ = true;
+    this.change_();
+  }
 
-  /**
-   * @return the invalid status
-   */
-  get invalid(): boolean { return this.status === FormStatus.Invalid; }
-
-  /**
-   * @return the disabled status
-   */
-  get disabled(): boolean { return this.status === FormStatus.Disabled; }
-
-  /**
-   * @return the enabled status
-   */
-  get enabled(): boolean { return this.status !== FormStatus.Disabled; }
-
-  /**
-   * @return the readonly status
-   */
-  get readonly(): boolean { return this.status === FormStatus.Readonly; }
-
-  /**
-   * @return the enabled status
-   */
-  get writeable(): boolean { return this.status !== FormStatus.Disabled && this.status !== FormStatus.Readonly; }
-
-  /**
-   * @return the hidden status
-   */
-  get hidden(): boolean { return this.status === FormStatus.Hidden; }
-
-  /**
-   * @return the visible status
-   */
-  get visible(): boolean { return this.status !== FormStatus.Hidden; }
-
-  /**
-   * @return the submitted status
-   */
-  get submitted(): boolean { return this.submitted_; }
-
-  /**
-   * @return the dirty status
-   */
-  get dirty(): boolean { return this.dirty_; }
-
-  /**
-   * @return the pristine status
-   */
-  get pristine(): boolean { return !this.dirty_; }
-
-  /**
-   * @return the touched status
-   */
-  get touched(): boolean { return this.touched_; }
-
-  /**
-   * @return the untouched status
-   */
-  get untouched(): boolean { return !this.touched_; }
-
-  /**
-   * @param disabled the disabled state
-   */
-  set disabled(disabled: boolean) {
-    if (disabled) {
-      if (this.status !== FormStatus.Disabled) {
-        this.status = FormStatus.Disabled;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
-    } else {
-      if (this.status === FormStatus.Disabled) {
-        this.status = FormStatus.Pending;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
+  protected change_() {
+    if (!this.markAsDirty_) {
+      return;
     }
-  }
-
-  /**
-   * @param disabled the disabled state
-   */
-  set readonly(readonly: boolean) {
-    if (readonly) {
-      if (this.status !== FormStatus.Readonly) {
-        this.status = FormStatus.Readonly;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
-    } else {
-      if (this.status === FormStatus.Readonly) {
-        this.status = FormStatus.Pending;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
+    // console.log(`${this.name || 'unnamed'}.didChange`);
+    this.markAsDirty_ = false;
+    if (this.changes$_) {
+      this.changes$_.next(this.value);
     }
-  }
-
-  get flags(): { [key: string]: boolean } {
-    return {
-      untouched: this.untouched,
-      touched: this.touched,
-      pristine: this.pristine,
-      dirty: this.dirty,
-      pending: this.pending,
-      enabled: this.enabled,
-      disabled: this.disabled,
-      readonly: this.readonly,
-      writeable: this.writeable,
-      hidden: this.hidden,
-      visible: this.visible,
-      valid: this.valid,
-      invalid: this.invalid,
-      submitted: this.submitted
+    this.emit('change', this.value);
+    /*
+    if (this.parent) {
+      this.parent.change_.call(this.parent);
     }
+    */
   }
 
-  /**
-   * @param hidden the hidden state
-   */
-  set hidden(hidden: boolean) {
-    if (hidden) {
-      if (this.status !== FormStatus.Hidden) {
-        this.status = FormStatus.Hidden;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
-    } else {
-      if (this.status === FormStatus.Hidden) {
-        this.status = FormStatus.Pending;
-        // this.value_ = null;
-        this.dirty_ = false;
-        this.touched_ = false;
-        this.submitted_ = false;
-        this.statusSubject.next(null);
-      }
-    }
+  protected updateState_() {
+    const state = this.state_;
+    state.dirty = this.value_ != null;
+    state.valid = !state.invalid;
+    state.enabled = !state.disabled;
+    state.visible = !state.hidden;
+    state.writeable = !state.disabled && !state.readonly;
+    state.pristine = !state.dirty;
+    state.untouched = !state.touched;
+    state.unsubmitted = !state.submitted;
+    // console.log('FormAbstract', Object.keys(state).filter((key) => state[key]).join(', '));
   }
 
-  /**
-   * @param submitted the submitted state
-   */
-  set submitted(submitted: boolean) {
-    this.submitted_ = submitted;
-    this.statusSubject.next(null);
+  /*
+  set changes$(changes) {
+    this.changes$_ = changes;
   }
-
-  /**
-   * @param touched the touched state
+  */
+  /*
+   bind(callback) {
+     const index = this.callbacks_.indexOf(callback);
+     if (index === -1) {
+       this.callbacks_.push(callback);
+       this.revalidate_();
+     }
+   }
+   unbind(callback) {
+     const index = this.callbacks_.indexOf(callback);
+     if (index !== -1) {
+       this.callbacks_.splice(index, 1);
+     }
+   }
+   once(callback) {
+     const this_ = this;
+     function once() {
+       callback();
+       this_.unbind(once);
+     }
+     this.bind(once);
+   }
+   bindControl(control) {
+     const index = this.binds_.indexOf(control);
+     if (index === -1) {
+       this.binds_.push(control);
+     }
+   }
+   unbindControl(control) {
+     const index = this.binds_.indexOf(control);
+     if (index !== -1) {
+       this.binds_.splice(index, 1);
+     }
+   }
    */
-  set touched(touched: boolean) {
-    this.touched_ = touched;
-    this.statusSubject.next(null);
-  }
 
-  /**
-   * @return inner value of the control
-   */
-  get value(): any { return this.value_; }
-
-  /**
-   * @param value a value
-   */
-  set value(value: any) {
-    this.value_ = value;
-    this.valueSubject.next(value);
-  }
-
-  /**
-   * @param status optional FormStatus
-   */
-  reset(status?: FormStatus): void {
-    this.status = status || FormStatus.Pending;
+  reset() {
     this.value_ = null;
-    this.dirty_ = false;
-    this.touched_ = false;
-    this.submitted_ = false;
-    this.statusSubject.next(null);
+    const state = this.state_;
+    state.dirty = false;
+    state.touched = false;
+    state.submitted = false;
+    this.revalidate_();
   }
 
-  /**
-   * @param value a value
-   */
-  patch(value: any): void {
-    this.value_ = value;
-    this.dirty_ = true;
-    this.submitted_ = false;
-    this.statusSubject.next(null);
+  patch(value: any) {
+    this.value = value;
   }
 
-  /**
-   * adds one or more FormValidator.
-   * @param validators a list of validators.
-   */
   addValidators(...validators: FormValidator[]): void {
     this.validators.push(...validators);
-    this.switchValidators_();
+    // console.log('addValidators', this.name, this.validators);
+    this.revalidate_();
   }
 
-  /**
-   * replace one or more FormValidator.
-   * @param validators a list of validators.
-   */
   replaceValidators(...validators: FormValidator[]): void {
     this.validators = validators;
-    this.switchValidators_();
   }
 
-  /**
-   * remove all FormValidator.
-   */
-  clearValidators(): void {
+  clearValidators() {
     this.validators = [];
-    this.switchValidators_();
   }
 
+  // getter & setter
+  protected get path(): (string | number)[] {
+    if (this.name != null) {
+      return this.parent ? [...this.parent.path, this.name] : [this.name];
+    } else {
+      return [];
+    }
+  }
+
+  protected get root(): FormCollection | FormAbstract {
+    let parent: FormCollection | FormAbstract = this;
+    while (parent.parent) {
+      parent = parent.parent;
+    }
+    return parent;
+  }
+
+  private label_?: string;
+  get label(): string {
+    return this.label_ || this.name?.toString() || '';
+  }
+  set label(label: string) {
+    this.label_ = label;
+  }
+
+  private placeholder_?: string;
+  get placeholder(): string {
+    return this.placeholder_ || this.name?.toString() || '';
+  }
+  set placeholder(placeholder: string) {
+    this.placeholder_ = placeholder;
+  }
+
+  get validators() {
+    return this.validators_;
+  }
+
+  set validators(validators) {
+    if (this.validators_ !== validators) {
+      this.validators_ = validators;
+      this.revalidate_();
+    }
+  }
+
+  get state() {
+    return this.state_;
+  }
+
+  get errors() {
+    return this.errors_;
+  }
+
+  get invalid() {
+    return this.state_.invalid;
+  }
+
+  get disabled() {
+    return this.state_.disabled;
+  }
+
+  get hidden() {
+    return this.state_.hidden;
+  }
+
+  get readonly() {
+    return this.state_.readonly;
+  }
+
+  get dirty() {
+    return this.state_.dirty;
+  }
+
+  get touched() {
+    return this.state_.touched;
+  }
+
+  get submitted() {
+    return this.state_.submitted;
+  }
+
+  get valid() {
+    return this.state_.valid;
+  }
+
+  get enabled() {
+    return this.state_.enabled;
+  }
+
+  get visible() {
+    return this.state_.visible;
+  }
+
+  get writeable() {
+    return this.state_.writeable;
+  }
+
+  get pristine() {
+    return this.state_.pristine;
+  }
+
+  get untouched() {
+    return this.state_.untouched;
+  }
+
+  get unsubmitted() {
+    return this.state_.unsubmitted;
+  }
+
+  get value() {
+    return this.value_;
+  }
+
+  set value(value) {
+    value = validValue(value);
+    if (this.value_ !== value) {
+      this.value_ = value;
+      this.state_.submitted = false;
+      this.revalidate_();
+    }
+  }
+
+  /*
+  set invalid(invalid) {
+    if (this.state_.invalid !== invalid) {
+      this.state_.invalid = invalid;
+      this.revalidate_();
+    }
+  }
+  */
+
+  // internal disabled type boolean | () => boolean | Promise<boolean>
+  set disabled(disabled) {
+    if (this.state_.disabled !== disabled) {
+      this.state_.disabled = disabled;
+      this.revalidate_();
+    }
+  }
+
+  set hidden(hidden) {
+    if (this.state_.hidden !== hidden) {
+      this.state_.hidden = hidden;
+      this.revalidate_();
+    }
+  }
+
+  set readonly(readonly) {
+    if (this.state_.readonly !== readonly) {
+      this.state_.readonly = readonly;
+      this.revalidate_();
+    }
+  }
+
+  set dirty(dirty) {
+    if (this.state_.dirty !== dirty) {
+      this.state_.dirty = dirty;
+      this.updateStateAndChange_();
+    }
+  }
+
+  set touched(touched) {
+    if (this.state_.touched !== touched) {
+      this.state_.touched = touched;
+      this.updateStateAndChange_();
+    }
+  }
+
+  set submitted(submitted) {
+    if (this.state_.submitted !== submitted) {
+      this.state_.submitted = submitted;
+      this.updateStateAndChange_();
+    }
+  }
+
+  get changes$(): Observable<any> {
+    if (!this.changes$_) {
+      this.changes$_ = new Subject();
+    }
+    return this.changes$_;
+  }
 }

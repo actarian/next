@@ -1,83 +1,104 @@
-import { IControlSchema } from '@config/forms';
-import { INamedEntity } from '@core';
-import { FormArray, FormControl, FormGroup, FormState, FormValidator, mapErrors_ } from '@forms';
+
+import { FormArray, FormControl, FormGroup, FormState, mapErrors_ } from '@forms';
+import { IFormBuilderArraySchema, IFormBuilderControlSchema, IFormBuilderGroupSchema, IFormBuilderGroupValues, IFormBuilderSchema } from '@forms/types';
 import { useObservable$ } from '@hooks';
-import { DependencyList, useCallback, useMemo } from 'react';
+import { DependencyList, useCallback, useEffect, useMemo, useState } from 'react';
 import { map } from 'rxjs';
 
-export interface IFormBuilderControlSchema {
-  schema: 'group' | 'array' | IControlSchema;
-  name?: string;
-  label?: string;
-  value?: string;
-  placeholder?: string;
-  required?: boolean;
-  hidden?: boolean | (() => boolean),
-  disabled?: boolean | (() => boolean),
-  readonly?: boolean | (() => boolean),
-  options?: INamedEntity[];
-  validators?: FormValidator | FormValidator[];
-  children?: IFormBuilderSchema;
+export function useFormBuilder<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
+  const collection: U = useMemo<U>(() => {
+    if (Array.isArray(schema)) {
+      return mapArray_(schema) as U;
+    } else {
+      return mapGroup_(schema) as U;
+    }
+    // return mapSchema_(schema) as U;
+  }, deps);
+
+  const setValue = useCallback((value: any) => {
+    collection.patch(value);
+  }, deps);
+
+  const setTouched = useCallback(() => {
+    collection.touched = true;
+  }, deps);
+
+  const reset = useCallback(() => {
+    collection.reset();
+  }, deps);
+
+  const [state, setState] = useState<FormState<T>>({ value: collection.value as T, flags: collection.state, errors: mapErrors_(collection.errors) })
+
+  useEffect(() => {
+    const onChange = (value: T) => {
+      const newState = { value, flags: collection.state, errors: mapErrors_(collection.errors) };
+      // console.log('useFormBuilder.onChange', newState);
+      setState(newState);
+    };
+    collection.on('change', onChange);
+    collection.validateAndChange_();
+    // console.log('subscribe');
+    return () => collection.off('change', onChange);
+  }, deps);
+
+  return [state, setValue, setTouched, reset, collection];
 }
 
-export type IFormBuilderGroupSchema = { [key: string]: IFormBuilderControlSchema };
+export function useFormBuilder__<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
+  const collection: U = useMemo<U>(() => {
+    if (Array.isArray(schema)) {
+      return mapArray_(schema) as U;
+    } else {
+      return mapGroup_(schema) as U;
+    }
+    // return mapSchema_(schema) as U;
+  }, deps);
 
-export type IFormBuilderArraySchema = IFormBuilderControlSchema[];
+  const setValue = useCallback((value: any) => {
+    collection.patch(value);
+  }, deps);
 
-export type IFormBuilderGroupValues = { [key: string]: FormGroup | FormArray | FormControl };
+  const setTouched = useCallback(() => {
+    collection.touched = true;
+  }, deps);
 
-export type IFormBuilderSchema = IFormBuilderGroupSchema | IFormBuilderArraySchema;
+  const reset = useCallback(() => {
+    collection.reset();
+  }, deps);
 
-function mapGroup(children: IFormBuilderGroupSchema, schema?: IFormBuilderControlSchema): FormGroup {
+  const [state] = useObservable$<FormState<T>>(() => collection.changes$.pipe(
+    map(value => ({ value: value, flags: collection.state, errors: mapErrors_(collection.errors) })),
+  ), { value: collection.value as T, flags: collection.state, errors: mapErrors_(collection.errors) });
+
+  return [state, setValue, setTouched, reset, collection];
+}
+
+function mapGroup_(children: IFormBuilderGroupSchema, schema?: IFormBuilderControlSchema): FormGroup {
   const controls: IFormBuilderGroupValues = {};
   Object.keys(children).forEach(key => {
-    controls[key] = mapSchema({ name: key, ...children[key] });
+    controls[key] = mapSchema_({ name: key, ...children[key] });
   });
   const group = new FormGroup(controls, schema?.validators, schema);
   return group;
 }
 
-function mapArray(children: IFormBuilderControlSchema[], schema?: IFormBuilderControlSchema): FormArray {
-  const controls = children.map(x => mapSchema(x));
+function mapArray_(children: IFormBuilderControlSchema[], schema?: IFormBuilderControlSchema): FormArray {
+  const controls = children.map(x => mapSchema_(x));
   const array = new FormArray(controls, schema?.validators, schema);
   return array;
 }
 
-function mapControl(schema: IFormBuilderControlSchema): FormControl {
+function mapControl_(schema: IFormBuilderControlSchema): FormControl {
   return new FormControl(schema.value, schema.validators, schema);
 }
 
-function mapSchema(schema: IFormBuilderControlSchema): FormGroup | FormArray | FormControl {
+function mapSchema_(schema: IFormBuilderControlSchema): FormGroup | FormArray | FormControl {
   switch (schema.schema) {
     case 'group':
-      return mapGroup(schema.children as IFormBuilderGroupSchema || {}, schema);
+      return mapGroup_(schema.children as IFormBuilderGroupSchema || {}, schema);
     case 'array':
-      return mapArray(schema.children as IFormBuilderArraySchema || [], schema);
+      return mapArray_(schema.children as IFormBuilderArraySchema || [], schema);
     default:
-      return mapControl(schema);
+      return mapControl_(schema);
   }
-}
-
-export function useFormBuilder<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
-  const collection: U = useMemo<U>(() => {
-    if (Array.isArray(schema)) {
-      return mapArray(schema) as U;
-    } else {
-      return mapGroup(schema) as U;
-    }
-    // return mapSchema(schema) as U;
-  }, deps);
-  const setValue = useCallback((value: any) => {
-    collection.patch(value);
-  }, deps);
-  const setTouched = useCallback(() => {
-    collection.touched = true;
-  }, deps);
-  const reset = useCallback(() => {
-    collection.reset();
-  }, deps);
-  const [state] = useObservable$<FormState<T>>(() => collection.changes$.pipe(
-    map(value => ({ value: value, flags: collection.flags, errors: mapErrors_(collection.errors) })),
-  ), { value: collection.value as T, flags: collection.flags, errors: mapErrors_(collection.errors) });
-  return [state, setValue, setTouched, reset, collection];
 }
