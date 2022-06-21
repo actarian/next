@@ -1,21 +1,34 @@
 import { className, INamedEntity } from '@core';
-import { EmailValidator, FormGroup, FormState, RequiredIfValidator, RequiredTrueValidator, RequiredValidator } from '@forms';
+import { EmailValidator, FormAsyncValidator, FormGroup, RequiredIfValidator, RequiredTrueValidator, RequiredValidator } from '@forms';
 import { FieldCollection } from '@forms/components/field-collection';
 import { FieldText } from '@forms/components/field-text';
 import { Grid } from '@geist-ui/core';
 import { useFormBuilder, useLabel } from '@hooks';
-import { useRef } from 'react';
 
 export default function ContactFormRxJs({ data }: { data: IContactForm }) {
   const label = useLabel();
 
-  const formRef = useRef<FormState<any> | null>(null);
-
   const required = RequiredValidator();
+
   const requiredTrue = RequiredTrueValidator();
+
   const email = EmailValidator();
+
+  /*
+  const exhist: FormAsyncValidator = async (value: any, rootValue: any) => {
+    return new Promise<ValidationError | null>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(value === 'aa@aa.aa' ? { exhist: true } : null);
+      }, 500);
+    });
+  }
+  */
+  const exhist: FormAsyncValidator = async (value: any, rootValue: any) => Promise.resolve(value === 'aa@aa.aa' ? { exhist: true } : null);
+
   const requiredIfPrintedCopy = RequiredIfValidator((value, rootValue) => rootValue?.printedCopy === true);
+
   const requiredIfItaly = RequiredIfValidator((value, rootValue) => rootValue?.country === 'it');
+
   /*
   const hiddenIfNotPrintedCopy = async (value: any, rootValue: any) => new Promise<boolean>((resolve, reject) => {
     setTimeout(() => {
@@ -23,7 +36,9 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     }, 500);
   });
   */
+
   // const hiddenIfNotPrintedCopy = async (value: any, rootValue: any) => Promise.resolve(!(rootValue?.printedCopy === true));
+
   const hiddenIfNotPrintedCopy = (value: any, rootValue: any) => !(rootValue?.printedCopy === true);
 
   const [form, setValue, setTouched, reset, group] = useFormBuilder<any, FormGroup>({
@@ -31,7 +46,7 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     //
     firstName: { schema: 'text', label: 'contact.firstName', validators: required },
     lastName: { schema: 'text', label: 'contact.lastName', validators: required },
-    email: { schema: 'text', label: 'contact.email', validators: [required, email] },
+    email: { schema: 'text', label: 'contact.email', validators: [required, email, exhist] },
     telephone: { schema: 'text', label: 'contact.telephone', validators: required },
     occupation: { schema: 'select', label: 'contact.occupation', options: data.occupations, validators: required },
     country: { schema: 'select', label: 'contact.country', options: data.countries, validators: required },
@@ -61,8 +76,6 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     checkField: { schema: 'text', hidden: true },
     //
   });
-
-  formRef.current = form;
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

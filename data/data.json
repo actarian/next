@@ -56390,6 +56390,14 @@
         "it": "EMail non valida",
         "fr": "E-mail invalide"
       }
+    },
+    {
+      "id": "error.exhist",
+      "text": {
+        "en": "This value is already in use",
+        "it": "Questo valore è già in uso",
+        "fr": "Cette valeur est déjà utilisée"
+      }
     }
   ]
 }
