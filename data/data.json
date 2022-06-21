@@ -56184,7 +56184,7 @@
       }
     },
     {
-      "id": "contact.magazine",
+      "id": "field.magazine",
       "text": {
         "en": "Magazine",
         "it": "Magazine",
@@ -56192,7 +56192,7 @@
       }
     },
     {
-      "id": "contact.firstName",
+      "id": "field.firstName",
       "text": {
         "en": "Name",
         "it": "Nome",
@@ -56200,7 +56200,7 @@
       }
     },
     {
-      "id": "contact.lastName",
+      "id": "field.lastName",
       "text": {
         "en": "Surname",
         "it": "Cognome",
@@ -56208,7 +56208,7 @@
       }
     },
     {
-      "id": "contact.email",
+      "id": "field.email",
       "text": {
         "en": "Email",
         "it": "Email",
@@ -56216,7 +56216,7 @@
       }
     },
     {
-      "id": "contact.telephone",
+      "id": "field.telephone",
       "text": {
         "en": "Phone",
         "it": "Telefono",
@@ -56224,7 +56224,7 @@
       }
     },
     {
-      "id": "contact.occupation",
+      "id": "field.occupation",
       "text": {
         "en": "Occupation",
         "it": "Occupazione",
@@ -56232,7 +56232,7 @@
       }
     },
     {
-      "id": "contact.country",
+      "id": "field.country",
       "text": {
         "en": "Country",
         "it": "Nazione",
@@ -56240,7 +56240,7 @@
       }
     },
     {
-      "id": "contact.region",
+      "id": "field.region",
       "text": {
         "en": "Region",
         "it": "Regione",
@@ -56248,7 +56248,7 @@
       }
     },
     {
-      "id": "contact.printedCopy",
+      "id": "field.printedCopy",
       "text": {
         "en": "Would you also like to receive the printed version of the Magazine?",
         "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
@@ -56256,7 +56256,7 @@
       }
     },
     {
-      "id": "contact.shippingInfo",
+      "id": "field.shippingInfo",
       "text": {
         "en": "Shipping Info",
         "it": "Informazioni di spedizione",
@@ -56264,7 +56264,7 @@
       }
     },
     {
-      "id": "contact.city",
+      "id": "field.city",
       "text": {
         "en": "Town",
         "it": "Città",
@@ -56272,7 +56272,7 @@
       }
     },
     {
-      "id": "contact.province",
+      "id": "field.province",
       "text": {
         "en": "Province",
         "it": "Provincia",
@@ -56280,7 +56280,7 @@
       }
     },
     {
-      "id": "contact.zipCode",
+      "id": "field.zipCode",
       "text": {
         "en": "Postcode",
         "it": "Codice postale",
@@ -56288,7 +56288,7 @@
       }
     },
     {
-      "id": "contact.address",
+      "id": "field.address",
       "text": {
         "en": "Street address",
         "it": "Indirizzo",
@@ -56296,7 +56296,7 @@
       }
     },
     {
-      "id": "contact.streetNumber",
+      "id": "field.streetNumber",
       "text": {
         "en": "Street number",
         "it": "Numero civico",
@@ -56304,7 +56304,7 @@
       }
     },
     {
-      "id": "contact.phoneNumber",
+      "id": "field.phoneNumber",
       "text": {
         "en": "Phone Number",
         "it": "Telefono",
@@ -56312,7 +56312,7 @@
       }
     },
     {
-      "id": "contact.privacy",
+      "id": "field.privacy",
       "text": {
         "en": "I have read the privacy policy and I consent to the processing of data *",
         "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
@@ -56320,7 +56320,7 @@
       }
     },
     {
-      "id": "contact.newsletter",
+      "id": "field.newsletter",
       "text": {
         "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
         "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
@@ -56328,7 +56328,7 @@
       }
     },
     {
-      "id": "contact.commercial",
+      "id": "field.commercial",
       "text": {
         "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
         "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
@@ -56336,7 +56336,7 @@
       }
     },
     {
-      "id": "contact.promotion",
+      "id": "field.promotion",
       "text": {
         "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
         "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",

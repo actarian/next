@@ -42,35 +42,35 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
   const hiddenIfNotPrintedCopy = (value: any, rootValue: any) => !(rootValue?.printedCopy === true);
 
   const [form, setValue, setTouched, reset, group] = useFormBuilder<any, FormGroup>({
-    magazine: { schema: 'select', label: 'contact.magazine', options: data.magazines, validators: required },
+    magazine: { schema: 'select', label: 'field.magazine', options: data.magazines, validators: required },
     //
-    firstName: { schema: 'text', label: 'contact.firstName', validators: required },
-    lastName: { schema: 'text', label: 'contact.lastName', validators: required },
-    email: { schema: 'text', label: 'contact.email', validators: [required, email, exhist] },
-    telephone: { schema: 'text', label: 'contact.telephone', validators: required },
-    occupation: { schema: 'select', label: 'contact.occupation', options: data.occupations, validators: required },
-    country: { schema: 'select', label: 'contact.country', options: data.countries, validators: required },
-    region: { schema: 'select', label: 'contact.region', options: data.regions, validators: requiredIfItaly },
+    firstName: { schema: 'text', label: 'field.firstName', validators: required },
+    lastName: { schema: 'text', label: 'field.lastName', validators: required },
+    email: { schema: 'text', label: 'field.email', validators: [required, email, exhist] },
+    telephone: { schema: 'text', label: 'field.telephone', validators: required },
+    occupation: { schema: 'select', label: 'field.occupation', options: data.occupations, validators: required },
+    country: { schema: 'select', label: 'field.country', options: data.countries, validators: required },
+    region: { schema: 'select', label: 'field.region', options: data.regions, validators: requiredIfItaly },
     //
-    printedCopy: { schema: 'checkbox', label: 'contact.printedCopy' },
+    printedCopy: { schema: 'checkbox', label: 'field.printedCopy' },
     //
     shippingInfo: {
-      schema: 'group', label: 'contact.shippingInfo', children: {
-        city: { schema: 'text', label: 'contact.city' },
-        province: { schema: 'select', label: 'contact.province', options: data.provinces },
-        zipCode: { schema: 'text', label: 'contact.zipCode' },
-        address: { schema: 'text', label: 'contact.address' },
-        streetNumber: { schema: 'text', label: 'contact.streetNumber' },
-        phoneNumber: { schema: 'text', label: 'contact.phoneNumber' },
+      schema: 'group', label: 'field.shippingInfo', children: {
+        city: { schema: 'text', label: 'field.city' },
+        province: { schema: 'select', label: 'field.province', options: data.provinces },
+        zipCode: { schema: 'text', label: 'field.zipCode' },
+        address: { schema: 'text', label: 'field.address' },
+        streetNumber: { schema: 'text', label: 'field.streetNumber' },
+        phoneNumber: { schema: 'text', label: 'field.phoneNumber' },
       },
       hidden: hiddenIfNotPrintedCopy,
       validators: requiredIfPrintedCopy,
     },
     //
-    privacy: { schema: 'checkbox', label: 'contact.privacy', validators: requiredTrue },
-    newsletter: { schema: 'accept', label: 'contact.newsletter', validators: required },
-    commercial: { schema: 'accept', label: 'contact.commercial', validators: required },
-    promotion: { schema: 'accept', label: 'contact.promotion', validators: required },
+    privacy: { schema: 'checkbox', label: 'field.privacy', validators: requiredTrue },
+    newsletter: { schema: 'accept', label: 'field.newsletter', validators: required },
+    commercial: { schema: 'accept', label: 'field.commercial', validators: required },
+    promotion: { schema: 'accept', label: 'field.promotion', validators: required },
     //
     checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true },
     checkField: { schema: 'text', hidden: true },
