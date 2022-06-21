@@ -58375,7 +58375,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.magazine",
+        "id": "field.magazine",
         "text": {
           "en": "Magazine",
           "it": "Magazine",
@@ -58384,7 +58384,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.firstName",
+        "id": "field.firstName",
         "text": {
           "en": "Name",
           "it": "Nome",
@@ -58393,7 +58393,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.lastName",
+        "id": "field.lastName",
         "text": {
           "en": "Surname",
           "it": "Cognome",
@@ -58402,7 +58402,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.email",
+        "id": "field.email",
         "text": {
           "en": "Email",
           "it": "Email",
@@ -58411,7 +58411,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.telephone",
+        "id": "field.telephone",
         "text": {
           "en": "Phone",
           "it": "Telefono",
@@ -58420,7 +58420,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.occupation",
+        "id": "field.occupation",
         "text": {
           "en": "Occupation",
           "it": "Occupazione",
@@ -58429,7 +58429,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.country",
+        "id": "field.country",
         "text": {
           "en": "Country",
           "it": "Nazione",
@@ -58438,7 +58438,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.region",
+        "id": "field.region",
         "text": {
           "en": "Region",
           "it": "Regione",
@@ -58447,7 +58447,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.printedCopy",
+        "id": "field.printedCopy",
         "text": {
           "en": "Would you also like to receive the printed version of the Magazine?",
           "it": "Vorresti ricevere anche la versione cartacea del Magazine?",
@@ -58456,7 +58456,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.shippingInfo",
+        "id": "field.shippingInfo",
         "text": {
           "en": "Shipping Info",
           "it": "Informazioni di spedizione",
@@ -58465,7 +58465,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.city",
+        "id": "field.city",
         "text": {
           "en": "Town",
           "it": "Città",
@@ -58474,7 +58474,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.province",
+        "id": "field.province",
         "text": {
           "en": "Province",
           "it": "Provincia",
@@ -58483,7 +58483,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.zipCode",
+        "id": "field.zipCode",
         "text": {
           "en": "Postcode",
           "it": "Codice postale",
@@ -58492,7 +58492,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.address",
+        "id": "field.address",
         "text": {
           "en": "Street address",
           "it": "Indirizzo",
@@ -58501,7 +58501,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.streetNumber",
+        "id": "field.streetNumber",
         "text": {
           "en": "Street number",
           "it": "Numero civico",
@@ -58510,7 +58510,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.phoneNumber",
+        "id": "field.phoneNumber",
         "text": {
           "en": "Phone Number",
           "it": "Telefono",
@@ -58519,7 +58519,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.privacy",
+        "id": "field.privacy",
         "text": {
           "en": "I have read the privacy policy and I consent to the processing of data *",
           "it": "Ho letto l'informativa sulla privacy e acconsento al trattamento dei dati *",
@@ -58528,7 +58528,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.newsletter",
+        "id": "field.newsletter",
         "text": {
           "en": "To the processing of my personal data for direct marketing activities by subscribing to the newsletter. *",
           "it": "Al trattamento dei miei dati personali per attività di marketing diretto mediante l'iscrizione alla newsletter. *",
@@ -58537,7 +58537,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.commercial",
+        "id": "field.commercial",
         "text": {
           "en": "To the processing of my personal data for profiling activities, in order to receive commercial communications that are closer to my interests. *",
           "it": "Al trattamento dei miei dati personali per attività di profilazione, al fine di ricevere comunicazioni commerciali più vicine ai miei interessi. *",
@@ -58546,7 +58546,7 @@
         "schema": "label"
       },
       {
-        "id": "contact.promotion",
+        "id": "field.promotion",
         "text": {
           "en": "To the transfer of my personal data for promotional activities by third parties. The data will be transferred exclusively to companies that are part of the Group. *",
           "it": "Al trasferimento dei miei dati personali per attività promozionali da parte di terzi. I dati verranno ceduti esclusivamente a società facenti parte del Gruppo. *",

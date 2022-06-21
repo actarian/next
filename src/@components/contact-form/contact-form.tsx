@@ -27,7 +27,7 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
 
   const requiredIfPrintedCopy = RequiredIfValidator((value, rootValue) => rootValue?.printedCopy === true);
 
-  const requiredIfItaly = RequiredIfValidator((value, rootValue) => rootValue?.country === 'it');
+  const requiredIfItaly = RequiredIfValidator((value, rootValue) => rootValue?.shippingInfo.country === 'it');
 
   /*
   const hiddenIfNotPrintedCopy = async (value: any, rootValue: any) => new Promise<boolean>((resolve, reject) => {
@@ -49,22 +49,21 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     email: { schema: 'text', label: 'field.email', validators: [required, email, exhist] },
     telephone: { schema: 'text', label: 'field.telephone', validators: required },
     occupation: { schema: 'select', label: 'field.occupation', options: data.occupations, validators: required },
-    country: { schema: 'select', label: 'field.country', options: data.countries, validators: required },
-    region: { schema: 'select', label: 'field.region', options: data.regions, validators: requiredIfItaly },
     //
     printedCopy: { schema: 'checkbox', label: 'field.printedCopy' },
     //
     shippingInfo: {
       schema: 'group', label: 'field.shippingInfo', children: {
-        city: { schema: 'text', label: 'field.city' },
-        province: { schema: 'select', label: 'field.province', options: data.provinces },
-        zipCode: { schema: 'text', label: 'field.zipCode' },
-        address: { schema: 'text', label: 'field.address' },
-        streetNumber: { schema: 'text', label: 'field.streetNumber' },
-        phoneNumber: { schema: 'text', label: 'field.phoneNumber' },
+        country: { schema: 'autocomplete', label: 'field.country', options: data.countries, validators: requiredIfPrintedCopy },
+        region: { schema: 'autocomplete', label: 'field.region', options: data.regions, validators: requiredIfItaly },
+        province: { schema: 'autocomplete', label: 'field.province', options: data.provinces, validators: requiredIfItaly },
+        address: { schema: 'text', label: 'field.address', validators: requiredIfPrintedCopy },
+        streetNumber: { schema: 'text', label: 'field.streetNumber', validators: requiredIfPrintedCopy },
+        zipCode: { schema: 'text', label: 'field.zipCode', validators: requiredIfPrintedCopy },
+        city: { schema: 'text', label: 'field.city', validators: requiredIfPrintedCopy },
+        phoneNumber: { schema: 'text', label: 'field.phoneNumber', validators: requiredIfPrintedCopy },
       },
       hidden: hiddenIfNotPrintedCopy,
-      validators: requiredIfPrintedCopy,
     },
     //
     privacy: { schema: 'checkbox', label: 'field.privacy', validators: requiredTrue },

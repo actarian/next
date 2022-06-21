@@ -3,7 +3,7 @@ import { apiGet } from '@core';
 import { Drawer } from '@geist-ui/core';
 import { useLayout, useWishlist } from '@hooks';
 import { IProduct } from '@models';
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import WishlistMiniItem from './wishlist-mini-item';
 
 export default function WishlistMini({ children, visible, onClose }: WishlistMiniProps) {

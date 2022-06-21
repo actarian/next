@@ -5,7 +5,7 @@ import { FormArray } from './form-array';
 import { FormControl } from './form-control';
 import { FormGroup } from './form-group';
 
-export type ControlType = 'text' | 'select' | 'checkbox' | 'radio' | 'accept';
+export type ControlType = 'text' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'accept';
 
 export type FormOptions = {
   schema?: 'group' | 'array' | ControlType;

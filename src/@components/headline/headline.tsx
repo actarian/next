@@ -2,7 +2,6 @@ import { Button, Card, Grid, Spacer, Text } from '@geist-ui/core';
 import { ArrowLeft } from '@geist-ui/icons';
 import { useLabel } from '@hooks';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 export default function Headline({ title, abstract }: { title?: string, abstract?: string }) {
   const router = useRouter();
