@@ -10,15 +10,12 @@ type FieldCheckboxProps = {
   uid?: number | null | undefined;
 }
 
-export function FieldCheckbox(props: FieldCheckboxProps) {
+export default function FieldCheckbox(props: FieldCheckboxProps) {
   const label = useLabel();
 
   const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
-  // console.log('FieldCheckbox', state, props.control.flags, props.control);
-  // const [changes] = useObservable$<any>(() => props.control.changes$, props.control.value);
-  // console.log('FieldCheckbox', 'changes', changes, props.control);
 
   const onDidChange = (event: CheckboxEvent) => {
     setValue(event.target.checked);

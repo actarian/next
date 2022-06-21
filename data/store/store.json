@@ -58591,6 +58591,15 @@
         "schema": "label"
       },
       {
+        "id": "form.test",
+        "text": {
+          "en": "Test",
+          "it": "Test",
+          "fr": "Test"
+        },
+        "schema": "label"
+      },
+      {
         "id": "error.required",
         "text": {
           "en": "Required field",

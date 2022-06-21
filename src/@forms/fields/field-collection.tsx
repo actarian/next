@@ -1,15 +1,15 @@
 
-import { CONTROLS, IControlSchema } from '@config/forms';
 import { FormAbstract, FormArray, FormGroup } from '@forms';
 import { Divider, Grid } from '@geist-ui/core';
 import { useLabel } from '@hooks';
+import { FIELDS, FieldType } from './fields';
 
 type FieldCollectionProps = {
   collection: FormGroup | FormArray;
   uid?: number | null | undefined;
 }
 
-export function FieldCollection(props: FieldCollectionProps) {
+export default function FieldCollection(props: FieldCollectionProps) {
   const label = useLabel();
 
   let uid = props.uid || 0;
@@ -29,10 +29,10 @@ export function FieldCollection(props: FieldCollectionProps) {
     if (control instanceof FormGroup || control instanceof FormArray) {
       return <FieldCollection collection={control} uid={uid} key={uid} />
     } else {
-      if (control.schema in CONTROLS) {
-        return CONTROLS[control.schema as IControlSchema](control, uid);
+      if (control.schema in FIELDS) {
+        return FIELDS[control.schema as FieldType](control, uid);
       } else {
-        return CONTROLS.text(control, uid);
+        return FIELDS.text(control, uid);
       }
     }
   }

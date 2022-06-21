@@ -4,8 +4,16 @@ import { asStaticProps } from '@core';
 import { Fieldset, Text } from '@geist-ui/core';
 import { getCountries, getLayout, getListByKeys, getPage, getProvinces, getRegions, getStaticPathsForSchema, PageProps } from '@models';
 import { GetStaticPropsContext } from 'next/types';
+import { useState } from 'react';
 
 export default function Contact({ layout, page, data, params }: ContactProps) {
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const onSubmit = (value: any) => {
+    setSubmitted(true);
+  }
+
   return (
     <>
       <Layout>
@@ -15,11 +23,22 @@ export default function Contact({ layout, page, data, params }: ContactProps) {
         <Headline title={page.title} abstract={page.abstract}></Headline>
 
         <Fieldset style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-          <Fieldset.Title><Text h2 style={{ maxWidth: '740px' }}>{page.description}</Text></Fieldset.Title>
-
-          <ContactForm data={data} />
-
+          {submitted ?
+            <>
+              <Fieldset.Title><Text h2>Thanks for being awesome!</Text></Fieldset.Title>
+              <Fieldset.Title>
+                <Text h4>
+                  <p>We have received your message and would like to thank you for writing to us.</p>
+                  <p>If your inquiry is urgent, please use the telephone number listed below to talk to one of our staff members.</p>
+                  <p>Otherwise, we will reply by email as soon as possible.</p>
+                  <p>Talk to you soon, [Your Company]</p>
+                </Text>
+              </Fieldset.Title>
+            </> :
+            <>
+              <Fieldset.Title><Text h2 style={{ maxWidth: '740px' }}>{page.description}</Text></Fieldset.Title>
+              <ContactForm data={data} onSubmit={onSubmit} />
+            </>}
         </Fieldset>
 
       </Layout>

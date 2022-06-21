@@ -1,27 +1,24 @@
 
 import type { IEquatable } from '@core';
 import { FormControl } from '@forms';
-import { Select, Text } from '@geist-ui/core';
+import { AutoComplete, Text } from '@geist-ui/core';
 import { useControl, useLabel } from '@hooks';
 import { FocusEvent, useState } from 'react';
 
-type FieldSelectProps = {
+type FieldAutocompleteProps = {
   control: FormControl;
   uid?: number | null | undefined;
 }
 
-export function FieldSelect(props: FieldSelectProps) {
+export default function FieldAutocomplete(props: FieldAutocompleteProps) {
   const label = useLabel();
 
   const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
-  // console.log('FieldSelect', state, props.control.flags, props.control);
-  // const [changes] = useObservable$<any>(() => props.control.changes$, props.control.value);
-  // console.log('FieldSelect', 'changes', changes, props.control);
 
   const onDidChange = (value: string | string[]) => {
-    // console.log('FieldSelect', event.target.value);
+    // console.log('FieldAutocomplete', event.target.value);
     let id: IEquatable | IEquatable[] | null = null;
     function mapValue(value: string) {
       const option = props.control.options?.find(x => x.id.toString() === value);
@@ -47,6 +44,34 @@ export function FieldSelect(props: FieldSelectProps) {
     setFocus(true);
   }
 
+  const [options, setOptions] = useState<any[]>();
+
+  const onSearch = (query: string) => {
+    const options = props.control.options;
+    if (!query || !options) {
+      return setOptions([]);
+    }
+    query = query.toLowerCase();
+    const results = options.filter(x => x.name.toString().toLowerCase().includes(query)).map(x => ({
+      value: x.name,
+      label: x.name,
+    }));
+    setOptions(results)
+  }
+
+  const onSelect = (value: string) => {
+    const option = props.control.options?.find(x => x.name === value);
+    const id = option ? option.id.toString() : null;
+    if (id) {
+      onDidChange(id);
+    }
+  }
+
+  const option = state.value && options ? options.find(x => x.id === state.value) : undefined;
+  const value = option ? option.name.toString() : undefined;
+
+  // const initialValue = state.value ? state.value.toString() : undefined;
+
   return (
     state.flags.hidden ? (
       <input type="hidden" value={state.value || ''} />
@@ -58,22 +83,22 @@ export function FieldSelect(props: FieldSelectProps) {
           </Text>
         }
 
-        <Select
+        <AutoComplete
           id={uniqueName}
           type={(state.flags.invalid && state.flags.touched) ? 'error' : 'default'}
           placeholder={label(props.control.placeholder || props.control.label || '')}
-          value={state.value ? state.value.toString() : undefined}
-          onChange={onDidChange}
+          value={value}
+          onSelect={onSelect}
           onBlur={onDidBlur}
           onFocus={onDidFocus}
           disabled={state.flags.disabled || state.flags.readonly}
           width="100%"
           disableMatchWidth
-          style={{ minWidth: '0' }}>
-          {props.control.options && props.control.options.map((option, i) => (
-            <Select.Option key={i} value={option.id.toString()}>{option.name as string}</Select.Option>
-          ))}
-        </Select>
+          style={{ minWidth: '0' }}
+          clearable={true}
+          options={options}
+          onSearch={onSearch}
+        />
 
         {state.flags.touched && state.errors.map(error => (
           <Text key={error.key} type="error" small>{label(`error.${error.key}`)}</Text>

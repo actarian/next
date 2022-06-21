@@ -16,7 +16,6 @@ export type { ILabelContext } from '@hooks/useLabel/useLabel';
 export { LayoutProvider, useLayout } from '@hooks/useLayout/useLayout';
 export type { ILayoutContext } from '@hooks/useLayout/useLayout';
 export { useMounted } from '@hooks/useMounted/useMounted';
-export { useObservable$ } from '@hooks/useObservable/useObservable';
 export { PageProvider, usePage } from '@hooks/usePage/usePage';
 export type { IPageContext } from '@hooks/usePage/usePage';
 export { getPagedItems, getPaginationInfo } from '@hooks/usePagination/pagination.service';

@@ -1,11 +1,10 @@
 import { className, INamedEntity } from '@core';
-import { EmailValidator, FormAsyncValidator, FormGroup, RequiredIfValidator, RequiredTrueValidator, RequiredValidator } from '@forms';
-import { FieldCollection } from '@forms/components/field-collection';
-import { FieldText } from '@forms/components/field-text';
+import { EmailValidator, FieldCollection, FieldText, FormAsyncValidator, FormGroup, RequiredIfValidator, RequiredTrueValidator, RequiredValidator } from '@forms';
+import Tester from '@forms/fields/tester';
 import { Grid } from '@geist-ui/core';
 import { useFormBuilder, useLabel } from '@hooks';
 
-export default function ContactFormRxJs({ data }: { data: IContactForm }) {
+export default function ContactForm({ data, onSubmit }: { data: IContactForm, onSubmit: (value: any) => void }) {
   const label = useLabel();
 
   const required = RequiredValidator();
@@ -27,7 +26,7 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
 
   const requiredIfPrintedCopy = RequiredIfValidator((value, rootValue) => rootValue?.printedCopy === true);
 
-  const requiredIfItaly = RequiredIfValidator((value, rootValue) => rootValue?.shippingInfo.country === 'it');
+  const requiredIfItaly = RequiredIfValidator((value, rootValue) => rootValue?.shippingInfo?.country === 'it');
 
   /*
   const hiddenIfNotPrintedCopy = async (value: any, rootValue: any) => new Promise<boolean>((resolve, reject) => {
@@ -63,6 +62,7 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
         city: { schema: 'text', label: 'field.city', validators: requiredIfPrintedCopy },
         phoneNumber: { schema: 'text', label: 'field.phoneNumber', validators: requiredIfPrintedCopy },
       },
+      disabled: hiddenIfNotPrintedCopy,
       hidden: hiddenIfNotPrintedCopy,
     },
     //
@@ -71,29 +71,45 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
     commercial: { schema: 'accept', label: 'field.commercial', validators: required },
     promotion: { schema: 'accept', label: 'field.promotion', validators: required },
     //
-    checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true },
-    checkField: { schema: 'text', hidden: true },
+    checkRequest: { schema: 'text', value: 'window.antiforgery', hidden: true }, // todo take antiforgery token from server
+    checkField: { schema: 'text', hidden: true }, // check hidden field for antiforgery
     //
   });
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('ContactFormRxJs.onSubmit', group.value);
-    if (form.flags.valid) {
-      // form.value
-    } else {
-      setTouched();
-    }
-    alert(JSON.stringify({ valid: form.flags.valid, value: group.value }));
+  const onTest = () => {
+    setValue({
+      magazine: data.magazines[0].id,
+      firstName: 'John',
+      lastName: 'Appleseed',
+      email: 'jhon.appleseed@gmail.com',
+      telephone: '+39 123456789',
+      occupation: data.occupations[0].id,
+      printedCopy: false,
+      privacy: true,
+      newsletter: false,
+      commercial: false,
+      promotion: false,
+    });
   }
 
   const onReset = () => {
-    console.log('ContactFormRxJs.onReset');
+    console.log('ContactForm.onReset');
     reset();
   }
 
+  const onValidate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log('ContactForm.onSubmit', form.value);
+    if (form.flags.valid) {
+      // form.value
+      onSubmit(form.value);
+    } else {
+      setTouched();
+    }
+  }
+
   return (
-    <form className={className('form', form.flags)} onSubmit={onSubmit}>
+    <form className={className('form', form.flags)} onSubmit={onValidate}>
       {false &&
         <FieldText control={group.controls.magazine}></FieldText>
       }
@@ -102,6 +118,7 @@ export default function ContactFormRxJs({ data }: { data: IContactForm }) {
       </Grid.Container>
       <button className="button" type="submit">{label('form.submit')}</button>
       <button className="button secondary" type="button" onClick={onReset}>{label('form.reset')}</button>
+      <Tester form={form} onTest={onTest} onReset={onReset}></Tester>
     </form>
   )
 }
@@ -115,59 +132,50 @@ export type IContactForm = {
 }
 
 /*
-    const [form, setValue, setTouched, group] = useForm<any>(() => new FormGroup({
-      magazine: new FormControl(null, [required], { schema: 'select' }),
-      //
-      firstName: new FormControl(null, [required]),
-      lastName: new FormControl(null, [required]),
-      email: new FormControl(null, [required, email]),
-      telephone: new FormControl(null),
-      occupation: new FormControl(null, [required], { schema: 'select' }),
-      country: new FormControl(null, [required], { schema: 'select' }),
-      // region: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.country === 'IT'))]),
-      region: new FormControl(null, [], { schema: 'select' }),
-      //
-      printedCopy: new FormControl(null, [], { schema: 'checkbox' }),
-      //
-      shippingInfo: new FormGroup({
-        city: new FormControl(null, []),
-        province: new FormControl(null, [], { schema: 'select' }),
-        zipCode: new FormControl(null, []),
-        address: new FormControl(null, []),
-        streetNumber: new FormControl(null, []),
-        phoneNumber: new FormControl(null, []),
-
-
-        city: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
-        province: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
-        zipCode: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
-        address: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
-        streetNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
-        phoneNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy)), Validators.PhoneNumberValidator()]),
-
-      }),
-      //
-      privacy: new FormControl(null, [requiredTrue], { schema: 'checkbox' }),
-      newsletter: new FormControl(null, [required], { schema: 'checkbox' }),
-      commercial: new FormControl(null, [required], { schema: 'checkbox' }),
-      promotion: new FormControl(null, [required], { schema: 'checkbox' }),
-      checkRequest: new FormControl('window.antiforgery', [], { hidden: true }),
-      checkField: new FormControl(null, [], { hidden: true }),
-      //
-
-
-      hidden: new FormControl('hidden', [], { hidden: true }), // Validators.PatternValidator(/^\d+$/),
-      disabled: new FormControl('disabled', [], { disabled: true }), // Validators.PatternValidator(/^\d+$/),
-      readonly: new FormControl('readonly', [], { readonly: true }), // Validators.PatternValidator(/^[a-zA-Z0-9]{3}$/),
-      required: new FormControl(null, [required]),
-      group: new FormGroup({
-        a: null,
-        b: null,
-      }),
-      array: new FormArray([null, null]),
-
-
-    }));
-  }
-
+  const [form, setValue, setTouched, group] = useForm<any>(() => new FormGroup({
+    magazine: new FormControl(null, [required], { schema: 'select' }),
+    //
+    firstName: new FormControl(null, [required]),
+    lastName: new FormControl(null, [required]),
+    email: new FormControl(null, [required, email]),
+    telephone: new FormControl(null),
+    occupation: new FormControl(null, [required], { schema: 'select' }),
+    country: new FormControl(null, [required], { schema: 'select' }),
+    // region: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.country === 'IT'))]),
+    region: new FormControl(null, [], { schema: 'select' }),
+    //
+    printedCopy: new FormControl(null, [], { schema: 'checkbox' }),
+    //
+    shippingInfo: new FormGroup({
+      city: new FormControl(null, []),
+      province: new FormControl(null, [], { schema: 'select' }),
+      zipCode: new FormControl(null, []),
+      address: new FormControl(null, []),
+      streetNumber: new FormControl(null, []),
+      phoneNumber: new FormControl(null, []),
+      city: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
+      province: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
+      zipCode: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
+      address: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
+      streetNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy))]),
+      phoneNumber: new FormControl(null, [Validators.RequiredIfValidator(() => Boolean(form.value.printedCopy)), Validators.PhoneNumberValidator()]),
+    }),
+    //
+    privacy: new FormControl(null, [requiredTrue], { schema: 'checkbox' }),
+    newsletter: new FormControl(null, [required], { schema: 'checkbox' }),
+    commercial: new FormControl(null, [required], { schema: 'checkbox' }),
+    promotion: new FormControl(null, [required], { schema: 'checkbox' }),
+    checkRequest: new FormControl('window.antiforgery', [], { hidden: true }),
+    checkField: new FormControl(null, [], { hidden: true }),
+    //
+    hidden: new FormControl('hidden', [], { hidden: true }), // Validators.PatternValidator(/^\d+$/),
+    disabled: new FormControl('disabled', [], { disabled: true }), // Validators.PatternValidator(/^\d+$/),
+    readonly: new FormControl('readonly', [], { readonly: true }), // Validators.PatternValidator(/^[a-zA-Z0-9]{3}$/),
+    required: new FormControl(null, [required]),
+    group: new FormGroup({
+      a: null,
+      b: null,
+    }),
+    array: new FormArray([null, null]),
+  }));
 */

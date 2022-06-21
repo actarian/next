@@ -1,7 +1,5 @@
 import { FormArray, FormGroup, FormState, mapErrors_ } from '@forms';
-import { useObservable$ } from '@hooks';
 import { DependencyList, useCallback, useEffect, useMemo, useState } from 'react';
-import { map } from 'rxjs';
 
 export function useForm<T, U extends (FormGroup | FormArray)>(factory: () => U, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
   const collection: U = useMemo<U>(factory, deps);
@@ -30,28 +28,6 @@ export function useForm<T, U extends (FormGroup | FormArray)>(factory: () => U, 
     collection.validateAndChange_();
     return () => collection.off('change', onChange);
   }, deps);
-
-  return [state, setValue, setTouched, reset, collection];
-}
-
-export function useForm__<T, U extends (FormGroup | FormArray)>(factory: () => U, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
-  const collection: U = useMemo<U>(factory, deps);
-
-  const setValue = useCallback((value: any) => {
-    collection.patch(value);
-  }, deps);
-
-  const setTouched = useCallback(() => {
-    collection.touched = true;
-  }, deps);
-
-  const reset = useCallback(() => {
-    collection.reset();
-  }, deps);
-
-  const [state] = useObservable$<FormState<T>>(() => collection.changes$.pipe(
-    map(value => ({ value: value, flags: collection.state, errors: mapErrors_(collection.errors) })),
-  ), { value: collection.value as T, flags: collection.state, errors: mapErrors_(collection.errors) });
 
   return [state, setValue, setTouched, reset, collection];
 }

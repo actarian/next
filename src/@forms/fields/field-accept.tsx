@@ -9,7 +9,7 @@ type FieldAcceptProps = {
   uid?: number | null | undefined;
 }
 
-export function FieldAccept(props: FieldAcceptProps) {
+export default function FieldAccept(props: FieldAcceptProps) {
   const label = useLabel();
 
   const uniqueName = `${props.control.name}-${props.uid}`;

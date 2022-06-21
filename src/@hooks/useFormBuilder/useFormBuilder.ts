@@ -1,9 +1,7 @@
 
 import { FormArray, FormControl, FormGroup, FormState, mapErrors_ } from '@forms';
 import { IFormBuilderArraySchema, IFormBuilderControlSchema, IFormBuilderGroupSchema, IFormBuilderGroupValues, IFormBuilderSchema } from '@forms/types';
-import { useObservable$ } from '@hooks';
 import { DependencyList, useCallback, useEffect, useMemo, useState } from 'react';
-import { map } from 'rxjs';
 
 export function useFormBuilder<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
   const collection: U = useMemo<U>(() => {
@@ -40,35 +38,6 @@ export function useFormBuilder<T, U extends (FormGroup | FormArray)>(schema: IFo
     // console.log('subscribe');
     return () => collection.off('change', onChange);
   }, deps);
-
-  return [state, setValue, setTouched, reset, collection];
-}
-
-export function useFormBuilder__<T, U extends (FormGroup | FormArray)>(schema: IFormBuilderSchema, deps: DependencyList = []): [FormState<T>, (value: any) => void, () => void, () => void, U] {
-  const collection: U = useMemo<U>(() => {
-    if (Array.isArray(schema)) {
-      return mapArray_(schema) as U;
-    } else {
-      return mapGroup_(schema) as U;
-    }
-    // return mapSchema_(schema) as U;
-  }, deps);
-
-  const setValue = useCallback((value: any) => {
-    collection.patch(value);
-  }, deps);
-
-  const setTouched = useCallback(() => {
-    collection.touched = true;
-  }, deps);
-
-  const reset = useCallback(() => {
-    collection.reset();
-  }, deps);
-
-  const [state] = useObservable$<FormState<T>>(() => collection.changes$.pipe(
-    map(value => ({ value: value, flags: collection.state, errors: mapErrors_(collection.errors) })),
-  ), { value: collection.value as T, flags: collection.state, errors: mapErrors_(collection.errors) });
 
   return [state, setValue, setTouched, reset, collection];
 }

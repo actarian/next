@@ -56376,6 +56376,14 @@
       }
     },
     {
+      "id": "form.test",
+      "text": {
+        "en": "Test",
+        "it": "Test",
+        "fr": "Test"
+      }
+    },
+    {
       "id": "error.required",
       "text": {
         "en": "Required field",

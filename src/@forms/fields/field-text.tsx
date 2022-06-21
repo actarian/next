@@ -9,15 +9,12 @@ type FieldTextProps = {
   uid?: number | null | undefined;
 }
 
-export function FieldText(props: FieldTextProps) {
+export default function FieldText(props: FieldTextProps) {
   const label = useLabel();
 
   const uniqueName = `${props.control.name}-${props.uid}`;
 
   const [state, setValue, setTouched] = useControl<string>(props.control);
-  // console.log('FieldText', state, props.control.flags, props.control);
-  // const [changes] = useObservable$<any>(() => props.control.changes$, props.control.value);
-  // console.log('FieldText', 'changes', changes, props.control);
 
   const onDidChange = (event: ChangeEvent<HTMLInputElement>) => {
     // console.log('FieldText', event.target.value);

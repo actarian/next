@@ -1,14 +1,19 @@
 import { INamedEntity } from '@core';
+import { FieldType } from './fields/fields';
 import { FormAbstract } from './form-abstract';
 import { FormAbstractCollection } from './form-abstract-collection';
 import { FormArray } from './form-array';
 import { FormControl } from './form-control';
 import { FormGroup } from './form-group';
 
-export type ControlType = 'text' | 'select' | 'autocomplete' | 'checkbox' | 'radio' | 'accept';
+export type IControlParam = { uid: number, control: FormControl };
+
+export type IFields = {
+  [key in FieldType]: (control: FormControl, uid?: number) => JSX.Element;
+}
 
 export type FormOptions = {
-  schema?: 'group' | 'array' | ControlType;
+  schema?: ControlType;
   name?: string,
   label?: string,
   value?: string;
@@ -41,8 +46,10 @@ export type FormState<T> = {
   errors: FormValidationErrors,
 }
 
+export type ControlType = 'group' | 'array' | FieldType;
+
 export interface IFormBuilderControlSchema {
-  schema: 'group' | 'array' | ControlType;
+  schema: ControlType;
   name?: string;
   label?: string;
   value?: string;

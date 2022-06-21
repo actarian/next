@@ -1,12 +1,9 @@
 import { INamedEntity } from '@core';
-import { Observable, Subject } from 'rxjs';
 import { EventEmitter } from './event-emitter';
 import { ControlType, FormActivator, FormCollection, FormOptions, FormValidator, ValidationError } from './types';
 import { isThenable, validValue } from './utils';
 
 export class FormAbstract extends EventEmitter {
-
-  private changes$_: Subject<any> = new Subject();
 
   // callbacks_: Function[] = [];
   errors_: ValidationError;
@@ -17,7 +14,7 @@ export class FormAbstract extends EventEmitter {
   parent?: FormCollection;
 
   // new
-  schema: 'group' | 'array' | ControlType = 'text';
+  schema: ControlType = 'text';
   options?: INamedEntity[];
   protected initialOptions_?: FormOptions;
   private markAsDirty_: boolean = false;
@@ -223,9 +220,6 @@ export class FormAbstract extends EventEmitter {
     }
     // console.log(`${this.name || 'unnamed'}.didChange`);
     this.markAsDirty_ = false;
-    if (this.changes$_) {
-      this.changes$_.next(this.value);
-    }
     this.emit('change', this.value);
     /*
     if (this.parent) {
@@ -486,12 +480,5 @@ export class FormAbstract extends EventEmitter {
       this.state_.submitted = submitted;
       this.updateStateAndChange_();
     }
-  }
-
-  get changes$(): Observable<any> {
-    if (!this.changes$_) {
-      this.changes$_ = new Subject();
-    }
-    return this.changes$_;
   }
 }
