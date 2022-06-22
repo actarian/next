@@ -50,23 +50,23 @@ export class FormAbstractCollection<T extends FormControls> extends FormAbstract
         });
       }
       */
-      if (options.disabled === true) {
+      if (options.disabled === true || typeof options.disabled === 'function') {
         this.forEach_((control: FormAbstract) => {
           control.state_.disabled = true;
         });
       }
-      if (options.readonly === true) {
+      if (options.readonly === true || typeof options.readonly === 'function') {
         this.forEach_((control: FormAbstract) => {
           control.state_.readonly = true;
         });
       }
-      if (options.hidden === true) {
+      if (options.hidden === true || typeof options.hidden === 'function') {
         this.forEach_((control: FormAbstract) => {
           control.state_.hidden = true;
         });
       }
     }
-    // this.updateState_();
+    this.updateState_();
   }
 
   protected async checkAsyncPropState_(key: string, option?: FormActivator, root?: FormCollection): Promise<boolean> {

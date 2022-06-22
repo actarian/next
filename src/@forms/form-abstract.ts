@@ -135,13 +135,13 @@ export class FormAbstract extends EventEmitter {
         this.state_.required = true;
       }
       */
-      if (options.disabled === true) {
+      if (options.disabled === true || typeof options.disabled === 'function') {
         this.state_.disabled = true;
       }
-      if (options.readonly === true) {
+      if (options.readonly === true || typeof options.readonly === 'function') {
         this.state_.readonly = true;
       }
-      if (options.hidden === true) {
+      if (options.hidden === true || typeof options.hidden === 'function') {
         this.state_.hidden = true;
       }
     }
@@ -187,8 +187,23 @@ export class FormAbstract extends EventEmitter {
     if (this.validators.length === 0 || this.disabled || this.submitted) {
       this.state_.invalid = false;
     } else {
-      let promises = this.validators_.map((x) => x(this.value_, root?.value, this, root)).filter((x) => x).map(x => isThenable(x) ? x : Promise.resolve(x));
-      const results = (await Promise.all(promises)).filter(x => x);
+      const validations = this.validators_.map((x) => x(this.value_, root?.value, this, root)).filter((x) => x);
+      const { results, promises } = validations.reduce((p: { results: (null | ValidationError)[], promises: Promise<null | ValidationError>[] }, c: (null | ValidationError) | Promise<null | ValidationError>) => {
+        isThenable(c) ? p.promises.push(c as Promise<null | ValidationError>) : p.results.push(c);
+        return p;
+      }, { results: [], promises: [] });
+      promises.forEach(x => x.then((result: null | ValidationError) => {
+        // console.log('Validation.async.result', result);
+        if (result) {
+          this.state_.invalid = true;
+          this.errors_ = Object.assign(this.errors_, result);
+          this.markAsDirty_ = true;
+          this.updateState_();
+          this.change_(true);
+        }
+      }).catch(error => {
+        console.warn('Validation.async.error', error);
+      }));
       this.state_.invalid = results.length > 0;
       errors = Object.assign(errors, ...results);
       // console.log(`${this.name}.value`, '=', this.value_, '{', ...Object.keys(errors), '}');
@@ -214,18 +229,17 @@ export class FormAbstract extends EventEmitter {
     this.change_();
   }
 
-  protected change_() {
+  protected change_(propagate: boolean = false) {
     if (!this.markAsDirty_) {
       return;
     }
     // console.log(`${this.name || 'unnamed'}.didChange`);
     this.markAsDirty_ = false;
     this.emit('change', this.value);
-    /*
-    if (this.parent) {
+    if (propagate && this.parent) {
+      this.parent.markAsDirty_ = true;
       this.parent.change_.call(this.parent);
     }
-    */
   }
 
   protected updateState_() {

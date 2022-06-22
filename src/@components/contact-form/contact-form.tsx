@@ -1,5 +1,5 @@
 import { className, INamedEntity } from '@core';
-import { EmailValidator, FieldCollection, FieldText, FormAsyncValidator, FormGroup, RequiredIfValidator, RequiredTrueValidator, RequiredValidator } from '@forms';
+import { EmailValidator, FieldCollection, FieldText, FormAsyncValidator, FormGroup, RequiredIfValidator, RequiredTrueValidator, RequiredValidator, ValidationError } from '@forms';
 import Tester from '@forms/fields/tester';
 import { Grid } from '@geist-ui/core';
 import { useFormBuilder, useLabel } from '@hooks';
@@ -13,7 +13,6 @@ export default function ContactForm({ data, onSubmit }: { data: IContactForm, on
 
   const email = EmailValidator();
 
-  /*
   const exhist: FormAsyncValidator = async (value: any, rootValue: any) => {
     return new Promise<ValidationError | null>((resolve, reject) => {
       setTimeout(() => {
@@ -21,8 +20,8 @@ export default function ContactForm({ data, onSubmit }: { data: IContactForm, on
       }, 500);
     });
   }
-  */
-  const exhist: FormAsyncValidator = async (value: any, rootValue: any) => Promise.resolve(value === 'aa@aa.aa' ? { exhist: true } : null);
+
+  // const exhist: FormAsyncValidator = async (value: any, rootValue: any) => Promise.resolve(value === 'aa@aa.aa' ? { exhist: true } : null);
 
   const requiredIfPrintedCopy = RequiredIfValidator((value, rootValue) => rootValue?.printedCopy === true);
 
