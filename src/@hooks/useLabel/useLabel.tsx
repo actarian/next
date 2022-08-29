@@ -14,7 +14,7 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
   const dictionary = Object.fromEntries(labels.map(l => [l.id, l.text]));
 
   const context = (key: string, params?: { [key: string]: any }): string => {
-    let label = (dictionary[key] != null ? dictionary[key] : key) as string;
+    const label = (dictionary[key] != null ? dictionary[key] : key) as string;
     if (params) {
       return parseParams(label, params);
     }
@@ -27,7 +27,7 @@ function LabelProvider({ children }: { children?: React.ReactNode }) {
       {children}
     </LabelContextProvider>
   );
-};
+}
 
 function parseParams(label: string, params: { [key: string]: any }): string {
   const TEMPLATE_REGEXP: RegExp = /@(\w+)/g;

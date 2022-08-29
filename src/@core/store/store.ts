@@ -25,7 +25,7 @@ export enum StoreStrategy {
   Api = 'api',
   Data = 'data',
   Mock = 'mock',
-};
+}
 
 function getStoreStrategy(): StoreStrategy {
   let storeStrategy = StoreStrategy.Mock;

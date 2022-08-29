@@ -5,7 +5,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default apiHandler({
   post: async (request: NextApiRequest, response: NextApiResponse) => {
-    const bearer = request.headers.authorization && request.headers.authorization.replace('Bearer ', '');
+    console.log(request.headers);
+    const authorization = request.headers.authorization;
+    const bearer = authorization && authorization.replace('Bearer ', '');
     // Check for secret to confirm this is a valid request
     if (bearer !== process.env.HOOKS_SECRET) {
       return response.status(401).json({ message: 'Invalid token' })
@@ -22,7 +24,7 @@ export default apiHandler({
       }
       // console.log('route.found', route);
       const resolvedRoute = resolveRoute(route);
-      await response.unstable_revalidate(resolvedRoute);
+      await response.revalidate(resolvedRoute);
       return response.json({ revalidated: true })
     } catch (error) {
       // If there was an error, Next.js will continue

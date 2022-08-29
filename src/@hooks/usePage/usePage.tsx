@@ -13,7 +13,7 @@ function PageProvider({ children, page }: { children?: React.ReactNode, page: IP
       {children}
     </PageContextProvider>
   );
-};
+}
 
 export { usePage, PageProvider };
 

@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styles from './header.module.scss';
 
-let I = 0;
+// let I = 0;
 
 export default function Header() {
   const router = useRouter();

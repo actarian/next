@@ -49,30 +49,32 @@ export function setFilters<T>(items: T[], filters: Filter[], filter?: Filter, va
   filters.forEach(filter => {
     const otherFilters = selectedFilters.filter(x => x !== filter);
     const filteredItems = getFilteredItems<T>(items, otherFilters);
-    filter.options.forEach(option => {
-      let count = 0;
-      if (option.id) {
-        let i = 0;
-        while (i < filteredItems.length) {
-          const item = filteredItems[i];
-          if (filter.filter(item, option.id)) {
-            count++;
+    if (filter.options) {
+      filter.options.forEach(option => {
+        let count = 0;
+        if (option.id) {
+          let i = 0;
+          while (i < filteredItems.length) {
+            const item = filteredItems[i];
+            if (filter.filter(item, option.id)) {
+              count++;
+            }
+            i++;
           }
-          i++;
+        } else {
+          count = filteredItems.length;
         }
-      } else {
-        count = filteredItems.length;
-      }
-      option.count = count;
-      option.disabled = count === 0;
-    });
+        option.count = count;
+        option.disabled = count === 0;
+      });
+    }
   });
 
   return filteredItems;
 }
 
 export function filtersToParams(filters: Filter[]): FilterParams | null {
-  let params: { [key: string]: IEquatable[] } = {};
+  const params: { [key: string]: IEquatable[] } = {};
   let any = false;
   filters.filter(x => x.hasAny()).forEach(filter => {
     params[filter.id] = filter.values;

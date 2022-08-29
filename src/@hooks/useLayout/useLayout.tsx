@@ -13,7 +13,7 @@ function LayoutProvider({ children, layout }: { children?: React.ReactNode, layo
       {children}
     </LayoutContextProvider>
   );
-};
+}
 
 export { useLayout, LayoutProvider };
 

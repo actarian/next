@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/first */
 require('module-alias/register');
 
 const dotenv = require('dotenv');
-const fs = require('fs');
 const path = require('path');
 const pluralize = require('pluralize');
 
 import { PAGES } from '@config';
 import type { CollectionDescription, IEntity, SerializedCollection, SerializedStore } from '@core';
-import { fsReadJson, fsWrite, fsWriteJson } from '@core/fs/fs.service';
+import { fsReadJsonDirectory, fsWatch, fsWrite, fsWriteJson } from '@core/fs/fs.service';
 import { awaitAll } from '@core/utils';
 import type { ICategorized, IMarket, IRoute } from '@models';
 import { resolveCategoryTree } from '@models/category/category.service';
@@ -21,22 +21,21 @@ if (process.env && process.env.NODE_ENV) {
 }
 
 async function rebuildStore(pathname: string): Promise<SerializedStore> {
-  // const pathname = path.join(process.cwd(), 'data', 'data.json');
-  // const pathname = pathJoin('data', 'data.json'); // !!! not working
   console.log('MockBuild.rebuildStore', pathname);
-  const json = await fsReadJson(pathname);
-  const store = await buildStore(json);
-  const outname = path.join(process.cwd(), 'data', 'store', `store.json`);
+  const jsons = await fsReadJsonDirectory(pathname);
+  // const json = await fsReadJson(pathname);
+  const store = await buildStore(jsons);
+  const outname = path.join(process.cwd(), '.mock', 'store', `store.json`);
   await fsWriteJson(outname, store);
   console.log('MockBuild.buildComplete', outname);
   return store;
 }
 
-async function buildStore(json: { [key: string]: IEntity[] }): Promise<SerializedStore> {
-  let store: SerializedStore = {};
-  let collections: CollectionDescription[] = Object.keys(json).map(key => remapCollection(key));
-  collections.forEach((c) => {
-    store[c.singularName] = toServiceSchema(c, json[c.singularName]);
+async function buildStore(jsons: { name: string, data: IEntity[] }[]): Promise<SerializedStore> {
+  const store: SerializedStore = {};
+  let collections: CollectionDescription[] = jsons.map(json => remapCollection(json.name));
+  collections.forEach((c, i) => {
+    store[c.singularName] = toServiceSchema(c, jsons[i].data);
   });
   const pageService = createPageService(store);
   store['page'] = pageService;
@@ -95,9 +94,9 @@ function createRouteService(store: SerializedStore): SerializedCollection {
     if (collection) {
       const items = collection.items;
       // console.log('createRouteService', key, items.length);
-      for (let item of items) {
+      for (const item of items) {
         const categoryTree = resolveCategoryTree(item, store.page.items, store.category.items);
-        let availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
+        const availableMarkets = item.markets ? markets.filter(x => item.markets.indexOf(x.id) !== -1) : markets;
         availableMarkets.forEach(m => {
           (m.languages || languages).forEach(l => {
             const href = categoryTree.reduce((p, c, i) => {
@@ -187,7 +186,7 @@ export type I${c.displayName} = {
 };
 `;
   // console.log(type);
-  const pathname = path.join(process.cwd(), 'data', 'types', `${c.singularName}.ts`);
+  const pathname = path.join(process.cwd(), '.mock', 'types', `${c.singularName}.ts`);
   await fsWrite(pathname, type);
   return type;
 }
@@ -218,7 +217,8 @@ function getType(key: string, value: any, collections: CollectionDescription[]):
 async function BuildAndWatch(pathname: string) {
   // console.log('MockBuild.BuildAndWatch');
   await rebuildStore(pathname);
-  fs.watchFile(pathname, { interval: 2000 }, async () => { // (current, previous) => {}
+  fsWatch(pathname, async (eventType: any, fileName: string) => {
+    // console.log('watching', eventType, fileName);
     await rebuildStore(pathname);
   });
 }
@@ -227,5 +227,5 @@ async function BuildAndWatch(pathname: string) {
 
 if (process.argv.includes('mock') && process.env.NODE_ENV !== 'production') {
   global.Request = {} as any;
-  BuildAndWatch('./data/data.json');
+  BuildAndWatch('./mock');
 }

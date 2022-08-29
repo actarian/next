@@ -204,6 +204,7 @@ export class FormAbstract extends EventEmitter {
       }).catch(error => {
         console.warn('Validation.async.error', error);
       }));
+      // todo: handle pending case if promises.length
       this.state_.invalid = results.length > 0;
       errors = Object.assign(errors, ...results);
       // console.log(`${this.name}.value`, '=', this.value_, '{', ...Object.keys(errors), '}');
@@ -333,6 +334,7 @@ export class FormAbstract extends EventEmitter {
   }
 
   protected get root(): FormCollection | FormAbstract {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     let parent: FormCollection | FormAbstract = this;
     while (parent.parent) {
       parent = parent.parent;
@@ -382,25 +384,62 @@ export class FormAbstract extends EventEmitter {
   get disabled() {
     return this.state_.disabled;
   }
+  // internal disabled type boolean | () => boolean | Promise<boolean>
+  set disabled(disabled) {
+    if (this.state_.disabled !== disabled) {
+      this.state_.disabled = disabled;
+      this.revalidate_();
+    }
+  }
 
   get hidden() {
     return this.state_.hidden;
+  }
+  set hidden(hidden) {
+    if (this.state_.hidden !== hidden) {
+      this.state_.hidden = hidden;
+      this.revalidate_();
+    }
   }
 
   get readonly() {
     return this.state_.readonly;
   }
+  set readonly(readonly) {
+    if (this.state_.readonly !== readonly) {
+      this.state_.readonly = readonly;
+      this.revalidate_();
+    }
+  }
 
   get dirty() {
     return this.state_.dirty;
+  }
+  set dirty(dirty) {
+    if (this.state_.dirty !== dirty) {
+      this.state_.dirty = dirty;
+      this.updateStateAndChange_();
+    }
   }
 
   get touched() {
     return this.state_.touched;
   }
+  set touched(touched) {
+    if (this.state_.touched !== touched) {
+      this.state_.touched = touched;
+      this.updateStateAndChange_();
+    }
+  }
 
   get submitted() {
     return this.state_.submitted;
+  }
+  set submitted(submitted) {
+    if (this.state_.submitted !== submitted) {
+      this.state_.submitted = submitted;
+      this.updateStateAndChange_();
+    }
   }
 
   get valid() {
@@ -452,47 +491,4 @@ export class FormAbstract extends EventEmitter {
     }
   }
   */
-
-  // internal disabled type boolean | () => boolean | Promise<boolean>
-  set disabled(disabled) {
-    if (this.state_.disabled !== disabled) {
-      this.state_.disabled = disabled;
-      this.revalidate_();
-    }
-  }
-
-  set hidden(hidden) {
-    if (this.state_.hidden !== hidden) {
-      this.state_.hidden = hidden;
-      this.revalidate_();
-    }
-  }
-
-  set readonly(readonly) {
-    if (this.state_.readonly !== readonly) {
-      this.state_.readonly = readonly;
-      this.revalidate_();
-    }
-  }
-
-  set dirty(dirty) {
-    if (this.state_.dirty !== dirty) {
-      this.state_.dirty = dirty;
-      this.updateStateAndChange_();
-    }
-  }
-
-  set touched(touched) {
-    if (this.state_.touched !== touched) {
-      this.state_.touched = touched;
-      this.updateStateAndChange_();
-    }
-  }
-
-  set submitted(submitted) {
-    if (this.state_.submitted !== submitted) {
-      this.state_.submitted = submitted;
-      this.updateStateAndChange_();
-    }
-  }
 }

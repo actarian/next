@@ -105,7 +105,7 @@ export default class StoreApiService<T extends IEntity> implements IQuerable<IEn
   }
 
   protected search_(params: FindParams): string {
-    let search: { [key: string]: string; } = {};
+    const search: { [key: string]: string; } = {};
     Object.entries(params).forEach(([key, value]) => {
       if (typeof value !== 'object') {
         search[key] = value.toString();

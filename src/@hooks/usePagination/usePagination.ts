@@ -3,7 +3,7 @@ import { getPagedItems } from './pagination.service';
 
 export function usePagination<T>($items: T[], $page: number = 1, $perPage: number = 15) {
 
-  let total = $items.length;
+  const total = $items.length;
 
   const [page, setPage] = useState($page);
   const [perPage, setPerPage] = useState($perPage);

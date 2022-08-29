@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-export const createGenericContext = <T extends unknown>() => {
+export const createGenericContext = <T>() => {
   // Create a context with a generic parameter or undefined
   const genericContext = createContext<T | undefined>(undefined);
 

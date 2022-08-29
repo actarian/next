@@ -6,7 +6,7 @@ export enum FilterMode {
   AND = 'and',
   OR = 'or',
   QUERY = 'query',
-};
+}
 
 export interface IFilterOption {
   id: IEquatable;
@@ -76,12 +76,14 @@ export class Filter {
   }
 
   removeInvalidOptions(items: any[]): void {
-    this.options = this.options.filter(option => {
-      const hasItemWithOption = items.reduce((p, item) => {
-        return p || this.filter(item, option.id);
-      }, false);
-      return hasItemWithOption;
-    });
+    if (this.options) {
+      this.options = this.options.filter(option => {
+        const hasItemWithOption = items.reduce((p, item) => {
+          return p || this.filter(item, option.id);
+        }, false);
+        return hasItemWithOption;
+      });
+    }
   }
 
   getLabel(): string | null {

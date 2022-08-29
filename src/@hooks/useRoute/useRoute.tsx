@@ -13,7 +13,7 @@ function RouteProvider({ children, route }: { children?: React.ReactNode, route:
       {children}
     </RouteContextProvider>
   );
-};
+}
 
 export { useRoute, RouteProvider };
 

@@ -7,7 +7,7 @@ import { Filter, IFilterOption } from '@hooks';
 export default function FilterRecap({ filters, onChange }: { filters: Filter[], onChange: (filter: Filter, values: IEquatable[]) => void }) {
 
   const onRemove = (filter: Filter, option: IFilterOption) => {
-    let values = [...filter.values];
+    const values = [...filter.values];
     const index = values.indexOf(option.id);
     if (index !== -1) {
       values.splice(index, 1);

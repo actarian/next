@@ -10,11 +10,11 @@ type TesterProps = {
 }
 
 export default function Tester(props: TesterProps) {
+  const label = useLabel();
+
   if (!isDevelopment) {
     return null;
   }
-
-  const label = useLabel();
 
   const json = JSON.stringify(props.form.value, null, 2);
 

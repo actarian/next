@@ -21,7 +21,6 @@ export default function FieldCollection(props: FieldCollectionProps) {
     props.collection.controls.map((control, i) => {
       return { key: i, control };
     });
-  ;
 
   function resolveField(item: { control: FormAbstract, key: string | number }) {
     const { control, key } = item;

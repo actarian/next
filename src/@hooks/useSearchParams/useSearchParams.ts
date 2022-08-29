@@ -114,7 +114,7 @@ function encode(params: any, value: any, key?: string) {
 function searchParamsToObject_(params: URLSearchParams): { [key: string]: string } {
   const entries = params.entries();
   const result: { [key: string]: string } = {};
-  for (const [key, value] of entries) { // each 'entry' is a [key, value] tupple
+  for (const [key, value] of entries) { // each 'entry' is a [key, value] tuple
     result[key] = value;
   }
   return result;

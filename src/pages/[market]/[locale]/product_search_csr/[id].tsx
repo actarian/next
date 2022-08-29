@@ -31,14 +31,14 @@ export default function ProductSearchCSR({ page, items, featureTypes }: ProductS
     // serializing querystring filter
     const filterParams = filtersToParams(filters);
     replaceParamsSilently({ filter: filterParams, pagination: { page: 1 } });
-  };
+  }
 
   // fires when user make a change on pagination
   function onPaginationChange(page: number) {
     pagination.goToPage(page);
     // serializing querystring pagination
     replaceParamsSilently({ pagination: { page } });
-  };
+  }
 
   /*
   if (false) {

@@ -1,4 +1,3 @@
-export { default as Alert } from '@components/alert/alert';
 export { default as Banner } from '@components/banner/banner';
 export { default as Breadcrumb } from '@components/breadcrumb/breadcrumb';
 export { default as CartMini } from '@components/cart-mini/cart-mini';

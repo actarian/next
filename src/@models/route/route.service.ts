@@ -96,7 +96,7 @@ export function categoryToRouteLink(routes: IRoute[], categories: ICategory[], c
 
 export function resolveRoute(route: IRoute) {
   // console.log('resolveRoute', route.pageSchema);
-  let routepath: string = (PAGES as any)[route.pageSchema];
+  const routepath: string = (PAGES as any)[route.pageSchema];
   return `/${route.marketId}/${route.localeId}/${routepath}/${route.pageId}`;
   /*
   routepath = routepath.replace(/:([^\/]*)/g, (match, p1) => {

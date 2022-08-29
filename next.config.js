@@ -1,8 +1,12 @@
 module.exports = {
   compiler: {
-    styledComponents: true,
+    styledComponents: {
+      ssr: true,
+      displayName: true,
+      pure: true,
+      // namespace: 'theme',
+    },
   },
-  webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false, dotenv: false, pluralize: false };
     return config;
